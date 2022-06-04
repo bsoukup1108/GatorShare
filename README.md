@@ -15,7 +15,7 @@
 
 
 | Student Name |       Student Email       | GitHub Username |    Role   |  
-|    :---:     |           :---:           |     :---:       |           |  
+|    :---:     |           :---:           |     :---:       |  :---:    |  
 | Aleksandr G. |      agusev@sfsu.edu      |     agusev      |           |
 | Estefanos K. |                           |   estefanos8080 |           |
 | Yuwei L.     |   yliu43@mail.sfsu.edu    |      yliu43     |           |
