@@ -19,13 +19,13 @@
 
 | Student Name |       Student Email       |    Student ID   | GitHub Username |   Role    |  
 |    :---:     |           :---:           |      :---:      |     :---:       |   :---:   |  
-| Aleksandr G. |      agusev@sfsu.edu      |                 |     agusev      |           |
-| Estefanos K. |      ekebebew@sfsu.edu    |    922092480    |   estefanos8080 |           |
-| Yuwei L.     |   yliu43@mail.sfsu.edu    |                 |      yliu43     |           |
-| Brian N.     |   bnguyen25@mail.sfsu.edu |                 |    bnguyen25    |           |
+| Aleksandr G. |      agusev@sfsu.edu      |    922065622    |     agusev      | Front End |
+| Estefanos K. |      ekebebew@sfsu.edu    |    922092480    |   estefanos8080 | Back End Lead / Database  |
+| Yuwei L.     |   yliu43@mail.sfsu.edu    |    921574820    |      yliu43     | Front End          |
+| Brian N.     |   bnguyen25@mail.sfsu.edu |    915503815    |    bnguyen25    | Database Master          |
 | Donna N.     |   unguyen3@mail.sfsu.edu  |    916164007    |   donnaxnguyen  | Team Lead |
-| Brianna S.   |   bsoukup@mail.sfsu.edu   |    920260091    |   bsoukup1108   |           |
-| Mohamed T.   |    mtoure@mail.sfsu.edu   |                 |  mohamedcurtis  |           |
+| Brianna S.   |   bsoukup@mail.sfsu.edu   |    920260091    |   bsoukup1108   | Front End Lead          |
+| Mohamed T.   |    mtoure@mail.sfsu.edu   |    920581516    |  mohamedcurtis  | Github Master          |
 
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.
