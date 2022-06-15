@@ -2,13 +2,8 @@ import React, { Fragment } from 'react';
 
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
-<<<<<<< HEAD
-
-import brianPic from '../../img/Brian.JPG';
-import Estefanos from '../../img/Estefanos.jpg'
-=======
 import Estefanos from '../../img/Estefanos.jpg';
->>>>>>> 9171a376afdd1b17f3e17d10126469380da76137
+import donna from '../../img/donna.jpg';
 
 const About = () => {
 	return (
@@ -36,8 +31,8 @@ const About = () => {
 							aria-controls='flush-collapseOne'
 						>
 							<h1>
-								<strong>NAME</strong> – 
-								<i>ROLE</i>
+								<strong>Donna Nguyen</strong> – 
+								<i>Team Lead</i>
 							</h1>
 						</button>
 
@@ -51,11 +46,25 @@ const About = () => {
 					import it as in line 3
 					change the namee below */}
 							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
+								<img src={donna} alt='pic' />
 							</div>
-							<div class='accordion-body'></div>
+							<div class='accordion-body'>
+								Hello and thank you for visiting our page! I'm currently 
+								a Senior at SFSU as a double major in Computer Science 
+								and Economics. I was born and raised in Oakland. Although, 
+								I recently moved to San Jose. My hobbies include bullet journaling, 
+								cooking, going to the gym, and of course, coding. I am a detail-
+								oriented individual with a history of working in data analyst
+								roles and front-end projects. Although my passion is in web
+								development, I have always enjoyed improving my soft skills
+								such as decision making, improving my communication,
+								problem solving abilities, and overall interpersonal abilities. 
+
+							</div>
 						</div>
 					</div>
+
+
 					{/* PERSON #2 Backend Lead */}
 					<div class='accordion-item'>
 						<h2 class='accordion-header' id='flush-headingTwo'>
@@ -114,11 +123,6 @@ const About = () => {
 							{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-<<<<<<< HEAD
-						<img src={brianPic} alt='pic' />
-						<div class='accordion-body'>Hello, I'm a transfer student and currently in my fourth year at SFSU. 
-						I was born and raised in San Jose. My hobbies include weightlifting, tennis, and a new hobby I am getting into is golf.  </div>
-=======
 							<div className='img-about'>
 								<img src={briannasPic} alt='pic' />
 							</div>
@@ -140,7 +144,6 @@ const About = () => {
 								games, horror films, and car shows.
 							</div>
 						</div>
->>>>>>> 9171a376afdd1b17f3e17d10126469380da76137
 					</div>
 					{/* PERSON #4 Database master*/}
 					<div class='accordion-item'>
