@@ -1,16 +1,21 @@
+html {
+	min-width: 600px;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-
-.container {}
-
-body {
-
+#root {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
-footer {
+.container {
+	min-width: 320px;
 }
 
 h1 {
@@ -31,16 +36,32 @@ a:hover {
 }
 
 .img-about > img {
-	width: 600px;
-	max-width: 600px;
+	width: 100%;
+	max-width: 600px; 
 	padding: 10px;
 }
 .img-about {
 	text-align: center;
 }
 
-
-
-.accordion-item {
+#accordionProfile {
 	margin: 0 50px;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between !important;
+	padding: 10px !important;
+	height: 4.5rem !important;
+}
+
+nav > ul > .btn {
+	height: 50px;
+	margin: 0 0.7rem;
+	padding: 0.7rem;
+}
+
+footer {
+	text-align: center;
+	padding: 0.7rem;
 }
