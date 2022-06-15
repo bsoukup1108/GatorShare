@@ -3,7 +3,8 @@ import React, { Fragment } from 'react';
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
 <<<<<<< HEAD
-import brianPic from '../../img/Brian.JPG'
+
+import brianPic from '../../img/Brian.JPG';
 import Estefanos from '../../img/Estefanos.jpg'
 =======
 import Estefanos from '../../img/Estefanos.jpg';
