@@ -118,8 +118,8 @@ const About = () => {
 							aria-controls='flush-collapseFour'
 						>
 							<h1>
-								<strong>YOUR NAME</strong> – 
-								<i>ROLE</i>
+								<strong>Brian Nguyen</strong> – 
+								<i>Database Master</i>
 							</h1>
 						</button>
 					</h2>
