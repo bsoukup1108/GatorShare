@@ -150,7 +150,9 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
+						<div className='img-about'>
+							<img src={aleksPic} alt='pic' />
+						</div>
 						<div class='accordion-body'>
 							Hello, I'm a transfer student and currently in my
 							fourth year at SFSU. I was born and raised in San
