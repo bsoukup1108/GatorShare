@@ -199,8 +199,8 @@ const About = () => {
 								aria-controls='flush-collapseFive'
 							>
 								<h1>
-									<strong>YOUR NAME</strong> – 
-									<i>ROLE</i>
+									<strong>Mohamed Toure</strong> – 
+									<i>Github Master</i>
 								</h1>
 							</button>
 						</h2>
@@ -214,9 +214,19 @@ const About = () => {
 					import it as in line 3
 					change the namee below */}
 							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
+								<img src={Mohamed} alt='pic' />
 							</div>
-							<div class='accordion-body'>DESCRIPTION</div>
+							<div class='accordion-body'> 
+							Hello, I am Mohamed Toure and I am the GitHub master 
+							of the team. I have been attending SFSU since 2019. 
+							Originally from Ivory Coast, it has always been my passion 
+							to work with computers and understand how they work. 
+							I believe San Francisco is the perfect place to acquire 
+							a more in-depth formation in this domain. When I am not 
+							working, I am at the gym or trying some new recipes. 
+							I am a car enthusiast and always open to discovering 
+							more things!
+							</div>
 						</div>
 					</div>
 					{/* PERSON #6 Frontend*/}
