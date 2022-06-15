@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 
+
 import aleksPic from '../../img/alex.jpg';
+
+import Estefanos from '../../img/Estefanos.jpg'
 
 const About = () => {
 	return (
@@ -36,7 +39,7 @@ const About = () => {
 					change the namee below */}
 						<img src={aleksPic} alt='pic' />
 
-						<div class='accordion-body'>blah blah blah</div>
+						<div class='accordion-body'></div>
 					</div>
 				</div>
 				{/* PERSON #2 Backend Lead */}
@@ -51,8 +54,8 @@ const About = () => {
 							aria-controls='flush-collapseTwo'
 						>
 							<h1>
-								<strong>YOUR NAME</strong> – 
-								<i>ROLE</i>
+								<strong>Estefanos Kebebew</strong> – 
+								<i>Backend Lead</i>
 							</h1>
 						</button>
 					</h2>
@@ -62,11 +65,9 @@ const About = () => {
 						aria-labelledby='flush-headingTwo'
 						data-bs-parent='#accordionProfile'
 					>
-						{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-						<img src={aleksPic} alt='pic' />
-						<div class='accordion-body'>DESCRIPTION</div>
+					
+						<img src={Estefanos} alt='pic' />
+						<div class='accordion-body'>My name is esteafnos and i am third year student.</div>
 					</div>
 				</div>
 				{/* PERSON #3 Frontend Lead*/}
