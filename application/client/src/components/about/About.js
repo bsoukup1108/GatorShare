@@ -1,15 +1,16 @@
-import React, {Fragment } from 'react';
-
+import React, { Fragment } from 'react';
 
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
-
-import Estefanos from '../../img/Estefanos.jpg'
+import Estefanos from '../../img/Estefanos.jpg';
 
 const About = () => {
 	return (
 		<Fragment>
-			<h1>CSC 648 Software Engineering<br></br>SFSU<br></br>Summer 2022<br></br>Section 01<br></br>Team 01</h1>
+			<h1>
+				CSC 648 Software Engineering<br></br>SFSU<br></br>Summer 2022
+				<br></br>Section 01<br></br>Team 01
+			</h1>
 			<h2>About the Team</h2>
 
 			<div class='accordion accordion-flush' id='accordionProfile'>
@@ -38,8 +39,9 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
-
+						<div className='img-about'>
+							<img src={aleksPic} alt='pic' />
+						</div>
 						<div class='accordion-body'></div>
 					</div>
 				</div>
@@ -66,9 +68,13 @@ const About = () => {
 						aria-labelledby='flush-headingTwo'
 						data-bs-parent='#accordionProfile'
 					>
-					
-						<img src={Estefanos} alt='pic' />
-						<div class='accordion-body'>My name is Esteafnos Kebebew and I am third year student.</div>
+						<div className='img-about'>
+							<img src={Estefanos} alt='pic' />
+						</div>
+						<div class='accordion-body'>
+							My name is Esteafnos Kebebew and I am third year
+							student.
+						</div>
 					</div>
 				</div>
 				{/* PERSON #3 Frontend Lead*/}
@@ -97,13 +103,25 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={briannasPic} alt='pic' />
-						<div class='accordion-body'>Hello, I'm a fourth-year computer science student at SFSU with a focus on front-end development. 
-						I am originally from Calgary, Alberta, but moved to Daly City, California for college. I consider myself to be a person that is
-						 honest, determined, and motivated, as well as someone who learns from their mistakes. I am a creative, open-minded, and laid-back person. 
-						 I enjoy taking on new tasks and feel that by working in a team, we can accomplish more. I learned Java, Javascript, HTML, CSS, React, and 
-						 other programming languages during my studies. When I'm not focusing on school, I like to be around friends and family. I also love video games,
-						  horror films, and car shows.</div>
+						<div className='img-about'>
+							<img src={briannasPic} alt='pic' />
+						</div>
+						<div class='accordion-body'>
+							Hello, I'm a fourth-year computer science student at
+							SFSU with a focus on front-end development. I am
+							originally from Calgary, Alberta, but moved to Daly
+							City, California for college. I consider myself to
+							be a person that is honest, determined, and
+							motivated, as well as someone who learns from their
+							mistakes. I am a creative, open-minded, and
+							laid-back person. I enjoy taking on new tasks and
+							feel that by working in a team, we can accomplish
+							more. I learned Java, Javascript, HTML, CSS, React,
+							and other programming languages during my studies.
+							When I'm not focusing on school, I like to be around
+							friends and family. I also love video games, horror
+							films, and car shows.
+						</div>
 					</div>
 				</div>
 				{/* PERSON #4 Database master*/}
@@ -132,7 +150,9 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
+						<div className='img-about'>
+							<img src={aleksPic} alt='pic' />
+						</div>
 						<div class='accordion-body'>DESCRIPTION</div>
 					</div>
 				</div>
@@ -162,7 +182,9 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
+						<div className='img-about'>
+							<img src={aleksPic} alt='pic' />
+						</div>
 						<div class='accordion-body'>DESCRIPTION</div>
 					</div>
 				</div>
@@ -178,8 +200,8 @@ const About = () => {
 							aria-controls='flush-collapseSix'
 						>
 							<h1>
-							<strong>Aleksandr</strong> – 
-							<i>Frontend developer</i>
+								<strong>Aleksandr Gusev</strong> – 
+								<i>Frontend developer</i>
 							</h1>
 						</button>
 					</h2>
@@ -189,11 +211,18 @@ const About = () => {
 						aria-labelledby='flush-headingSix'
 						data-bs-parent='#accordionProfile'
 					>
-						{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-						<img src={aleksPic} alt='pic' />
-						<div class='accordion-body'>DESCRIPTION</div>
+						<div className='img-about'>
+							<img src={aleksPic} alt='pic' />
+						</div>
+						<div class='accordion-body'>
+							<p>
+								Hello! My name is Aleksandr. I'm a senior
+								Computer Science student at SFSU. I have some
+								experience with HTML/CSS, JS, and ReactJS. In my
+								future work, I would like to focus on frontend.
+								I also enjoy hiking or playing soccer.
+							</p>
+						</div>
 					</div>
 				</div>
 			</div>

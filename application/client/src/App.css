@@ -30,6 +30,17 @@ a:hover {
 	color: black;
 }
 
-div[id^="flush-collapse"]  > img {
+.img-about > img {
 	width: 600px;
+	max-width: 600px;
+	padding: 10px;
+}
+.img-about {
+	text-align: center;
+}
+
+
+
+.accordion-item {
+	margin: 0 50px;
 }
