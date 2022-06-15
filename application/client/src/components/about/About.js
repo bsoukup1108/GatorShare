@@ -3,7 +3,7 @@ import React, {Fragment } from 'react';
 
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
-
+import brianPic from '../../img/Brian.JPG'
 import Estefanos from '../../img/Estefanos.jpg'
 
 const About = () => {
@@ -132,7 +132,7 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
+						<img src={brianPic} alt='pic' />
 						<div class='accordion-body'>Hello, I'm a transfer student and currently in my fourth year at SFSU. 
 						I was born and raised in San Jose. My hobbies include weightlifting, tennis, and a new hobby I am getting into is golf.  </div>
 					</div>
