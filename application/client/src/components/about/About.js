@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import aleksPic from '../../img/alex.jpg';
+import briannasPic from '../../img/brianna.jpg';
 
 const About = () => {
 	return (
@@ -81,8 +82,8 @@ const About = () => {
 							aria-controls='flush-collapseThree'
 						>
 							<h1>
-								<strong>YOUR NAME</strong> – 
-								<i>ROLE</i>
+								<strong>Brianna Soukup</strong> – 
+								<i>Frontend Lead</i>
 							</h1>
 						</button>
 					</h2>
@@ -95,8 +96,13 @@ const About = () => {
 						{/* upload your pic to the img folder
 					import it as in line 3
 					change the namee below */}
-						<img src={aleksPic} alt='pic' />
-						<div class='accordion-body'>DESCRIPTION</div>
+						<img src={briannasPic} alt='pic' />
+						<div class='accordion-body'>Hello, I'm a fourth-year computer science student at SFSU with a focus on front-end development. 
+						I am originally from Calgary, Alberta, but moved to Daly City, California for college. I consider myself to be a person that is
+						 honest, determined, and motivated, as well as someone who learns from their mistakes. I am a creative, open-minded, and laid-back person. 
+						 I enjoy taking on new tasks and feel that by working in a team, we can accomplish more. I learned Java, Javascript, HTML, CSS, React, and 
+						 other programming languages during my studies. When I'm not focusing on school, I like to be around friends and family. I also love video games,
+						  horror films, and car shows.</div>
 					</div>
 				</div>
 				{/* PERSON #4 Database master*/}
