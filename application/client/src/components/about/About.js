@@ -68,7 +68,7 @@ const About = () => {
 					>
 					
 						<img src={Estefanos} alt='pic' />
-						<div class='accordion-body'>My name is Esteafnos Kebebew and I am third year student. In my free time i like to play CTF's.</div>
+						<div class='accordion-body'>My name is Esteafnos Kebebew and I am third year student.</div>
 					</div>
 				</div>
 				{/* PERSON #3 Frontend Lead*/}
