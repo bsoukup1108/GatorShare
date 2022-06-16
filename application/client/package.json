@@ -14,7 +14,7 @@
 		"react-redux": "^8.0.2",
 		"react-router-dom": "^6.3.0",
 		"react-script": "^2.0.5",
-		"react-scripts": "^2.1.8",
+		"react-scripts": "^5.0.1",
 		"redux": "^4.2.0",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.1",
@@ -22,7 +22,11 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
+<<<<<<< HEAD
 		"build": "react-scripts  build",
+=======
+		"build": "react-scripts build",
+>>>>>>> 341f9a940483a1a5d09f1b3d913a9d75b05fc517
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

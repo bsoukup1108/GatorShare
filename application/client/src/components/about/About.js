@@ -4,6 +4,8 @@ import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
 import Estefanos from '../../img/Estefanos.jpg';
 import donna from '../../img/donna.jpg';
+import MohamedPic from '../../img/Mohamed.jpg';
+import BrianPic from '../../img/Brian.JPG';
 
 const About = () => {
 	return (
@@ -92,8 +94,12 @@ const About = () => {
 								<img src={Estefanos} alt='pic' />
 							</div>
 							<div class='accordion-body'>
-								My name is Esteafnos Kebebew and I am third year
-								student.
+							My name is Esteafnos Kebebew, and I am a third-year student. 
+							I have a passion for building android and web apps. 
+							Recently, I build a chat app using android studio and the new google MI kit and 
+							I am currently working on a reinforcement-based traffic control system using an AI model to resolve city traffic tools.
+							I am proficient in python, java, javascript, kotlin, spring, Django, and swift. 
+							For the front-end side, I am familiar with HTML, CSS, react, angular, and typescript. In my free time, I like to watch and play soccer.
 							</div>
 						</div>
 					</div>
@@ -172,7 +178,7 @@ const About = () => {
 					import it as in line 3
 					change the namee below */}
 							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
+								<img src={BrianPic} alt='pic' />
 							</div>
 							<div class='accordion-body'>
 								Hello, I'm a transfer student and currently in
@@ -195,8 +201,8 @@ const About = () => {
 								aria-controls='flush-collapseFive'
 							>
 								<h1>
-									<strong>YOUR NAME</strong> – 
-									<i>ROLE</i>
+									<strong>Mohamed Toure</strong> – 
+									<i>Github Master</i>
 								</h1>
 							</button>
 						</h2>
@@ -210,9 +216,19 @@ const About = () => {
 					import it as in line 3
 					change the namee below */}
 							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
+								<img src={MohamedPic} alt='pic' />
 							</div>
-							<div class='accordion-body'>DESCRIPTION</div>
+							<div class='accordion-body'> 
+							Hello, I am Mohamed Toure and I am the GitHub master 
+							of the team. I have been attending SFSU since 2019. 
+							Originally from Ivory Coast, it has always been my passion 
+							to work with computers and understand how they work. 
+							I believe San Francisco is the perfect place to acquire 
+							a more in-depth formation in this domain. When I am not 
+							working, I am at the gym or trying some new recipes. 
+							I am a car enthusiast and always open to discovering 
+							more things!
+							</div>
 						</div>
 					</div>
 					{/* PERSON #6 Frontend*/}
