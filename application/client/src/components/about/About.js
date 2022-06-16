@@ -5,6 +5,7 @@ import briannasPic from '../../img/brianna.jpg';
 import Estefanos from '../../img/Estefanos.jpg';
 import donna from '../../img/donna.jpg';
 import MohamedPic from '../../img/Mohamed.jpg';
+import BrianPic from '../../img/Brian.JPG';
 
 const About = () => {
 	return (
@@ -177,7 +178,7 @@ const About = () => {
 					import it as in line 3
 					change the namee below */}
 							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
+								<img src={BrianPic} alt='pic' />
 							</div>
 							<div class='accordion-body'>
 								Hello, I'm a transfer student and currently in
