@@ -22,11 +22,7 @@
 	},
 	"scripts": {
 		"start": "react-scripts start",
-<<<<<<< HEAD
-		"build": "react-scripts  build",
-=======
 		"build": "react-scripts build",
->>>>>>> 341f9a940483a1a5d09f1b3d913a9d75b05fc517
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
 	},

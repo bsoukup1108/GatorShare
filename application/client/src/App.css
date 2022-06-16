@@ -1,3 +1,5 @@
+
+
 html {
 	min-width: 600px;
 }
@@ -8,10 +10,12 @@ html {
 	padding: 0;
 }
 #root {
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	background-color: rgba(252, 203, 6, 0.5);
+
 }
 
 .container {
@@ -20,6 +24,20 @@ html {
 
 h1 {
     text-align: center;
+} 
+
+.btn {
+	background-color:rgba(74, 33, 123, 1);
+}
+
+.btn a {
+	color: rgba(252, 203, 6, 1);
+}
+
+.container > h1,
+.container > h2
+{
+	color:rgba(74, 33, 123, 1);
 } 
 
 h2{
@@ -59,9 +77,36 @@ nav > ul > .btn {
 	height: 50px;
 	margin: 0 0.7rem;
 	padding: 0.7rem;
+	
 }
 
 footer {
 	text-align: center;
 	padding: 0.7rem;
+}
+
+.navbar {
+	align-items: flex-start;
+}
+
+ .navbar-brand{
+width:15rem;
+} 
+
+#logo {
+	max-width: 15rem
+}
+
+.accordion-button:is(.collapsed) {
+	background-color: rgba(74, 33, 123, 1);
+	color: white;
+}
+
+.accordion-button:not(.collapsed) {
+	background-color: rgba(252, 203, 6, 1);
+	color:rgba(74, 33, 123, 1);
+}
+
+button > h1 {
+	text-align: left;
 }

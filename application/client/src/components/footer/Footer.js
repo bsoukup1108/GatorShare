@@ -6,7 +6,10 @@ const Footer = () => {
 			<footer class='border-top bg-light'>
 				<div>
 					<span class='text-muted'>
-						TEAM #1 | CSC648 | SFSU | 2022
+						<span style={{ color: '#52247F' }}>TEAM #1 </span> |{' '}
+						<span style={{ color: '#FFCF01' }}>CSC648</span> |{' '}
+						<span style={{ color: '#52247F' }}>SFSU </span> |{' '}
+						<span style={{ color: '#FFCF01' }}>SUMMER 2022</span>
 					</span>
 				</div>
 			</footer>
