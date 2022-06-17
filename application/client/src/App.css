@@ -1,5 +1,5 @@
-
-
+/* *********************************************** */
+/* Reset global settings */
 html {
 	min-width: 600px;
 }
@@ -15,32 +15,16 @@ html {
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: rgba(252, 203, 6, 0.5);
-
 }
+/* *********************************************** */
 
-.container {
-	min-width: 320px;
-}
-
+/* *********************************************** */
+/* Basic elements  */
 h1 {
-    text-align: center;
-} 
-
-.btn {
-	background-color:rgba(74, 33, 123, 1);
+	text-align: center;
 }
 
-.btn a {
-	color: rgba(252, 203, 6, 1);
-}
-
-.container > h1,
-.container > h2
-{
-	color:rgba(74, 33, 123, 1);
-} 
-
-h2{
+h2 {
 	text-align: center;
 }
 
@@ -52,20 +36,51 @@ a {
 a:hover {
 	color: black;
 }
+/* *********************************************** */
+
+/* *********************************************** */
+/* Container */
+.container {
+	min-width: 320px;
+}
+
+.container > h1,
+.container > h2 {
+	color: rgba(74, 33, 123, 1);
+}
+
+/* -------------------------------------------- */
+
+/* *********************************************** */
+/* Buttons */
+.btn {
+	background-color: rgba(74, 33, 123, 1);
+}
+
+.btn a {
+	color: rgba(252, 203, 6, 1);
+}
+/* *********************************************** */
+
+/* *********************************************** */
+/* Images  */
 
 .img-about > img {
 	width: 100%;
-	max-width: 600px; 
+	max-width: 600px;
 	padding: 10px;
 }
 .img-about {
 	text-align: center;
 }
 
-#accordionProfile {
-	margin: 0 50px;
+#logo {
+	max-width: 15rem;
 }
+/* *********************************************** */
 
+/* *********************************************** */
+/* Navbar  */
 nav {
 	display: flex;
 	justify-content: space-between !important;
@@ -77,24 +92,14 @@ nav > ul > .btn {
 	height: 50px;
 	margin: 0 0.7rem;
 	padding: 0.7rem;
-	
-}
-
-footer {
-	text-align: center;
-	padding: 0.7rem;
 }
 
 .navbar {
 	align-items: flex-start;
 }
 
- .navbar-brand{
-width:15rem;
-} 
-
-#logo {
-	max-width: 15rem
+.navbar-brand {
+	width: 15rem;
 }
 
 .accordion-button:is(.collapsed) {
@@ -104,9 +109,22 @@ width:15rem;
 
 .accordion-button:not(.collapsed) {
 	background-color: rgba(252, 203, 6, 1);
-	color:rgba(74, 33, 123, 1);
+	color: rgba(74, 33, 123, 1);
+}
+
+#accordionProfile {
+	margin: 0 50px;
 }
 
 button > h1 {
 	text-align: left;
 }
+/* *********************************************** */
+
+/* *********************************************** */
+/* Footer  */
+footer {
+	text-align: center;
+	padding: 0.7rem;
+}
+/* *********************************************** */
