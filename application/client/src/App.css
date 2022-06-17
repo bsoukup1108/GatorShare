@@ -102,6 +102,8 @@ nav > ul > .btn {
 	width: 15rem;
 }
 
+/* *********************************************** */
+/* Accordeon  */
 .accordion-button:is(.collapsed) {
 	background-color: rgba(74, 33, 123, 1);
 	color: white;
