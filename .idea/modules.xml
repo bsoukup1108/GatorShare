@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/application/server/GatorShare/GatorShare.iml" filepath="$PROJECT_DIR$/application/server/GatorShare/GatorShare.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/csc648-848-01-sw-engineering-summer-22-team01.iml" filepath="$PROJECT_DIR$/.idea/csc648-848-01-sw-engineering-summer-22-team01.iml" />
-    </modules>
-  </component>
-</project>
