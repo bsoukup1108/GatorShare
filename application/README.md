@@ -1,4 +1,4 @@
-# These is the API endpoints for the about me page.
+# These is the API endpoints for the about us page.
 
 ![Test Image 1](ths.png)
 
