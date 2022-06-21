@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70b147d2-cfff-43da-9d2a-6212b2be484b" name="Changes" comment="" />
+    <list default="true" id="70b147d2-cfff-43da-9d2a-6212b2be484b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Dto/AboutUsDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Dto/AboutUsDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/GatorShareApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/GatorShareApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Repo/AboutUsRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Repo/AboutUsRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Service/AboutUsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/Service/AboutUsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/config/SwaggerConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/classes/com/GatorShare/config/SwaggerConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/server/GatorShare/target/test-classes/com/GatorShare/GatorShare/GatorShareApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/application/server/GatorShare/target/test-classes/com/GatorShare/GatorShare/GatorShareApplicationTests.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
