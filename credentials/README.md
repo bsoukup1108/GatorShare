@@ -22,7 +22,7 @@
 <strong>PromtionSiteSFSU1888</strong><br>
 7. Database name (basically the name that contains all your tables)<br>
 <strong>promtionsitesfsu-db</strong><br>
-8. Instructions on how to use the above information.
+8. Instructions on how to use the above information.<br>
 First go to https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3FhashArgs%3D%2523%26isauthcode%3Dtrue%26nc2%3Dh_ct%26src%3Dheader-signin%26state%3DhashArgsFromTB_us-west-1_fa18735456716cd3&client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcanvas&forceMobileApp=0&code_challenge=v5xmfKW-eFlYbvLWRoCE7ZmScFhk7SQFYx9xlvKqInM&code_challenge_method=SHA-256. 
 <br>Then mark the root user and input the credential above to login. The database is stored under Amazon RDS. 
 
