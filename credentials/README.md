@@ -12,7 +12,7 @@
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
 4. Database URL or IP and port used.
-<br>Database URL: <strong> promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com </strong>
+<br>Database URL: <br><strong> promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com </strong>
 <br>Port used: <br><strong>port 3306</strong><br>
 5. Database username<br>
 <strong>PromtionSiteSFSU</strong><br>
