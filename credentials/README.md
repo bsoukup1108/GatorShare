@@ -7,8 +7,10 @@
 
 # Below is a list of items required. Missing items will causes points to be deducted from multiple milestone submissions.
 
-1. Server URL or IP
-2. SSH username
+1. Server URL or IP<br>
+<strong>ec2-user@ec2-54-193-53-30.us-west-1.compute.amazonaws.com</strong>
+2. SSH username<br>
+<strong>GatorShare</strong>
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
 4. Database URL or IP and port used. 
