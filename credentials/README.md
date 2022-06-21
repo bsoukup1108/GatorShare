@@ -17,13 +17,13 @@ Database URL: <br>
 <strong> promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com </strong>
 <br>
 Port used: <br>
-<strong>port 3306</strong>
+<strong>port 3306</strong><br>
 5. Database username<br>
-<strong>PromtionSiteSFSU</strong>
+<strong>PromtionSiteSFSU</strong><br>
 6. Database password<br>
-<strong>PromtionSiteSFSU1888</strong>
+<strong>PromtionSiteSFSU1888</strong><br>
 7. Database name (basically the name that contains all your tables)<br>
-<strong>promtionsitesfsu-db</strong>
+<strong>promtionsitesfsu-db</strong><br>
 8. Instructions on how to use the above information.
 
 # Most important things to Remember
