@@ -11,6 +11,7 @@
 2. SSH username
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
+<<<<<<< HEAD
 4. Database URL or IP and port used.
 <br>Database URL: <br><strong> promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com </strong>
 <br>Port used: <br><strong>port 3306</strong><br>
@@ -20,7 +21,14 @@
 <strong>PromtionSiteSFSU1888</strong><br>
 9. Database name (basically the name that contains all your tables)<br>
 <strong>promtionsitesfsu-db</strong><br>
+=======
+4. Database URL or IP and port used. promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com and runs on port 3306
+5. Database username: PromtionSiteSFSU
+6. Database password: PromtionSiteSFSU1888
+7. Database name (basically the name that contains all your tables): promtionsitesfsu-db
+>>>>>>> testing
 8. Instructions on how to use the above information.
+First go to https://signin.aws.amazon.com/signin?redirect_uri=https%3A%2F%2Fconsole.aws.amazon.com%2Fconsole%2Fhome%3FhashArgs%3D%2523%26isauthcode%3Dtrue%26nc2%3Dh_ct%26src%3Dheader-signin%26state%3DhashArgsFromTB_us-west-1_fa18735456716cd3&client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcanvas&forceMobileApp=0&code_challenge=v5xmfKW-eFlYbvLWRoCE7ZmScFhk7SQFYx9xlvKqInM&code_challenge_method=SHA-256. Then mark the root user and input the credential above to login. The database is stored under Amazon RDS. 
 
 # Most important things to Remember
 ## These values need to kept update to date throughout the semester. <br>
