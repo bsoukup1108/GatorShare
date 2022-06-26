@@ -3,6 +3,8 @@
 
 ## Please when ready add your teams application URL or IP to the repository description. This will help with grading. Teams are expected to keep this value up to date.
 
+https://gatorshare.com/
+
 ## Please do the following steps before completing Milestone 0.
 1. Change the name of the repository. All that needs to change is the NN to your respective team number. Team numbers whose value is less than 10, please pad with a 0. Ex team 1 is Team01 team 11 is Team11. Please make sure to also remove the username from the repository as well. Teams with incorrectly name repository will have points deducted from their milestone 0 grades.
       - Please follow the naming convention assigned by your instructor.
@@ -25,7 +27,6 @@
 | Brian N.     |   bnguyen25@mail.sfsu.edu |    915503815    |    bnguyen25    | Database Master          |
 | Mohamed T.   |    mtoure@mail.sfsu.edu   |    920581516    |  mohamedcurtis  | Github Master          |
 | Aleksandr G. |      agusev@sfsu.edu      |    922065622    |     agusev      | Front End |
-| Yuwei L.     |   yliu43@mail.sfsu.edu    |    921574820    |      yliu43     | Front End          |
 
 
 ## NO code needs to be stored in the root of your repository. You may rename the application folder if you like to your team's application name. But all source code related to your team's application should be stored inside the application folder.

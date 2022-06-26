@@ -12,10 +12,14 @@
 3. SSH password or key.
     <br> If a ssh key is used please upload the key to the credentials folder.
 4. Database URL or IP and port used.
-    <br><strong> NOTE THIS DOES NOT MEAN YOUR DATABASE NEEDS A PUBLIC FACING PORT.</strong> But knowing the IP and port number will help with SSH tunneling into the database. The default port is more than sufficient for this class.
-5. Database username
-6. Database password
-7. Database name (basically the name that contains all your tables)
+<br>Database URL: <br><strong> promtionsitesfsu-db.cuh8ubczifbn.us-west-1.rds.amazonaws.com </strong>
+<br>Port used: <br><strong>port 3306</strong><br>
+5. Database username<br>
+<strong>PromtionSiteSFSU</strong><br>
+7. Database password<br>
+<strong>PromtionSiteSFSU1888</strong><br>
+9. Database name (basically the name that contains all your tables)<br>
+<strong>promtionsitesfsu-db</strong><br>
 8. Instructions on how to use the above information.
 
 # Most important things to Remember
