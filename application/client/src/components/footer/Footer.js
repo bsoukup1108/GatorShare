@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 const Footer = () => {
 	return (
-		<Fragment>
+		<>
 			<footer class='border-top bg-light'>
 				<div>
 					<span class='text-muted'>
@@ -13,7 +13,7 @@ const Footer = () => {
 					</span>
 				</div>
 			</footer>
-		</Fragment>
+		</>
 	);
 };
 

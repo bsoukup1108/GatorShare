@@ -4,6 +4,11 @@
 
 In the project directory, you can run:
 
+### `npm run sass`
+
+In a separate terminal window run `sass` to compile styles.
+
+
 ### `npm start`
 
 Runs the app in the development mode.\

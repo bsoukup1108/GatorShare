@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../img/logo.png';
 
 const Navbar = () => {
 	return (
-		<Fragment>
+		<>
 			<nav class='navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom'>
 				<div id='logo-content'>
 					<a class='navbar-brand' href='/'>
@@ -21,7 +21,7 @@ const Navbar = () => {
 					</li>
 				</ul>
 			</nav>
-		</Fragment>
+		</>
 	);
 };
 

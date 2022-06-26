@@ -1,3 +1,12 @@
+
+/* *********************************************** */
+/* colors */
+$primary : rgba(74, 33, 123, 1);
+$secondary: rgba(252, 203, 6, 1);
+$primary-bg : rgba(74, 33, 123, 0.5);
+$secondary-bg: rgba(252, 203, 6, 0.5);
+/* *********************************************** */
+
 /* *********************************************** */
 /* Reset global settings */
 html {
@@ -14,7 +23,8 @@ html {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	background-color: rgba(252, 203, 6, 0.5);
+	background-color: $secondary-bg;
+
 }
 /* *********************************************** */
 
@@ -46,7 +56,7 @@ a:hover {
 
 .container > h1,
 .container > h2 {
-	color: rgba(74, 33, 123, 1);
+	color: $primary;
 }
 
 /* -------------------------------------------- */
@@ -54,11 +64,11 @@ a:hover {
 /* *********************************************** */
 /* Buttons */
 .btn {
-	background-color: rgba(74, 33, 123, 1);
+	background-color: $primary;
 }
 
 .btn a {
-	color: rgba(252, 203, 6, 1);
+	color: $secondary;
 }
 /* *********************************************** */
 
@@ -105,13 +115,13 @@ nav > ul > .btn {
 /* *********************************************** */
 /* Accordeon  */
 .accordion-button:is(.collapsed) {
-	background-color: rgba(74, 33, 123, 1);
+	background-color: $primary;
 	color: white;
 }
 
 .accordion-button:not(.collapsed) {
-	background-color: rgba(252, 203, 6, 1);
-	color: rgba(74, 33, 123, 1);
+	background-color: $secondary;
+	color: $primary;
 }
 
 #accordionProfile {
@@ -129,4 +139,33 @@ footer {
 	text-align: center;
 	padding: 0.7rem;
 }
+/* *********************************************** */
+
+/* *********************************************** */
+/* Grid  */
+#wrapper {
+	min-height:100vh;
+	display: grid;
+	grid-template-columns: repeat(12, [col-start] 1fr);
+	grid-template-rows: 100px auto 50px;
+	gap: 20px;
+	grid-template-areas: 
+	'n n n n n n n n n n n n'
+	'c c c c c c c c c c c c'
+	'f f f f f f f f f f f f'
+	;
+}
+
+nav {
+	grid-area: n;
+}
+
+footer {
+	grid-area: f;
+}
+
+.container {
+	grid-area: c;
+}
+
 /* *********************************************** */

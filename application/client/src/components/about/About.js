@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
@@ -9,7 +9,7 @@ import BrianPic from '../../img/Brian.JPG';
 
 const About = () => {
 	return (
-		<Fragment>
+		<>
 			<div className='container'>
 				<h1>
 					CSC 648 Software Engineering
@@ -51,21 +51,22 @@ const About = () => {
 								<img src={donna} alt='pic' />
 							</div>
 							<div class='accordion-body'>
-								Hello and thank you for visiting our page! I'm currently 
-								a Senior at SFSU as a double major in Computer Science 
-								and Economics. I was born and raised in Oakland. Although, 
-								I recently moved to San Jose. My hobbies include bullet journaling, 
-								cooking, going to the gym, and of course, coding. I am a detail-
-								oriented individual with a history of working in data analyst
-								roles and front-end projects. Although my passion is in web
-								development, I have always enjoyed improving my soft skills
-								such as decision making, improving my communication,
-								problem solving abilities, and overall interpersonal abilities. 
-
+								Hello and thank you for visiting our page! I'm
+								currently a Senior at SFSU as a double major in
+								Computer Science and Economics. I was born and
+								raised in Oakland. Although, I recently moved to
+								San Jose. My hobbies include bullet journaling,
+								cooking, going to the gym, and of course,
+								coding. I am a detail- oriented individual with
+								a history of working in data analyst roles and
+								front-end projects. Although my passion is in
+								web development, I have always enjoyed improving
+								my soft skills such as decision making,
+								improving my communication, problem solving
+								abilities, and overall interpersonal abilities.
 							</div>
 						</div>
 					</div>
-
 
 					{/* PERSON #2 Backend Lead */}
 					<div class='accordion-item'>
@@ -94,12 +95,18 @@ const About = () => {
 								<img src={Estefanos} alt='pic' />
 							</div>
 							<div class='accordion-body'>
-							My name is Esteafnos Kebebew, and I am a third-year student. 
-							I have a passion for building android and web apps. 
-							Recently, I build a chat app using android studio and the new google MI kit and 
-							I am currently working on a reinforcement-based traffic control system using an AI model to resolve city traffic tools.
-							I am proficient in python, java, javascript, kotlin, spring, Django, and swift. 
-							For the front-end side, I am familiar with HTML, CSS, react, angular, and typescript. In my free time, I like to watch and play soccer.
+								My name is Esteafnos Kebebew, and I am a
+								third-year student. I have a passion for
+								building android and web apps. Recently, I build
+								a chat app using android studio and the new
+								google MI kit and I am currently working on a
+								reinforcement-based traffic control system using
+								an AI model to resolve city traffic tools. I am
+								proficient in python, java, javascript, kotlin,
+								spring, Django, and swift. For the front-end
+								side, I am familiar with HTML, CSS, react,
+								angular, and typescript. In my free time, I like
+								to watch and play soccer.
 							</div>
 						</div>
 					</div>
@@ -218,16 +225,17 @@ const About = () => {
 							<div className='img-about'>
 								<img src={MohamedPic} alt='pic' />
 							</div>
-							<div class='accordion-body'> 
-							Hello, I am Mohamed Toure and I am the GitHub master 
-							of the team. I have been attending SFSU since 2019. 
-							Originally from Ivory Coast, it has always been my passion 
-							to work with computers and understand how they work. 
-							I believe San Francisco is the perfect place to acquire 
-							a more in-depth formation in this domain. When I am not 
-							working, I am at the gym or trying some new recipes. 
-							I am a car enthusiast and always open to discovering 
-							more things!
+							<div class='accordion-body'>
+								Hello, I am Mohamed Toure and I am the GitHub
+								master of the team. I have been attending SFSU
+								since 2019. Originally from Ivory Coast, it has
+								always been my passion to work with computers
+								and understand how they work. I believe San
+								Francisco is the perfect place to acquire a more
+								in-depth formation in this domain. When I am not
+								working, I am at the gym or trying some new
+								recipes. I am a car enthusiast and always open
+								to discovering more things!
 							</div>
 						</div>
 					</div>
@@ -271,7 +279,7 @@ const About = () => {
 					</div>
 				</div>
 			</div>
-		</Fragment>
+		</>
 	);
 };
 

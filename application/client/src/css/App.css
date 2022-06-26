@@ -1,0 +1,160 @@
+/* *********************************************** */
+/* colors */
+/* *********************************************** */
+/* *********************************************** */
+/* Reset global settings */
+html {
+  min-width: 600px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(252, 203, 6, 0.5);
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Basic elements  */
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+a:hover {
+  color: black;
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Container */
+.container {
+  min-width: 320px;
+}
+
+.container > h1,
+.container > h2 {
+  color: rgb(74, 33, 123);
+}
+
+/* -------------------------------------------- */
+/* *********************************************** */
+/* Buttons */
+.btn {
+  background-color: rgb(74, 33, 123);
+}
+
+.btn a {
+  color: rgb(252, 203, 6);
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Images  */
+.img-about > img {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+}
+
+.img-about {
+  text-align: center;
+}
+
+#logo {
+  max-width: 15rem;
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Navbar  */
+nav {
+  display: flex;
+  justify-content: space-between !important;
+  padding: 10px !important;
+  height: 4.5rem !important;
+}
+
+nav > ul > .btn {
+  height: 50px;
+  margin: 0 0.7rem;
+  padding: 0.7rem;
+}
+
+.navbar {
+  align-items: flex-start;
+}
+
+.navbar-brand {
+  width: 15rem;
+}
+
+/* *********************************************** */
+/* Accordeon  */
+.accordion-button:is(.collapsed) {
+  background-color: rgb(74, 33, 123);
+  color: white;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgb(252, 203, 6);
+  color: rgb(74, 33, 123);
+}
+
+#accordionProfile {
+  margin: 0 50px;
+}
+
+button > h1 {
+  text-align: left;
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Footer  */
+footer {
+  text-align: center;
+  padding: 0.7rem;
+}
+
+/* *********************************************** */
+/* *********************************************** */
+/* Grid  */
+#wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(12, [col-start] 1fr);
+  grid-template-rows: 100px auto 50px;
+  gap: 20px;
+  grid-template-areas: "n n n n n n n n n n n n" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
+}
+
+nav {
+  grid-area: n;
+}
+
+footer {
+  grid-area: f;
+}
+
+.container {
+  grid-area: c;
+}
+
+/* *********************************************** */
