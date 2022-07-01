@@ -60,10 +60,6 @@ a:hover {
   background-color: rgb(74, 33, 123);
 }
 
-.btn a {
-  color: rgb(252, 203, 6);
-}
-
 /* *********************************************** */
 /* *********************************************** */
 /* Images  */
@@ -92,9 +88,8 @@ nav {
 }
 
 nav > ul > .btn {
-  height: 50px;
+  height: 2.5rem;
   margin: 0 0.7rem;
-  padding: 0.7rem;
 }
 
 .navbar {
@@ -103,6 +98,12 @@ nav > ul > .btn {
 
 .navbar-brand {
   width: 15rem;
+}
+
+/* *********************************************** */
+/* Searchbar  */
+#searchBar {
+  margin-inline: 1rem;
 }
 
 /* *********************************************** */
@@ -140,13 +141,17 @@ footer {
   min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: 100px auto 50px;
-  gap: 20px;
-  grid-template-areas: "n n n n n n n n n n n n" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
+  grid-template-rows: 75px 50px auto 50px;
+  grid-template-areas: "n n n n n n n n n n n n" "s s s s s s s s s s s s" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
 }
 
 nav {
   grid-area: n;
+}
+
+#searchBar {
+  grid-area: s;
+  grid-column: span 12;
 }
 
 footer {

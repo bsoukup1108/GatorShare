@@ -21,11 +21,14 @@ const About = () => {
 				</h1>
 				<h2>About the Team</h2>
 
-				<div class='accordion accordion-flush' id='accordionProfile'>
+				<div
+					className='accordion accordion-flush'
+					id='accordionProfile'
+				>
 					{/* PERSON #1  Team Leader*/}
-					<div class='accordion-item'>
+					<div className='accordion-item'>
 						<button
-							class='accordion-button collapsed'
+							className='accordion-button collapsed'
 							type='button'
 							data-bs-toggle='collapse'
 							data-bs-target='#flush-collapseOne'
@@ -40,7 +43,7 @@ const About = () => {
 
 						<div
 							id='flush-collapseOne'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingOne'
 							data-bs-parent='#accordionProfile'
 						>
@@ -50,7 +53,7 @@ const About = () => {
 							<div className='img-about'>
 								<img src={donna} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								Hello and thank you for visiting our page! I'm
 								currently a Senior at SFSU as a double major in
 								Computer Science and Economics. I was born and
@@ -69,10 +72,10 @@ const About = () => {
 					</div>
 
 					{/* PERSON #2 Backend Lead */}
-					<div class='accordion-item'>
-						<h2 class='accordion-header' id='flush-headingTwo'>
+					<div className='accordion-item'>
+						<h2 className='accordion-header' id='flush-headingTwo'>
 							<button
-								class='accordion-button collapsed'
+								className='accordion-button collapsed'
 								type='button'
 								data-bs-toggle='collapse'
 								data-bs-target='#flush-collapseTwo'
@@ -87,14 +90,14 @@ const About = () => {
 						</h2>
 						<div
 							id='flush-collapseTwo'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingTwo'
 							data-bs-parent='#accordionProfile'
 						>
 							<div className='img-about'>
 								<img src={Estefanos} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								My name is Esteafnos Kebebew, and I am a
 								third-year student. I have a passion for
 								building android and web apps. Recently, I build
@@ -111,10 +114,13 @@ const About = () => {
 						</div>
 					</div>
 					{/* PERSON #3 Frontend Lead*/}
-					<div class='accordion-item'>
-						<h2 class='accordion-header' id='flush-headingThree'>
+					<div className='accordion-item'>
+						<h2
+							className='accordion-header'
+							id='flush-headingThree'
+						>
 							<button
-								class='accordion-button collapsed'
+								className='accordion-button collapsed'
 								type='button'
 								data-bs-toggle='collapse'
 								data-bs-target='#flush-collapseThree'
@@ -129,7 +135,7 @@ const About = () => {
 						</h2>
 						<div
 							id='flush-collapseThree'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingThree'
 							data-bs-parent='#accordionProfile'
 						>
@@ -139,7 +145,7 @@ const About = () => {
 							<div className='img-about'>
 								<img src={briannasPic} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								Hello, I'm a fourth-year computer science
 								student at SFSU with a focus on front-end
 								development. I am originally from Calgary,
@@ -159,10 +165,10 @@ const About = () => {
 						</div>
 					</div>
 					{/* PERSON #4 Database master*/}
-					<div class='accordion-item'>
-						<h2 class='accordion-header' id='flush-headingFour'>
+					<div className='accordion-item'>
+						<h2 className='accordion-header' id='flush-headingFour'>
 							<button
-								class='accordion-button collapsed'
+								className='accordion-button collapsed'
 								type='button'
 								data-bs-toggle='collapse'
 								data-bs-target='#flush-collapseFour'
@@ -177,7 +183,7 @@ const About = () => {
 						</h2>
 						<div
 							id='flush-collapseFour'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingFour'
 							data-bs-parent='#accordionProfile'
 						>
@@ -187,7 +193,7 @@ const About = () => {
 							<div className='img-about'>
 								<img src={BrianPic} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								Hello, I'm a transfer student and currently in
 								my fourth year at SFSU. I was born and raised in
 								San Jose. My hobbies include weightlifting,
@@ -197,10 +203,10 @@ const About = () => {
 						</div>
 					</div>
 					{/* PERSON #5 github master */}
-					<div class='accordion-item'>
-						<h2 class='accordion-header' id='flush-headingFive'>
+					<div className='accordion-item'>
+						<h2 className='accordion-header' id='flush-headingFive'>
 							<button
-								class='accordion-button collapsed'
+								className='accordion-button collapsed'
 								type='button'
 								data-bs-toggle='collapse'
 								data-bs-target='#flush-collapseFive'
@@ -215,7 +221,7 @@ const About = () => {
 						</h2>
 						<div
 							id='flush-collapseFive'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingFive'
 							data-bs-parent='#accordionProfile'
 						>
@@ -225,7 +231,7 @@ const About = () => {
 							<div className='img-about'>
 								<img src={MohamedPic} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								Hello, I am Mohamed Toure and I am the GitHub
 								master of the team. I have been attending SFSU
 								since 2019. Originally from Ivory Coast, it has
@@ -240,10 +246,10 @@ const About = () => {
 						</div>
 					</div>
 					{/* PERSON #6 Frontend*/}
-					<div class='accordion-item'>
-						<h2 class='accordion-header' id='flush-headingSix'>
+					<div className='accordion-item'>
+						<h2 className='accordion-header' id='flush-headingSix'>
 							<button
-								class='accordion-button collapsed'
+								className='accordion-button collapsed'
 								type='button'
 								data-bs-toggle='collapse'
 								data-bs-target='#flush-collapseSix'
@@ -258,14 +264,14 @@ const About = () => {
 						</h2>
 						<div
 							id='flush-collapseSix'
-							class='accordion-collapse collapse'
+							className='accordion-collapse collapse'
 							aria-labelledby='flush-headingSix'
 							data-bs-parent='#accordionProfile'
 						>
 							<div className='img-about'>
 								<img src={aleksPic} alt='pic' />
 							</div>
-							<div class='accordion-body'>
+							<div className='accordion-body'>
 								<p>
 									Hello! My name is Aleksandr. I'm a senior
 									Computer Science student at SFSU. I have
