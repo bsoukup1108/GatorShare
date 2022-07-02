@@ -58,6 +58,7 @@ a:hover {
 /* Buttons */
 .btn {
   background-color: rgb(74, 33, 123);
+  border-radius: 0;
 }
 
 /* *********************************************** */
@@ -75,6 +76,7 @@ a:hover {
 
 #logo {
   max-width: 15rem;
+  height: 40px;
 }
 
 /* *********************************************** */
@@ -84,7 +86,7 @@ nav {
   display: flex;
   justify-content: space-between !important;
   padding: 10px !important;
-  height: 4.5rem !important;
+  height: 3.5rem !important;
 }
 
 nav > ul > .btn {
@@ -102,10 +104,6 @@ nav > ul > .btn {
 
 /* *********************************************** */
 /* Searchbar  */
-#searchBar {
-  margin-inline: 1rem;
-}
-
 /* *********************************************** */
 /* Accordeon  */
 .accordion-button:is(.collapsed) {
@@ -141,17 +139,12 @@ footer {
   min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: 75px 50px auto 50px;
-  grid-template-areas: "n n n n n n n n n n n n" "s s s s s s s s s s s s" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
+  grid-template-rows: 75px auto 50px;
+  grid-template-areas: "n n n n n n n n n n n n" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
 }
 
 nav {
   grid-area: n;
-}
-
-#searchBar {
-  grid-area: s;
-  grid-column: span 12;
 }
 
 footer {
@@ -184,3 +177,36 @@ footer {
 }
 
 /* *********************************************** */
+p > a,
+label > a {
+  color: blue;
+}
+
+.auth {
+  text-align: center;
+}
+
+form div {
+  margin: 1rem auto;
+}
+
+#agreement > input {
+  margin-inline: 10px;
+}
+
+.form-group {
+  width: fit-content;
+}
+
+input.form-control {
+  width: 100%;
+}
+
+ul {
+  padding: 0;
+  margin-inline: 0;
+}
+
+nav > ul > .btn {
+  margin-inline: 0.1rem;
+}
