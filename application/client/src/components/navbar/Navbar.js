@@ -11,20 +11,20 @@ const Navbar = () => {
 	const authLinks = (
 		<>
 			<ul>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house'></i>
 					</Link>
 				</li>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/about'>
 						<i className='fa-solid fa-circle-info'></i>
 					</Link>
 				</li>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/posts'>posts</Link>
 				</li>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/create'>
 						<i className='fa-solid fa-plus'></i>
 					</Link>
@@ -93,17 +93,17 @@ const Navbar = () => {
 	const guestLinks = (
 		<>
 			<ul>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house'></i>
 					</Link>
 				</li>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/about'>
 						<i className='fa-solid fa-circle-info'></i>
 					</Link>
 				</li>
-				<li className='btn btn-primary'>
+				<li className='btn btn-secondary'>
 					<Link to='/posts'>posts</Link>
 				</li>
 			</ul>
@@ -192,8 +192,9 @@ const Navbar = () => {
 					</form>
 				</div>
 			</div>
-
-			<>{isAuthenticated ? authLinks : guestLinks}</>
+			<div className='navbar-right'>
+				{isAuthenticated ? authLinks : guestLinks}
+			</div>
 		</nav>
 	);
 };

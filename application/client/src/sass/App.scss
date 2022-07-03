@@ -23,7 +23,7 @@ html {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	background-color: $secondary-bg;
+	// background-color: $secondary-bg;
 
 }
 /* *********************************************** */
@@ -56,16 +56,16 @@ a:hover {
 
 .container > h1,
 .container > h2 {
-	color: $primary;
+	// color: $primary;
 }
 
 /* -------------------------------------------- */
 
 /* *********************************************** */
 /* Buttons */
-.btn {
-	background-color: $primary;
-	border-radius: 0;
+.btn,
+input {
+	border-radius: 0 !important;
 }
 
 .btn a {
@@ -124,13 +124,10 @@ nav > ul > .btn {
 /* *********************************************** */
 /* Accordeon  */
 .accordion-button:is(.collapsed) {
-	background-color: $primary;
-	color: white;
+		background-color: lightgray;
 }
 
 .accordion-button:not(.collapsed) {
-	background-color: $secondary;
-	color: $primary;
 }
 
 #accordionProfile {
@@ -189,17 +186,17 @@ footer {
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  box-shadow: inset 0 0 5px $secondary;
+  box-shadow: inset 0 0 5px ;
 
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary-bg;
+//   background: $primary-bg;
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $primary;
+//   background: $primary;
 }
 /* *********************************************** */
 
@@ -209,7 +206,11 @@ label > a {
 }
 
 .auth {
+	height: 100%;
+	display: flex;
 	text-align: center;
+	flex-direction: column;
+	justify-content: center;
 }
 
 form div {
@@ -229,10 +230,23 @@ input.form-control {
 }
 
 ul {
-	padding: 0;
-	margin-inline: 0
+	padding: 0 0.5rem;
+	// margin-inline: 0.5rem
+	
+
 }
+
+ul > li + .btn {
+}
+
 nav > ul > .btn {
-	margin-inline: 0.1rem;
+	// margin-inline: 0.1rem;
 }
+
+// .navbar-left,
+.navbar-right {
+	display: flex;
+	height: 100%
+}
+
 
