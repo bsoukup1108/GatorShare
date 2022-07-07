@@ -25,6 +25,9 @@ const SignUp = () => {
 		if (password !== password2) {
 			console.log('passwords do not match', 'danger');
 		} else {
+			alert(
+				`Login will be implemented! You entered: \n${formData.name} \n${formData.email}\n${formData.password} \n${formData.password2}`
+			);
 			console.log(formData);
 		}
 	};

@@ -1,8 +1,4 @@
-import axios from 'axios';
-
-let config = {
-	headers: { 'Access-Control-Allow-Origin': '*' },
-};
+import http from '../http-common';
 
 const highlightText = (str, searchTerm) => {
 	return str
@@ -37,8 +33,7 @@ const handleSearch = (e) => {
 	let searchURL = 'http://localhost:1234/api/aboutus';
 	let mainContent = document.getElementById('search-results');
 
-	axios
-		.get(searchURL, config)
+	http.get(searchURL)
 		.then((res) => {
 			return res.data;
 		})

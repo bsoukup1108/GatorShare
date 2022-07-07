@@ -20,6 +20,9 @@ const Login = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		alert(
+			`Login will be implemented! You entered: \n${formData.email} \n${formData.password}`
+		);
 		console.log(formData);
 	};
 

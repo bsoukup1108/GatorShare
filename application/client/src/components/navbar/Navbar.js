@@ -14,23 +14,34 @@ const Navbar = () => {
 				<li className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house'></i>
+						<span id='home-content'></span>
 					</Link>
 				</li>
 				<li className='btn btn-secondary'>
 					<Link to='/about'>
 						<i className='fa-solid fa-circle-info'></i>
+						<span id='about-content'></span>
 					</Link>
 				</li>
 				<li className='btn btn-secondary'>
-					<Link to='/posts'>posts</Link>
+					<Link to='/posts'>
+						<i class='fa-solid fa-rectangle-list'></i>{' '}
+						<span id='posts-content'></span>
+					</Link>
 				</li>
 				<li className='btn btn-secondary'>
 					<Link to='/create'>
-						<i className='fa-solid fa-plus'></i>
+						<i className='fa-solid fa-plus '></i>
+						<span id='create-content'></span>
 					</Link>
 				</li>
 			</ul>
-
+			<div>
+				<button type='button' class='btn btn-secondary'>
+					<i class='fa-solid fa-message'></i>
+					<span id='messages-content'></span>
+				</button>
+			</div>
 			<div className='dropdown me-1 '>
 				<a
 					className='btn btn-secondary dropdown-toggle'
@@ -40,7 +51,7 @@ const Navbar = () => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fa-solid fa-bell'></i>
+					<i className='fa-solid fa-bell '></i>
 				</a>
 
 				<ul
@@ -64,7 +75,7 @@ const Navbar = () => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user '></i>
+					<i className='fas fa-user  '></i>
 				</a>
 
 				<ul
@@ -73,7 +84,7 @@ const Navbar = () => {
 				>
 					<li>
 						<a className='dropdown-item' href='/profile'>
-							<i className='fa-solid fa-user'></i> Profile
+							<i className='fa-solid fa-user '></i> Profile
 						</a>
 					</li>
 					<li>
@@ -82,7 +93,7 @@ const Navbar = () => {
 							onClick={console.log('logout')}
 							href='/!#'
 						>
-							<i className='fas fa-sign-out-alt'></i>{' '}
+							<i className='fas fa-sign-out-alt '></i>{' '}
 							<span className='hide-sm'>Logout</span>
 						</a>
 					</li>
@@ -95,16 +106,21 @@ const Navbar = () => {
 			<ul>
 				<li className='btn btn-secondary'>
 					<Link to='/'>
-						<i className='fa-solid fa-house'></i>
+						<i className='fa-solid fa-house '></i>
+						<span id='home-content'></span>
 					</Link>
 				</li>
 				<li className='btn btn-secondary'>
 					<Link to='/about'>
-						<i className='fa-solid fa-circle-info'></i>
+						<i className='fa-solid fa-circle-info '></i>
+						<span id='about-content'></span>
 					</Link>
 				</li>
 				<li className='btn btn-secondary'>
-					<Link to='/posts'>posts</Link>
+					<Link to='/posts'>
+						<i class='fa-solid fa-rectangle-list'></i>{' '}
+						<span id='posts-content'></span>
+					</Link>
 				</li>
 			</ul>
 			<div className='dropdown me-1 '>
@@ -116,7 +132,7 @@ const Navbar = () => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fa-solid fa-bell'></i>
+					<i className='fa-solid fa-bell '></i>
 				</a>
 
 				<ul
@@ -139,7 +155,7 @@ const Navbar = () => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user '></i>
+					<i className='fas fa-user  '></i>
 				</a>
 
 				<ul
@@ -148,13 +164,13 @@ const Navbar = () => {
 				>
 					<li>
 						<a className='dropdown-item' href='/login'>
-							<i className='fa-solid fa-arrow-right-to-bracket'></i>{' '}
+							<i className='fa-solid fa-arrow-right-to-bracket '></i>{' '}
 							Log In
 						</a>
 					</li>
 					<li>
 						<a className='dropdown-item' href='/signup'>
-							<i className='fa-solid fa-user-plus'></i> Sign Up
+							<i className='fa-solid fa-user-plus '></i> Sign Up
 						</a>
 					</li>
 				</ul>
@@ -163,7 +179,7 @@ const Navbar = () => {
 	);
 
 	return (
-		<nav className='navbar sticky-top navbar-expand-lg navbar-light bg-light border-bottom'>
+		<nav className='navbar sticky-top navbar-light bg-light border-bottom'>
 			<div id='logo-content'>
 				<a className='navbar-brand' href='/'>
 					<img id='logo' src={logo} alt='logo' />
@@ -187,7 +203,7 @@ const Navbar = () => {
 								return false;
 							}}
 						>
-							<i className='fa-solid fa-magnifying-glass'></i>{' '}
+							<i className='fa-solid fa-magnifying-glass'></i>
 						</button>
 					</form>
 				</div>

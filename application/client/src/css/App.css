@@ -85,7 +85,10 @@ nav {
 
 nav > ul > .btn {
   height: 2.5rem;
-  margin: 0 0.7rem;
+}
+
+.navbar-right > div {
+  margin-inline: 0 !important;
 }
 
 .navbar {
@@ -189,11 +192,28 @@ input.form-control {
   width: 100%;
 }
 
-ul {
-  padding: 0 0.5rem;
-}
-
 .navbar-right {
   display: flex;
   height: 100%;
+}
+
+@media screen and (min-width: 1170px) {
+  #notification-content::after {
+    content: "";
+  }
+  #home-content::after {
+    content: " home";
+  }
+  #about-content::after {
+    content: "  about";
+  }
+  #messages-content::after {
+    content: "  messages";
+  }
+  #posts-content::after {
+    content: " posts";
+  }
+  #create-content::after {
+    content: " create post";
+  }
 }
