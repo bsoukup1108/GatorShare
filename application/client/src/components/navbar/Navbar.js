@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import handleSearch from '../../js/search';
 
 import logo from '../../img/logo.png';
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -38,8 +38,10 @@ const Navbar = () => {
 			</ul>
 			<div>
 				<button type='button' class='btn btn-secondary'>
-					<i class='fa-solid fa-message'></i>
-					<span id='messages-content'></span>
+					<Link to='/messages'>
+						<i class='fa-solid fa-message'></i>
+						<span id='messages-content'></span>
+					</Link>
 				</button>
 			</div>
 			<div className='dropdown me-1 '>

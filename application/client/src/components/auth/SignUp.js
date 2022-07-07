@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const SignUp = () => {
 	const [formData, setFormData] = useState({

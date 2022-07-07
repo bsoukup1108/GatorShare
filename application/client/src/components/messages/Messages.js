@@ -4,25 +4,21 @@ import { getUser } from '../../js/profile';
 
 const isAuthenticated = true;
 
-const Profile = () => {
+const Messages = () => {
 	// redirect if not logged in
 	if (!isAuthenticated) {
 		return <Navigate to='/login' />;
 	}
 
-	getUser().then((res) => {
-		console.log(res);
-	});
-
 	alert('Will be implemented soon!');
 
 	return (
 		<>
-			<div className='profile'>
-				<h1 className='text-secondary'>Welcome To Your Profile!</h1>
+			<div className='messages'>
+				<h1 className='text-secondary'>You have no messages yet...</h1>
 			</div>
 		</>
 	);
 };
 
-export default Profile;
+export default Messages;
