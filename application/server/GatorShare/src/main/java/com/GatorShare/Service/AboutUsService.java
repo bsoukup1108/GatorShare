@@ -13,6 +13,7 @@ import com.GatorShare.Repo.AboutUsRepo;
 public class  AboutUsService{
     @Autowired
     private AboutUsRepo useRepository;
+
     public List<AboutUsDto> listAll() 
     {
         return useRepository.findAll();
@@ -29,4 +30,10 @@ public class  AboutUsService{
     {
         useRepository.deleteById(id);
     }
-}
+//    public List<AboutUsDto> searchPost(String query) {
+//        List<AboutUsDto> posts = useRepository.searchPost(query);
+//        return posts;
+//    }
+
+
+    }
