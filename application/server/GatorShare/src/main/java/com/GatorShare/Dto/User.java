@@ -4,15 +4,22 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
+
+
 @Entity
-@Data
+
 @Table(name = "users")
+@Data
 public class User {
 
     @Id
@@ -25,7 +32,7 @@ public class User {
     private String lastName;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
     
 }
