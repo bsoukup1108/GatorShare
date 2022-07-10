@@ -11,28 +11,34 @@ import Profile from './components/profile/Profile';
 import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
 import Posts from './components/posts/Posts';
+import TestSignup from './components/testlogin/TestSignup';
+import TestLogin from './components/auth/TestLogin';
 
-const App = () => (
-	<BrowserRouter>
-		<>
-			<div id='wrapper'>
-				<Navbar />
-				<div className='container'>
-					<Routes>
-						<Route exact path='/signup' element={<SignUp />} />
-						<Route exact path='/login' element={<Login />} />
-						<Route path='/search' element={<SearchResults />} />
-						<Route exact path='/about' element={<About />} />
-						<Route exact path='/profile' element={<Profile />} />
-						<Route exact path='/messages' element={<Messages />} />
-						<Route exact path='/create' element={<CreatePost />} />
-						<Route exact path='/posts' element={<Posts />} />
-					</Routes>
+function App() {
+	return (
+		<BrowserRouter>
+			<>
+				<div id='wrapper'>
+					<Navbar />
+					<div className='container'>
+						<Routes>
+							<Route exact path='/signup' element={<SignUp />} />
+							<Route exact path='/login' element={<Login />} />
+							<Route path='/search' element={<SearchResults />} />
+							<Route exact path='/about' element={<About />} />
+							<Route exact path='/profile' element={<Profile />} />
+							<Route exact path='/messages' element={<Messages />} />
+							<Route exact path='/create' element={<CreatePost />} />
+							<Route exact path='/posts' element={<Posts />} />
+							<Route exact path='/testsignUp' element={<TestSignup />} />
+							<Route exact path='/testlogin' element={<TestLogin />} />
+						</Routes>
+					</div>
+					<Footer />
 				</div>
-				<Footer />
-			</div>
-		</>
-	</BrowserRouter>
-);
+			</>
+		</BrowserRouter>
+	);
+}
 
 export default App;

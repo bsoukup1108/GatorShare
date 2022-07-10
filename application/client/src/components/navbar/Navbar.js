@@ -24,7 +24,19 @@ const Navbar = () => {
 					</Link>
 				</li>
 				<li className='btn btn-secondary'>
+					<Link to='/testsignUp'>
+						<i className='fa-solid fa-plus'></i>
+						<span id='create-content'></span>
+					</Link>
+				</li>
+				<li className='btn btn-secondary'>
 					<Link to='/posts'>
+						<i class='fa-solid fa-rectangle-list'></i>{' '}
+						<span id='posts-content'></span>
+					</Link>
+				</li>
+				<li className='btn btn-secondary'>
+					<Link to='/testlogin'>
 						<i class='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
 					</Link>

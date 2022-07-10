@@ -98,15 +98,15 @@ const About = () => {
 								<img src={Estefanos} alt='pic' />
 							</div>
 							<div className='accordion-body'>
-								My name is Esteafnos Kebebew, and I am a
+								My name is Estefanos Kebebew, and I am a
 								third-year student. I have a passion for
 								building android and web apps. Recently, I build
 								a chat app using android studio and the new
-								google MI kit and I am currently working on a
+								google MI kit.I am currently working on a
 								reinforcement-based traffic control system using
 								an AI model to resolve city traffic tools. I am
 								proficient in python, java, javascript, kotlin,
-								spring, Django, and swift. For the front-end
+								spring, SQL, Django, and swift. For the front-end
 								side, I am familiar with HTML, CSS, react,
 								angular, and typescript. In my free time, I like
 								to watch and play soccer.

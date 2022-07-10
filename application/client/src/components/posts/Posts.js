@@ -14,10 +14,11 @@ const Posts = () => {
 	return (
 		<>
 			<div className='posts'>
-				<h1 className='text-secondary'>You will see all posts here!</h1>
+			
 			</div>
 		</>
 	);
 };
 
 export default Posts;
+
