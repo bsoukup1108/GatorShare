@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Repository
 @Table(name = "posts")
 public interface PostRepo extends
-JpaRepository<Post, Long>{
+JpaRepository<Post, String>{
 
 
 //    @Query("SELECT description FROM posts")

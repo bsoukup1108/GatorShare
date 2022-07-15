@@ -1,36 +1,74 @@
 package com.GatorShare.Dto;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import javax.persistence.Table;
-import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
+import javax.persistence.*;
+
+
+import org.hibernate.annotations.GenericGenerator;
+
+
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Entity
 @Table(name = "posts")
-@Data
+
 public class Post {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
-	private Long id;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_Name")
-	private String lastName;
-	@Column(name = "title")
-	private String title;
-	@Column(name = "description")
-	private String description;
+	@GeneratedValue(generator = "uuid", strategy = GenerationType.IDENTITY)
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	@Column(name = "id")
+	private String id;
+	@Column(name = "Title")
+	private String Title;
 
-	// After the final table is desineg retrive the image and other infromation from the database
+	@Column(name = "Description")
+	private String Description;
+
+	@Lob
+	@Column(name = "IMAGE")
+	private String image;
+
+	public Post() {
+	}
+
+	public Post(String title, String description, String image) {
+		this.Title = title;
+		this.Description = description;
+		this.image = image;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public String getTitle() {
+		return Title;
+	}
+
+
+
+	public void SetTtitle(String title){
+		this.Title = title;
+	}
+
+
+	public void setDescription(String description) {
+		this.Description = description;
+	}
+
+	public String getIMage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+//	Evey post must be saved in the logo
+	@Override
+	public String toString(){
+		return "Post Id" + id + "Post Title" + Title + "Post Description" + Description + "Post Image" + image;
+	}
+
 
 }
