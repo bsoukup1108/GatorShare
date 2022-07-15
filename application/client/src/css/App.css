@@ -217,3 +217,10 @@ input.form-control {
     content: " create post";
   }
 }
+.react-chat-container {
+  max-width: 100% !important;
+}
+
+.react-chat-viewerBox {
+  height: 80vh !important;
+}

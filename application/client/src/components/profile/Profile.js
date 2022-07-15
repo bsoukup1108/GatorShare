@@ -1,12 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { getUser } from '../../js/profile';
-
-const isAuthenticated = true;
+import { getToken } from '../../js/useToken';
 
 const Profile = () => {
 	// redirect if not logged in
-	if (!isAuthenticated) {
+	if (!getToken()) {
 		return <Navigate to='/login' />;
 	}
 

@@ -1,10 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import { login } from '../../js/auth';
+import { getToken } from '../../js/useToken';
+import { ReactSession } from 'react-client-session';
 
-const isAuthenticated = true;
+const Login = (props) => {
+	// const [isAuthenticated, setIsAuthenticated] = useState(props.isAuthenticated);
+	const { isAuthenticated } = props;
 
-const Login = () => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -20,14 +23,11 @@ const Login = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		alert(
-			`Login will be implemented! You entered: \n${formData.email} \n${formData.password}`
-		);
-		console.log(formData);
+		login(formData);
 	};
 
 	// redirect if logged in
-	if (isAuthenticated) {
+	if (ReactSession.get('token')) {
 		return <Navigate to='/' />;
 	}
 

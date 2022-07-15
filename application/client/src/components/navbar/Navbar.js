@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import handleSearch from '../../js/search';
 
 import logo from '../../img/logo.png';
-const isAuthenticated = true;
+import { getToken } from '../../js/useToken';
+import { logout } from '../../js/auth';
 
-const Navbar = () => {
+const Navbar = (props) => {
+	const { isAuthenticated } = props;
+
 	const navigate = useNavigate();
-
+	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
 	const authLinks = (
 		<>
 			<ul>
@@ -25,7 +28,7 @@ const Navbar = () => {
 				</li>
 				<li className='btn btn-secondary'>
 					<Link to='/posts'>
-						<i class='fa-solid fa-rectangle-list'></i>{' '}
+						<i className='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
 					</Link>
 				</li>
@@ -37,9 +40,9 @@ const Navbar = () => {
 				</li>
 			</ul>
 			<div>
-				<button type='button' class='btn btn-secondary'>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/messages'>
-						<i class='fa-solid fa-message'></i>
+						<i className='fa-solid fa-message'></i>
 						<span id='messages-content'></span>
 					</Link>
 				</button>
@@ -92,8 +95,8 @@ const Navbar = () => {
 					<li>
 						<a
 							className='dropdown-item'
-							onClick={console.log('logout')}
-							href='/!#'
+							onClick={() => logout()}
+							href='/logout'
 						>
 							<i className='fas fa-sign-out-alt '></i>{' '}
 							<span className='hide-sm'>Logout</span>
@@ -120,7 +123,7 @@ const Navbar = () => {
 				</li>
 				<li className='btn btn-secondary'>
 					<Link to='/posts'>
-						<i class='fa-solid fa-rectangle-list'></i>{' '}
+						<i className='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
 					</Link>
 				</li>

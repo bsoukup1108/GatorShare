@@ -30,7 +30,7 @@ const handleSearch = (e) => {
 	// let searchURL = `http://localhost:1234/api/search?${searchTerm}`;
 
 	// stub
-	let searchURL = 'http://localhost:1234/api/aboutus';
+	let searchURL = '/aboutus';
 	let mainContent = document.getElementById('search-results');
 
 	http.get(searchURL)

@@ -1,39 +1,38 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
+import { register } from '../../js/auth';
 
-const isAuthenticated = true;
+import { getToken } from '../../js/useToken';
 
 const SignUp = () => {
 	const [formData, setFormData] = useState({
 		name: '',
+		lastname: '',
 		email: '',
 		password: '',
-		password2: '',
 	});
 
-	const { name, email, password, password2 } = formData;
+	const { name, lastname, email, password } = formData;
 
 	const onChange = (e) =>
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
+			[e.target.lastname]: e.target.value,
 		});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		if (password !== password2) {
-			console.log('passwords do not match', 'danger');
-		} else {
-			alert(
-				`Login will be implemented! You entered: \n${formData.name} \n${formData.email}\n${formData.password} \n${formData.password2}`
-			);
-			console.log(formData);
-		}
+		// if (password !== password2) {
+		// 	console.log('passwords do not match', 'danger');
+		// } else {
+		register(formData);
+		// }
 	};
 
 	// redirect if logged in
-	if (isAuthenticated) {
+	if (getToken()) {
 		return <Navigate to='/' />;
 	}
 
@@ -52,6 +51,18 @@ const SignUp = () => {
 							placeholder='Name'
 							name='name'
 							value={name}
+							onChange={(e) => onChange(e)}
+							// required
+						/>
+					</div>
+
+					<div className='form-group'>
+						<input
+							className='form-control'
+							type='text'
+							placeholder='Lastname'
+							name='lastname'
+							value={lastname}
 							onChange={(e) => onChange(e)}
 							// required
 						/>
@@ -78,31 +89,21 @@ const SignUp = () => {
 							onChange={(e) => onChange(e)}
 						/>
 					</div>
-					<div className='form-group'>
-						<input
-							className='form-control'
-							type='password'
-							placeholder='Confirm Password'
-							name='password2'
-							value={password2}
-							onChange={(e) => onChange(e)}
-							// minLength='6'
-						/>
-					</div>
-					<div id='agreement' className='form-group '>
+
+					{/* <div id='agreement' className='form-group '>
 						<input
 							className='form-check-input mt-1'
 							type='checkbox'
 							name='agreement'
 							required
-							onchange='validateAgreement(event.target)'
+							// onChange='validateAgreement(event.target)'
 						/>
-						<label for='agreement'>
+						<label htmlFor='agreement'>
 							<p>
 								<a href='#!'>Agree to Privacy Rules</a>
 							</p>
 						</label>
-					</div>
+					</div> */}
 
 					<input
 						type='submit'
