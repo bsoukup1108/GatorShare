@@ -1,74 +1,70 @@
 package com.GatorShare.Dto;
 
 import javax.persistence.*;
-
-
-import org.hibernate.annotations.GenericGenerator;
-
-
-import lombok.Data;
-
+import java.util.Date;
 
 @Entity
 @Table(name = "posts")
-
 public class Post {
+
 	@Id
-	@GeneratedValue(generator = "uuid", strategy = GenerationType.IDENTITY)
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@Column(name = "id")
-	private String id;
-	@Column(name = "Title")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id",referencedColumnName = "id")
+	private User user;
+
+	@Column(columnDefinition="TEXT")
 	private String Title;
 
-	@Column(name = "Description")
+
+	@Column(columnDefinition="TEXT")
 	private String Description;
 
-	@Lob
-	@Column(name = "IMAGE")
-	private String image;
+	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Date createdDate;
 
 	public Post() {
 	}
 
-	public Post(String title, String description, String image) {
-		this.Title = title;
-		this.Description = description;
-		this.image = image;
-	}
-
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public String getTitle() {
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public String getTitle(){
 		return Title;
 	}
 
-
-
-	public void SetTtitle(String title){
-		this.Title = title;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-
-	public void setDescription(String description) {
-		this.Description = description;
+	public String getContent() {
+		return Description;
 	}
 
-	public String getIMage() {
-		return image;
+	public void setContent(String Description) {
+		this.Description = Description;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void SetTitle(String Title){
+		this.Title = Title;
 	}
 
-//	Evey post must be saved in the logo
-	@Override
-	public String toString(){
-		return "Post Id" + id + "Post Title" + Title + "Post Description" + Description + "Post Image" + image;
+	public Date getCreatedDate() {
+		return createdDate;
 	}
 
-
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 }

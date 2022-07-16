@@ -16,23 +16,23 @@ public class postService{
     @Autowired
     private PostRepo postrepo;
 
-    public void store(MultipartFile file, String Title, String description) throws IOException {
+    public void store(Integer id, MultipartFile file, String Title, String description) throws IOException {
         Post newPost = new Post();
         String PostName = StringUtils.cleanPath(file.getOriginalFilename());
         if(PostName.contains("..")){
             System.out.println("post is not valid");
         }
         try {
-            newPost.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+            newPost.setContent(Base64.getEncoder().encodeToString(file.getBytes()));
         } catch (IOException e){
             e.printStackTrace();
         }
-        newPost.setDescription(description);
-        newPost.setImage(Title);
+        newPost.setContent(description);
+        newPost.SetTitle(Title);
         postrepo.save(newPost);
     }
 
-    public Post getPost(String id) {
+    public Post getPost(Integer id) {
         return postrepo.findById(id).get();
     }
 
@@ -40,17 +40,17 @@ public class postService{
         return postrepo.findAll();
     }
 
-    public void ChangePostTitle(String id, String NewTitile){
+    public void ChangePostTitle(Integer id, String NewTitile){
         Post newTi = new Post();
         newTi = postrepo.findById(id).get();
-        newTi.setImage(NewTitile);
+        newTi.SetTitle(NewTitile);
         postrepo.save(newTi);
     }
 
-    public void ChangePostDesc(String id, String Newdisc){
+    public void ChangePostDesc(Integer id, String Newdisc){
         Post newDEsc = new Post();
         newDEsc = postrepo.findById(id).get();
-        newDEsc.setDescription(Newdisc);
+        newDEsc.setContent(Newdisc);
         postrepo.save(newDEsc);
     }
 

@@ -137,11 +137,11 @@ public class GatorShareApplication {
 	}
 
 	@PostMapping("/post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("posts") Integer  id, @RequestParam("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
 		String message = "";
 		try{
-			PostService.store(posts, Titile, DEsc);
-			message = "upload the post successfully: "+ posts.getOriginalFilename();
+			PostService.store(id, posts, Titile, DEsc);
+			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
 			message = "Post could not be uploaded " + posts.getOriginalFilename() + ".";
@@ -152,7 +152,7 @@ public class GatorShareApplication {
 
 
 	@PostMapping("/changePostTitle")
-	public String changePname(@RequestParam("id") String id,
+	public String changePname(@RequestParam("id") Integer id,
 							  @RequestParam("newPostname") String name)
 	{
 		String message = "";
@@ -170,7 +170,7 @@ public class GatorShareApplication {
 
 	}
 	@PostMapping("/changePostDescription")
-	public String changeDescription(@RequestParam("id") String id ,
+	public String changeDescription(@RequestParam("id") Integer id ,
 									@RequestParam("newDescription") String description)
 
 	{
