@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
+import Spinner from '../misc/Spinner';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -22,7 +23,7 @@ const Posts = () => {
 
 	return (
 		<>
-			{!isLoaded && <p>loading...</p>}
+			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div>
 					<div style={{ 'margin-bottom': '1rem' }}>
