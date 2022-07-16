@@ -33,47 +33,47 @@ const Login = (props) => {
 
   return (
     <>
-      <div class="auth">
-        <div class="signin-child signin-background">
-          <div class="signin-left text-center">
-            <h1 class="heading-primary">Hello, <span class="text-warning">Gators</span>!</h1>
-            <p class="heading-secondary">
+      <div className="auth">
+        <div className="form-child form-background">
+          <div classNames="form-left text-center">
+            <h1 className="heading-primary">Hello, <span class="text-warning">Gators</span>!</h1>
+            <p className="heading-secondary">
 			Enter your personal details and start your journey with us
             </p>
-			<button class="create-btn" type="button" value="Sign Up">
+			<button className="create-btn" type="button" value="Sign Up">
                 Create Account
               </button>
           </div>
 
-          <div class="signin-overlay"></div>
+          <div className="form-overlay"></div>
         </div>
-        <div class="signin-child signin-form">
+        <div className="form-child signin-form" onSubmit={(e) => onSubmit(e)}>
           <form action="#">
             <h1>
               <b>Sign In</b>
             </h1>
 
-            <div class="form-group">
-              <label for="email">Email Address</label>
+            <div className="form-group">
+              <label htmlFor="email">Email Address</label>
               <input
-                class="form-control"
-                type="text"
+                className="form-control"
+                type="email"
                 name="email"
+				placeholder='Email Address'
                 id="email"
-				placeholder="johnnyappleseed@gmail.com"
 				value={email}
                 onChange={(e) => onChange(e)}
                 required
               />
             </div>
-            <div class="form-group">
-              <label for="password">Password</label>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
               <input
-                class="form-control"
-                type="text"
+                className="form-control"
+                type="email"
                 name="password"
+				placeholder='Password'
                 id="password"
-                placeholder="********"
 				 // minLength='6'
 				 value={password}
 				 onChange={(e) => onChange(e)}
@@ -82,14 +82,14 @@ const Login = (props) => {
             </div>
 
             <div>
-              <ul class="list-inline">
+              <ul className="list-inline">
 			  <li>
-                  <a class="forgotpass-link" href="#">
+                  <a className="forgotpass-link" href="#">
                     Forgot your password?
                   </a>
                 </li>
                 <li>
-				<button class="signin-btn" type="button" value="Sign In">
+				<button className="form-btn" type="button" value="Sign In">
                 Sign In
               </button>
                 </li>
@@ -98,61 +98,7 @@ const Login = (props) => {
           </form>
         </div>
       </div>
-      {/* <div className="auth">
-		<div class="auth-child">
-        <div className="right-content">
-          <div className="form" onSubmit={(e) => onSubmit(e)}>
-            <h2>
-              <b>Sign In</b>
-            </h2>
-            <label>
-              <span>
-                <b>Email Address</b>
-              </span>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => onChange(e)}
-                // required
-              />
-            </label>
-
-            <label>
-              <span>
-                <b>Password</b>
-              </span>
-              <input
-                type="password"
-                // minLength='6'
-                value={password}
-                onChange={(e) => onChange(e)}
-              />
-            </label>
-
-            <p class="forgot-pass">Forgot your password?</p>
-
-            <button class="submit" type="button" value="Sign In">
-              Sign In
-            </button>
-			
-  
-  
-          </div>
-          <div class="left-content">
-            <div class="cont">
-              <h1>
-                Hello, <span class="text-warning">Gators</span>!
-              </h1>
-              <p>Enter your personal details and start your journey with us</p>
-              <button class="create" type="button" value="Sign In">
-                Create Account
-              </button>
-            </div>
-			<div class="signup-overlay"></div>
-          </div>
-        </div>
-		</div>
-      </div> */}
+      
     </>
   );
 };

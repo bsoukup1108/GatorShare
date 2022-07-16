@@ -163,7 +163,7 @@ footer {
 }
 
 /* *********************************************** */
-/* Sign In */
+/* SignIn/SignUp */
 .auth {
   position: relative;
   top: 50%;
@@ -182,7 +182,7 @@ footer {
   box-shadow: 0px 0.1875rem 0.4375rem rgba(0, 0, 0, 0.25);
 }
 
-.signin-overlay {
+.form-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -191,14 +191,14 @@ footer {
   background-color: rgb(74, 33, 123);
 }
 
-.signin-child {
+.form-child {
   font-weight: 600;
   width: 50%;
   height: 100%;
   color: black;
 }
 
-.signin-background {
+.form-background {
   position: relative;
   padding: 2rem;
   display: flex;
@@ -209,7 +209,7 @@ footer {
   background-size: cover;
 }
 
-.signin-left {
+.form-left {
   position: relative;
   z-index: 2;
 }
@@ -241,6 +241,73 @@ label {
   color: black;
 }
 
+.name-group {
+  display: inline-block;
+}
+
+.firstName {
+  float: left;
+  width: 160px;
+  padding-right: 5px;
+}
+
+.lastName {
+  float: right;
+  width: 160px;
+  padding-left: 5px;
+}
+
+.pass-group {
+  display: inline-block;
+}
+
+.password {
+  float: left;
+  width: 160px;
+  padding-right: 5px;
+}
+
+.confirm-pass {
+  float: right;
+  width: 160px;
+  padding-left: 5px;
+}
+
+.who-label {
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: black;
+}
+
+.who-check {
+  display: block;
+  text-align: center;
+}
+
+.who-input {
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+.policy {
+  display: block;
+  text-align: center;
+}
+
+.policy-link {
+  margin-left: 5px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #999;
+}
+.policy-link:focus, .policy-link:hover {
+  color: #787878;
+}
+
 .form-control {
   background-color: white;
 }
@@ -266,7 +333,7 @@ label {
   background: #323232;
 }
 
-.signin-btn {
+.form-btn {
   margin: 50px 60px auto;
   padding: 0.5rem 4rem;
   font-size: 0.95rem;
@@ -276,7 +343,7 @@ label {
   background: #111;
   border-radius: 2.1875rem;
 }
-.signin-btn:focus, .signin-btn:hover {
+.form-btn:focus, .form-btn:hover {
   background: #323232;
 }
 
@@ -292,7 +359,7 @@ label {
   color: #787878;
 }
 
-.signin-container h2 {
+.form-container h2 {
   width: 100%;
   font-size: 30px;
   text-align: center;
@@ -309,19 +376,19 @@ label {
     content: "";
   }
   #home-content::after {
-    content: " home";
+    content: " Home";
   }
   #about-content::after {
-    content: "  about";
+    content: "  About";
   }
   #messages-content::after {
-    content: "  messages";
+    content: "  Messages";
   }
   #posts-content::after {
-    content: " posts";
+    content: " Posts";
   }
   #create-content::after {
-    content: " create post";
+    content: " Create Post";
   }
 }
 .react-chat-container {
