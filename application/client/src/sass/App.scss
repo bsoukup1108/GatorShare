@@ -196,34 +196,155 @@ footer {
 }
 /* *********************************************** */
 
-p > a,
-label > a {
-	color: blue
-}
+// p > a,
+// label > a {
+// 	color: blue
+// }
 
 .auth {
+	width: 100%;
 	height: 100%;
-	display: flex;
-	text-align: center;
-	flex-direction: column;
+	display:flex;
 	justify-content: center;
+	align-items: center;
+	background: $primary;
 }
 
-form div {
-	margin: 1rem auto;
+.content{
+	overflow: hidden;
+	position: relative;
+	width: 900px;
+	height: 550px;
+	background: white;
 }
 
-#agreement > input {
-	margin-inline: 10px;
+.form{
+	position: relative;
+	width: 640px;
+	height: 100%;
+	padding: 50px 30px;
 }
 
-.form-group {
-	width: fit-content;
+.form h2{
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+}
+label{
+	display: block;
+	width: 260px;
+	margin: 25px auto;
+	text-align: left;
+}
+label span{
+	font-size: 14px;
+	font-weight: 600;
+	color: black;
+	
+}
+// #agreement > input {
+// 	margin-inline: 10px;
+// }
+
+.form input{
+	display: block;
+	width: 100%;
+	margin-top: 5px;
+	font-size: 16px;
+	padding-bottom: 5px;
+	border-radius: 30px;
+	text-align: left;
+	
 }
 
-input.form-control {
-	width: 100%
+.form button{
+	display: block;
+	margin: 0 auto;
+	width: 200px;
+	height: 36px;
+	border-radius: 30px;
+	color: black;
+	font-size: 15px;
+	cursor: pointer;
 }
+
+.submit{
+	margin-top: 40px;
+	margin-bottom: 30px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.submit:hover{
+	background: rgba(185, 184, 184, 0.658);
+}
+
+.forgot-pass{
+	margin-top: 15px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 600;
+	color: rgb(88, 88, 88);
+	cursor: pointer;
+}
+
+.forgot-pass:hover{
+	color:black;
+}
+
+.sub-content{
+	overflow: hidden;
+	position: absolute;
+	right: 640px;
+	top:0;
+	width: 900px;
+	height: 100%;
+	padding-right: 260px;
+	
+}
+
+.cont{
+	overflow: hidden;
+	z-index: 2;
+	position: absolute;
+	right:0;
+	top:0;
+	width: 260px;
+	height: 100%;
+}
+
+.cont h2{
+	margin-bottom: 10px;
+	font-size: 25px;
+	font-weight: normal;
+}
+
+.cont p{
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.create {
+	overflow: hidden;
+	z-index: 2;
+	position: relative;
+	width: 200px;
+	height: 36px;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-size: 15px;
+	cursor: pointer;
+	color: black;
+	border-radius: 30px;
+}
+
+// .form-group {
+// 	width: fit-content;
+// }
+
+// input.form-control {
+// 	width: 100%
+// }
 
 
 // .navbar-left,
