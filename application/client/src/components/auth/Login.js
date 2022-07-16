@@ -35,14 +35,16 @@ const Login = (props) => {
     <>
       <div className="auth">
         <div className="form-child form-background">
-          <div classNames="form-left text-center">
-            <h1 className="heading-primary">Hello, <span class="text-warning">Gators</span>!</h1>
+          <div className="form-left text-center">
+            <h1 className="heading-primary">
+              Hello, <span className="text-warning">Gators</span>!
+            </h1>
             <p className="heading-secondary">
-			Enter your personal details and start your journey with us
+            Enter your personal details and start your journey with us
             </p>
-			<button className="create-btn" type="button" value="Sign Up">
-                Create Account
-              </button>
+            <button className="create-btn" type="button" value="Sign In">
+              Create Account
+            </button>
           </div>
 
           <div className="form-overlay"></div>
