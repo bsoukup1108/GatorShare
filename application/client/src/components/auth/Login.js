@@ -33,8 +33,74 @@ const Login = (props) => {
 
   return (
     <>
-      <div className="auth">
-        <div className="content">
+      <div class="auth">
+        <div class="signin-child signin-background">
+          <div class="signin-left text-center">
+            <h1 class="heading-primary">Hello, <span class="text-warning">Gators</span>!</h1>
+            <p class="heading-secondary">
+			Enter your personal details and start your journey with us
+            </p>
+			<button class="create-btn" type="button" value="Sign Up">
+                Create Account
+              </button>
+          </div>
+
+          <div class="signin-overlay"></div>
+        </div>
+        <div class="signin-child signin-form">
+          <form action="#">
+            <h1>
+              <b>Sign In</b>
+            </h1>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                class="form-control"
+                type="text"
+                name="email"
+                id="email"
+				placeholder="johnnyappleseed@gmail.com"
+				value={email}
+                onChange={(e) => onChange(e)}
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                class="form-control"
+                type="text"
+                name="password"
+                id="password"
+                placeholder="********"
+				 // minLength='6'
+				 value={password}
+				 onChange={(e) => onChange(e)}
+                required
+              />
+            </div>
+
+            <div>
+              <ul class="list-inline">
+			  <li>
+                  <a class="forgotpass-link" href="#">
+                    Forgot your password?
+                  </a>
+                </li>
+                <li>
+				<button class="signin-btn" type="button" value="Sign In">
+                Sign In
+              </button>
+                </li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </div>
+      {/* <div className="auth">
+		<div class="auth-child">
+        <div className="right-content">
           <div className="form" onSubmit={(e) => onSubmit(e)}>
             <h2>
               <b>Sign In</b>
@@ -68,8 +134,11 @@ const Login = (props) => {
             <button class="submit" type="button" value="Sign In">
               Sign In
             </button>
+			
+  
+  
           </div>
-          <div class="sub-content">
+          <div class="left-content">
             <div class="cont">
               <h1>
                 Hello, <span class="text-warning">Gators</span>!
@@ -79,9 +148,11 @@ const Login = (props) => {
                 Create Account
               </button>
             </div>
+			<div class="signup-overlay"></div>
           </div>
         </div>
-      </div>
+		</div>
+      </div> */}
     </>
   );
 };
