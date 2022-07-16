@@ -13,33 +13,25 @@ const Navbar = (props) => {
 	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
 	const authLinks = (
 		<>
-			<ul>
-				<li className='btn btn-secondary'>
-					<Link to='/'>
-						<i className='fa-solid fa-house'></i>
-						<span id='home-content'></span>
-					</Link>
-				</li>
-				<li className='btn btn-secondary'>
+			<div>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/about'>
 						<i className='fa-solid fa-circle-info'></i>
 						<span id='about-content'></span>
 					</Link>
-				</li>
-				<li className='btn btn-secondary'>
+				</button>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
 					</Link>
-				</li>
-				<li className='btn btn-secondary'>
+				</button>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/create'>
 						<i className='fa-solid fa-plus '></i>
 						<span id='create-content'></span>
 					</Link>
-				</li>
-			</ul>
-			<div>
+				</button>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/messages'>
 						<i className='fa-solid fa-message'></i>
@@ -96,7 +88,7 @@ const Navbar = (props) => {
 						<a
 							className='dropdown-item'
 							onClick={() => logout()}
-							href='/logout'
+							href='/login'
 						>
 							<i className='fas fa-sign-out-alt '></i>{' '}
 							<span className='hide-sm'>Logout</span>
@@ -108,26 +100,26 @@ const Navbar = (props) => {
 	);
 	const guestLinks = (
 		<>
-			<ul>
-				<li className='btn btn-secondary'>
+			<div>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
 						<span id='home-content'></span>
 					</Link>
-				</li>
-				<li className='btn btn-secondary'>
+				</button>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/about'>
 						<i className='fa-solid fa-circle-info '></i>
 						<span id='about-content'></span>
 					</Link>
-				</li>
-				<li className='btn btn-secondary'>
+				</button>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
 					</Link>
-				</li>
-			</ul>
+				</button>
+			</div>
 			<div className='dropdown me-1 '>
 				<a
 					className='btn btn-secondary dropdown-toggle'

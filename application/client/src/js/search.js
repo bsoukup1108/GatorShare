@@ -27,10 +27,8 @@ const handleSearch = (e) => {
 	e.preventDefault();
 
 	let searchTerm = document.getElementById('search-text').value;
-	// let searchURL = `http://localhost:1234/api/search?${searchTerm}`;
+	let searchURL = `/search?${searchTerm}`;
 
-	// stub
-	let searchURL = '/aboutus';
 	let mainContent = document.getElementById('search-results');
 
 	http.get(searchURL)

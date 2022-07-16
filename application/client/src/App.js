@@ -1,5 +1,5 @@
 import './css/App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import About from './components/about/About';
@@ -14,6 +14,8 @@ import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
 
 import { ReactSession } from 'react-client-session';
+
+const Rrr = React.lazy(() => import('./components/posts/Posts'));
 
 const App = () => {
 	ReactSession.setStoreType('localStorage');
@@ -62,7 +64,15 @@ const App = () => {
 								path='/create'
 								element={<CreatePost />}
 							/>
-							<Route exact path='/posts' element={<Posts />} />
+							<Route
+								exact
+								path='/posts'
+								element={
+									<Suspense fallback={<p>loading...</p>}>
+										<Rrr />
+									</Suspense>
+								}
+							/>
 						</Routes>
 					</div>
 					<Footer />

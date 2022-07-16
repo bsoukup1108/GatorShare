@@ -201,16 +201,21 @@ label > a {
 	color: blue
 }
 
-.auth {
+.auth,
+.create {
 	height: 100%;
 	display: flex;
 	text-align: center;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 }
 
 form div {
 	margin: 1rem auto;
+}
+form {
+	max-width: 500px
 }
 
 #agreement > input {
@@ -299,3 +304,31 @@ input.form-control {
 //   }
 
 
+.posts:hover {
+	cursor: pointer;
+	border-width: thick;
+}
+
+#createPostWrapper {
+	height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#descInput {
+	display: flex;
+    justify-content: center;
+
+	textarea {
+		width:28rem;
+		height: 300px
+	}
+}
+
+
+#checkboxCreate {
+	display: flex;
+    flex-wrap: wrap;
+}
