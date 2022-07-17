@@ -375,7 +375,8 @@ label {
 	}
 }
 
-.form-btn {
+.form-btn,
+.comment-btn {
 	margin: 50px 60px auto;
 	padding: 0.5rem 4rem;
 	font-size: 0.95rem;
@@ -389,6 +390,10 @@ label {
 	&:hover {
 		background: lighten(#111, 13%);
 	}
+}
+
+.comment-btn {
+	margin-right: 0;
 }
 
 .forgotpass-link {

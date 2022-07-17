@@ -333,7 +333,8 @@ label {
   background: #323232;
 }
 
-.form-btn {
+.form-btn,
+.comment-btn {
   margin: 50px 60px auto;
   padding: 0.5rem 4rem;
   font-size: 0.95rem;
@@ -343,8 +344,14 @@ label {
   background: #111;
   border-radius: 2.1875rem;
 }
-.form-btn:focus, .form-btn:hover {
+.form-btn:focus, .form-btn:hover,
+.comment-btn:focus,
+.comment-btn:hover {
   background: #323232;
+}
+
+.comment-btn {
+  margin-right: 0;
 }
 
 .forgotpass-link {
