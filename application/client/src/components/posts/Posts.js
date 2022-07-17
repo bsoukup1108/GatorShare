@@ -28,9 +28,37 @@ const Posts = () => {
 			{isLoaded && (
 				<div>
 					<div id='sort'>
-						<button className='sort-btn'>
-							Sort alphabetically
-						</button>
+						<div class='dropdown'>
+							<button
+								class='btn btn-secondary dropdown-toggle sort-btn'
+								type='button'
+								id='dropdownMenuButton1'
+								data-bs-toggle='dropdown'
+								aria-expanded='false'
+							>
+								Sort by
+							</button>
+							<ul
+								class='dropdown-menu'
+								aria-labelledby='dropdownMenuButton1'
+							>
+								<li>
+									<a class='dropdown-item' href='#'>
+										Alphabetically
+									</a>
+								</li>
+								<li>
+									<a class='dropdown-item' href='#'>
+										Most recent
+									</a>
+								</li>
+								<li>
+									<a class='dropdown-item' href='#'>
+										Most popular
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
 						<div className='row row-cols-1 row-cols-md-3 g-4'>
