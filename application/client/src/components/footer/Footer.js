@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
 	return (
 		<>
-			<footer className='border-top bg-light'>
+			<footer className='gradient-hor bg-pan-right flex-center'>
 				<div>
 					<span className='text-muted'>
 						<span>TEAM #1 </span> | <span>CSC648</span> |{' '}

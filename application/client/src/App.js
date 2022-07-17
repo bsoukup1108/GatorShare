@@ -12,11 +12,13 @@ import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
 import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
+import Spinner from './components/misc/Spinner';
 
 import { ReactSession } from 'react-client-session';
 
-const Rrr = React.lazy(() => import('./components/posts/Posts'));
-
+const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
+const PostLayout = React.lazy(() => import('./components/posts/Post'));
+const Aboutus = React.lazy(() => import('./components/about/About'));
 const App = () => {
 	ReactSession.setStoreType('localStorage');
 
@@ -26,7 +28,7 @@ const App = () => {
 		if (!!token) {
 			setIsAuthenticated(true);
 		}
-	}, token);
+	}, [token]);
 	return (
 		<BrowserRouter>
 			<>
@@ -48,7 +50,16 @@ const App = () => {
 								/>
 							)}
 							<Route path='/search' element={<SearchResults />} />
-							<Route exact path='/about' element={<About />} />
+
+							<Route
+								path='/about'
+								element={
+									<Suspense fallback={<Spinner />}>
+										<About />
+									</Suspense>
+								}
+							/>
+
 							<Route
 								exact
 								path='/profile'
@@ -59,20 +70,32 @@ const App = () => {
 								path='/messages'
 								element={<Messages />}
 							/>
-							<Route
-								exact
-								path='/create'
-								element={<CreatePost />}
-							/>
+							{isAuthenticated && (
+								<Route
+									exact
+									path='/create'
+									element={<CreatePost />}
+								/>
+							)}
 							<Route
 								exact
 								path='/posts'
 								element={
-									<Suspense fallback={<p>loading...</p>}>
-										<Rrr />
+									<Suspense fallback={<Spinner />}>
+										<PostsLayout />
 									</Suspense>
 								}
 							/>
+							{
+								<Route
+									path='/post/:id'
+									element={
+										<Suspense fallback={<Spinner />}>
+											<PostLayout />
+										</Suspense>
+									}
+								/>
+							}
 						</Routes>
 					</div>
 					<Footer />
