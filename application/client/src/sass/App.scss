@@ -3,7 +3,7 @@
 $primary: rgba(74, 33, 123, 1);
 $secondary: rgba(252, 203, 6, 1);
 $primary-bg: rgba(74, 33, 123, 0.5);
-$secondary-bg: rgba(252, 203, 6, 0.5);
+$secondary-bg: rgb(209, 142, 18);
 /* *********************************************** */
 
 /* *********************************************** */
@@ -277,6 +277,13 @@ label {
 	text-transform: uppercase;
 	color: black;
 }
+.signup-label{
+  margin-top: 10px;
+	text-align: left;
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	color: black;
+}
 
 .name-group {
 	display: inline-block;
@@ -311,7 +318,8 @@ label {
 }
 
 .who-label {
-	display: block;
+	display:block;
+margin-top:5px;
 	text-align: center;
 	font-size: 0.85rem;
 	text-transform: uppercase;
@@ -319,11 +327,13 @@ label {
 }
 
 .who-check {
-	display: block;
+  
+  margin-top:5px;
 	text-align: center;
 }
 
 .who-input {
+  margin-top: 5px;
 	padding-left: 10px;
 	padding-right: 20px;
 }
@@ -343,7 +353,7 @@ label {
 
 	&:focus,
 	&:hover {
-		color: darken(#999, 13%);
+		color: $primary;
 	}
 }
 
@@ -354,6 +364,8 @@ label {
 		border-color: #111;
 	}
 }
+
+
 
 [type="text"] {
 	color: #111;
@@ -366,12 +378,13 @@ label {
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #fff;
-	background: #111;
+	background: $secondary-bg;
+  border-color: $secondary-bg;
 	border-radius: remy(35px);
 
 	&:focus,
 	&:hover {
-		background: lighten(#111, 13%);
+		background: lighten($color: $secondary-bg, $amount: 10);
 	}
 }
 
@@ -391,7 +404,21 @@ label {
 		background: lighten(#111, 13%);
 	}
 }
+.signup-btn{
+	margin: 10px 60px auto;
+	padding: 0.5rem 4rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+	background: #111;
+	border-radius: remy(35px);
 
+	&:focus,
+	&:hover {
+		background: lighten(#111, 13%);
+	}
+}
 .comment-btn {
 	margin-right: 0;
 }
@@ -406,7 +433,7 @@ label {
 
 	&:focus,
 	&:hover {
-		color: darken(#999, 13%);
+		color: $primary;
 	}
 }
 
