@@ -165,6 +165,7 @@ footer {
 /* *********************************************** */
 /* SignIn/SignUp */
 .auth {
+  height: 100%;
   position: relative;
   top: 50%;
   right: 0;
@@ -241,6 +242,14 @@ label {
   color: black;
 }
 
+.signup-label {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: black;
+}
+
 .name-group {
   display: inline-block;
 }
@@ -275,6 +284,7 @@ label {
 
 .who-label {
   display: block;
+  margin-top: 5px;
   text-align: center;
   font-size: 0.85rem;
   text-transform: uppercase;
@@ -282,11 +292,12 @@ label {
 }
 
 .who-check {
-  display: block;
+  margin-top: 5px;
   text-align: center;
 }
 
 .who-input {
+  margin-top: 5px;
   padding-left: 10px;
   padding-right: 20px;
 }
@@ -305,7 +316,7 @@ label {
   color: #999;
 }
 .policy-link:focus, .policy-link:hover {
-  color: #787878;
+  color: rgb(74, 33, 123);
 }
 
 .form-control {
@@ -326,11 +337,12 @@ label {
   font-weight: 600;
   text-transform: uppercase;
   color: #fff;
-  background: #111;
+  background: rgb(209, 142, 18);
+  border-color: rgb(209, 142, 18);
   border-radius: 2.1875rem;
 }
 .create-btn:focus, .create-btn:hover {
-  background: #323232;
+  background: #eda829;
 }
 
 .form-btn,
@@ -350,6 +362,20 @@ label {
   background: #323232;
 }
 
+.signup-btn {
+  margin: 10px 60px auto;
+  padding: 0.5rem 4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+  border-radius: 2.1875rem;
+}
+.signup-btn:focus, .signup-btn:hover {
+  background: #323232;
+}
+
 .comment-btn {
   margin-right: 0;
 }
@@ -363,7 +389,7 @@ label {
   color: #999;
 }
 .forgotpass-link:focus, .forgotpass-link:hover {
-  color: #787878;
+  color: rgb(74, 33, 123);
 }
 
 .form-container h2 {

@@ -47,9 +47,9 @@ const SignUp = () => {
             <p className="heading-secondary">
               To stay connected with us please log in with your account details
             </p>
-            <button className="create-btn" type="button" value="Sign In">
+            <a className="create-btn" type="button" value="Sign In" href='/login'>
               Sign In
-            </button>
+            </a>
           </div>
 
           <div className="form-overlay"></div>
@@ -61,7 +61,7 @@ const SignUp = () => {
             </h1>
             <div className="name-group">
               <div className="firstName">
-                <label htmlFor="firstName">First Name</label>
+                <label className="signup-label" htmlFor="firstName">First Name</label>
                 <input
                   className='form-control'
 				  type='text'
@@ -73,7 +73,7 @@ const SignUp = () => {
                 />
               </div>
               <div className="lastName">
-                <label htmlFor="LastName">Last Name</label>
+                <label className="signup-label" htmlFor="LastName">Last Name</label>
                 <input
                   className='form-control'
 				  type='text'
@@ -87,7 +87,7 @@ const SignUp = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email Address</label>
+              <label className="signup-label"  htmlFor="email">Email Address</label>
               <input
                 className='form-control'
 				type='email'
@@ -100,7 +100,7 @@ const SignUp = () => {
             </div>
             <div className="pass-group">
               <div className="password">
-                <label htmlFor="password">Password</label>
+                <label className="signup-label" htmlFor="password">Password</label>
                 <input
                   className='form-control'
 				  type='password'
@@ -113,7 +113,7 @@ const SignUp = () => {
                 />
               </div>
               <div className="confirm-pass">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+                <label className="signup-label" htmlFor="confirmPassword">Confirm Password</label>
                 <input
                  className='form-control'
 				 type='password'
@@ -128,10 +128,11 @@ const SignUp = () => {
             </div>
 
             <div>
-              <label className="who-label" htmlFor="who-btns">
+             
+              <div className="who-check">
+                 <label className="who-label" htmlFor="who-btns">
                 Who are you?
               </label>
-              <div className="who-check">
                 <input
 					
                   type="checkbox"
@@ -167,11 +168,11 @@ const SignUp = () => {
 				// onChange='validateAgreement(event.target)'
 			  />
                   <a className="policy-link" href="#">
-                    Agree to privacy policy
+                    Agree to Terms & Conditions
                   </a>
                 </li>
                 <li>
-                  <button className="form-btn" type="button" value="Sign In">
+                  <button className="signup-btn" type="submit" value="Sign In">
                     Sign Up
                   </button>
                 </li>
