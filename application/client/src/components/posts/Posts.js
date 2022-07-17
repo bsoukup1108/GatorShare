@@ -27,7 +27,12 @@ const Posts = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div>
-					<div style={{ marginBottom: '1rem' }}>
+					<div id='sort'>
+						<button className='sort-btn'>
+							Sort alphabetically
+						</button>
+					</div>
+					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
 						<div className='row row-cols-1 row-cols-md-3 g-4'>
 							{posts.map((post, i) => {
 								return (

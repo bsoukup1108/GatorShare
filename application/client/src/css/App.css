@@ -365,6 +365,23 @@ label {
   color: #111;
 }
 
+.sort-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: #111;
+}
+.sort-btn:focus, .sort-btn:hover {
+  background: #323232;
+}
+
+#sort {
+  width: 100%;
+  text-align: right;
+}
+
 .create-btn {
   margin-top: 50px;
   padding: 0.5rem 4rem;
@@ -527,9 +544,8 @@ label {
 
 #chat-container {
   display: flex;
-  flex-grow: 1;
+  flex-grow: 2;
   min-width: 800px;
-  max-width: 1000px;
   max-height: 800px;
   height: 100%;
   background: #FFF;
@@ -644,6 +660,10 @@ label {
   padding: 1rem 0;
 }
 
+.react-chat-messagesList {
+  height: 300px;
+}
+
 .flex-container-right {
   display: flex;
   flex-direction: column;
@@ -696,62 +716,27 @@ label {
 }
 
 .bg-pan-right {
-  animation: bg-pan-right 6s both;
+  animation: bg-pan-right 12s both infinite;
 }
 
 @keyframes bg-pan-right {
   0% {
     background-position: 0% 50%;
   }
-  100% {
+  50% {
     background-position: 100% 50%;
   }
-}
-.kenburns-top {
-  width: inherit;
-  -webkit-animation: kenburns-top 5s ease-out both;
-  animation: kenburns-top 5s ease-out both;
-}
-
-@-webkit-keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-    transform-origin: 50% 16%;
-  }
   100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-    transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-    transform-origin: top;
+    background-position: 0% 50%;
   }
 }
-@keyframes kenburns-top {
-  0% {
-    -webkit-transform: scale(1) translateY(0);
-    transform: scale(1) translateY(0);
-    -webkit-transform-origin: 50% 16%;
-    transform-origin: 50% 16%;
-  }
-  100% {
-    -webkit-transform: scale(1.25) translateY(-15px);
-    transform: scale(1.25) translateY(-15px);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-  }
+.message-btn {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
 }
-.carousel-inner .carousel-item-end.active,
-.carousel-inner .carousel-item-next {
-  transform: translateX(25%);
-}
-
-.carousel-inner .carousel-item-start.active,
-.carousel-inner .carousel-item-prev {
-  transform: translateX(-25%);
-}
-
-.carousel-inner .carousel-item-end,
-.carousel-inner .carousel-item-start {
-  transform: translateX(0);
+.message-btn > span {
+  background-color: #cc6aa5;
+  border-radius: 50%;
+  padding: 1rem;
 }

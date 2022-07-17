@@ -181,7 +181,7 @@ const Profile = () => {
 								{isLoaded && (
 									<div>
 										<div style={{ marginBottom: '1rem' }}>
-											<h3>Your posts</h3>
+											<h3>CREATED POSTS</h3>
 											<div className='row row-cols-1 row-cols-md-2 g-4'>
 												{posts.map((post, i) => {
 													return (

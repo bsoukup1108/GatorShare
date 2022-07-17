@@ -37,59 +37,66 @@ const Messages = () => {
 
 	const handleOnSendMessage = (message) => {
 		setMessages(
-			messages.concat({
-				author: {
-					username: 'user1',
-					id: 1,
-					avatarUrl: '',
+			messages.concat(
+				{
+					author: {
+						username: 'John Doe',
+						id: 2,
+						avatarUrl: '',
+					},
+					text: message,
+					timestamp: +new Date(),
+					type: 'text',
 				},
-				text: message,
-				timestamp: +new Date(),
-				type: 'text',
-			})
+				{
+					author: {
+						username: 'Avocado',
+						id: 1,
+						avatarUrl: '',
+					},
+					text: message,
+					timestamp: +new Date(),
+					type: 'text',
+				}
+			)
 		);
 	};
 
 	return (
-		// <div id='chat'>
-		// 	<div id='messageUsers'>fvrfvrvrr</div>
-		// 	<div className='App'>
-
-		// </div>
 		<div id='chat-container'>
 			<div id='side-bar'>
 				<button
 					type='button'
-					className='btn btn-lg btn-light'
+					className='btn btn-lg btn-light message-btn'
 					style={{
 						width: '100%',
 						border: 'grey 1px solid ',
 						margin: '0rem auto',
 					}}
 				>
-					User 1
+					<span>AG</span> Avocado Green
 				</button>
 				<button
 					type='button'
-					className='btn btn-lg btn-light'
+					className='btn btn-lg btn-light message-btn'
 					style={{
 						width: '100%',
 						border: 'grey 1px solid ',
 						margin: '0rem auto',
 					}}
 				>
-					User 2
+					<span>JD</span> John Doe
 				</button>
 				<button
 					type='button'
-					className='btn btn-lg btn-light'
+					className='btn btn-lg btn-light message-btn'
 					style={{
 						width: '100%',
 						border: 'grey 1px solid ',
 						margin: '0rem auto',
 					}}
 				>
-					User 3
+					<span>MP</span> Max Payne
 				</button>
 			</div>
 			<div id='chat-window'>
