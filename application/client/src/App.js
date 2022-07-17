@@ -28,7 +28,7 @@ const App = () => {
 		if (!!token) {
 			setIsAuthenticated(true);
 		}
-	}, token);
+	}, [token]);
 	return (
 		<BrowserRouter>
 			<>

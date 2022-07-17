@@ -176,7 +176,7 @@ const Navbar = (props) => {
 	);
 
 	return (
-		<nav className='navbar sticky-top navbar-light bg-light border-bottom'>
+		<nav className='navbar sticky-top navbar-light bg-light border-bottom gradient-hor bg-pan-right flex-center'>
 			<div id='logo-content'>
 				<a className='navbar-brand' href='/'>
 					<img id='logo' src={logo} alt='logo' />
