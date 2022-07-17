@@ -40,11 +40,16 @@ const Login = (props) => {
               Hello, <span className="text-warning">Gators</span>!
             </h1>
             <p className="heading-secondary">
-            Enter your personal details and start your journey with us
+              Enter your personal details and start your journey with us
             </p>
-            <button className="create-btn" type="button" value="Sign In">
+            <a
+              className="create-btn"
+              type="button"
+              value="Sign In"
+              href="/signup"
+            >
               Create Account
-            </button>
+            </a>
           </div>
 
           <div className="form-overlay"></div>
@@ -61,9 +66,9 @@ const Login = (props) => {
                 className="form-control"
                 type="email"
                 name="email"
-				placeholder='Email Address'
+                placeholder="Email Address"
                 id="email"
-				value={email}
+                value={email}
                 onChange={(e) => onChange(e)}
                 required
               />
@@ -72,35 +77,34 @@ const Login = (props) => {
               <label htmlFor="password">Password</label>
               <input
                 className="form-control"
-                type="email"
+                type="password"
                 name="password"
-				placeholder='Password'
+                placeholder="Password"
                 id="password"
-				 // minLength='6'
-				 value={password}
-				 onChange={(e) => onChange(e)}
+                // minLength='6'
+                value={password}
+                onChange={(e) => onChange(e)}
                 required
               />
             </div>
 
             <div>
               <ul className="list-inline">
-			  <li>
+                <li>
                   <a className="forgotpass-link" href="#">
                     Forgot your password?
                   </a>
                 </li>
                 <li>
-				<button className="form-btn" type="button" value="Sign In">
-                Sign In
-              </button>
+                  <button className="form-btn" type="submit" value="Sign In">
+                    Sign In
+                  </button>
                 </li>
               </ul>
             </div>
           </form>
         </div>
       </div>
-      
     </>
   );
 };

@@ -165,6 +165,7 @@ footer {
 /* *********************************************** */
 /* SignIn/SignUp */
 .auth {
+  height: 100%;
   position: relative;
   top: 50%;
   right: 0;

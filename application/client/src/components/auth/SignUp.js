@@ -47,9 +47,9 @@ const SignUp = () => {
             <p className="heading-secondary">
               To stay connected with us please log in with your account details
             </p>
-            <button className="create-btn" type="button" value="Sign In">
+            <a className="create-btn" type="button" value="Sign In" href='/login'>
               Sign In
-            </button>
+            </a>
           </div>
 
           <div className="form-overlay"></div>
@@ -172,7 +172,7 @@ const SignUp = () => {
                   </a>
                 </li>
                 <li>
-                  <button className="signup-btn" type="button" value="Sign In">
+                  <button className="signup-btn" type="submit" value="Sign In">
                     Sign Up
                   </button>
                 </li>
