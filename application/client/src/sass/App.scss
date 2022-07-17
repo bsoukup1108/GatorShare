@@ -201,7 +201,7 @@ footer {
 }
 
 .auth {
-  height:100%;
+	height: 100%;
 	position: relative;
 	top: 50%;
 	right: 0;
@@ -303,8 +303,9 @@ label {
 	text-transform: uppercase;
 	color: black;
 }
-.signup-label{
-  margin-top: 10px;
+
+.signup-label {
+	margin-top: 10px;
 	text-align: left;
 	font-size: 0.85rem;
 	text-transform: uppercase;
@@ -352,8 +353,8 @@ label {
 }
 
 .who-label {
-	display:block;
-margin-top:5px;
+	display: block;
+	margin-top: 5px;
 	text-align: center;
 	font-size: 0.85rem;
 	text-transform: uppercase;
@@ -361,13 +362,13 @@ margin-top:5px;
 }
 
 .who-check {
-  
-  margin-top:5px;
+
+	margin-top: 5px;
 	text-align: center;
 }
 
 .who-input {
-  margin-top: 5px;
+	margin-top: 5px;
 	padding-left: 10px;
 	padding-right: 20px;
 }
@@ -413,7 +414,7 @@ margin-top:5px;
 	text-transform: uppercase;
 	color: #fff;
 	background: $secondary-bg;
-  border-color: $secondary-bg;
+	border-color: $secondary-bg;
 	border-radius: remy(35px);
 
 	&:focus,
@@ -453,7 +454,8 @@ margin-top:5px;
 		background: lighten(#111, 13%);
 	}
 }
-.signup-btn{
+
+.signup-btn {
 	margin: 10px 60px auto;
 	padding: 0.5rem 4rem;
 	font-size: 0.95rem;
@@ -468,6 +470,7 @@ margin-top:5px;
 		background: lighten(#111, 13%);
 	}
 }
+
 .comment-btn {
 	margin-right: 0;
 }
@@ -707,4 +710,18 @@ margin-top:5px;
 #descInput textarea {
 	width: 100%;
 	height: 300px;
+}
+
+.btn-like {
+	border: none;
+	background-color: transparent;
+	margin-bottom: 0.5rem;
+}
+
+#like-icon {
+	color: grey;
+}
+
+#like-icon:hover {
+	color: gold;
 }

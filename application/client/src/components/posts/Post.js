@@ -9,11 +9,23 @@ const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
-	let likes = 0;
+
+	const [likes, setLikes] = useState(0);
 
 	const navigate = useNavigate();
 
 	const postId = 1;
+
+	const onLike = (e) => {
+		let icon = document.getElementById('like-icon');
+
+		icon.style.color =
+			icon.style.color === 'rebeccapurple' ? 'grey' : 'rebeccapurple';
+	};
+
+	const incLikes = () => {
+		setLikes(likes + 1);
+	};
 
 	useEffect(() => {
 		http(`/posts`)
@@ -32,6 +44,20 @@ const Post = () => {
 			});
 	}, []);
 
+	const [comment, setComment] = useState({
+		comment: '',
+	});
+
+	const onComment = (e) => {
+		setComment({
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const postComment = () => {
+		console.log(comment);
+	};
+
 	if (isLoaded) {
 		const { content, createdDate, title } = post[0];
 		const { firstName, lastName } = post[0].user;
@@ -40,11 +66,17 @@ const Post = () => {
 			<>
 				{isLoaded && (
 					<div style={{ marginBottom: '1rem' }}>
-						<div className='likePost'>
-							<button>
-								<i className='fa-thin fa-thumbs-up fa-2xl'></i>
+						<div className='likePost' onClick={() => incLikes()}>
+							<button
+								className='btn-like'
+								onClick={(e) => onLike(e)}
+							>
+								<i
+									id='like-icon'
+									className='fa-regular fa-thumbs-up fa-xl'
+								></i>
 							</button>
-							<small>dcedfc</small>
+							<small> {likes} liked this post</small>
 						</div>
 
 						<div className='card mb-3'>
@@ -108,16 +140,22 @@ const Post = () => {
 							</div>
 							<div className='' id='commentArea'>
 								<textarea
+									id='leaveComment'
 									className='form-control'
 									placeholder='Leave a comment'
 									name='commentArea'
-									//value={}
+									onChange={(e) => {
+										onComment(e);
+									}}
 								></textarea>
 							</div>
 							<input
 								className='comment-btn'
 								type='submit'
 								value='Leave a comment'
+								onSubmit={() => {
+									postComment();
+								}}
 							/>
 						</div>
 					</div>
