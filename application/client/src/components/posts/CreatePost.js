@@ -199,7 +199,7 @@ const CreatePost = () => {
 							</div>
 						</div>
 						<input
-							className='signin-btn'
+							className='form-btn'
 							type='submit'
 							value='Post'
 						/>

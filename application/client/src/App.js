@@ -77,7 +77,7 @@ const App = () => {
 									</Suspense>
 								}
 							/>
-							{isAuthenticated && (
+							{
 								<Route
 									path='/post/:id'
 									element={
@@ -86,7 +86,7 @@ const App = () => {
 										</Suspense>
 									}
 								/>
-							)}
+							}
 						</Routes>
 					</div>
 					<Footer />
