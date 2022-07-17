@@ -51,12 +51,54 @@ const Messages = () => {
 	};
 
 	return (
-		<div className='App'>
-			<ChatBox
-				messages={messages}
-				userId={1}
-				onSendMessage={handleOnSendMessage}
-			/>
+		// <div id='chat'>
+		// 	<div id='messageUsers'>fvrfvrvrr</div>
+		// 	<div className='App'>
+
+		// </div>
+		<div id='chat-container'>
+			<div id='side-bar'>
+				<button
+					type='button'
+					className='btn btn-lg btn-light'
+					style={{
+						width: '100%',
+						border: 'grey 1px solid ',
+						margin: '0rem auto',
+					}}
+				>
+					User 1
+				</button>
+				<button
+					type='button'
+					className='btn btn-lg btn-light'
+					style={{
+						width: '100%',
+						border: 'grey 1px solid ',
+						margin: '0rem auto',
+					}}
+				>
+					User 2
+				</button>
+				<button
+					type='button'
+					className='btn btn-lg btn-light'
+					style={{
+						width: '100%',
+						border: 'grey 1px solid ',
+						margin: '0rem auto',
+					}}
+				>
+					User 3
+				</button>
+			</div>
+			<div id='chat-window'>
+				<ChatBox
+					messages={messages}
+					userId={1}
+					onSendMessage={handleOnSendMessage}
+				/>
+			</div>
 		</div>
 	);
 };

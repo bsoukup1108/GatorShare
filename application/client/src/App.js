@@ -12,10 +12,12 @@ import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
 import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
+import Spinner from './components/misc/Spinner';
 
 import { ReactSession } from 'react-client-session';
 
-const Rrr = React.lazy(() => import('./components/posts/Posts'));
+const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
+const PostLayout = React.lazy(() => import('./components/posts/Post'));
 
 const App = () => {
 	ReactSession.setStoreType('localStorage');
@@ -59,20 +61,32 @@ const App = () => {
 								path='/messages'
 								element={<Messages />}
 							/>
-							<Route
-								exact
-								path='/create'
-								element={<CreatePost />}
-							/>
+							{isAuthenticated && (
+								<Route
+									exact
+									path='/create'
+									element={<CreatePost />}
+								/>
+							)}
 							<Route
 								exact
 								path='/posts'
 								element={
-									<Suspense fallback={<p>loading...</p>}>
-										<Rrr />
+									<Suspense fallback={<Spinner />}>
+										<PostsLayout />
 									</Suspense>
 								}
 							/>
+							{isAuthenticated && (
+								<Route
+									path='/post/:id'
+									element={
+										<Suspense fallback={<Spinner />}>
+											<PostLayout />
+										</Suspense>
+									}
+								/>
+							)}
 						</Routes>
 					</div>
 					<Footer />

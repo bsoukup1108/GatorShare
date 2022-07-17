@@ -266,7 +266,8 @@ label {
   background: #323232;
 }
 
-.signin-btn {
+.signin-btn,
+.comment-btn {
   margin: 50px 60px auto;
   padding: 0.5rem 4rem;
   font-size: 0.95rem;
@@ -276,8 +277,14 @@ label {
   background: #111;
   border-radius: 2.1875rem;
 }
-.signin-btn:focus, .signin-btn:hover {
+.signin-btn:focus, .signin-btn:hover,
+.comment-btn:focus,
+.comment-btn:hover {
   background: #323232;
+}
+
+.comment-btn {
+  margin-right: 0;
 }
 
 .forgotpass-link {
@@ -337,6 +344,52 @@ label {
   border-width: thick;
 }
 
+#checkboxCreate {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#chat {
+  display: flex;
+  align-items: flex-start;
+}
+
+.react-chat-container {
+  height: 100%;
+}
+
+.react-chat-row {
+  height: inherit;
+}
+
+.react-chat-viewerBox {
+  height: inherit !important;
+}
+
+#chat-container {
+  display: flex;
+  flex-grow: 1;
+  min-width: 800px;
+  max-width: 1000px;
+  max-height: 800px;
+  height: 100%;
+  background: #FFF;
+  border-radius: 10px;
+}
+
+#side-bar {
+  background: white;
+  border: grey 1px solid;
+  border-radius: 10px 0 0 10px;
+  flex-basis: 275px;
+  padding: 0.2rem;
+}
+
+#chat-window {
+  border-radius: 0 10px 10px 0;
+  flex-grow: 1;
+}
+
 #createPostWrapper {
   height: 100%;
   display: flex;
@@ -345,16 +398,41 @@ label {
   align-items: center;
 }
 
-#descInput {
-  display: flex;
-  justify-content: center;
+.create form > * {
+  margin: 1rem 0;
 }
+
 #descInput textarea {
-  width: 28rem;
   height: 300px;
 }
 
-#checkboxCreate {
+.form-check .form-check-label {
+  margin: 0;
+}
+
+.form-check {
+  margin: 0 0.5rem;
+}
+
+.card-body {
   display: flex;
-  flex-wrap: wrap;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-text-bottom {
+  text-align: right;
+}
+
+.card-text-bottom {
+  margin: 0;
+}
+
+#postComments {
+  text-align: right;
+}
+
+#postCommentList {
+  margin: 5rem 0;
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
+import moment from 'moment';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -26,15 +27,18 @@ const Posts = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div>
-					<div style={{ 'margin-bottom': '1rem' }}>
+					<div style={{ marginBottom: '1rem' }}>
 						<div className='row row-cols-1 row-cols-md-3 g-4'>
 							{posts.map((post, i) => {
 								return (
-									<div className='col'>
+									<div
+										key={`posts-post-${i}`}
+										className='col'
+									>
 										<div
 											className='card posts'
 											onClick={() => {
-												navigate(`/${post.id}`);
+												navigate(`/post/${post.id}`);
 												return false;
 											}}
 										>
@@ -56,16 +60,37 @@ const Posts = () => {
 												<p
 													className='card-text'
 													style={{
-														'white-space': 'nowrap',
+														whiteSpace: 'nowrap',
 														overflow: 'hidden',
-														'text-overflow':
+														textOverflow:
 															'ellipsis',
-														'max-width': '500px',
+														maxWidth: '500px',
 													}}
 												>
-													{post.description
-														? post.description
+													{post.content
+														? post.content
 														: 'No description...'}
+												</p>
+												<p className='card-text'>
+													<small className='text-muted'>
+														Created
+														<i>
+															{' '}
+															{moment(
+																post.createdDate
+															)
+																.startOf('day')
+																.fromNow()}{' '}
+														</i>
+														by{' '}
+														<strong>
+															{
+																post.user
+																	.firstName
+															}{' '}
+															{post.user.lastName}
+														</strong>
+													</small>
 												</p>
 											</div>
 										</div>
