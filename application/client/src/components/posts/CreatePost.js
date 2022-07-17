@@ -1,49 +1,52 @@
-import React from 'react';
-import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import { getToken } from '../../js/useToken';
-import { createPost } from '../../js/post';
+import React from "react";
+import { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { getToken } from "../../js/useToken";
+import { createPost } from "../../js/post";
 
 const CreatePost = () => {
-	// redirect if not logged in
-	if (!getToken()) {
-		return <Navigate to='/login' />;
-	}
+  // redirect if not logged in
+  // if (!getToken()) {
+  // 	return <Navigate to='/login' />;
+  // }
 
-	const [formData, setFormData] = useState({
-		title: '',
-		description: '',
-		// link: '',
-		// image: '',
-		// category: '',
-	});
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    // link: '',
+    // image: '',
+    // category: '',
+  });
 
-	const { title, description, link, image, category } = formData;
+  const { title, description, link, image, category } = formData;
 
-	const onChange = (e) => {
-		setFormData({
-			...formData,
-			[e.target.name]: e.target.value,
-			[e.target.lastname]: e.target.value,
-		});
-	};
+  const onChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      [e.target.lastname]: e.target.value,
+    });
+  };
 
-	const onSubmit = async (e) => {
-		e.preventDefault();
-		createPost(formData);
-	};
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    createPost(formData);
+  };
 
-	return (
-		<>
-			<div id='createPostWrapper'>
-				<div className='create'>
-					<h1 className='text-secondary'>Create Post</h1>
-					<h2 className='lead'>
-						<i className='fa-solid fa-image'></i> Publish a New Post
-					</h2>
-					<form className='form' onSubmit={(e) => onSubmit(e)}>
-						<div className='form-group'>
-							<label className='group-label' htmlFor='title'>
+  return (
+    <>
+      <div className="auth-create">
+        <div className="form-child signin-form" id="createPostWrapper">
+          <form action="#">
+            <h1>
+              <b>Create Post</b>
+            </h1>
+            <h2 className="lead">
+              <i className="fa-solid fa-image"></i> Publish a New Post
+            </h2>
+            <form className="form" onSubmit={(e) => onSubmit(e)}>
+			<div className='form-group'>
+							<label className='form-label' htmlFor='title'>
 								Add title
 							</label>
 							<input
@@ -56,7 +59,6 @@ const CreatePost = () => {
 								// required
 							/>
 						</div>
-
 						<div className='' id='descInput'>
 							<label className='form-label' htmlFor='description'>
 								Add description
@@ -99,8 +101,11 @@ const CreatePost = () => {
 								onChange={(e) => onChange(e)}
 							/>
 						</div>
-
+						<label className='form-label' htmlFor='image'>
+								Pick a Genre
+							</label>
 						<div id='checkboxCreate'>
+						
 							<div className='form-check'>
 								<input
 									className='form-check-input'
@@ -198,18 +203,22 @@ const CreatePost = () => {
 								</label>
 							</div>
 						</div>
-						<input
-							className='form-btn'
-							type='submit'
-							value='Post'
-						/>
+						<button className="createpost-btn" type="submit" value="Post">
+                    Post
+                  </button>
 
 						<div></div>
-					</form>
-				</div>
-			</div>
-		</>
-	);
+
+
+			</form>
+
+            
+          </form>
+        </div>
+      </div>
+   
+    </>
+  );
 };
 
 export default CreatePost;
