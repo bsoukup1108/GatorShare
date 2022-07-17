@@ -9,6 +9,7 @@ const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
+	let likes = 0;
 
 	const navigate = useNavigate();
 
@@ -39,6 +40,13 @@ const Post = () => {
 			<>
 				{isLoaded && (
 					<div style={{ marginBottom: '1rem' }}>
+						<div className='likePost'>
+							<button>
+								<i className='fa-thin fa-thumbs-up fa-2xl'></i>
+							</button>
+							<small>dcedfc</small>
+						</div>
+
 						<div className='card mb-3'>
 							<div className='row g-0'>
 								<div className='col-md-4'>
