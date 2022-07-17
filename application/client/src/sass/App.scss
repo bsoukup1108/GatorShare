@@ -1,8 +1,8 @@
 /* *********************************************** */
 /* colors */
-$primary : rgba(74, 33, 123, 1);
+$primary: rgba(74, 33, 123, 1);
 $secondary: rgba(252, 203, 6, 1);
-$primary-bg : rgba(74, 33, 123, 0.5);
+$primary-bg: rgba(74, 33, 123, 0.5);
 $secondary-bg: rgba(252, 203, 6, 0.5);
 /* *********************************************** */
 
@@ -24,7 +24,6 @@ html {
 	flex-direction: column;
 	justify-content: space-between;
 	// background-color: $secondary-bg;
-
 }
 
 /* *********************************************** */
@@ -47,7 +46,6 @@ a {
 a:hover {
 	color: black;
 }
-
 
 /* *********************************************** */
 
@@ -100,7 +98,6 @@ nav {
 nav>ul>.btn {
 	height: 2.5rem;
 }
-
 
 .navbar-right>div {
 	margin-inline: 0 !important;
@@ -157,17 +154,14 @@ footer {
 	grid-template-rows: 75px auto 50px;
 	// gap: 20px;
 	grid-template-areas:
-		'n n n n n n n n n n n n'
-		'c c c c c c c c c c c c'
-		'f f f f f f f f f f f f'
-	;
+		"n n n n n n n n n n n n"
+		"c c c c c c c c c c c c"
+		"f f f f f f f f f f f f";
 }
 
 nav {
 	grid-area: n;
 }
-
-
 
 footer {
 	grid-area: f;
@@ -188,7 +182,6 @@ footer {
 ::-webkit-scrollbar-track {
 	background: #f1f1f1;
 	box-shadow: inset 0 0 5px;
-
 }
 
 ::-webkit-scrollbar-thumb {
@@ -201,7 +194,7 @@ footer {
 }
 
 /* *********************************************** */
-/* Sign In */
+/* SignIn/SignUp */
 
 @function remy($value) {
 	@return ($value / 16px) * 1rem;
@@ -222,10 +215,10 @@ footer {
 	width: remy(800px);
 	height: remy(480px);
 	border-radius: remy(3px);
-	box-shadow: 0px remy(3px) remy(7px) rgba(0, 0, 0, .25);
+	box-shadow: 0px remy(3px) remy(7px) rgba(0, 0, 0, 0.25);
 }
 
-.signin-overlay {
+.form-overlay {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -234,15 +227,14 @@ footer {
 	background-color: $primary;
 }
 
-.signin-child {
-
+.form-child {
 	font-weight: 600;
 	width: 50%;
 	height: 100%;
 	color: black;
 }
 
-.signin-background {
+.form-background {
 	position: relative;
 	padding: 2rem;
 	display: flex;
@@ -254,7 +246,7 @@ footer {
 	background-size: cover;
 }
 
-.signin-left {
+.form-left {
 	position: relative;
 	z-index: 2;
 }
@@ -269,11 +261,9 @@ footer {
 	padding-top: 5%;
 	font-size: 15px;
 	font-weight: 400;
-	text-align: left;
+	text-align: center;
 	color: white;
 }
-
-
 
 .signin-form {
 	padding: 2.5rem;
@@ -281,14 +271,80 @@ footer {
 }
 
 label {
-
-
 	margin-top: 25px;
 	text-align: left;
-	font-size: .85rem;
+	font-size: 0.85rem;
 	text-transform: uppercase;
 	color: black;
+}
 
+.name-group {
+	display: inline-block;
+}
+
+.firstName {
+	float: left;
+	width: 160px;
+	padding-right: 5px;
+}
+
+.lastName {
+	float: right;
+	width: 160px;
+	padding-left: 5px;
+}
+
+.pass-group {
+	display: inline-block;
+}
+
+.password {
+	float: left;
+	width: 160px;
+	padding-right: 5px;
+}
+
+.confirm-pass {
+	float: right;
+	width: 160px;
+	padding-left: 5px;
+}
+
+.who-label {
+	display: block;
+	text-align: center;
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	color: black;
+}
+
+.who-check {
+	display: block;
+	text-align: center;
+}
+
+.who-input {
+	padding-left: 10px;
+	padding-right: 20px;
+}
+
+.policy {
+	display: block;
+	text-align: center;
+}
+
+.policy-link {
+	margin-left: 5px;
+	text-align: center;
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-decoration: underline;
+	color: #999;
+
+	&:focus,
+	&:hover {
+		color: darken(#999, 13%);
+	}
 }
 
 .form-control {
@@ -305,8 +361,8 @@ label {
 
 .create-btn {
 	margin-top: 50px;
-	padding: .5rem 4rem;
-	font-size: .95rem;
+	padding: 0.5rem 4rem;
+	font-size: 0.95rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #fff;
@@ -319,12 +375,10 @@ label {
 	}
 }
 
-.signin-btn,
-.comment-btn {
-
+.form-btn {
 	margin: 50px 60px auto;
-	padding: .5rem 4rem;
-	font-size: .95rem;
+	padding: 0.5rem 4rem;
+	font-size: 0.95rem;
 	font-weight: 600;
 	text-transform: uppercase;
 	color: #fff;
@@ -335,16 +389,12 @@ label {
 	&:hover {
 		background: lighten(#111, 13%);
 	}
-}
-
-.comment-btn {
-	margin-right: 0;
 }
 
 .forgotpass-link {
 	margin: 50px 90px;
 	text-align: center;
-	font-size: .8rem;
+	font-size: 0.8rem;
 	font-weight: 600;
 	text-decoration: underline;
 	color: #999;
@@ -355,121 +405,12 @@ label {
 	}
 }
 
-.signin-container h2 {
+.form-container h2 {
 	width: 100%;
 	font-size: 30px;
 	text-align: center;
 	color: black;
-
 }
-
-// label{
-// 	display: block;
-// 	width: 260px;
-// 	margin: 25px auto;
-// 	text-align: left;
-// }
-// label span{
-// 	font-size: 14px;
-// 	font-weight: 600;
-// 	color: black;
-
-// }
-// // #agreement > input {
-// // 	margin-inline: 10px;
-// // }
-
-// .form input{
-// 	display: block;
-// 	width: 100%;
-// 	margin-top: 5px;
-// 	font-size: 16px;
-// 	padding-bottom: 5px;
-// 	border-radius: 30px;
-// 	text-align: left;
-
-// }
-
-// .form button{
-// 	display: block;
-// 	margin: 0 auto;
-// 	width: 200px;
-// 	height: 36px;
-// 	border-radius: 30px;
-// 	color: black;
-// 	font-size: 15px;
-// 	cursor: pointer;
-// }
-
-// .submit{
-// 	margin-top: 40px;
-// 	margin-bottom: 30px;
-// 	font-weight: 600;
-// 	text-transform: uppercase;
-// }
-
-// .submit:hover{
-// 	background: rgba(185, 184, 184, 0.658);
-// }
-
-// .forgot-pass{
-// 	margin-top: 15px;
-// 	text-align: center;
-// 	font-size: 14px;
-// 	font-weight: 600;
-// 	color: rgb(88, 88, 88);
-// 	cursor: pointer;
-// }
-
-// .forgot-pass:hover{
-// 	color:black;
-// }
-
-// .left-content{
-// 	overflow: hidden;
-// 	position: absolute;
-// 	right: 640px;
-// 	top:0;
-// 	width: 900px;
-// 	height: 100%;
-// 	padding-right: 260px;
-
-// }
-
-// .cont{
-// 	overflow: hidden;
-// 	z-index: 2;
-// 	position: absolute;
-// 	right:0;
-// 	top:0;
-// 	width: 260px;
-// 	height: 100%;
-// }
-
-// .cont h2{
-// 	margin-bottom: 10px;
-// 	font-size: 25px;
-// 	font-weight: normal;
-// }
-
-// .cont p{
-// 	font-size: 14px;
-// 	line-height: 1.5;
-// }
-
-// .create {
-// 	overflow: hidden;
-// 	z-index: 2;
-// 	position: relative;
-// 	width: 200px;
-// 	height: 36px;
-// 	margin: 0 auto;
-// 	text-transform: uppercase;
-// 	font-size: 15px;
-// 	cursor: pointer;
-// 	color: black;
-// 	border-radius: 30px;
-// }
 
 // .form-group {
 // 	width: fit-content;
@@ -479,40 +420,37 @@ label {
 // 	width: 100%
 // }
 
-
 // .navbar-left,
 .navbar-right {
 	display: flex;
-	height: 100%
+	height: 100%;
 }
-
 
 @media screen and (min-width: 1170px) {
 	#notification-content::after {
-		content: ''
+		content: "";
 	}
 
 	#home-content::after {
-		content: ' home'
+		content: " Home";
 	}
 
 	#about-content::after {
-		content: '  about'
+		content: "  About";
 	}
 
 	#messages-content::after {
-		content: '  messages'
+		content: "  Messages";
 	}
 
 	#posts-content::after {
-		content: ' posts'
+		content: " Posts";
 	}
 
 	#create-content::after {
-		content: ' create post'
+		content: " Create Post";
 	}
 }
-
 
 .react-chat-container {
 	max-width: 100% !important;
@@ -557,7 +495,6 @@ label {
 // 	}
 //   }
 
-
 .posts:hover {
 	cursor: pointer;
 	border-width: thick;
@@ -566,7 +503,23 @@ label {
 
 
 
+#createPostWrapper {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
+#descInput {
+	display: flex;
+	justify-content: center;
+
+	textarea {
+		width: 28rem;
+		height: 300px;
+	}
+}
 
 #checkboxCreate {
 	display: flex;
@@ -662,4 +615,15 @@ label {
 
 #postCommentList {
 	margin: 5rem 0;
+}
+
+#descInput {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#descInput textarea {
+	width: 100%;
+	height: 300px;
 }

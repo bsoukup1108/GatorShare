@@ -35,8 +35,8 @@ const Login = (props) => {
 	return (
 		<>
 			<div className='auth'>
-				<div className='signin-child signin-background'>
-					<div className='signin-left text-center'>
+				<div className='form-child form-background'>
+					<div className='form-left text-center'>
 						<h1 className='heading-primary'>
 							Hello, <span className='text-warning'>Gators</span>!
 						</h1>
@@ -47,16 +47,19 @@ const Login = (props) => {
 						<button
 							className='create-btn'
 							type='button'
-							value='Sign Up'
+							value='Sign In'
 						>
 							Create Account
 						</button>
 					</div>
 
-					<div className='signin-overlay'></div>
+					<div className='form-overlay'></div>
 				</div>
-				<div className='signin-child signin-form'>
-					<form className='form' onSubmit={(e) => onSubmit(e)}>
+				<div
+					className='form-child signin-form'
+					onSubmit={(e) => onSubmit(e)}
+				>
+					<form onSubmit={(e) => onSubmit(e)}>
 						<h1>
 							<b>Sign In</b>
 						</h1>
@@ -65,10 +68,10 @@ const Login = (props) => {
 							<label htmlFor='email'>Email Address</label>
 							<input
 								className='form-control'
-								type='text'
+								type='email'
 								name='email'
+								placeholder='Email Address'
 								id='email'
-								placeholder='johnnyappleseed@gmail.com'
 								value={email}
 								onChange={(e) => onChange(e)}
 								required
@@ -80,8 +83,8 @@ const Login = (props) => {
 								className='form-control'
 								type='password'
 								name='password'
+								placeholder='Password'
 								id='password'
-								// placeholder='********'
 								// minLength='6'
 								value={password}
 								onChange={(e) => onChange(e)}
@@ -97,72 +100,19 @@ const Login = (props) => {
 									</a>
 								</li>
 								<li>
-									<input
+									<button
+										className='form-btn'
 										type='submit'
-										className='signin-btn'
 										value='Sign In'
-									/>
+									>
+										Sign In
+									</button>
 								</li>
 							</ul>
 						</div>
 					</form>
 				</div>
 			</div>
-			{/* <div className="auth">
-		<div className="auth-child">
-        <div className="right-content">
-          <div className="form" onSubmit={(e) => onSubmit(e)}>
-            <h2>
-              <b>Sign In</b>
-            </h2>
-            <label>
-              <span>
-                <b>Email Address</b>
-              </span>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => onChange(e)}
-                // required
-              />
-            </label>
-
-            <label>
-              <span>
-                <b>Password</b>
-              </span>
-              <input
-                type="password"
-                // minLength='6'
-                value={password}
-                onChange={(e) => onChange(e)}
-              />
-            </label>
-
-            <p className="forgot-pass">Forgot your password?</p>
-
-            <button className="submit" type="button" value="Sign In">
-              Sign In
-            </button>
-			
-  
-  
-          </div>
-          <div className="left-content">
-            <div className="cont">
-              <h1>
-                Hello, <span className="text-warning">Gators</span>!
-              </h1>
-              <p>Enter your personal details and start your journey with us</p>
-              <button className="create" type="button" value="Sign In">
-                Create Account
-              </button>
-            </div>
-			<div className="signup-overlay"></div>
-          </div>
-        </div>
-		</div>
-      </div> */}
 		</>
 	);
 };
