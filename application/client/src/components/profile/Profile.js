@@ -155,6 +155,11 @@ const Profile = () => {
 	const lastname = 'Doe';
 	const eMail = 'email@email.mx';
 
+	const confirmDeletion = (e) => {
+		e.preventDefault();
+		window.confirm('Do you really want to delete the post?');
+	};
+
 	return (
 		<>
 			<div className='profile'>
@@ -258,6 +263,19 @@ const Profile = () => {
 																			</strong>
 																		</small>
 																	</p>
+																	<button
+																		type='button'
+																		class='btn btn-danger'
+																		onClick={(
+																			e
+																		) =>
+																			confirmDeletion(
+																				e
+																			)
+																		}
+																	>
+																		DELETE
+																	</button>
 																</div>
 															</div>
 														</div>
