@@ -37,13 +37,12 @@ const Home = () => {
 						{' '}
 						<div className='gradient-hor bg-pan-right flex-center-1'>
 							<div className='content'>
-								<h4>HOOK</h4>
-								<p>
-									<a href='#!'>Log in</a>
-								</p>
-								<p>
-									<a href='#!'>Sign Up</a>
-								</p>
+								<h4>
+									For <span class='text-warning'>SFSU</span>{' '}
+									students, by{' '}
+									<span class='text-warning'>SFSU</span>{' '}
+									students
+								</h4>
 							</div>
 						</div>
 					</div>
@@ -51,32 +50,32 @@ const Home = () => {
 						<div className='container-home-links'>
 							<div className='btn-group ' role='group'>
 								<button type='button' className='btn btn-dark'>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Articles and Essays
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Art & Film
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Clubs
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
-										Discord
+									<a className='nav-link' href='/posts'>
+										Discords
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Tutoring
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Other
 									</a>
 								</button>
@@ -93,6 +92,7 @@ const Home = () => {
 								data-bs-ride='carousel'
 								onClick={() => navigate(`/posts`)}
 							>
+								{' '}
 								<div className='carousel-inner'>
 									{posts.map((post, i) => {
 										return (
@@ -173,6 +173,7 @@ const Home = () => {
 								data-bs-ride='carousel'
 								onClick={() => navigate(`/posts`)}
 							>
+								{' '}
 								<div className='carousel-inner'>
 									{posts.map((post, i) => {
 										console.log(post.title);
