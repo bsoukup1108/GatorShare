@@ -115,9 +115,11 @@ const Home = () => {
 												/>
 												<div className='carousel-caption d-none d-md-block'>
 													<h5>
-														{post.title
-															? post.title
-															: 'No title ...'}
+														<strong>
+															{post.title
+																? post.title
+																: 'No title ...'}
+														</strong>
 													</h5>
 													<p>
 														<small>
@@ -196,9 +198,11 @@ const Home = () => {
 												/>
 												<div className='carousel-caption d-none d-md-block'>
 													<h5>
-														{post.title
-															? post.title
-															: 'No title ...'}
+														<strong>
+															{post.title
+																? post.title
+																: 'No title ...'}
+														</strong>
 													</h5>
 													<p>
 														<small>

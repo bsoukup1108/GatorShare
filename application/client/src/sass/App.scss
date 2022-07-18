@@ -1119,3 +1119,15 @@ footer a {
 		color: white !important;
 	}
 }
+
+.carousel-caption {
+	text-align: left;
+
+	>*>small,
+	>*>p,
+	>*>i,
+	>*>strong {
+		background-color: white;
+
+	}
+}

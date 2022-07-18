@@ -84,9 +84,11 @@ const Posts = () => {
 											/>
 											<div className='card-body'>
 												<h5 className='card-title'>
-													{post.title
-														? post.title
-														: 'No title...'}
+													<i>
+														{post.title
+															? post.title
+															: 'No title...'}
+													</i>
 												</h5>
 												<p
 													className='card-text'

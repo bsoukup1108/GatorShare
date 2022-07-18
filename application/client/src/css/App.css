@@ -986,3 +986,13 @@ footer a > i :hover,
 footer a :hover {
   color: white !important;
 }
+
+.carousel-caption {
+  text-align: left;
+}
+.carousel-caption > * > small,
+.carousel-caption > * > p,
+.carousel-caption > * > i,
+.carousel-caption > * > strong {
+  background-color: white;
+}
