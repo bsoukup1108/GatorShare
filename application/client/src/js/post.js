@@ -10,7 +10,7 @@ export const createPost = (formData) => {
 		.then((response) => {
 			console.log(response);
 			// if (response.status === 200) {
-			// 	window.location = '/posts';
+			window.location = '/posts';
 			// } else {
 			// 	// TODO errors
 			// 	console.log('create post error');
@@ -19,6 +19,8 @@ export const createPost = (formData) => {
 		})
 		.catch(function (err) {
 			console.log(err);
+			window.location = '/posts';
+
 			//return window.location.reload();
 		});
 };
