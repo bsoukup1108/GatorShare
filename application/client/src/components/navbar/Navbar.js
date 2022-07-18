@@ -81,7 +81,7 @@ const Navbar = (props) => {
 				>
 					<li>
 						<a className='dropdown-item' href='/profile'>
-							<i className='fa-solid fa-user '></i> Profile
+							<i className='fa-solid' class="fas fa-square-user"></i> Profile
 						</a>
 					</li>
 					<li>
