@@ -14,7 +14,7 @@ const Navbar = (props) => {
 	const authLinks = (
 		<>
 			<div>
-			<button type='button' className='btn btn-secondary'>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
 						<span id='home-content'></span>
@@ -80,8 +80,12 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						<a className='dropdown-item' href='/profile'>
-							<i className='fa-solid' class="fas fa-square-user"></i> Profile
+						<a
+							id='dropdown-user-icon'
+							className='dropdown-item'
+							href='/profile'
+						>
+							<i className='fa-solid fa-user'></i> Profile
 						</a>
 					</li>
 					<li>
@@ -101,7 +105,7 @@ const Navbar = (props) => {
 	const guestLinks = (
 		<>
 			<div>
-			<button type='button' className='btn btn-secondary'>
+				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
 						<span id='home-content'></span>

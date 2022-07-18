@@ -965,8 +965,14 @@ li::marker {
 }
 
 .fa-arrow-right-to-bracket,
-.fa-user-plus, .fa-square-user, .fa-sign-out-alt {
+.fa-user-plus,
+.fa-square-user,
+.fa-sign-out-alt {
   color: black !important;
+}
+
+#dropdown-user-icon i {
+  color: black;
 }
 
 .nav-link {
