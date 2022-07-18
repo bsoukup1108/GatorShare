@@ -12,7 +12,7 @@ const SearchResults = (props) => {
 	const navigate = useNavigate();
 	let searchTerm = ReactSession.get('searchTerm');
 	let searchURL = `/search?query=${searchTerm}`;
-	ReactSession.get('searchTerm');
+
 	useEffect(() => {
 		http.get(searchURL)
 			.then((res) => {

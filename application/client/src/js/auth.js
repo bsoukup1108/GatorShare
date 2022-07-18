@@ -8,12 +8,14 @@ export const login = (formData) => {
 		password: password,
 	})
 		.then((response) => {
+			console.log(response);
 			if (response.data.token) {
 				const token = response.data.token;
+				console.log(token);
 				ReactSession.set('token', token);
 				document.getElementById('login-btn-1').style.visibility =
 					'visible';
-				return window.location.reload();
+				//	return window.location.href('/');
 			} else {
 				// TODO errors
 
