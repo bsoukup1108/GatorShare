@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Sfsu from '../../img/sfsu.jpeg';
+import Sfsu from '../../img/sfsu1.png';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';

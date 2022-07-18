@@ -550,24 +550,31 @@ label {
 		content: "";
 	}
 
+
 	#home-content::after {
 		content: " Home";
+		color: white;
+
 	}
 
 	#about-content::after {
 		content: "  About";
+		color: white;
 	}
 
 	#messages-content::after {
 		content: "  Messages";
+		color: white;
 	}
 
 	#posts-content::after {
 		content: " Posts";
+		color: white;
 	}
 
 	#create-content::after {
 		content: " Create Post";
+		color: white;
 	}
 }
 
@@ -871,8 +878,10 @@ label {
 	text-shadow: 1px 1px 5px hsla(0, 0%, 0%, .2);
 
 	h4 {
-		font: normal 2rem/1.2 serif;
+		font: 2rem/1.0 serif;
 		margin: 0;
+		font-weight: 600;
+
 		// text-transform: uppercase;
 	}
 
@@ -906,6 +915,11 @@ label {
 }
 
 .container-home {
+	margin-top: 30%;
+
+	position: relative;
+	border-radius: remy(3px);
+	box-shadow: 0px remy(3px) remy(7px) rgba(0, 0, 0, 0.25);
 	background-color: white;
 }
 
@@ -914,6 +928,7 @@ label {
 	justify-content: space-between;
 	align-content: center;
 	align-items: baseline;
+	margin-right: auto;
 
 	>* {
 		width: -webkit-fill-available;
@@ -1032,4 +1047,61 @@ li::marker {
 	display: flex;
 	justify-content: space-around;
 
+}
+
+
+.home-btn {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0.5rem 1rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: $secondary;
+	background: black;
+	border-color: white;
+
+
+	&:focus,
+	&:hover {
+		background: lighten(#111, 13%);
+	}
+
+}
+
+.btn-dark {
+	color: white;
+	background: black;
+	border-color: rgba(255, 255, 255, 0.281);
+
+	&:focus,
+	&:hover {
+		background: $primary-bg;
+		color: rgb(253, 221, 91);
+	}
+}
+
+.btn-secondary {
+	color: white;
+	background: black !important;
+	border-color: rgba(255, 255, 255, 0.281);
+
+	&:focus,
+	&:hover {
+		color: white !important;
+	}
+}
+
+.fa-solid,
+.fa-user {
+	color: white;
+
+	&:focus,
+	&:hover {
+		color: rgb(253, 221, 91);
+	}
+}
+
+.nav-link {
+	text-align: center;
 }
