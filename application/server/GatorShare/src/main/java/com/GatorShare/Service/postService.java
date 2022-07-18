@@ -1,6 +1,9 @@
 package com.GatorShare.Service;
 
 import com.GatorShare.Dto.Post;
+import com.GatorShare.Dto.User;
+import com.GatorShare.Repo.UserRepository;
+import com.GatorShare.Dto.UserDTO;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +19,10 @@ public class postService{
     @Autowired
     private PostRepo postrepo;
 
-    public void store(Integer id, MultipartFile file, String Title, String description) throws IOException {
+    @Autowired
+    private UserRepository userRepository;
+
+    public void store(MultipartFile file, String Title, String description) throws IOException {
         Post newPost = new Post();
         String PostName = StringUtils.cleanPath(file.getOriginalFilename());
         if(PostName.contains("..")){
@@ -31,6 +37,13 @@ public class postService{
         newPost.SetTitle(Title);
         postrepo.save(newPost);
     }
+//    public Post savePost(UserDTO userDTO, String content){
+//        Post post = new Post();
+//        User user = userRepository.findByEmail(userDTO.getEmail());
+//        post.setUser(user);
+//        post.setContent(content);
+//        return postrepo.save(post);
+//    }
 
     public Post getPost(Integer id) {
         return postrepo.findById(id).get();

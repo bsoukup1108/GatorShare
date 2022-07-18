@@ -136,11 +136,11 @@ public class GatorShareApplication {
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 
-	@PostMapping("/post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("posts") Integer  id, @RequestParam("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
+	@PostMapping("post")
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
 		String message = "";
 		try{
-			PostService.store(id, posts, Titile, DEsc);
+			PostService.store(posts, Titile, DEsc);
 			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
