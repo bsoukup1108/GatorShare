@@ -964,6 +964,11 @@ li::marker {
   color: rgb(253, 221, 91);
 }
 
+.fa-arrow-right-to-bracket,
+.fa-user-plus {
+  color: black !important;
+}
+
 .nav-link {
   text-align: center;
 }
