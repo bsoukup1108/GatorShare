@@ -15,7 +15,7 @@ export const login = (formData) => {
 				ReactSession.set('token', token);
 				document.getElementById('login-btn-1').style.visibility =
 					'visible';
-				//	return window.location.href('/');
+				return window.location.href('/');
 			} else {
 				// TODO errors
 
