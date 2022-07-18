@@ -3,9 +3,13 @@ package com.GatorShare.Service;
 import com.GatorShare.Dto.Post;
 import com.GatorShare.Dto.User;
 import com.GatorShare.Repo.UserRepository;
-import com.GatorShare.Dto.UserDTO;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,14 +17,20 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 
 @Service
-public class postService{
-    @Autowired
+public class postService implements PostServiceInterface{
+
     private PostRepo postrepo;
 
+    public postService(PostRepo postrepo){
+        this.postrepo = postrepo;
+    }
     @Autowired
     private UserRepository userRepository;
+
 
     public void store(MultipartFile file, String Title, String description) throws IOException {
         Post newPost = new Post();
@@ -44,6 +54,13 @@ public class postService{
 //        post.setContent(content);
 //        return postrepo.save(post);
 //    }
+    @Override
+    public List<Post> searchPosts(String query){
+        List<Post> posts = postrepo.searchPosts(query);
+        return posts;
+    }
+
+
 
     public Post getPost(Integer id) {
         return postrepo.findById(id).get();

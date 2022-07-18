@@ -69,6 +69,8 @@ public class GatorShareApplication {
 	@Autowired
 	private postService PostService;
 
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
@@ -134,6 +136,11 @@ public class GatorShareApplication {
 	public ResponseEntity<List<Post>> getAllPost() {
 		List<Post> posts = this.PostService.getAllPosts();
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+
+	@GetMapping("search")
+	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
+		return ResponseEntity.ok(PostService.searchPosts(query));
 	}
 
 	@PostMapping("post")

@@ -12,18 +12,21 @@ import javax.persistence.Table;
 
 @EntityScan
 @Repository
-@Table(name = "posts")
+
 public interface PostRepo extends
 JpaRepository<Post, Integer>{
+
+    @Query("SELECT p FROM Post p WHERE " +
+            "p.Title LIKE CONCAT('%',:query, '%')" +
+            "Or p.Description LIKE CONCAT('%', :query, '%')")
+    List<Post> searchPosts(String query);
 
     List<Post> findPostByUserOrderById(User user);
 
     List<Post> findAllByOrderByIdDesc();
 
 
-//    @Query("SELECT description FROM posts")
-////    @Query("SELECT * FROM posts p WHERE title='%' or description="+"'"+"%"+"'")
-//    List<Post> searchPost(String query);
+
 
 
 }
