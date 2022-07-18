@@ -4,14 +4,17 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
+import { ReactSession } from 'react-client-session';
 
-const SearchResults = () => {
+const SearchResults = (props) => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
-
+	let searchTerm = ReactSession.get('searchTerm');
+	let searchURL = `/search?query=${searchTerm}`;
+	ReactSession.get('searchTerm');
 	useEffect(() => {
-		http(`/search?query=test`)
+		http.get(searchURL)
 			.then((res) => {
 				setPosts(res.data);
 				setIsLoaded(true);
@@ -21,7 +24,7 @@ const SearchResults = () => {
 				console.log(e);
 			});
 	}, []);
-	console.log();
+
 	return (
 		<>
 			{!isLoaded && <Spinner />}

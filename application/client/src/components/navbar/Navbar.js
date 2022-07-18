@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import handleSearch from '../../js/search';
 
 import logo from '../../img/logo.png';
 import { getToken } from '../../js/useToken';
 import { logout } from '../../js/auth';
+import SearchResults from '../SearchResults/SearchResults';
+import { ReactSession } from 'react-client-session';
 
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
@@ -193,8 +194,14 @@ const Navbar = (props) => {
 							id='search-button'
 							className='btn btn-secondary'
 							type='submit'
-							onClick={() => {
-								navigate('/search');
+							onClick={(e) => {
+								let searchTerm =
+									document.getElementById(
+										'search-text'
+									).value;
+								ReactSession.set('searchTerm', searchTerm);
+								navigate(`/search`);
+
 								return false;
 							}}
 						>
