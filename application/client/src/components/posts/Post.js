@@ -54,8 +54,32 @@ const Post = () => {
 		});
 	};
 
-	const postComment = () => {
-		console.log(comment);
+	// const appendComment = () => {
+	// 	let el = document.getElementById('leftComment');
+	// 	console.log(el);
+	// 	let div = document.createElement('div');
+	// 	div.setAttribute('className', 'comment');
+	// 	div.innerHTML = `<p>${comment}</p>`;
+	// 	el.appendChild(div);
+	// };
+
+	const postComment = (e) => {
+		e.preventDefault();
+		if (document.getElementById('postCommentList')) {
+			document.getElementById('postCommentList').remove();
+		}
+		document.getElementById('leaveComment').value = '';
+
+		let el = document.getElementById('leftComment');
+		let div = document.createElement('div');
+		div.setAttribute('class', 'commentMessage');
+
+		div.innerHTML = `<p class='commentAuthor'> <small class='text-muted text-left'>Author: anonimous</small></p>`;
+		div.innerHTML += `<p class='commentContent'>${comment.commentArea}</p>`;
+		div.innerHTML += `<p class='commentDate'><small class='text-muted'><i>${moment().fromNow()}</i></small></p>`;
+
+		el.appendChild(div);
+		setComment('');
 	};
 
 	if (isLoaded) {
@@ -124,6 +148,7 @@ const Post = () => {
 								</div>
 							</div>
 						</div>
+
 						<div id='postComments'>
 							<div className='' id='commentArea'>
 								<label
@@ -134,9 +159,10 @@ const Post = () => {
 								</label>
 								<div id='postCommentList'>
 									{comments === []
-										? 'comments will be here'
+										? ''
 										: 'there is no comments yet ... Be the first to comment!'}
 								</div>
+								<div id='leftComment'></div>
 							</div>
 							<div className='' id='commentArea'>
 								<textarea
@@ -153,8 +179,8 @@ const Post = () => {
 								className='comment-btn'
 								type='submit'
 								value='Leave a comment'
-								onSubmit={() => {
-									postComment();
+								onClick={(e) => {
+									postComment(e);
 								}}
 							/>
 						</div>

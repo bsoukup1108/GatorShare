@@ -1,115 +1,199 @@
-import React from "react";
-import noImage from "../../img/noImage.jpeg";
-import placeholderhome from "../../img/placeholderhome.jpeg";
-
+import React, { useEffect, useState } from 'react';
+import Sfsu from '../../img/sfsu.jpeg';
+import { useNavigate } from 'react-router-dom';
+import http from '../../http-common';
+import noImage from '../../img/noImage.jpeg';
+import Spinner from '../misc/Spinner';
+import moment from 'moment';
 
 const Home = () => {
-  return (
-    <>
-      <div class="container">
-        {/* this will be the main image. make image bigger using css, then use absolute position to have text overlap the image*/}
-        <img src={placeholderhome}></img> </div>
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [posts, setPosts] = useState([]);
+	const navigate = useNavigate();
 
+	useEffect(() => {
+		http(`/posts`)
+			.then((res) => {
+				setPosts(res.data);
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
+	}, []);
 
-        <div class="container">
-        {/* tabs are centered.. use css to style.. */}
-        <ul class="nav justify-content-center">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Articles and Essays
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Art & Film
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Clubs
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Discord
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Tutoring
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Other
-            </a>
-          </li>
-        </ul>
-      </div>
+	return (
+		<>
+			{!isLoaded && <Spinner />}
+			{isLoaded && (
+				<>
+					<img
+						className='kenburns-top homeImg img-fluid'
+						alt='...'
+						src={Sfsu}
+					></img>
+					<div className='container1'>
+						{' '}
+						<div className='gradient-hor bg-pan-right flex-center-1'>
+							<div className='content'>
+								<h4>HOOK</h4>
+								<p>
+									<a href='#!'>Log in</a>
+								</p>
+								<p>
+									<a href='#!'>Sign Up</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div className='container-home'>
+						<div className='container-home-links'>
+							<div className='btn-group ' role='group'>
+								<button type='button' className='btn btn-dark'>
+									<a className='nav-link' href='#'>
+										Articles and Essays
+									</a>
+								</button>
+								<button type='button' className='btn btn-dark '>
+									<a className='nav-link' href='#'>
+										Art & Film
+									</a>
+								</button>
+								<button type='button' className='btn btn-dark '>
+									<a className='nav-link' href='#'>
+										Clubs
+									</a>
+								</button>
+								<button type='button' className='btn btn-dark '>
+									<a className='nav-link' href='#'>
+										Discord
+									</a>
+								</button>
+								<button type='button' className='btn btn-dark '>
+									<a className='nav-link' href='#'>
+										Tutoring
+									</a>
+								</button>
+								<button type='button' className='btn btn-dark '>
+									<a className='nav-link' href='#'>
+										Other
+									</a>
+								</button>
+							</div>
+						</div>
 
-      {/* need to add styling
-      make the images or carousel smaller */}
-      <div id="carouselExampleSlidesOnly" class="carousel slide">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-          <div class="card">
-          <img src={noImage} class="d-block w-100" alt="..."></img>
-          <div class="container">
-          <h4><b>Title</b></h4>
-          <p>Description</p>
-          </div>
-          </div>
-          </div>
-
-          <div class="carousel-item">
-          <div class="card">
-          <img src={noImage} class="d-block w-100" alt="..."></img>
-          <div class="container">
-          <h4><b>Title</b></h4>
-          <p>Description</p>
-          </div>
-          </div>
-          </div>
-          
-          <div class="carousel-item">
-          <div class="card">
-          <img src={noImage} class="d-block w-100" alt="..."></img>
-          <div class="container">
-          <h4><b>Title</b></h4>
-          <p>Description</p>
-          </div>
-          </div>
-          </div>
-          
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#carouselExampleSlidesOnly"
-          data-bs-slide="prev"
-        >
-          <i
-            className="fa-solid fa-chevron-left"
-            style={{ color: "black" }}
-          ></i>
-
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleSlidesOnly"
-          data-bs-slide="next"
-        >
-          <i
-            className="fa-solid fa-chevron-right"
-            style={{ color: "black" }}
-          ></i>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </>
-  );
+						<div id='main-carroussel'>
+							<div
+								id='carousel-2'
+								class='carousel carousel-dark slide'
+								data-bs-ride='carousel'
+							>
+								<h2 className='text-muted'>
+									Most Popular Posts
+								</h2>
+								<div class='carousel-inner'>
+									<div
+										class='carousel-item active'
+										data-bs-interval='10000'
+									>
+										<img
+											src={noImage}
+											class='d-block w-100'
+											alt='...'
+										/>
+										<div class='carousel-caption d-none d-md-block'>
+											<h5>First slide label</h5>
+											<p>
+												Some representative placeholder
+												content for the first slide.
+											</p>
+										</div>
+									</div>
+								</div>
+								<button
+									class='carousel-control-prev'
+									type='button'
+									data-bs-slide='prev'
+								>
+									<span
+										class='carousel-control-prev-icon'
+										aria-hidden='true'
+									></span>
+									<span class='visually-hidden'>
+										Previous
+									</span>
+								</button>
+								<button
+									class='carousel-control-next'
+									type='button'
+									data-bs-slide='next'
+								>
+									<span
+										class='carousel-control-next-icon'
+										aria-hidden='true'
+									></span>
+									<span class='visually-hidden'>Next</span>
+								</button>
+							</div>
+							<div
+								id='carousel-1'
+								class='carousel carousel-dark slide'
+								data-bs-ride='carousel'
+							>
+								<h2 className='text-muted'>
+									Most Recent Posts
+								</h2>
+								<div class='carousel-inner'>
+									<div
+										class='carousel-item active'
+										data-bs-interval='10000'
+									>
+										<img
+											src={noImage}
+											class='d-block w-100'
+											alt='...'
+										/>
+										<div class='carousel-caption d-none d-md-block'>
+											<h5>First slide label</h5>
+											<p>
+												Some representative placeholder
+												content for the first slide.
+											</p>
+										</div>
+									</div>
+								</div>
+								<button
+									class='carousel-control-prev'
+									type='button'
+									data-bs-slide='prev'
+								>
+									<span
+										class='carousel-control-prev-icon'
+										aria-hidden='true'
+									></span>
+									<span class='visually-hidden'>
+										Previous
+									</span>
+								</button>
+								<button
+									class='carousel-control-next'
+									type='button'
+									data-bs-slide='next'
+								>
+									<span
+										class='carousel-control-next-icon'
+										aria-hidden='true'
+									></span>
+									<span class='visually-hidden'>Next</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</>
+			)}
+		</>
+	);
 };
 
 export default Home;

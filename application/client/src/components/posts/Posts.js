@@ -27,6 +27,7 @@ const Posts = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div>
+					<h1>ALL POSTS</h1>
 					<div id='sort'>
 						<div class='dropdown'>
 							<button
@@ -109,19 +110,26 @@ const Posts = () => {
 														Created
 														<i>
 															{' '}
-															{moment(
-																post.createdDate
-															)
-																.startOf('day')
-																.fromNow()}{' '}
+															{post.createdDate
+																? moment(
+																		post.createdDate
+																  )
+																		.startOf(
+																			'day'
+																		)
+																		.fromNow()
+																: ''}{' '}
 														</i>
 														by{' '}
 														<strong>
-															{
-																post.user
-																	.firstName
-															}{' '}
-															{post.user.lastName}
+															{post.user
+																? post.user
+																		.firstName
+																: 'Anonymous'}{' '}
+															{post.user
+																? post.user
+																		.lastName
+																: 'User'}
 														</strong>
 													</small>
 												</p>

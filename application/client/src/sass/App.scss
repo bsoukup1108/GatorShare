@@ -171,6 +171,8 @@ footer {
 	grid-area: c;
 }
 
+
+
 /* *********************************************** */
 
 /* *********************************************** */
@@ -833,4 +835,121 @@ label {
 		border-radius: 50%;
 		padding: 1rem;
 	}
+}
+
+
+
+.commentContent {
+	margin: 0;
+	text-align: left;
+}
+
+.commentAuthor {
+	margin: 0;
+	text-align: left;
+}
+
+.leftComment {
+	margin: 1 rem 0;
+}
+
+
+.content {
+	max-width: 600px;
+	padding: 1rem;
+	text-align: center;
+	line-height: 1.4;
+	text-shadow: 1px 1px 5px hsla(0, 0%, 0%, .2);
+
+	h4 {
+		font: normal 2rem/1.2 serif;
+		margin: 0;
+		// text-transform: uppercase;
+	}
+
+	a {
+		color: hsl(40, 70%, 80%);
+		font-weight: bold;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+
+.flex-center-1 {
+	display: flex;
+	align-items: left;
+	justify-content: center;
+	width: fit-content;
+	padding: 0 4rem;
+	margin: 4rem 0;
+
+}
+
+.homeImg {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: -100;
+}
+
+.container-home {
+	background-color: white;
+}
+
+.container-home-links {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	align-items: baseline;
+
+	>* {
+		width: -webkit-fill-available;
+	}
+
+}
+
+.kenburns-top {
+	-webkit-animation: kenburns-top 5s ease-out both;
+	animation: kenburns-top 5s ease-out both;
+}
+
+@-webkit-keyframes kenburns-top {
+	0% {
+		-webkit-transform: scale(1) translateY(0);
+		transform: scale(1) translateY(0);
+		-webkit-transform-origin: 50% 16%;
+		transform-origin: 50% 16%;
+	}
+
+	100% {
+		-webkit-transform: scale(1.25) translateY(-15px);
+		transform: scale(1.25) translateY(-15px);
+		-webkit-transform-origin: top;
+		transform-origin: top;
+	}
+}
+
+@keyframes kenburns-top {
+	0% {
+		-webkit-transform: scale(1) translateY(0);
+		transform: scale(1) translateY(0);
+		-webkit-transform-origin: 50% 16%;
+		transform-origin: 50% 16%;
+	}
+
+	100% {
+		-webkit-transform: scale(1.25) translateY(-15px);
+		transform: scale(1.25) translateY(-15px);
+		-webkit-transform-origin: top;
+		transform-origin: top;
+	}
+}
+
+#main-carroussel {
+	margin: 1rem 0;
+	display: flex;
 }

@@ -156,6 +156,7 @@ const Profile = () => {
 	const eMail = 'email@email.mx';
 
 	const confirmDeletion = (e) => {
+		e.stopPropagation();
 		e.preventDefault();
 		window.confirm('Do you really want to delete the post?');
 	};
