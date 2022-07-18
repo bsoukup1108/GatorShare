@@ -188,7 +188,7 @@ const Navbar = (props) => {
 							id='search-text'
 							className='form-control me-2'
 							type='text'
-							placeholder='Search'
+							placeholder='Search for posts'
 						/>
 						<button
 							id='search-button'
