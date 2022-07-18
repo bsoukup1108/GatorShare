@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Sfsu from '../../img/sfsu.jpeg';
+import Sfsu from '../../img/sfsu1.png';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
@@ -7,26 +7,26 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 
 const Home = () => {
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [posts, setPosts] = useState([]);
-	const navigate = useNavigate();
+	// const [isLoaded, setIsLoaded] = useState(false);
+	// const [posts, setPosts] = useState([]);
+	// const navigate = useNavigate();
 
-	useEffect(() => {
-		http(`/posts`)
-			.then((res) => {
-				setPosts(res.data);
-				setIsLoaded(true);
-			})
-			.catch((e) => {
-				setIsLoaded(false);
-				console.log(e);
-			});
-	}, []);
+	// useEffect(() => {
+	// 	http(`/posts`)
+	// 		.then((res) => {
+	// 			setPosts(res.data);
+	// 			setIsLoaded(true);
+	// 		})
+	// 		.catch((e) => {
+	// 			setIsLoaded(false);
+	// 			console.log(e);
+	// 		});
+	// }, []);
 
 	return (
 		<>
-			{!isLoaded && <Spinner />}
-			{isLoaded && (
+			{/* {!isLoaded && <Spinner />}
+			{isLoaded && ( */}
 				<>
 					<img
 						className='kenburns-top homeImg img-fluid'
@@ -37,13 +37,8 @@ const Home = () => {
 						{' '}
 						<div className='gradient-hor bg-pan-right flex-center-1'>
 							<div className='content'>
-								<h4>HOOK</h4>
-								<p>
-									<a href='#!'>Log in</a>
-								</p>
-								<p>
-									<a href='#!'>Sign Up</a>
-								</p>
+								<h4>For <span class="text-warning">SFSU</span> students, by <span class="text-warning">SFSU</span> students</h4>
+								
 							</div>
 						</div>
 					</div>
@@ -51,32 +46,32 @@ const Home = () => {
 						<div className='container-home-links'>
 							<div className='btn-group ' role='group'>
 								<button type='button' className='btn btn-dark'>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Articles and Essays
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Art & Film
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Clubs
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
-										Discord
+									<a className='nav-link' href='/posts'>
+										Discords
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Tutoring
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='#'>
+									<a className='nav-link' href='/posts'>
 										Other
 									</a>
 								</button>
@@ -89,7 +84,7 @@ const Home = () => {
 								class='carousel carousel-dark slide'
 								data-bs-ride='carousel'
 							>
-								<h2 className='text-muted'>
+								<h2 >
 									Most Popular Posts
 								</h2>
 								<div class='carousel-inner'>
@@ -141,7 +136,7 @@ const Home = () => {
 								class='carousel carousel-dark slide'
 								data-bs-ride='carousel'
 							>
-								<h2 className='text-muted'>
+								<h2 >
 									Most Recent Posts
 								</h2>
 								<div class='carousel-inner'>
@@ -191,7 +186,7 @@ const Home = () => {
 						</div>
 					</div>
 				</>
-			)}
+			
 		</>
 	);
 };

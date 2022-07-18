@@ -476,18 +476,23 @@ label {
   }
   #home-content::after {
     content: " Home";
+    color: white;
   }
   #about-content::after {
     content: "  About";
+    color: white;
   }
   #messages-content::after {
     content: "  Messages";
+    color: white;
   }
   #posts-content::after {
     content: " Posts";
+    color: white;
   }
   #create-content::after {
     content: " Create Post";
+    color: white;
   }
 }
 .react-chat-container {
@@ -763,8 +768,9 @@ label {
   text-shadow: 1px 1px 5px hsla(0deg, 0%, 0%, 0.2);
 }
 .content h4 {
-  font: normal 2rem/1.2 serif;
+  font: 2rem/1 serif;
   margin: 0;
+  font-weight: 600;
 }
 .content a {
   color: hsl(40deg, 70%, 80%);
@@ -792,6 +798,10 @@ label {
 }
 
 .container-home {
+  margin-top: 30%;
+  position: relative;
+  border-radius: 0.1875rem;
+  box-shadow: 0px 0.1875rem 0.4375rem rgba(0, 0, 0, 0.25);
   background-color: white;
 }
 
@@ -800,6 +810,7 @@ label {
   justify-content: space-between;
   align-content: center;
   align-items: baseline;
+  margin-right: auto;
 }
 .container-home-links > * {
   width: -webkit-fill-available;
@@ -841,4 +852,50 @@ label {
 #main-carroussel {
   margin: 1rem 0;
   display: flex;
+  align-content: center;
+}
+
+.home-btn {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(252, 203, 6);
+  background: black;
+  border-color: white;
+}
+.home-btn:focus, .home-btn:hover {
+  background: #323232;
+}
+
+.btn-dark {
+  color: white;
+  background: black;
+  border-color: rgba(255, 255, 255, 0.281);
+}
+.btn-dark:focus, .btn-dark:hover {
+  background: rgba(74, 33, 123, 0.5);
+  color: rgb(253, 221, 91);
+}
+
+.btn-secondary {
+  color: white;
+  background: black !important;
+  border-color: rgba(255, 255, 255, 0.281);
+}
+.btn-secondary:focus, .btn-secondary:hover {
+  color: white !important;
+}
+
+.fa-solid, .fa-user {
+  color: white;
+}
+.fa-solid:focus, .fa-solid:hover, .fa-user:focus, .fa-user:hover {
+  color: rgb(253, 221, 91);
+}
+
+.nav-link {
+  text-align: center;
 }
