@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { register } from '../../js/auth';
 
 import { getToken } from '../../js/useToken';
@@ -16,7 +16,6 @@ const SignUp = () => {
 	});
 
 	const { name, lastname, email, password, password2, role } = formData;
-
 	const onChange = (e) =>
 		setFormData({
 			...formData,
@@ -212,7 +211,7 @@ const SignUp = () => {
 										required
 										// onChange='validateAgreement(event.target)'
 									/>
-									<a className='policy-link' href='#'>
+									<a className='policy-link' href='/rules'>
 										Agree to Terms & Conditions
 									</a>
 								</li>

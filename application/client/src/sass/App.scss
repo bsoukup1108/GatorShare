@@ -141,6 +141,15 @@ button>h1 {
 footer {
 	text-align: center;
 	padding: 0.7rem;
+	height: 100px !important;
+}
+
+footer a {
+	color: black;
+
+	:hover {
+		color: white;
+	}
 }
 
 /* *********************************************** */
@@ -952,4 +961,75 @@ label {
 #main-carroussel {
 	margin: 1rem 0;
 	display: flex;
+}
+
+.carousel-item:hover {
+	cursor: pointer;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+	background-color: lightgray;
+}
+
+#carousel-1,
+#carousel-2 {
+	max-width: 50%
+}
+
+#carroussel-caps {
+	display: flex;
+	justify-content: space-around;
+}
+
+li>p,
+ul>li,
+li>h2 {
+	text-align: left;
+}
+
+li::marker {
+	font-size: x-large;
+}
+
+#footerContent {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#footer-left {
+	text-align: left;
+
+	>* {
+		margin: 0;
+		line-height: 1;
+	}
+}
+
+#footer-right {
+	text-align: right;
+
+	>*>p {
+		margin: 0;
+	}
+}
+
+#footer-center {
+	display: flex;
+	flex-direction: column;
+
+
+}
+
+#footer-center-top>* {
+	margin-inline: 0.5rem;
+}
+
+#footer-center-top,
+#footer-center-bottom {
+	display: flex;
+	justify-content: space-around;
+
 }

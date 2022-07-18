@@ -13,6 +13,7 @@ import CreatePost from './components/posts/CreatePost';
 import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
+import Agreement from './components/misc/Agreement';
 
 import { ReactSession } from 'react-client-session';
 
@@ -51,6 +52,7 @@ const App = () => {
 							)}
 							<Route path='/search' element={<SearchResults />} />
 
+							<Route path='/rules' element={<Agreement />} />
 							<Route
 								path='/about'
 								element={

@@ -15,12 +15,6 @@ const Navbar = (props) => {
 		<>
 			<div>
 				<button type='button' className='btn btn-secondary'>
-					<Link to='/about'>
-						<i className='fa-solid fa-circle-info'></i>
-						<span id='about-content'></span>
-					</Link>
-				</button>
-				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}
 						<span id='posts-content'></span>
@@ -101,18 +95,6 @@ const Navbar = (props) => {
 	const guestLinks = (
 		<>
 			<div>
-				<button type='button' className='btn btn-secondary'>
-					<Link to='/'>
-						<i className='fa-solid fa-house '></i>
-						<span id='home-content'></span>
-					</Link>
-				</button>
-				<button type='button' className='btn btn-secondary'>
-					<Link to='/about'>
-						<i className='fa-solid fa-circle-info '></i>
-						<span id='about-content'></span>
-					</Link>
-				</button>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}

@@ -82,110 +82,170 @@ const Home = () => {
 								</button>
 							</div>
 						</div>
-
+						<div id='carroussel-caps'>
+							<h2 className='text-muted'>Most Recent Posts</h2>
+							<h2 className='text-muted'>Most Popular Posts</h2>
+						</div>
 						<div id='main-carroussel'>
 							<div
 								id='carousel-2'
-								class='carousel carousel-dark slide'
+								className='carousel carousel-dark slide'
 								data-bs-ride='carousel'
+								onClick={() => navigate(`/posts`)}
 							>
-								<h2 className='text-muted'>
-									Most Popular Posts
-								</h2>
-								<div class='carousel-inner'>
-									<div
-										class='carousel-item active'
-										data-bs-interval='10000'
-									>
-										<img
-											src={noImage}
-											class='d-block w-100'
-											alt='...'
-										/>
-										<div class='carousel-caption d-none d-md-block'>
-											<h5>First slide label</h5>
-											<p>
-												Some representative placeholder
-												content for the first slide.
-											</p>
-										</div>
-									</div>
+								<div className='carousel-inner'>
+									{posts.map((post, i) => {
+										return (
+											<div
+												key={`car-1-${i}`}
+												className={
+													i === 1
+														? 'carousel-item active'
+														: 'carousel-item'
+												}
+												data-bs-interval='10000'
+											>
+												<img
+													src={noImage}
+													className='d-block w-100'
+													alt='...'
+												/>
+												<div className='carousel-caption d-none d-md-block'>
+													<h5>
+														{post.title
+															? post.title
+															: 'No title ...'}
+													</h5>
+													<p>
+														<small>
+															Created by:{' '}
+														</small>
+														<i>
+															{post.user
+																? post.user
+																		.firstName
+																: 'Anonimous'}{' '}
+															{post.user
+																? post.user
+																		.lastName
+																: '...'}
+														</i>
+													</p>
+												</div>
+											</div>
+										);
+									})}
 								</div>
 								<button
-									class='carousel-control-prev'
+									className='carousel-control-prev'
 									type='button'
+									data-bs-target='#carousel-2'
 									data-bs-slide='prev'
+									onClick={(e) => e.stopPropagation()}
 								>
 									<span
-										class='carousel-control-prev-icon'
+										className='carousel-control-prev-icon'
 										aria-hidden='true'
 									></span>
-									<span class='visually-hidden'>
+									<span className='visually-hidden'>
 										Previous
 									</span>
 								</button>
 								<button
-									class='carousel-control-next'
+									className='carousel-control-next'
 									type='button'
+									data-bs-target='#carousel-2'
 									data-bs-slide='next'
+									onClick={(e) => e.stopPropagation()}
 								>
 									<span
-										class='carousel-control-next-icon'
+										className='carousel-control-next-icon'
 										aria-hidden='true'
 									></span>
-									<span class='visually-hidden'>Next</span>
+									<span className='visually-hidden'>
+										Next
+									</span>
 								</button>
 							</div>
 							<div
 								id='carousel-1'
-								class='carousel carousel-dark slide'
+								className='carousel carousel-dark slide'
 								data-bs-ride='carousel'
+								onClick={() => navigate(`/posts`)}
 							>
-								<h2 className='text-muted'>
-									Most Recent Posts
-								</h2>
-								<div class='carousel-inner'>
-									<div
-										class='carousel-item active'
-										data-bs-interval='10000'
-									>
-										<img
-											src={noImage}
-											class='d-block w-100'
-											alt='...'
-										/>
-										<div class='carousel-caption d-none d-md-block'>
-											<h5>First slide label</h5>
-											<p>
-												Some representative placeholder
-												content for the first slide.
-											</p>
-										</div>
-									</div>
+								<div className='carousel-inner'>
+									{posts.map((post, i) => {
+										console.log(post.title);
+										return (
+											<div
+												key={`car-1-${i}`}
+												className={
+													i === 1
+														? 'carousel-item active'
+														: 'carousel-item'
+												}
+												data-bs-interval='10000'
+											>
+												<img
+													src={noImage}
+													className='d-block w-100'
+													alt='...'
+												/>
+												<div className='carousel-caption d-none d-md-block'>
+													<h5>
+														{post.title
+															? post.title
+															: 'No title ...'}
+													</h5>
+													<p>
+														<small>
+															Created by:{' '}
+														</small>
+														<i>
+															{post.user
+																? post.user
+																		.firstName
+																: 'Anonimous'}{' '}
+															{post.user
+																? post.user
+																		.lastName
+																: '...'}
+														</i>
+													</p>
+												</div>
+											</div>
+										);
+									})}
 								</div>
 								<button
-									class='carousel-control-prev'
+									className='carousel-control-prev'
 									type='button'
+									data-bs-target='#carousel-1'
 									data-bs-slide='prev'
+									onClick={(e) => e.stopPropagation()}
 								>
 									<span
-										class='carousel-control-prev-icon'
+										className='carousel-control-prev-icon'
 										aria-hidden='true'
 									></span>
-									<span class='visually-hidden'>
+									<span className='visually-hidden'>
 										Previous
 									</span>
 								</button>
 								<button
-									class='carousel-control-next'
+									className='carousel-control-next'
 									type='button'
+									data-bs-target='#carousel-1'
 									data-bs-slide='next'
+									onClick={(e) => e.stopPropagation()}
 								>
 									<span
-										class='carousel-control-next-icon'
+										className='carousel-control-next-icon'
 										aria-hidden='true'
 									></span>
-									<span class='visually-hidden'>Next</span>
+									<span className='visually-hidden'>
+										Next
+									</span>
 								</button>
 							</div>
 						</div>
