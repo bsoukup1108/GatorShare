@@ -14,6 +14,12 @@ const Navbar = (props) => {
 	const authLinks = (
 		<>
 			<div>
+			<button type='button' className='btn btn-secondary'>
+					<Link to='/'>
+						<i className='fa-solid fa-house '></i>
+						<span id='home-content'></span>
+					</Link>
+				</button>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}
@@ -95,6 +101,12 @@ const Navbar = (props) => {
 	const guestLinks = (
 		<>
 			<div>
+			<button type='button' className='btn btn-secondary'>
+					<Link to='/'>
+						<i className='fa-solid fa-house '></i>
+						<span id='home-content'></span>
+					</Link>
+				</button>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/posts'>
 						<i className='fa-solid fa-rectangle-list'></i>{' '}
