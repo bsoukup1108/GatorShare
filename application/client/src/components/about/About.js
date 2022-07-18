@@ -20,7 +20,6 @@ const About = () => {
 	useEffect(() => {
 		http(`/aboutus`)
 			.then((res) => {
-				console.log(res.data);
 				setUsers(res.data);
 				setIsLoaded(true);
 			})

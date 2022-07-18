@@ -266,7 +266,7 @@ const Profile = () => {
 																	</p>
 																	<button
 																		type='button'
-																		class='btn btn-danger'
+																		className='btn btn-danger'
 																		onClick={(
 																			e
 																		) =>

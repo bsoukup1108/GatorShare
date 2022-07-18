@@ -44,13 +44,13 @@ const Footer = () => {
 						</div>
 						<div id='footer-center-bottom'>
 							<a href='https://www.sfsu.edu/'>
-								<i class='fa-solid fa-school fa-2x'></i>
+								<i className='fa-solid fa-school fa-2x'></i>
 							</a>
 							<a href='https://www.twitter.com/'>
-								<i class='fa-brands fa-twitter fa-2x'></i>
+								<i className='fa-brands fa-twitter fa-2x'></i>
 							</a>
 							<a href='https://www.instagram.com/'>
-								<i class='fa-brands fa-instagram fa-2x'></i>
+								<i className='fa-brands fa-instagram fa-2x'></i>
 							</a>
 						</div>
 					</div>

@@ -166,7 +166,7 @@ const Navbar = (props) => {
 			</div>
 			<div id='searchBar'>
 				<div className='container-fluid'>
-					<form className='d-flex' onSubmit={handleSearch}>
+					<form className='d-flex'>
 						<input
 							id='search-text'
 							className='form-control me-2'

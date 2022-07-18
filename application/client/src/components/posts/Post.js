@@ -74,9 +74,9 @@ const Post = () => {
 		let div = document.createElement('div');
 		div.setAttribute('class', 'commentMessage');
 
-		div.innerHTML = `<p class='commentAuthor'> <small class='text-muted text-left'>Author: anonimous</small></p>`;
-		div.innerHTML += `<p class='commentContent'>${comment.commentArea}</p>`;
-		div.innerHTML += `<p class='commentDate'><small class='text-muted'><i>${moment().fromNow()}</i></small></p>`;
+		div.innerHTML = `<p className='commentAuthor'> <small className='text-muted text-left'>Author: anonimous</small></p>`;
+		div.innerHTML += `<p className='commentContent'>${comment.commentArea}</p>`;
+		div.innerHTML += `<p className='commentDate'><small className='text-muted'><i>${moment().fromNow()}</i></small></p>`;
 
 		el.appendChild(div);
 		setComment('');

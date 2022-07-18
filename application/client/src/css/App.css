@@ -124,13 +124,6 @@ footer {
   height: 100px !important;
 }
 
-footer a {
-  color: black;
-}
-footer a :hover {
-  color: white;
-}
-
 /* *********************************************** */
 /* *********************************************** */
 /* Grid  */
@@ -769,7 +762,6 @@ label {
 }
 
 .content {
-  max-width: 600px;
   padding: 1rem;
   text-align: center;
   line-height: 1.4;
@@ -860,52 +852,6 @@ label {
 #main-carroussel {
   margin: 1rem 0;
   display: flex;
-  align-content: center;
-}
-
-.home-btn {
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0.5rem 1rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: rgb(252, 203, 6);
-  background: black;
-  border-color: white;
-}
-.home-btn:focus, .home-btn:hover {
-  background: #323232;
-}
-
-.btn-dark {
-  color: white;
-  background: black;
-  border-color: rgba(255, 255, 255, 0.281);
-}
-.btn-dark:focus, .btn-dark:hover {
-  background: rgba(74, 33, 123, 0.5);
-  color: rgb(253, 221, 91);
-}
-
-.btn-secondary {
-  color: white;
-  background: black !important;
-  border-color: rgba(255, 255, 255, 0.281);
-}
-.btn-secondary:focus, .btn-secondary:hover {
-  color: white !important;
-}
-
-.fa-solid, .fa-user {
-  color: white;
-}
-.fa-solid:focus, .fa-solid:hover, .fa-user:focus, .fa-user:hover {
-  color: rgb(253, 221, 91);
-}
-
-.nav-link {
-  text-align: center;
 }
 
 .carousel-item:hover {
@@ -972,4 +918,61 @@ li::marker {
 #footer-center-bottom {
   display: flex;
   justify-content: space-around;
+}
+
+.home-btn {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgb(252, 203, 6);
+  background: black;
+  border-color: white;
+}
+.home-btn:focus, .home-btn:hover {
+  background: #323232;
+}
+
+.btn-dark {
+  color: white;
+  background: black;
+  border-color: rgba(255, 255, 255, 0.281);
+}
+.btn-dark:focus, .btn-dark:hover {
+  background: rgba(74, 33, 123, 0.5);
+  color: rgb(253, 221, 91);
+}
+
+.btn-secondary {
+  color: white;
+  background: black !important;
+  border-color: rgba(255, 255, 255, 0.281);
+}
+.btn-secondary:focus, .btn-secondary:hover {
+  color: white !important;
+}
+
+.fa-solid,
+.fa-user {
+  color: white;
+}
+.fa-solid:focus, .fa-solid:hover,
+.fa-user:focus,
+.fa-user:hover {
+  color: rgb(253, 221, 91);
+}
+
+.nav-link {
+  text-align: center;
+}
+
+footer a > i,
+footer a {
+  color: black !important;
+}
+footer a > i :hover,
+footer a :hover {
+  color: white !important;
 }

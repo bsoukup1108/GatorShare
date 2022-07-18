@@ -144,13 +144,7 @@ footer {
 	height: 100px !important;
 }
 
-footer a {
-	color: black;
 
-	:hover {
-		color: white;
-	}
-}
 
 /* *********************************************** */
 
@@ -871,7 +865,7 @@ label {
 
 
 .content {
-	max-width: 600px;
+	//max-width: 600px;
 	padding: 1rem;
 	text-align: center;
 	line-height: 1.4;
@@ -1104,4 +1098,13 @@ li::marker {
 
 .nav-link {
 	text-align: center;
+}
+
+footer a>i,
+footer a {
+	color: black !important;
+
+	:hover {
+		color: white !important;
+	}
 }

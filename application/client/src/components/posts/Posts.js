@@ -29,7 +29,7 @@ const Posts = () => {
 				<div>
 					<h1>ALL POSTS</h1>
 					<div id='sort'>
-						<div class='dropdown'>
+						<div className='dropdown'>
 							<button
 								class='btn btn-secondary dropdown-toggle sort-btn'
 								type='button'
@@ -44,17 +44,17 @@ const Posts = () => {
 								aria-labelledby='dropdownMenuButton1'
 							>
 								<li>
-									<a class='dropdown-item' href='#'>
+									<a className='dropdown-item' href='#'>
 										Alphabetically
 									</a>
 								</li>
 								<li>
-									<a class='dropdown-item' href='#'>
+									<a className='dropdown-item' href='#'>
 										Most recent
 									</a>
 								</li>
 								<li>
-									<a class='dropdown-item' href='#'>
+									<a className='dropdown-item' href='#'>
 										Most popular
 									</a>
 								</li>

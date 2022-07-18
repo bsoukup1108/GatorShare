@@ -28,7 +28,8 @@ const SignUp = () => {
 		// if (password !== password2) {
 		// 	console.log('passwords do not match', 'danger');
 		// } else {
-		console.log(formData);
+		document.getElementById('signup-btn-1').style.visibility = 'hidden';
+
 		register(formData);
 		// }
 	};
@@ -220,6 +221,7 @@ const SignUp = () => {
 										className='signup-btn'
 										type='submit'
 										value='Sign Up'
+										id='signup-btn-1'
 									>
 										Sign Up
 									</button>

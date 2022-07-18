@@ -38,9 +38,10 @@ const Home = () => {
 						<div className='gradient-hor bg-pan-right flex-center-1'>
 							<div className='content'>
 								<h4>
-									For <span class='text-warning'>SFSU</span>{' '}
+									For{' '}
+									<span className='text-warning'>SFSU</span>{' '}
 									students, by{' '}
-									<span class='text-warning'>SFSU</span>{' '}
+									<span className='text-warning'>SFSU</span>{' '}
 									students
 								</h4>
 							</div>
@@ -176,7 +177,6 @@ const Home = () => {
 								{' '}
 								<div className='carousel-inner'>
 									{posts.map((post, i) => {
-										console.log(post.title);
 										return (
 											<div
 												key={`car-1-${i}`}

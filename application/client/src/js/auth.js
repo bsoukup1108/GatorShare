@@ -11,14 +11,18 @@ export const login = (formData) => {
 			if (response.data.token) {
 				const token = response.data.token;
 				ReactSession.set('token', token);
+				document.getElementById('login-btn-1').style.visibility =
+					'visible';
 				return window.location.reload();
 			} else {
 				// TODO errors
+
 				console.log('token error');
 				return null;
 			}
 		})
 		.catch(function (err) {
+			document.getElementById('login-btn-1').style.visibility = 'visible';
 			console.log(err);
 			return window.location.reload();
 		});
@@ -41,6 +45,8 @@ export const register = (formData) => {
 		.catch(function (err) {
 			console.log(err);
 			return window.location.reload();
+			document.getElementById('signup-btn-1').style.visibility =
+				'visible';
 		});
 };
 

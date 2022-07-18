@@ -20,6 +20,10 @@ import { ReactSession } from 'react-client-session';
 const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
 const PostLayout = React.lazy(() => import('./components/posts/Post'));
 const Aboutus = React.lazy(() => import('./components/about/About'));
+const Search = React.lazy(() =>
+	import('./components/SearchResults/SearchResults')
+);
+
 const App = () => {
 	ReactSession.setStoreType('localStorage');
 
@@ -50,7 +54,14 @@ const App = () => {
 									}
 								/>
 							)}
-							<Route path='/search' element={<SearchResults />} />
+							<Route
+								path='/search'
+								element={
+									<Suspense fallback={<Spinner />}>
+										<Search />
+									</Suspense>
+								}
+							/>
 
 							<Route path='/rules' element={<Agreement />} />
 							<Route

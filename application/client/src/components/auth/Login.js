@@ -23,6 +23,7 @@ const Login = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		document.getElementById('login-btn-1').style.visibility = 'hidden';
 		login(formData);
 	};
 
@@ -98,7 +99,8 @@ const Login = (props) => {
 								</li>
 								<li>
 									<button
-										className='form-btn'
+										id='login-btn-1'
+										className='form-btn '
 										type='submit'
 										value='Sign In'
 									>
