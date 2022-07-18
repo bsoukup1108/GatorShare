@@ -4,6 +4,7 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
+import test from '../../img/sfsu.jpeg';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -77,11 +78,7 @@ const Posts = () => {
 											}}
 										>
 											<img
-												src={
-													post.image
-														? noImage
-														: noImage
-												}
+												src={test}
 												className='card-img-top'
 												alt='No image...'
 											/>

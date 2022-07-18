@@ -4,6 +4,8 @@ import { Navigate } from 'react-router-dom';
 import { getToken } from '../../js/useToken';
 import noProfile from '../../img/noProfile.png';
 
+import test from '../../img/sfsu.jpeg';
+
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
@@ -205,11 +207,7 @@ const Profile = () => {
 																}}
 															>
 																<img
-																	src={
-																		post.image
-																			? noImage
-																			: noImage
-																	}
+																	src={test}
 																	className='card-img-top'
 																	alt='No image...'
 																/>

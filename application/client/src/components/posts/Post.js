@@ -4,6 +4,7 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
+import test from '../../img/sfsu.jpeg';
 
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -109,7 +110,7 @@ const Post = () => {
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={post.image ? noImage : noImage}
+										src={test}
 										className='img-fluid rounded-start'
 										alt='...'
 									/>

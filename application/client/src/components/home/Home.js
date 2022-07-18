@@ -5,6 +5,8 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
+import test from '../../img/sfsu.jpeg';
+import test1 from '../../img/sfsu1.png';
 
 const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -107,7 +109,7 @@ const Home = () => {
 												data-bs-interval='10000'
 											>
 												<img
-													src={noImage}
+													src={test}
 													className='d-block w-100'
 													alt='...'
 												/>
@@ -188,7 +190,7 @@ const Home = () => {
 												data-bs-interval='10000'
 											>
 												<img
-													src={noImage}
+													src={test1}
 													className='d-block w-100'
 													alt='...'
 												/>
