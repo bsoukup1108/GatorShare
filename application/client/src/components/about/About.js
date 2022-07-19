@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import http from '../../http-common';
+import noImage from '../../img/noImage.jpeg';
+import Spinner from '../misc/Spinner';
+import moment from 'moment';
 
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
@@ -8,6 +13,72 @@ import MohamedPic from '../../img/Mohamed.jpg';
 import BrianPic from '../../img/Brian.JPG';
 
 const About = () => {
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [users, setUsers] = useState([]);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		http(`/aboutus`)
+			.then((res) => {
+				setUsers(res.data);
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
+	}, []);
+
+	const getPic = (name) => {
+		switch (name) {
+			case 'Donna':
+				return donna;
+
+			case 'Brianna':
+				return briannasPic;
+
+			case 'Aleksandr':
+				return aleksPic;
+
+			case 'Estefanos':
+				return Estefanos;
+
+			case 'Mohamed':
+				return MohamedPic;
+
+			case 'Brian':
+				return BrianPic;
+
+			default:
+				return noImage;
+		}
+	};
+
+	const getRole = (name) => {
+		switch (name) {
+			case 'Donna':
+				return 'Team Lead';
+
+			case 'Brianna':
+				return 'Frontend Lead';
+
+			case 'Aleksandr':
+				return 'Frontend';
+
+			case 'Estefanos':
+				return 'Backend Lead';
+
+			case 'Mohamed':
+				return 'Github Master';
+
+			case 'Brian':
+				return 'Database Master';
+
+			default:
+				return noImage;
+		}
+	};
+
 	return (
 		<>
 			<div className='container'>
@@ -21,268 +92,38 @@ const About = () => {
 				</h1>
 				<h2>About the Team</h2>
 
-				<div
-					className='accordion accordion-flush'
-					id='accordionProfile'
-				>
-					{/* PERSON #1  Team Leader*/}
-					<div className='accordion-item'>
-						<button
-							className='accordion-button collapsed'
-							type='button'
-							data-bs-toggle='collapse'
-							data-bs-target='#flush-collapseOne'
-							aria-expanded='false'
-							aria-controls='flush-collapseOne'
-						>
-							<h1>
-								<strong>Donna Nguyen</strong> – 
-								<i>Team Lead</i>
-							</h1>
-						</button>
-
-						<div
-							id='flush-collapseOne'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingOne'
-							data-bs-parent='#accordionProfile'
-						>
-							{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-							<div className='img-about'>
-								<img src={donna} alt='pic' />
+				<div style={{ marginBottom: '1rem' }}>
+					{users.map((user, i) => {
+						return (
+							<div key={`about-${i}`} className='card mb-3'>
+								<div className='row g-0'>
+									<div className='col-md-4'>
+										<img
+											src={getPic(user.firstName)}
+											className='img-fluid rounded-start'
+											alt='...'
+											style={{ width: '100%' }}
+										/>
+									</div>
+									<div className='col-md-8'>
+										<div className='card-body'>
+											<h5 className='card-title'>
+												{user.firstName} {user.lastName}
+											</h5>
+											<p className='card-text'>
+												{user.information}
+											</p>
+											<p className='card-text'>
+												<small className='text-muted'>
+													{getRole(user.firstName)}
+												</small>
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
-							<div className='accordion-body'>
-								Hello and thank you for visiting our page! I'm
-								currently a Senior at SFSU as a double major in
-								Computer Science and Economics. I was born and
-								raised in Oakland. Although, I recently moved to
-								San Jose. My hobbies include bullet journaling,
-								cooking, going to the gym, and of course,
-								coding. I am a detail- oriented individual with
-								a history of working in data analyst roles and
-								front-end projects. Although my passion is in
-								web development, I have always enjoyed improving
-								my soft skills such as decision making,
-								improving my communication, problem solving
-								abilities, and overall interpersonal abilities.
-							</div>
-						</div>
-					</div>
-
-					{/* PERSON #2 Backend Lead */}
-					<div className='accordion-item'>
-						<h2 className='accordion-header' id='flush-headingTwo'>
-							<button
-								className='accordion-button collapsed'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#flush-collapseTwo'
-								aria-expanded='false'
-								aria-controls='flush-collapseTwo'
-							>
-								<h1>
-									<strong>Estefanos Kebebew</strong> – 
-									<i>Backend Lead</i>
-								</h1>
-							</button>
-						</h2>
-						<div
-							id='flush-collapseTwo'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingTwo'
-							data-bs-parent='#accordionProfile'
-						>
-							<div className='img-about'>
-								<img src={Estefanos} alt='pic' />
-							</div>
-							<div className='accordion-body'>
-								My name is Esteafnos Kebebew, and I am a
-								third-year student. I have a passion for
-								building android and web apps. Recently, I build
-								a chat app using android studio and the new
-								google MI kit and I am currently working on a
-								reinforcement-based traffic control system using
-								an AI model to resolve city traffic tools. I am
-								proficient in python, java, javascript, kotlin,
-								spring, Django, and swift. For the front-end
-								side, I am familiar with HTML, CSS, react,
-								angular, and typescript. In my free time, I like
-								to watch and play soccer.
-							</div>
-						</div>
-					</div>
-					{/* PERSON #3 Frontend Lead*/}
-					<div className='accordion-item'>
-						<h2
-							className='accordion-header'
-							id='flush-headingThree'
-						>
-							<button
-								className='accordion-button collapsed'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#flush-collapseThree'
-								aria-expanded='false'
-								aria-controls='flush-collapseThree'
-							>
-								<h1>
-									<strong>Brianna Soukup</strong> – 
-									<i>Frontend Lead</i>
-								</h1>
-							</button>
-						</h2>
-						<div
-							id='flush-collapseThree'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingThree'
-							data-bs-parent='#accordionProfile'
-						>
-							{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-							<div className='img-about'>
-								<img src={briannasPic} alt='pic' />
-							</div>
-							<div className='accordion-body'>
-								Hello, I'm a fourth-year computer science
-								student at SFSU with a focus on front-end
-								development. I am originally from Calgary,
-								Alberta, but moved to Daly City, California for
-								college. I consider myself to be a person that
-								is honest, determined, and motivated, as well as
-								someone who learns from their mistakes. I am a
-								creative, open-minded, and laid-back person. I
-								enjoy taking on new tasks and feel that by
-								working in a team, we can accomplish more. I
-								learned Java, Javascript, HTML, CSS, React, and
-								other programming languages during my studies.
-								When I'm not focusing on school, I like to be
-								around friends and family. I also love video
-								games, horror films, and car shows.
-							</div>
-						</div>
-					</div>
-					{/* PERSON #4 Database master*/}
-					<div className='accordion-item'>
-						<h2 className='accordion-header' id='flush-headingFour'>
-							<button
-								className='accordion-button collapsed'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#flush-collapseFour'
-								aria-expanded='false'
-								aria-controls='flush-collapseFour'
-							>
-								<h1>
-									<strong>Brian Nguyen</strong> – 
-									<i>Database Master</i>
-								</h1>
-							</button>
-						</h2>
-						<div
-							id='flush-collapseFour'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingFour'
-							data-bs-parent='#accordionProfile'
-						>
-							{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-							<div className='img-about'>
-								<img src={BrianPic} alt='pic' />
-							</div>
-							<div className='accordion-body'>
-								Hello, I'm a transfer student and currently in
-								my fourth year at SFSU. I was born and raised in
-								San Jose. My hobbies include weightlifting,
-								tennis, and a new hobby I am getting into is
-								golf.{' '}
-							</div>
-						</div>
-					</div>
-					{/* PERSON #5 github master */}
-					<div className='accordion-item'>
-						<h2 className='accordion-header' id='flush-headingFive'>
-							<button
-								className='accordion-button collapsed'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#flush-collapseFive'
-								aria-expanded='false'
-								aria-controls='flush-collapseFive'
-							>
-								<h1>
-									<strong>Mohamed Toure</strong> – 
-									<i>Github Master</i>
-								</h1>
-							</button>
-						</h2>
-						<div
-							id='flush-collapseFive'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingFive'
-							data-bs-parent='#accordionProfile'
-						>
-							{/* upload your pic to the img folder
-					import it as in line 3
-					change the namee below */}
-							<div className='img-about'>
-								<img src={MohamedPic} alt='pic' />
-							</div>
-							<div className='accordion-body'>
-								Hello, I am Mohamed Toure and I am the GitHub
-								master of the team. I have been attending SFSU
-								since 2019. Originally from Ivory Coast, it has
-								always been my passion to work with computers
-								and understand how they work. I believe San
-								Francisco is the perfect place to acquire a more
-								in-depth formation in this domain. When I am not
-								working, I am at the gym or trying some new
-								recipes. I am a car enthusiast and always open
-								to discovering more things!
-							</div>
-						</div>
-					</div>
-					{/* PERSON #6 Frontend*/}
-					<div className='accordion-item'>
-						<h2 className='accordion-header' id='flush-headingSix'>
-							<button
-								className='accordion-button collapsed'
-								type='button'
-								data-bs-toggle='collapse'
-								data-bs-target='#flush-collapseSix'
-								aria-expanded='false'
-								aria-controls='flush-collapseSix'
-							>
-								<h1>
-									<strong>Aleksandr Gusev</strong> – 
-									<i>Frontend developer</i>
-								</h1>
-							</button>
-						</h2>
-						<div
-							id='flush-collapseSix'
-							className='accordion-collapse collapse'
-							aria-labelledby='flush-headingSix'
-							data-bs-parent='#accordionProfile'
-						>
-							<div className='img-about'>
-								<img src={aleksPic} alt='pic' />
-							</div>
-							<div className='accordion-body'>
-								<p>
-									Hello! My name is Aleksandr. I'm a senior
-									Computer Science student at SFSU. I have
-									some experience with HTML/CSS, JS, and
-									ReactJS. In my future work, I would like to
-									focus on frontend. I also enjoy hiking or
-									playing soccer.
-								</p>
-							</div>
-						</div>
-					</div>
+						);
+					})}
 				</div>
 			</div>
 		</>

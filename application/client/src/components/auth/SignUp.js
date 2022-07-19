@@ -1,118 +1,235 @@
 import React from 'react';
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import { register } from '../../js/auth';
 
-const isAuthenticated = true;
+import { getToken } from '../../js/useToken';
 
 const SignUp = () => {
 	const [formData, setFormData] = useState({
 		name: '',
+		lastname: '',
 		email: '',
 		password: '',
 		password2: '',
+		role: '',
 	});
 
-	const { name, email, password, password2 } = formData;
-
+	const { name, lastname, email, password, password2, role } = formData;
 	const onChange = (e) =>
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
+			[e.target.lastname]: e.target.value,
 		});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		if (password !== password2) {
-			console.log('passwords do not match', 'danger');
-		} else {
-			alert(
-				`Login will be implemented! You entered: \n${formData.name} \n${formData.email}\n${formData.password} \n${formData.password2}`
-			);
-			console.log(formData);
-		}
+		// if (password !== password2) {
+		// 	console.log('passwords do not match', 'danger');
+		// } else {
+		document.getElementById('signup-btn-1').style.visibility = 'hidden';
+
+		register(formData);
+		// }
 	};
 
 	// redirect if logged in
-	if (isAuthenticated) {
+	if (getToken()) {
 		return <Navigate to='/' />;
 	}
 
 	return (
 		<>
 			<div className='auth'>
-				<h1 className='text-secondary'>Sign Up</h1>
-				<p className='lead'>
-					<i className='fas fa-user '></i> Create Your Account
-				</p>
-				<form className='form' onSubmit={(e) => onSubmit(e)}>
-					<div className='form-group'>
-						<input
-							className='form-control'
-							type='text'
-							placeholder='Name'
-							name='name'
-							value={name}
-							onChange={(e) => onChange(e)}
-							// required
-						/>
-					</div>
-					<div className='form-group'>
-						<input
-							className='form-control'
-							type='email'
-							placeholder='Email Address'
-							name='email'
-							value={email}
-							onChange={(e) => onChange(e)}
-							// required
-						/>
-					</div>
-					<div className='form-group'>
-						<input
-							className='form-control'
-							type='password'
-							placeholder='Password'
-							name='password'
-							// minLength='6'
-							value={password}
-							onChange={(e) => onChange(e)}
-						/>
-					</div>
-					<div className='form-group'>
-						<input
-							className='form-control'
-							type='password'
-							placeholder='Confirm Password'
-							name='password2'
-							value={password2}
-							onChange={(e) => onChange(e)}
-							// minLength='6'
-						/>
-					</div>
-					<div id='agreement' className='form-group '>
-						<input
-							className='form-check-input mt-1'
-							type='checkbox'
-							name='agreement'
-							required
-							onchange='validateAgreement(event.target)'
-						/>
-						<label for='agreement'>
-							<p>
-								<a href='#!'>Agree to Privacy Rules</a>
-							</p>
-						</label>
+				<div className='form-child form-background'>
+					<div className='form-left text-center'>
+						<h1 className='heading-primary'>
+							Welcome <span className='text-warning'>Gators</span>
+							!
+						</h1>
+						<p className='heading-secondary'>
+							To stay connected with us please log in with your
+							account details
+						</p>
+						<a
+							className='create-btn'
+							type='button'
+							value='Sign In'
+							href='/login'
+						>
+							Sign In
+						</a>
 					</div>
 
-					<input
-						type='submit'
-						className='btn btn-primary'
-						value='Register'
-					/>
-				</form>
-				<p className='my-1'>
-					Already have an account? <Link to='/login'>Sign In</Link>
-				</p>
+					<div className='form-overlay'></div>
+				</div>
+				<div className='form-child signin-form'>
+					<form onSubmit={(e) => onSubmit(e)}>
+						<h1>
+							<b>Sign Up</b>
+						</h1>
+						<div className='name-group'>
+							<div className='firstName'>
+								<label
+									className='signup-label'
+									htmlFor='firstName'
+								>
+									First Name
+								</label>
+								<input
+									className='form-control'
+									type='text'
+									placeholder='FirstName'
+									name='name'
+									value={name}
+									onChange={(e) => onChange(e)}
+									required
+								/>
+							</div>
+							<div className='lastName'>
+								<label
+									className='signup-label'
+									htmlFor='LastName'
+								>
+									Last Name
+								</label>
+								<input
+									className='form-control'
+									type='text'
+									placeholder='Lastname'
+									name='lastname'
+									value={lastname}
+									onChange={(e) => onChange(e)}
+									required
+								/>
+							</div>
+						</div>
+
+						<div className='form-group'>
+							<label className='signup-label' htmlFor='email'>
+								Email Address
+							</label>
+							<input
+								className='form-control'
+								type='email'
+								placeholder='Email Address'
+								name='email'
+								value={email}
+								onChange={(e) => onChange(e)}
+								required
+							/>
+						</div>
+						<div className='pass-group'>
+							<div className='password'>
+								<label
+									className='signup-label'
+									htmlFor='password'
+								>
+									Password
+								</label>
+								<input
+									className='form-control'
+									type='password'
+									placeholder='Password'
+									name='password'
+									// minLength='6'
+									value={password}
+									onChange={(e) => onChange(e)}
+									required
+								/>
+							</div>
+							<div className='confirm-pass'>
+								<label
+									className='signup-label'
+									htmlFor='confirmPassword'
+								>
+									Confirm Password
+								</label>
+								<input
+									className='form-control'
+									type='password'
+									placeholder='Confirm password'
+									name='password2'
+									// minLength='6'
+									value={password2}
+									onChange={(e) => onChange(e)}
+									required
+								/>
+							</div>
+						</div>
+
+						<div>
+							<div className='who-check'>
+								<label className='who-label' htmlFor='who-btns'>
+									Who are you?
+								</label>
+								<input
+									type='checkbox'
+									id='student'
+									name='role'
+									value='student'
+									onChange={(e) => onChange(e)}
+								/>
+								<label className='who-input' htmlFor='student'>
+									{' '}
+									Student
+								</label>
+								<input
+									type='checkbox'
+									id='professor'
+									name='role'
+									value='professor'
+									onChange={(e) => onChange(e)}
+								/>
+								<label
+									className='who-input'
+									htmlFor='professor'
+								>
+									{' '}
+									Professor
+								</label>
+								<input
+									type='checkbox'
+									id='tutor'
+									name='role'
+									value='tutor'
+									onChange={(e) => onChange(e)}
+								/>
+								<label className='who-input' htmlFor='tutor'>
+									{' '}
+									Tutor
+								</label>
+							</div>
+							<ul className='list-inline'>
+								<li className='policy'>
+									<input
+										className='form-check-input mt-1'
+										type='checkbox'
+										name='agreement'
+										value={true}
+										onChange={(e) => onChange(e)}
+										required
+										// onChange='validateAgreement(event.target)'
+									/>
+									<a className='policy-link' href='/rules'>
+										Agree to Terms & Conditions
+									</a>
+								</li>
+								<li>
+									<button
+										className='signup-btn'
+										type='submit'
+										value='Sign Up'
+										id='signup-btn-1'
+									>
+										Sign Up
+									</button>
+								</li>
+							</ul>
+						</div>
+					</form>
+				</div>
 			</div>
 		</>
 	);

@@ -1,36 +1,77 @@
 package com.GatorShare.Dto;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import javax.persistence.Table;
-import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
+@AllArgsConstructor
 
 @Entity
 @Table(name = "posts")
-@Data
 public class Post {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
-	private Long id;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_Name")
-	private String lastName;
-	@Column(name = "title")
-	private String title;
-	@Column(name = "description")
-	private String description;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	// After the final table is desineg retrive the image and other infromation from the database
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id",referencedColumnName = "id")
+	private User user;
 
+	@Column(columnDefinition="TEXT")
+	private String Title;
+
+
+	@Column(columnDefinition="TEXT")
+	private String Description;
+
+	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	private Date createdDate;
+
+	public Post() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public String getTitle(){
+		return Title;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getContent() {
+		return Description;
+	}
+
+	public void setContent(String Description) {
+		this.Description = Description;
+	}
+
+	public void SetTitle(String Title){
+		this.Title = Title;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 }
