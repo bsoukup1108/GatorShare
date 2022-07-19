@@ -996,3 +996,19 @@ footer a :hover {
 .carousel-caption > * > strong {
   background-color: white;
 }
+
+#notifications {
+  position: fixed;
+  z-index: 100;
+  float: right;
+  margin-top: 4rem;
+  right: 0;
+}
+#notifications > * {
+  width: fit-content;
+  margin-left: auto;
+  min-width: 15rem;
+  text-align: center;
+  padding: 0.3rem 3rem;
+  margin-bottom: 0.3rem;
+}

@@ -6,6 +6,8 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
 
+import { alert } from '../../js/alert';
+
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
@@ -19,6 +21,8 @@ const Post = () => {
 
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
+
+		alert('info', 'post has been liked!');
 
 		icon.style.color =
 			icon.style.color === 'rebeccapurple' ? 'grey' : 'rebeccapurple';
@@ -70,6 +74,7 @@ const Post = () => {
 			document.getElementById('postCommentList').remove();
 		}
 		document.getElementById('leaveComment').value = '';
+		alert('primary', 'post has been commented!');
 
 		let el = document.getElementById('leftComment');
 		let div = document.createElement('div');

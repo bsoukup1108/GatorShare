@@ -15,6 +15,8 @@ import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
 
+import { alert } from './js/alert';
+
 import { ReactSession } from 'react-client-session';
 
 const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
@@ -37,8 +39,10 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<>
+				<div id='notifications'></div>
 				<div id='wrapper'>
 					<Navbar isAuthenticated={isAuthenticated} />
+
 					<div className='container'>
 						<Routes>
 							<Route path='/' element={<Home />} />
