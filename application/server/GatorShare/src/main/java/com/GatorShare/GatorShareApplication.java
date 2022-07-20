@@ -54,11 +54,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.GatorShare" })
+@ComponentScan(basePackages = {"com.GatorShare"})
 @RequestMapping("/api/")
 @EnableJpaRepositories
+@CrossOrigin(origins = {"http://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com"})
 
-@CrossOrigin(origins = "http://localhost:3000/")
+
 public class GatorShareApplication {
 	@Autowired
 	private AboutUsService userServicetDto;
@@ -136,6 +137,18 @@ public class GatorShareApplication {
 	public ResponseEntity<List<Post>> getAllPost() {
 		List<Post> posts = this.PostService.getAllPosts();
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
+
+	@GetMapping("posts/{id}")
+	public ResponseEntity<Post> getPostByID( @PathVariable(name = "id") final Integer postId)
+	{
+		String PostNotFound = "{Wrong Entry: Try Some Thing Else}";
+		try {
+			final Post post = this.PostService.getPost(postId);
+			return new ResponseEntity<Post>(post, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
+		}
 	}
 
 	@GetMapping("search")
