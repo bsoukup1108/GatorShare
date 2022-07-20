@@ -1077,3 +1077,7 @@ footer a :hover {
 .posts-btn:hover {
   border-color: rgba(101, 61, 150, 0.808);
 }
+
+#notifications-1 {
+  max-height: 15rem;
+}

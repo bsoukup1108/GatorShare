@@ -57,9 +57,14 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						<a className='dropdown-item' href='/login'>
-							You don't have any notifications
-						</a>
+						{/* <div className='dropdown-item' href='/login' id='eeee'>
+							You don't have any notifications.
+						</div> */}
+						<div className='dropdown-item' href='/login' id='notifications-1'>
+						<i className="fas fa-thumbs-up notif"></i> User liked your post!
+			<br/>
+						<i className="fas fa-comment notif"></i> Your post received a new comment!
+						</div>
 					</li>
 				</ul>
 			</div>
