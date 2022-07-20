@@ -85,7 +85,7 @@ const Home = () => {
 							<div className='btn-group ' role='group'>
 								<button type='button' className='btn btn-dark'>
 									<a className='nav-link' href='/articles'>
-										Articles and Essays
+										Articles & Essays
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>

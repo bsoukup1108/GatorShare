@@ -190,7 +190,7 @@ const SignUp = () => {
 								<input
 									className='form-control'
 									type='text'
-									placeholder='Lastname'
+									placeholder='LastName'
 									name='lastname'
 									value={lastname}
 									onChange={(e) => onChange(e)}
@@ -252,7 +252,7 @@ const SignUp = () => {
 									id='signup-password-2'
 									className='form-control'
 									type='password'
-									placeholder='Confirm password'
+									placeholder='Confirm Password'
 									name='password2'
 									// minLength='6'
 									value={password2}
