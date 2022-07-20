@@ -73,7 +73,7 @@ const Navbar = (props) => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user  '></i>
+					<i className='fas fa-user  '></i> Account
 				</a>
 
 				<ul
@@ -151,7 +151,7 @@ const Navbar = (props) => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user  '></i>
+					<i className='fas fa-user  '></i> Account
 				</a>
 
 				<ul
