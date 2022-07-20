@@ -16,50 +16,50 @@ const Tutoring = () => {
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post1',
 		},
 		{
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post2',
 		},
 		{
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post3',
 		},
 		{
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post4',
 		},
 		{
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post5',
 		},
 		{
 			id: 1,
 			link: 'https://tutoring.sfsu.edu/',
 			content: 'Tutoring',
-			title: 'THIS IS A LINK',
+			title: 'Tutoring Post6',
 		},
-		{
-			id: 1,
-			link: 'https://tutoring.sfsu.edu/',
-			content: 'Tutoring',
-			title: 'THIS IS A LINK',
-		},
+	
 	];
 
 	return (
 		<>
 			<div>
-				<h1>Tutoring</h1>
+			<div class="header-image">
+	
+          
+	<h1 className="header-text"> Tutoring </h1>
+  
+</div>
 				<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -125,7 +125,7 @@ const Tutoring = () => {
 													? link.content
 													: 'No description...'}
 											</p>
-											<button className='btn btn-dark'>
+											<button className='btn btn-light posts-btn'>
 												<a href={link.link}>
 													Find Your Tutor!
 												</a>

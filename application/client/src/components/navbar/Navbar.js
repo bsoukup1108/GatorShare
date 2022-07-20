@@ -119,7 +119,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 			</div>
-			<div className='dropdown me-1 '>
+			{/* <div className='dropdown me-1 '>
 				<a
 					className='btn btn-secondary dropdown-toggle'
 					href='/#'
@@ -141,7 +141,7 @@ const Navbar = (props) => {
 						</a>
 					</li>
 				</ul>
-			</div>
+			</div> */}
 			<div className='dropdown me-1'>
 				<a
 					className='btn btn-secondary dropdown-toggle'

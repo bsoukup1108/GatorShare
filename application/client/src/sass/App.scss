@@ -868,12 +868,12 @@ label {
 .content {
 	//max-width: 600px;
 	padding: 1rem;
-	text-align: center;
+	text-align: left;
 	line-height: 1.4;
 	text-shadow: 1px 1px 5px hsla(0, 0%, 0%, .2);
 
 	h4 {
-		font: 2rem/1.0 serif;
+		font: rem/1.0 serif;
 		margin: 0;
 		font-weight: 600;
 
@@ -881,7 +881,7 @@ label {
 	}
 
 	a {
-		color: hsl(40, 70%, 80%);
+		color: white;
 		font-weight: bold;
 
 		&:hover {
@@ -889,6 +889,23 @@ label {
 		}
 	}
 }
+
+#auth-hook {
+  display: flex;
+	text-align: left;
+
+	>*>button {
+    margin: 5px 20px auto;
+    
+    &:hover, &:focus{
+      background: lighten($color: $secondary-bg, $amount: 10);
+    }
+    
+	}
+}
+
+
+
 
 
 .flex-center-1 {
@@ -910,7 +927,7 @@ label {
 }
 
 .container-home {
-	margin-top: 30%;
+	margin-top: 20%;
 
 	position: relative;
 	border-radius: remy(3px);
@@ -1198,11 +1215,40 @@ footer a {
 	min-width: 10rem;
 }
 
-#auth-hook {
-	text-align: left;
 
-	>*>button {
-		width: 8rem;
-		margin: 0.5rem 0;
-	}
-}
+.header-image {
+background-color: rgba(101, 61, 150, 0.808);
+
+  height: 100px;
+  }
+
+
+.header-text {
+  text-align: center;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%,50%);
+  color: white;
+  }
+
+  .posts-btn{
+    color: white;
+    border-color: black;
+
+    a {
+      color:black;
+
+      &:hover{
+        color: rgba(101, 61, 150, 0.808);
+      }
+    }
+
+    &:hover{
+      border-color: rgba(101, 61, 150, 0.808);
+
+    }
+  }
+
+
+  

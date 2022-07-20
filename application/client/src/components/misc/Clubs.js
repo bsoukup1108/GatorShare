@@ -15,45 +15,50 @@ const Clubs = () => {
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post1',
 		},
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post2',
 		},
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post3',
 		},
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post4',
 		},
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post5',
 		},
 		{
 			id: 1,
 			link: 'https://advisinglca.sfsu.edu/clubsandgroups',
-			content: 'CLUUUUUUUUUUB',
-			title: 'THIS IS A LINK',
+			content: 'Clubs',
+			title: 'Club Post6',
 		},
 	];
 
 	return (
 		<>
 			<div>
-				<h1>Clubs</h1>
+			<div class="header-image">
+	
+          
+	<h1 className="header-text"> Clubs </h1>
+  
+</div>
 				<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -119,7 +124,7 @@ const Clubs = () => {
 													? link.content
 													: 'No description...'}
 											</p>
-											<button className='btn btn-dark'>
+											<button className='btn btn-light posts-btn'>
 												<a href={link.link}>
 													Learn more!
 												</a>

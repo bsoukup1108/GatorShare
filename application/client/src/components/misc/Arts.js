@@ -16,44 +16,49 @@ const Arts = () => {
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post1',
 		},
 		{
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post2',
 		},
 		{
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post3',
 		},
 		{
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post4',
 		},
 		{
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post5',
 		},
 		{
 			id: 1,
 			link: 'https://www.sanfranciscofilmschool.edu/',
 			content: 'Art & Film',
-			title: 'THIS IS A LINK',
+			title: 'Art & Film Post6',
 		},
 	];
 
 	return (
 		<>
 			<div>
-				<h1>Art & Film</h1>
+			<div class="header-image">
+	
+          
+	<h1 className="header-text"> Art & Film </h1>
+  
+</div>
 				<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -119,7 +124,7 @@ const Arts = () => {
 													? link.content
 													: 'No description...'}
 											</p>
-											<button className='btn btn-dark'>
+											<button className='btn posts-btn'>
 												<a href={link.link}>
 													Learn more!
 												</a>

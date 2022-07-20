@@ -15,45 +15,50 @@ const Discords = () => {
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post1',
 		},
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post2',
 		},
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post3',
 		},
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post4',
 		},
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post5',
 		},
 		{
 			id: 1,
 			link: 'https://discord.com/channels/882703721551790171/882703721551790172',
-			content: 'Discord Link',
-			title: 'THIS IS A LINK',
+			content: 'Discords',
+			title: 'Discord Post6',
 		},
 	];
 
 	return (
 		<>
 			<div>
-				<h1>Discords</h1>
+			<div class="header-image">
+	
+          
+	<h1 className="header-text"> Discords </h1>
+  
+</div>
 				<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -119,9 +124,9 @@ const Discords = () => {
 													? link.content
 													: 'No description...'}
 											</p>
-											<button className='btn btn-dark'>
+											<button className='btn btn-light posts-btn'>
 												<a href={link.link}>
-													go to this server
+													See this server
 												</a>
 											</button>
 										</div>

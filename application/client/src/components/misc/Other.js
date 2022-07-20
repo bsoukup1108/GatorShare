@@ -16,44 +16,32 @@ const Other = () => {
 			id: 1,
 			link: 'https://campusrec.sfsu.edu/',
 			content: 'Other',
-			title: 'THIS IS A LINK',
+			title: 'Other Post1',
 		},
 		{
 			id: 1,
 			link: 'https://campusrec.sfsu.edu/',
 			content: 'Other',
-			title: 'THIS IS A LINK',
+			title: 'Other Post2',
 		},
 		{
 			id: 1,
 			link: 'https://campusrec.sfsu.edu/',
 			content: 'Other',
-			title: 'THIS IS A LINK',
+			title: 'Other Post3',
 		},
-		{
-			id: 1,
-			link: 'https://campusrec.sfsu.edu/',
-			content: 'Other',
-			title: 'THIS IS A LINK',
-		},
-		{
-			id: 1,
-			link: 'https://campusrec.sfsu.edu/',
-			content: 'Other',
-			title: 'THIS IS A LINK',
-		},
-		{
-			id: 1,
-			link: 'https://campusrec.sfsu.edu/',
-			content: 'Other',
-			title: 'THIS IS A LINK',
-		},
+		
 	];
 
 	return (
 		<>
 			<div>
-				<h1>Other</h1>
+			<div class="header-image">
+	
+          
+	<h1 className="header-text"> Other </h1>
+  
+</div>
 				<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -119,7 +107,7 @@ const Other = () => {
 													? link.content
 													: 'No description...'}
 											</p>
-											<button className='btn btn-dark'>
+											<button className='btn btn-light posts-btn'>
 												<a href={link.link}>
 													Learn more!
 												</a>
