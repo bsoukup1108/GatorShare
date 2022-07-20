@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { getToken } from '../../js/useToken';
 import { createPost } from '../../js/post';
+import { alert } from '../../js/alert';
 
 const CreatePost = () => {
 	//redirect if not logged in
@@ -203,6 +204,7 @@ const CreatePost = () => {
 							</div>
 						</div>
 						<button
+							id='create-btn-post'
 							className='createpost-btn'
 							type='submit'
 							value='Post'

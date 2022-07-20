@@ -101,6 +101,10 @@ nav > ul > .btn {
 
 /* *********************************************** */
 /* Searchbar  */
+#searchBar {
+  flex-grow: 1;
+}
+
 /* *********************************************** */
 /* Accordeon  */
 .accordion-button:is(.collapsed) {
@@ -131,7 +135,7 @@ footer {
   min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(12, [col-start] 1fr);
-  grid-template-rows: 75px auto 50px;
+  grid-template-rows: 55px auto 100px;
   grid-template-areas: "n n n n n n n n n n n n" "c c c c c c c c c c c c" "f f f f f f f f f f f f";
 }
 
@@ -708,6 +712,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
+  align-content: center;
 }
 
 .gradient-hor {
@@ -995,4 +1000,20 @@ footer a :hover {
 .carousel-caption > * > i,
 .carousel-caption > * > strong {
   background-color: white;
+}
+
+#notifications {
+  position: fixed;
+  z-index: 100;
+  float: right;
+  margin-top: 4rem;
+  right: 0;
+}
+#notifications > * {
+  width: fit-content;
+  margin-left: auto;
+  min-width: 15rem;
+  text-align: center;
+  padding: 0.3rem 3rem;
+  margin-bottom: 0.3rem;
 }
