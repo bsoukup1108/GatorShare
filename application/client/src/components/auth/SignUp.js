@@ -328,7 +328,7 @@ const SignUp = () => {
 										type='submit'
 										value='Sign Up'
 										id='signup-btn-1'
-										hidden={true}
+										hidden={false}
 									>
 										Sign Up
 									</button>
