@@ -1148,3 +1148,61 @@ footer a {
 		margin-bottom: 0.3rem;
 	}
 }
+
+// .hint {
+// 	position: absolute;
+// 	right: 0;
+// 	z-index: 100;
+
+// 	>* {
+
+// 	}
+
+// 	>*>* {
+// 		margin: 1px;
+// 		padding: 0.5rem;
+
+// 		position: fixed;
+// 		width: 600px;
+// 		height: 200px;
+// 		left: 50%;
+// 		top: 0%;
+// 		margin-left: -300px;
+// 	}
+// }
+
+[id *="hint-username-"] {
+	position: fixed;
+
+	left: 65%;
+	top: 30%;
+	margin-left: -300px;
+	z-index: 100;
+
+	//opacity: 0;
+
+	>* {
+		margin: 1px;
+		padding: 0.5rem;
+	}
+}
+
+#hint-username-5 {
+	left: 25%;
+
+}
+
+
+[id *="username-hint-"] {
+	opacity: 0;
+	min-width: 10rem;
+}
+
+#auth-hook {
+	text-align: left;
+
+	>*>button {
+		width: 8rem;
+		margin: 0.5rem 0;
+	}
+}

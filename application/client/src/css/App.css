@@ -1017,3 +1017,32 @@ footer a :hover {
   padding: 0.3rem 3rem;
   margin-bottom: 0.3rem;
 }
+
+[id*=hint-username-] {
+  position: fixed;
+  left: 65%;
+  top: 30%;
+  margin-left: -300px;
+  z-index: 100;
+}
+[id*=hint-username-] > * {
+  margin: 1px;
+  padding: 0.5rem;
+}
+
+#hint-username-5 {
+  left: 25%;
+}
+
+[id*=username-hint-] {
+  opacity: 0;
+  min-width: 10rem;
+}
+
+#auth-hook {
+  text-align: left;
+}
+#auth-hook > * > button {
+  width: 8rem;
+  margin: 0.5rem 0;
+}

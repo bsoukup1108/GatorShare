@@ -36,7 +36,7 @@ const Post = () => {
 	};
 
 	useEffect(() => {
-		http(`/posts`)
+		http.get(`/posts`)
 			.then((res) => {
 				setPost(
 					res.data.map((post) => {

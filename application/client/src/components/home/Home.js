@@ -7,6 +7,7 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
 import test1 from '../../img/sfsu1.png';
+import { ReactSession } from 'react-client-session';
 
 const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,36 @@ const Home = () => {
 									students, by{' '}
 									<span className='text-warning'>SFSU</span>{' '}
 									students
+									{!ReactSession.get('token') && (
+										<div id='auth-hook'>
+											<div>
+												<button
+													type='button'
+													className='btn btn-primary'
+												>
+													<a
+														className='nav-link'
+														href='/login'
+													>
+														Log In
+													</a>
+												</button>
+											</div>
+											<div>
+												<button
+													type='button'
+													className='btn btn-primary'
+												>
+													<a
+														className='nav-link'
+														href='/signup'
+													>
+														Sign Up
+													</a>
+												</button>
+											</div>
+										</div>
+									)}
 								</h4>
 							</div>
 						</div>
@@ -53,32 +84,32 @@ const Home = () => {
 						<div className='container-home-links'>
 							<div className='btn-group ' role='group'>
 								<button type='button' className='btn btn-dark'>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/articles'>
 										Articles and Essays
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/arts'>
 										Art & Film
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/clubs'>
 										Clubs
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/discords'>
 										Discords
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/tutoring'>
 										Tutoring
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a className='nav-link' href='/other'>
 										Other
 									</a>
 								</button>
