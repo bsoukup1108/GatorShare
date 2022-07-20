@@ -1080,4 +1080,7 @@ footer a :hover {
 
 #notifications-1 {
   max-height: 15rem;
+  overflow: auto;
+  display: flex;
+  flex-direction: column-reverse;
 }
