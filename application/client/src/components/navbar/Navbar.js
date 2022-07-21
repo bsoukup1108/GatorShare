@@ -57,9 +57,14 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						<a className='dropdown-item' href='/login'>
-							You don't have any notifications
-						</a>
+						{/* <div className='dropdown-item' href='/login' id='eeee'>
+							You don't have any notifications.
+						</div> */}
+						<div className='dropdown-item' href='/login' id='notifications-1'>
+						<i className="fas fa-thumbs-up notif"></i> User liked your post!
+			<br/>
+						<i className="fas fa-comment notif"></i> Your post received a new comment!
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -73,7 +78,7 @@ const Navbar = (props) => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user  '></i>
+					<i className='fas fa-user  '></i> Account
 				</a>
 
 				<ul
@@ -119,7 +124,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 			</div>
-			<div className='dropdown me-1 '>
+			{/* <div className='dropdown me-1 '>
 				<a
 					className='btn btn-secondary dropdown-toggle'
 					href='/#'
@@ -141,7 +146,7 @@ const Navbar = (props) => {
 						</a>
 					</li>
 				</ul>
-			</div>
+			</div> */}
 			<div className='dropdown me-1'>
 				<a
 					className='btn btn-secondary dropdown-toggle'
@@ -151,7 +156,7 @@ const Navbar = (props) => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fas fa-user  '></i>
+					<i className='fas fa-user  '></i> Account
 				</a>
 
 				<ul
