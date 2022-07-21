@@ -36,14 +36,9 @@ const Post = () => {
 	};
 
 	useEffect(() => {
-		http.get(`/posts`)
+		http.get(`/posts/1`)
 			.then((res) => {
-				setPost(
-					res.data.map((post) => {
-						return post.id === postId ? post : '';
-					})
-				);
-
+				setPost(res.data);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -94,8 +89,8 @@ const Post = () => {
 	};
 
 	if (isLoaded) {
-		const { content, createdDate, title } = post[0];
-		const { firstName, lastName } = post[0].user;
+		const { content, createdDate, title } = post;
+		const { firstName, lastName } = post.user;
 
 		return (
 			<>
