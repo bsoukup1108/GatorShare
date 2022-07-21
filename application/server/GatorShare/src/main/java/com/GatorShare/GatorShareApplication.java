@@ -57,7 +57,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @ComponentScan(basePackages = {"com.GatorShare"})
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = {"http://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com"})
+@CrossOrigin(origins = {"https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com","http://localhost:3000/", "http://gatorshare.com", "gatorshare.com"})
 
 
 public class GatorShareApplication {

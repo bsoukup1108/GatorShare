@@ -2,8 +2,7 @@ package com.GatorShare.Service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.transaction.Transactional;
 import javax.xml.bind.DatatypeConverter;
@@ -11,6 +10,7 @@ import javax.xml.bind.DatatypeConverter;
 import com.GatorShare.Dto.*;
 import com.GatorShare.Excpetions.AuthenticationFailException;
 import com.GatorShare.Excpetions.CustomeException;
+import com.GatorShare.Repo.RoleRepo;
 import com.GatorShare.config.messageString;
 import lombok.SneakyThrows;
 import org.slf4j.LoggerFactory;
@@ -60,7 +60,30 @@ public class UserService {
       }
 
       User user = new User(singUPDTO.getFirstName(), singUPDTO.getLastName(),singUPDTO.getEmail(),encryptpassword);
+      Set<String> strRoles = singUPDTO.getRole();
+      Set<Role> roles = new HashSet<>();
+
       try{
+         strRoles.forEach(role -> {
+            switch (role){
+               case "Professor":
+                  Role professor = new Role(AssignRole.ROLE_Professor);
+                  roles.add(professor);
+                  break;
+               case "Student":
+                  Role student = new Role(AssignRole.ROLE_Student);
+                  roles.add(student);
+                  break;
+               case "Tutor":
+                  Role tutor = new Role(AssignRole.ROLE_Tutor);
+                  roles.add(tutor);
+                  break;
+               default:
+                  Role userRole = new Role(AssignRole.ROLE_USER);
+                  roles.add(userRole);
+            }
+         });
+         user.setRoles(roles);
          userRepository.save(user);
          final AuthenticationToken authenticationToken = new AuthenticationToken(user);
          authenticationService.saveConformedToken(authenticationToken);
