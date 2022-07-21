@@ -12,6 +12,8 @@ import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
 
+import { alert } from '../../js/alert';
+
 const Profile = () => {
 	// redirect if not logged in
 	if (!getToken()) {
@@ -161,6 +163,8 @@ const Profile = () => {
 		e.stopPropagation();
 		e.preventDefault();
 		window.confirm('Do you really want to delete the post?');
+
+		alert('warning', 'POST HAS BEEN DELETED...');
 	};
 
 	return (

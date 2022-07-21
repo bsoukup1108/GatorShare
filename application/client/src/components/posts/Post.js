@@ -6,10 +6,15 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
 
+import { alert } from '../../js/alert';
+import { getToken } from '../../js/useToken';
+
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
+
+	const [isAuth, setIsAuth] = useState(!!getToken());
 
 	const [likes, setLikes] = useState(0);
 
@@ -20,6 +25,8 @@ const Post = () => {
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
 
+		alert('info', 'post has been liked!');
+
 		icon.style.color =
 			icon.style.color === 'rebeccapurple' ? 'grey' : 'rebeccapurple';
 	};
@@ -29,14 +36,9 @@ const Post = () => {
 	};
 
 	useEffect(() => {
-		http(`/posts`)
+		http.get(`/posts/1`)
 			.then((res) => {
-				setPost(
-					res.data.map((post) => {
-						return post.id === postId ? post : '';
-					})
-				);
-
+				setPost(res.data);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -70,6 +72,7 @@ const Post = () => {
 			document.getElementById('postCommentList').remove();
 		}
 		document.getElementById('leaveComment').value = '';
+		alert('primary', 'post has been commented!');
 
 		let el = document.getElementById('leftComment');
 		let div = document.createElement('div');
@@ -86,8 +89,8 @@ const Post = () => {
 	};
 
 	if (isLoaded) {
-		const { content, createdDate, title } = post[0];
-		const { firstName, lastName } = post[0].user;
+		const { content, createdDate, title } = post;
+		const { firstName, lastName } = post.user;
 
 		return (
 			<>
@@ -167,25 +170,30 @@ const Post = () => {
 								</div>
 								<div id='leftComment'></div>
 							</div>
-							<div className='' id='commentArea'>
-								<textarea
-									id='leaveComment'
-									className='form-control'
-									placeholder='Leave a comment'
-									name='commentArea'
-									onChange={(e) => {
-										onComment(e);
-									}}
-								></textarea>
-							</div>
-							<input
-								className='comment-btn'
-								type='submit'
-								value='Leave a comment'
-								onClick={(e) => {
-									postComment(e);
-								}}
-							/>
+							{isAuth && (
+								<>
+									{' '}
+									<div className='' id='commentArea'>
+										<textarea
+											id='leaveComment'
+											className='form-control'
+											placeholder='Leave a comment'
+											name='commentArea'
+											onChange={(e) => {
+												onComment(e);
+											}}
+										></textarea>
+									</div>
+									<input
+										className='comment-btn'
+										type='submit'
+										value='Leave a comment'
+										onClick={(e) => {
+											postComment(e);
+										}}
+									/>
+								</>
+							)}
 						</div>
 					</div>
 				)}

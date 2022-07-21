@@ -28,7 +28,7 @@ const Posts = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div>
-					<h1>ALL POSTS</h1>
+					<h1>All Posts</h1>
 					<div id='sort'>
 						<div className='dropdown'>
 							<button
