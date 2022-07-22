@@ -48,6 +48,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Slf4j
 
 @EntityScan
@@ -57,7 +59,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @ComponentScan(basePackages = {"com.GatorShare"})
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = {"https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com","http://localhost:3000/", "http://gatorshare.com", "gatorshare.com"})
+@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com", "http://gatorshare.com"})
 
 
 public class GatorShareApplication {
@@ -156,15 +158,48 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.searchPosts(query));
 	}
 
+	@GetMapping("search/{ArtAndFilm}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsArtAndFilm(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsArtAndFilm());
+	}
+
+	@GetMapping("search/{Article}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsArticle(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsArticle());
+	}
+
+	@GetMapping("search/{Discord}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsDiscords(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsDiscords());
+	}
+
+	@GetMapping("search/{ASC}")
+	public ResponseEntity<List<Post>> SortAlphabetically(){
+		return ResponseEntity.ok(PostService.SortAlphabetically());
+	}
+
+	@GetMapping("search/{Tutoring}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsTutoring());
+	}
+
+	@GetMapping("search/{ESSAY}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsAEssa());
+	}
+
+
+
+
 	@PostMapping("post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
 		String message = "";
 		try{
-			PostService.store(posts, Titile, DEsc);
-			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
+			PostService.store(Image, tag, Titile, DEsc);
+			message = "uploaded the post successfully: "+ Image.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
-			message = "Post could not be uploaded " + posts.getOriginalFilename() + ".";
+			message = "Post could not be uploaded " + Image.getOriginalFilename() + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
 		}
 	}
@@ -214,26 +249,13 @@ public class GatorShareApplication {
 	}
 
 
-	@GetMapping("login/{userName}/post")
-	public String post() {
-		return "{Title: title" + "Description: description" + "attachedImage: []" + "}";
-	}
 
-	@GetMapping("login/{UserID}/search")
-	public String search() {
-		return "{SELECT * FROM <tableName> WHERE <Name Of attribute>='%' or <Name Of attribute>=\"+\"'\"+\"%\"+\"';"
-				+ "}";
-	}
 
-	@GetMapping(value = "login/{UserID}/Message")
-	public String Message() {
-		return "{[Message input]" + "}";
-	}
 
-	@GetMapping(value = "login/{userID}/comment")
-	public String Comment() {
-		return "{[commnet input]" + "}";
-	}
+
+
+
+
 
 
 

@@ -1,8 +1,21 @@
 package com.GatorShare.Service;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.List;
+
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.GatorShare.Dto.Post;
 import com.GatorShare.Dto.User;
 import com.GatorShare.Repo.UserRepository;
+import org.springframework.beans.factory.annotation.Value;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -14,11 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
+
 
 @Service
 public class postService implements PostServiceInterface{
@@ -32,20 +41,39 @@ public class postService implements PostServiceInterface{
     private UserRepository userRepository;
 
 
-    public void store(MultipartFile file, String Title, String description) throws IOException {
-        Post newPost = new Post();
-        String PostName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(PostName.contains("..")){
-            System.out.println("post is not valid");
-        }
-        try {
-            newPost.setContent(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e){
+    private String uploadfolder;
+
+    public HttpServletRequest request;
+
+    public void store(MultipartFile image, String tag, String Title, String description) throws IOException {
+        String uploadDic = request.getServletContext().getRealPath(uploadfolder);
+        String fileName = image.getOriginalFilename();
+        String FilePath = Paths.get(uploadDic, fileName).toString();
+        System.out.println("FileName: " + image.getOriginalFilename());
+        try{
+            File dir = new File(uploadDic);
+            if(!dir.exists()){
+                System.out.println("Folder created");
+                dir.mkdir();
+            }
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(FilePath)));
+            stream.write(image.getBytes());
+            stream.close();
+
+        }catch (Exception e){
+            System.out.println("in catch");
             e.printStackTrace();
+
         }
-        newPost.setContent(description);
-        newPost.SetTitle(Title);
-        postrepo.save(newPost);
+        Date createDate = new Date();
+        byte [] imageData = image.getBytes();
+        Post post = new Post();
+        post.SetTitle(Title);
+        post.setPhotos(imageData);
+        post.setDescription(description);
+        post.setTag(tag);
+        post.setCreatedDate(createDate);
+        postrepo.save(post);
     }
 //    public Post savePost(UserDTO userDTO, String content){
 //        Post post = new Post();
@@ -59,6 +87,42 @@ public class postService implements PostServiceInterface{
         List<Post> posts = postrepo.searchPosts(query);
         return posts;
     }
+
+    public List<Post> SearchWhereInputIsArticle(){
+        List<Post> posts = postrepo.SearchWhereInputIsArticle();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsAEssa(){
+        List<Post> posts = postrepo.SearchWhereInputIsAEssay();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsArtAndFilm(){
+        List<Post> posts = postrepo.SearchWhereInputIsArtAndFilm();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsTutoring(){
+        List<Post> posts = postrepo.SearchWhereInputIsTutoring();
+        return posts;
+    }
+
+    public List<Post> SortAlphabetically(){
+        List<Post> posts = postrepo.SortAlphabetically();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsDiscords(){
+        List<Post> posts = postrepo.SearchWhereInputIsDiscords();
+        return posts;
+    }
+
+
+
+
+
+
 
 
 

@@ -131,7 +131,7 @@ public class UserService {
       if(!Objects.nonNull(token)){
          throw new CustomeException(messageString.Auth_Token_not_found);
       }
-      return new loginResponse("sucess", token.getToken(), user.getID());
+      return new loginResponse("success", token.getToken(), user.getID());
    }
 
    private void deleteUser(Long id) {
