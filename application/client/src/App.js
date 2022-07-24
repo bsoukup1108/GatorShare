@@ -28,7 +28,7 @@ const Search = React.lazy(() =>
 const App = () => {
 	ReactSession.setStoreType('localStorage');
 	//registered user nav
-	ReactSession.set('token', 'token');
+	//ReactSession.set('token', 'token');
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const token = ReactSession.get('token') || '';
