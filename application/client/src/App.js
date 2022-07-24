@@ -18,6 +18,8 @@ import { ReactSession } from 'react-client-session';
 
 const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
 const PostLayout = React.lazy(() => import('./components/posts/Post'));
+const UserProfile = React.lazy(() => import('./components/profile/Profile'));
+
 const Aboutus = React.lazy(() => import('./components/about/About'));
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')
@@ -77,7 +79,11 @@ const App = () => {
 							<Route
 								exact
 								path='/profile'
-								element={<Profile />}
+								element={
+									<Suspense fallback={<Spinner />}>
+										<UserProfile />
+									</Suspense>
+								}
 							/>
 							<Route
 								exact
