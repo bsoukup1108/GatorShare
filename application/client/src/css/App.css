@@ -1135,3 +1135,31 @@ footer a :hover {
   padding: 2rem;
   border: 1px solid purple;
 }
+
+.edit-btn {
+  margin: 5px 20px auto;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: black;
+  border-radius: 2.1875rem;
+  border-color: #eda829;
+  background: #eda829;
+}
+.edit-btn:hover, .edit-btn:focus {
+  background: #efb241;
+}
+
+.delete-btn {
+  margin: 5px 20px auto;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: black;
+  border-radius: 2.1875rem;
+  border-color: red;
+  background: rgb(248, 41, 41);
+}
+.delete-btn:hover, .delete-btn:focus {
+  background: #fa5a5a;
+}

@@ -155,13 +155,13 @@ const Profile = () => {
 							/>
 
 							<h1>{role}</h1>
-							<p>email: {eMail}</p>
+							<p>Email: {eMail}</p>
 							<div id='profile-btn-1'>
 								<button
 									htmlFor='edit-user-form-1'
 									id='profile-btn-2'
 									type='submit'
-									className='btn btn-warning'
+									className='edit-btn'
 									value={edit}
 									onClick={(e) => confirmUserEdit(e)}
 								>
@@ -169,7 +169,7 @@ const Profile = () => {
 								</button>
 								<button
 									type='button'
-									className='btn btn-danger'
+									className='delete-btn'
 									value={userId}
 									onClick={(e) => confirmUserDeletion(e)}
 								>
@@ -423,7 +423,7 @@ const Profile = () => {
 																		</p>
 																		<button
 																			type='button'
-																			className='btn btn-danger'
+																			className='delete-btn'
 																			value={
 																				post.id
 																			}
