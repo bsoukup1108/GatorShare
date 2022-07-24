@@ -199,7 +199,7 @@ const Navbar = (props) => {
 							id='search-text'
 							className='form-control me-2'
 							type='text'
-							placeholder='Search for posts'
+							placeholder='Search for posts (example: Society of Women Engineers Club)'
 						/>
 						<div className='btn-group dropdown me-1 '>
 							<button
