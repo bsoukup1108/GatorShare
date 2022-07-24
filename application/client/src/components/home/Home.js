@@ -27,7 +27,7 @@ const Home = () => {
 	}, []);
 
 	const setCategory = (e) => {
-		ReactSession.set('Category', e.target.name);
+		ReactSession.set('category', e.target.name);
 	};
 
 	return (
