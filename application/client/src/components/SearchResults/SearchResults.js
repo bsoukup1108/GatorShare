@@ -13,7 +13,7 @@ const SearchResults = (props) => {
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
 	let searchTerm = ReactSession.get('searchTerm');
-	let category = ReactSession.get('Category');
+	let category = ReactSession.get('category');
 
 	let searchURL = `/search?query=${searchTerm}`;
 
@@ -114,6 +114,8 @@ const SearchResults = (props) => {
 			});
 	}, []);
 
+	console.log(category);
+
 	const filterByName = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
@@ -203,7 +205,9 @@ const SearchResults = (props) => {
 							<h1 className='header-text'> Tutoring </h1>
 						</div>
 					) : null}
-					{(category == '') | (category == 'all posts') ? (
+					{(category == '') |
+					(category == 'Category') |
+					(category == 'All Posts') ? (
 						<div class='header-image-7'>
 							<h1 className='header-text'> SEARCH RESULTS </h1>
 						</div>

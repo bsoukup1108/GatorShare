@@ -27,7 +27,7 @@ const Home = () => {
 	}, []);
 
 	const setCategory = (e) => {
-		ReactSession.set('category', e.target.name);
+		ReactSession.set('Category', e.target.name);
 	};
 
 	return (
@@ -100,7 +100,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='articles&essay'
+										name='Articles&Essays'
 										onClick={(e) => setCategory(e)}
 									>
 										Articles & Essays
@@ -110,7 +110,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='art&films'
+										name='Art&Films'
 										onClick={(e) => setCategory(e)}
 									>
 										Art & Film
@@ -120,7 +120,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='clubs'
+										name='Clubs'
 										onClick={(e) => setCategory(e)}
 									>
 										Clubs
@@ -130,7 +130,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='discords'
+										name='Discords'
 										onClick={(e) => setCategory(e)}
 									>
 										Discords
@@ -140,7 +140,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='tutoring'
+										name='Tutoring'
 										onClick={(e) => setCategory(e)}
 									>
 										Tutoring
@@ -150,7 +150,7 @@ const Home = () => {
 									<a
 										className='nav-link'
 										href='/search'
-										name='other'
+										name='Other'
 										onClick={(e) => setCategory(e)}
 									>
 										Other

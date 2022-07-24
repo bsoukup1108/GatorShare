@@ -16,7 +16,6 @@ const Navbar = (props) => {
 	const changeCategory = (e) => {
 		e.preventDefault();
 		let newCategory = e.target.value;
-		console.log(newCategory);
 		setCategory(newCategory);
 	};
 
@@ -206,7 +205,7 @@ const Navbar = (props) => {
 							<button
 								className='btn btn-primary dropdown-toggle category-dropdown'
 								data-bs-toggle='dropdown'
-								name='category'
+								name='Category'
 								value={category}
 								id='search-button-1'
 							>

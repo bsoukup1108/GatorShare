@@ -371,7 +371,7 @@ label {
 }
 
 .who-radio {
-display:inline;
+	display: inline;
 	margin-top: 5px;
 	text-align: center;
 }
@@ -1287,14 +1287,14 @@ footer a {
 	flex-direction: column-reverse;
 }
 
-.category-dropdown{
-	color:white;
+.category-dropdown {
+	color: white;
 	background-color: black;
 	border-color: black;
 
 	&:hover,
-	&:focus
-	{
+	&:focus,
+	&:not(:hover) {
 		background-color: black;
 		border-color: black;
 	}

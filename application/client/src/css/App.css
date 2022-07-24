@@ -1119,7 +1119,7 @@ footer a :hover {
   background-color: black;
   border-color: black;
 }
-.category-dropdown:hover, .category-dropdown:focus {
+.category-dropdown:hover, .category-dropdown:focus, .category-dropdown:not(:hover) {
   background-color: black;
   border-color: black;
 }
