@@ -2,13 +2,11 @@ package com.GatorShare;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 
 import com.GatorShare.Dto.*;
+import com.GatorShare.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.http.*;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,37 +14,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.GatorShare.Excpetions.AuthenticationFailException;
 import com.GatorShare.Excpetions.CustomeException;
-import com.GatorShare.Repo.PostRepo;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.GatorShare.Service.postService;
-import com.GatorShare.Dto.postResponse;
 import com.GatorShare.Dto.Post;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.*;
-import com.GatorShare.Repo.PostRepo;
-import com.GatorShare.Service.AboutUsService;
-import com.GatorShare.Service.UserService;
 import com.GatorShare.Excpetions.FileResponseMassage;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -68,12 +56,17 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private RequestService requestService;
+
 
 	@Autowired
 	private postService PostService;
 
-
-
+	@Autowired
+	private AdminService adminService;
+	@Autowired
+	public HttpServletRequest request;
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
@@ -81,10 +74,19 @@ public class GatorShareApplication {
 	// public String test(){
 	// return "{Test: test}";
 	// }
+	@GetMapping("/")
+	public String index(HttpServletRequest request) {
+
+		adminService.store_userinfo(request);
+
+		return "client info saved in the database";
+	}
+
 
 	@GetMapping(value = "aboutus")
 	public ResponseEntity<List<AboutUsDto>> listAllUsers() {
 		List<AboutUsDto> Aboutusers = this.userServicetDto.listAll();
+
 		return new ResponseEntity<List<AboutUsDto>>(Aboutusers, HttpStatus.OK);
 	}
 
