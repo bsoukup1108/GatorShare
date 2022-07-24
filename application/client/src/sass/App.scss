@@ -891,16 +891,17 @@ label {
 }
 
 #auth-hook {
-  display: flex;
+	display: flex;
 	text-align: left;
 
 	>*>button {
-    margin: 5px 20px auto;
-    
-    &:hover, &:focus{
-      background: lighten($color: $secondary-bg, $amount: 10);
-    }
-    
+		margin: 5px 20px auto;
+
+		&:hover,
+		&:focus {
+			background: lighten($color: $secondary-bg, $amount: 10);
+		}
+
 	}
 }
 
@@ -1216,49 +1217,71 @@ footer a {
 }
 
 
-.header-image {
-background-color: rgba(101, 61, 150, 0.808);
+[class*="header-image-"] {
+	height: 100px;
+}
 
-  height: 100px;
-  }
+.header-image-1 {
+	background-color: lightcoral;
+}
+
+.header-image-2 {
+	background-color: lightseagreen;
+}
+
+.header-image-3 {
+	background-color: lightgrey;
+}
+
+.header-image-4 {
+	background-color: green;
+}
+
+.header-image-5 {
+	background-color: orangered;
+}
+
+.header-image-6 {
+	background-color: lightsteelblue;
+}
+
+
+.header-image-7 {
+	background-color: rgba(101, 61, 150, 0.808);
+}
+
 
 
 .header-text {
-  text-align: center;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%,50%);
-  color: white;
-  }
+	text-align: center;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, 50%);
+	color: white;
+}
 
-  .posts-btn{
-    color: white;
-    border-color: black;
+.posts-btn {
+	color: white;
+	border-color: black;
 
-    a {
-      color:black;
+	a {
+		color: black;
 
-      &:hover{
-        color: rgba(101, 61, 150, 0.808);
-      }
-    }
+		&:hover {
+			color: rgba(101, 61, 150, 0.808);
+		}
+	}
 
-    &:hover{
-      border-color: rgba(101, 61, 150, 0.808);
+	&:hover {
+		border-color: rgba(101, 61, 150, 0.808);
 
-    }
-  }
+	}
+}
 
-  #notifications-1{
-    max-height: 15rem;
-    overflow: auto;
-    display: flex;
-    flex-direction: column-reverse;
-  }
-
- 
-
-
-
-  
+#notifications-1 {
+	max-height: 15rem;
+	overflow: auto;
+	display: flex;
+	flex-direction: column-reverse;
+}

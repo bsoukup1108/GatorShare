@@ -4,6 +4,7 @@ import { alert } from './alert';
 
 export const login = (formData) => {
 	const { email, password } = formData;
+	let id;
 	http.post('/login', {
 		email: email,
 		password: password,
@@ -12,11 +13,24 @@ export const login = (formData) => {
 			console.log(response);
 			if (response.data.token) {
 				const token = response.data.token;
-				console.log(token);
+				id = response.data.id;
+
+				console.log(response.data);
 				ReactSession.set('token', token);
-				document.getElementById('login-btn-1').style.visibility =
-					'visible';
+				ReactSession.set('currentUserId', id);
 				alert('success', 'successfully logged in');
+
+				http.get('/login/id/' + id)
+					.then((response) => {
+						ReactSession.set(
+							'userRole',
+							response.data.role_name[0].role_name
+						);
+					})
+					.catch(function (err) {
+						console.log(err);
+					});
+
 				return window.location.href('/');
 			} else {
 				// TODO errors
@@ -27,19 +41,20 @@ export const login = (formData) => {
 		})
 		.catch(function (err) {
 			//	alert('danger', '');
-			document.getElementById('login-btn-1').style.visibility = 'visible';
 			console.log(err);
 			return window.location.reload();
 		});
 };
 
 export const register = (formData) => {
-	const { name, lastname, email, password } = formData;
+	const { name, lastname, email, password, role } = formData;
+	console.log(formData);
 	http.post('/signup', {
 		firstName: name,
 		lastName: lastname,
 		email: email,
 		password: password,
+		role: [role],
 	})
 		.then((res) => {
 			// TODO signup
@@ -47,13 +62,13 @@ export const register = (formData) => {
 
 			return res.status === 200
 				? (window.location = '/login')
-				: window.location.reload();
+				: alert('danger', 'failed to sign up...');
 		})
 		.catch(function (err) {
+			console.log(err);
 			alert('danger', 'failed to sign up...');
-			document.getElementById('signup-btn-1').style.visibility =
-				'visible';
-			return window.location.reload();
+
+			//	return window.location.reload();
 		});
 };
 

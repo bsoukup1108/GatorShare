@@ -6,9 +6,19 @@ import { getToken } from '../../js/useToken';
 import { logout } from '../../js/auth';
 import SearchResults from '../SearchResults/SearchResults';
 import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
 
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
+
+	const [category, setCategory] = useState('category');
+
+	const changeCategory = (e) => {
+		e.preventDefault();
+		let newCategory = e.target.value;
+		console.log(newCategory);
+		setCategory(newCategory);
+	};
 
 	const navigate = useNavigate();
 	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
@@ -28,7 +38,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 				<button type='button' className='btn btn-secondary'>
-					<Link to='/create'>
+					<Link to='/post'>
 						<i className='fa-solid fa-plus '></i>
 						<span id='create-content'></span>
 					</Link>
@@ -57,14 +67,11 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						{/* <div className='dropdown-item' href='/login' id='eeee'>
-							You don't have any notifications.
-						</div> */}
-						<div className='dropdown-item' href='/login' id='notifications-1'>
-						<i className="fas fa-thumbs-up notif"></i> User liked your post!
-			<br/>
-						<i className="fas fa-comment notif"></i> Your post received a new comment!
-						</div>
+						<div
+							className='dropdown-item'
+							href='/login'
+							id='notifications-1'
+						></div>
 					</li>
 				</ul>
 			</div>
@@ -195,6 +202,85 @@ const Navbar = (props) => {
 							type='text'
 							placeholder='Search for posts'
 						/>
+						<div className='btn-group dropdown me-1 '>
+							<button
+								className='btn btn-primary dropdown-toggle'
+								data-bs-toggle='dropdown'
+								name='category'
+								value={category}
+								id='search-button-1'
+							>
+								{category}
+							</button>
+
+							<div className='dropdown-menu'>
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									name='dropdown-all'
+									value='all posts'
+									onClick={(e) => changeCategory(e)}
+								/>
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='articles&essay'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='art&films'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='clubs'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='discords'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='tutoring'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='other'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+							</div>
+						</div>
+
 						<button
 							id='search-button'
 							className='btn btn-secondary'
@@ -205,6 +291,11 @@ const Navbar = (props) => {
 										'search-text'
 									).value;
 								ReactSession.set('searchTerm', searchTerm);
+								ReactSession.set(
+									'category',
+									document.getElementById('search-button-1')
+										.value
+								);
 								navigate(`/search`);
 
 								return false;

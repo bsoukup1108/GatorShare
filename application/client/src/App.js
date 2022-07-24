@@ -4,25 +4,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import About from './components/about/About';
 import Footer from './components/footer/Footer';
-import SearchResults from './components/SearchResults/SearchResults';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
 import Profile from './components/profile/Profile';
 import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
-import Posts from './components/posts/Posts';
-import Discords from './components/misc/Discords';
-import Arts from './components/misc/Arts';
-import Other from './components/misc/Other';
-import Articles from './components/misc/Articles';
-import Tutoring from './components/misc/Tutoring';
-import Clubs from './components/misc/Clubs';
 
 import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
-
-import { alert } from './js/alert';
 
 import { ReactSession } from 'react-client-session';
 
@@ -35,8 +25,6 @@ const Search = React.lazy(() =>
 
 const App = () => {
 	ReactSession.setStoreType('localStorage');
-
-		
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const token = ReactSession.get('token') || '';
@@ -54,13 +42,6 @@ const App = () => {
 
 					<div className='container'>
 						<Routes>
-							<Route path='/discords' element={<Discords />} />
-							<Route path='/clubs' element={<Clubs />} />
-							<Route path='/Arts' element={<Arts />} />
-							<Route path='/tutoring' element={<Tutoring />} />
-							<Route path='/other' element={<Other />} />
-							<Route path='/articles' element={<Articles />} />
-
 							<Route path='/' element={<Home />} />
 							<Route exact path='/signup' element={<SignUp />} />
 							{!isAuthenticated && (
@@ -106,7 +87,7 @@ const App = () => {
 							{isAuthenticated && (
 								<Route
 									exact
-									path='/create'
+									path='/post'
 									element={<CreatePost />}
 								/>
 							)}

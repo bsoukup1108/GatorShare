@@ -19,9 +19,58 @@ const Posts = () => {
 			})
 			.catch((e) => {
 				setIsLoaded(false);
-				console.log(e);
 			});
 	}, []);
+	console.log(posts);
+
+	const filterByName = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.title[0].toLowerCase();
+			let dateB = b.title[0].toLowerCase();
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		return val;
+	};
+	const filterByDate = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.createdDate;
+			let dateB = b.createdDate;
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		console.log(val);
+		return val;
+	};
+
+	const filterByLike = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.id;
+			let dateB = b.id;
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		console.log(val);
+		return val;
+	};
 
 	return (
 		<>
@@ -32,7 +81,7 @@ const Posts = () => {
 					<div id='sort'>
 						<div className='dropdown'>
 							<button
-								class='btn btn-secondary dropdown-toggle sort-btn'
+								className='btn btn-secondary dropdown-toggle sort-btn'
 								type='button'
 								id='dropdownMenuButton1'
 								data-bs-toggle='dropdown'
@@ -41,21 +90,33 @@ const Posts = () => {
 								Sort by
 							</button>
 							<ul
-								class='dropdown-menu'
+								className='dropdown-menu'
 								aria-labelledby='dropdownMenuButton1'
 							>
 								<li>
-									<a className='dropdown-item' href='#'>
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByName())}
+									>
 										Alphabetically
 									</a>
 								</li>
 								<li>
-									<a className='dropdown-item' href='#'>
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByLike())}
+									>
 										Most recent
 									</a>
 								</li>
 								<li>
-									<a className='dropdown-item' href='#'>
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByName())}
+									>
 										Most popular
 									</a>
 								</li>

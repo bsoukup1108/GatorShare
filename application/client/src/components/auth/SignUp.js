@@ -11,6 +11,8 @@ import {
 	validateEmail,
 	validatePassword,
 	validatePassword2,
+	getValidationFlag,
+	validateRole,
 } from '../../js/hint';
 
 const SignUp = () => {
@@ -28,18 +30,14 @@ const SignUp = () => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
-			[e.target.lastname]: e.target.value,
 		});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		// if (password !== password2) {
-		// 	console.log('passwords do not match', 'danger');
-		// } else {
-		document.getElementById('signup-btn-1').style.visibility = 'hidden';
 
-		register(formData);
-		// }
+		!getValidationFlag()
+			? alert('the information is not valid')
+			: register(formData);
 	};
 
 	// redirect if logged in
@@ -269,43 +267,62 @@ const SignUp = () => {
 							<div className='who-check'>
 								<label className='who-label' htmlFor='who-btns'>
 									Who are you?
-								</label>
-								<input
-									type='checkbox'
-									id='student'
-									name='role'
-									value='student'
-									onChange={(e) => onChange(e)}
-								/>
-								<label className='who-input' htmlFor='student'>
-									{' '}
-									Student
-								</label>
-								<input
-									type='checkbox'
-									id='professor'
-									name='role'
-									value='professor'
-									onChange={(e) => onChange(e)}
-								/>
-								<label
-									className='who-input'
-									htmlFor='professor'
-								>
-									{' '}
-									Professor
-								</label>
-								<input
-									type='checkbox'
-									id='tutor'
-									name='role'
-									value='tutor'
-									onChange={(e) => onChange(e)}
-								/>
-								<label className='who-input' htmlFor='tutor'>
-									{' '}
-									Tutor
-								</label>
+								</label>{' '}
+								<div>
+									<input
+										type='radio'
+										id='student'
+										name='role'
+										value='Student'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='student'
+									>
+										{' '}
+										Student
+									</label>{' '}
+								</div>
+								<div>
+									<input
+										type='radio'
+										id='professor'
+										name='role'
+										value='Professor'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='professor'
+									>
+										Professor
+									</label>
+								</div>
+								<div>
+									<input
+										type='radio'
+										id='tutor'
+										name='role'
+										value='Tutor'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='tutor'
+									>
+										Tutor
+									</label>
+								</div>
 							</div>
 							<ul className='list-inline'>
 								<li className='policy'>
@@ -314,7 +331,7 @@ const SignUp = () => {
 										type='checkbox'
 										name='agreement'
 										value={true}
-										onChange={(e) => onChange(e)}
+										//onChange={(e) => onChange(e)}
 										required
 										// onChange='validateAgreement(event.target)'
 									/>
@@ -328,7 +345,6 @@ const SignUp = () => {
 										type='submit'
 										value='Sign Up'
 										id='signup-btn-1'
-										
 									>
 										Sign Up
 									</button>

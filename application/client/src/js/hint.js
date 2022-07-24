@@ -1,5 +1,10 @@
 let form = document.getElementById('form-signup-1');
 
+export const getValidationFlag = () => {
+	inputStatus();
+	return validationFlag;
+};
+
 let validationFlag = false;
 
 let validationArr = {
@@ -19,6 +24,9 @@ let validationArr = {
 	password2Flag: {
 		passwordsMatch: false,
 	},
+	roleFlag: {
+		role: false,
+	},
 };
 
 const iterateThroughArr = (arr) => {
@@ -28,8 +36,6 @@ const iterateThroughArr = (arr) => {
 		let data = arr[el];
 		for (let element in data) {
 			if (data[element] === false) {
-				console.log(element);
-
 				validationFlag = false;
 				break;
 			}
@@ -39,14 +45,6 @@ const iterateThroughArr = (arr) => {
 
 let inputStatus = () => {
 	iterateThroughArr(validationArr);
-
-	let el = document.getElementById('signup-btn-1');
-	console.log(validationFlag);
-	if (!validationFlag) {
-		el.hidden = true;
-	} else {
-		el.hidden = false;
-	}
 };
 
 const setOpacityToNull = () => {
@@ -171,7 +169,7 @@ export const validateEmail = (email) => {
 
 const validateIsEmail = (email) => {
 	let el = document.getElementById('username-hint-5');
-	let isEmail = /^[-.\w]{3,}\@[-.\w]{3,}\.[-.\w]+$/;
+	let isEmail = /^[-.\w]{1,}\@[-.\w]{3,}\.[-.\w]+$/;
 
 	if (isEmail.test(email)) {
 		el.classList.remove('alert-secondary');
@@ -283,4 +281,15 @@ let passwordsMatch = (password2) => {
 		el.classList.add('alert-secondary');
 		validationArr.password2Flag.passwordsMatch = false;
 	}
+};
+
+export const validateRole = (role) => {
+	inputStatus();
+	setOpacityToNull();
+
+	roleExist(role);
+};
+
+let roleExist = (role) => {
+	validationArr.roleFlag = true;
 };

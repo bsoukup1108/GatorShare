@@ -12,11 +12,12 @@ const CreatePost = () => {
 	}
 
 	const [formData, setFormData] = useState({
-		title: '',
-		description: '',
+		title: 'www',
+		description: 'www',
 		// link: '',
 		// image: '',
-		// category: '',
+		image64: '',
+		// category: 'OTHER',
 	});
 
 	const { title, description, link, image, category } = formData;
@@ -25,7 +26,33 @@ const CreatePost = () => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
-			[e.target.lastname]: e.target.value,
+		});
+		console.log(formData);
+	};
+
+	const onImageUpload = (e) => {
+		let file = e.target.files[0];
+		console.log(file);
+		//let img = await getBase64(file).then((data) => data.toString());
+		setFormData({
+			...formData,
+			image64: file,
+		});
+	};
+
+	const decodeBase64 = (file) => {
+		const i = String(file.indexOf('base64,'));
+		const buffer = Buffer.from(file.slice(i + 7), 'base64');
+		const name = `${Math.random().toString(36).slice(-5)}.png`;
+		const file1 = new File(buffer, name);
+	};
+
+	const getBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (error) => reject(error);
 		});
 	};
 
@@ -96,10 +123,11 @@ const CreatePost = () => {
 							<input
 								className='form-control'
 								type='file'
+								accept='image/*'
 								id='formFile'
 								name='image'
 								value={image}
-								onChange={(e) => onChange(e)}
+								onInput={(e) => onImageUpload(e)}
 							/>
 						</div>
 						<label className='form-label' htmlFor='image'>

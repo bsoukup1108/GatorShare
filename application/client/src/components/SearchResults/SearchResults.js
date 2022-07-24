@@ -6,24 +6,162 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import { ReactSession } from 'react-client-session';
 
+import header from '../../img/Articles&Essays-header.jpg';
+
 const SearchResults = (props) => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
 	let searchTerm = ReactSession.get('searchTerm');
+	let category = ReactSession.get('category');
+
 	let searchURL = `/search?query=${searchTerm}`;
 
+	if (category) {
+		if (category === '') {
+			document.getElementById('search-button-1').innerHTML = 'category';
+		} else {
+			document.getElementById('search-button-1').value = category;
+			document.getElementById('search-button-1').innerHTML = category;
+		}
+	}
+
 	useEffect(() => {
+		let p = [];
 		http.get(searchURL)
 			.then((res) => {
-				setPosts(res.data);
-				setIsLoaded(true);
+				if (category == 'articles&essay') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'article') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else if (category == 'art&films') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'artandfilm') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else if (category == 'clubs') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'clubs') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else if (category == 'other') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'other') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else if (category == 'discords') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'discord') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else if (category == 'tutoring') {
+					{
+						res.data.map((post, i) => {
+							if (post.tag) {
+								if (post.tag.toLowerCase() == 'turoring') {
+									p[p.length] = res.data[i];
+								}
+							}
+						});
+						setPosts(p);
+						setIsLoaded(true);
+					}
+				} else {
+					setPosts(res.data);
+					setIsLoaded(true);
+				}
 			})
+
 			.catch((e) => {
 				setIsLoaded(false);
 				console.log(e);
 			});
 	}, []);
+
+	const filterByName = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.title[0].toLowerCase();
+			let dateB = b.title[0].toLowerCase();
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		return val;
+	};
+	const filterByDate = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.createdDate;
+			let dateB = b.createdDate;
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		console.log(val);
+		return val;
+	};
+
+	const filterByLike = () => {
+		let datafil = posts;
+		let val = datafil.sort(function (a, b) {
+			let dateA = a.id;
+			let dateB = b.id;
+
+			if (dateA < dateB) {
+				return -1;
+			} else if (dateA > dateB) {
+				return 1;
+			}
+			return 0;
+		});
+		console.log(val);
+		return val;
+	};
 
 	return (
 		<>
@@ -33,9 +171,43 @@ const SearchResults = (props) => {
 					<h1>NO RESULTS</h1>
 				</div>
 			)}
-			{isLoaded && posts !== [] && (
+			{isLoaded && !!posts && posts !== [] && (
 				<div>
-					<h1>SEARCH RESULTS</h1>
+					{category == 'articles&essay' ? (
+						<div class='header-image-1'>
+							<h1 className='header-text'> Articles & Essays </h1>
+						</div>
+					) : null}
+					{category == 'art&films' ? (
+						<div class='header-image-2'>
+							<h1 className='header-text'> Art & Films </h1>
+						</div>
+					) : null}
+					{category == 'discords' ? (
+						<div class='header-image-3'>
+							<h1 className='header-text'> Discords </h1>
+						</div>
+					) : null}
+					{category == 'clubs' ? (
+						<div class='header-image-4'>
+							<h1 className='header-text'> Clubs </h1>
+						</div>
+					) : null}
+					{category == 'other' ? (
+						<div class='header-image-5'>
+							<h1 className='header-text'>Other</h1>
+						</div>
+					) : null}
+					{category == 'tutoring' ? (
+						<div class='header-image-6'>
+							<h1 className='header-text'> Tutoring </h1>
+						</div>
+					) : null}
+					{(category == '') | (category == 'all posts') ? (
+						<div class='header-image-7'>
+							<h1 className='header-text'> SEARCH RESULTS </h1>
+						</div>
+					) : null}
 					<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -52,23 +224,36 @@ const SearchResults = (props) => {
 								aria-labelledby='dropdownMenuButton1'
 							>
 								<li>
-									<a className='dropdown-item' href='#'>
-										Alphabetically
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByName())}
+									>
+										Alphabetically{' '}
 									</a>
 								</li>
 								<li>
-									<a className='dropdown-item' href='#'>
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByDate())}
+									>
 										Most recent
 									</a>
 								</li>
 								<li>
-									<a className='dropdown-item' href='#'>
+									<a
+										className='dropdown-item'
+										href='#'
+										onClick={() => setPosts(filterByLike())}
+									>
 										Most popular
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
+
 					{posts.length === 0 ? (
 						<h1>WE DIDN'T FIND ANYTHING</h1>
 					) : (

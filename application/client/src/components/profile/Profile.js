@@ -20,6 +20,8 @@ const Profile = () => {
 		return <Navigate to='/login' />;
 	}
 
+	http('login/id/1').then((res) => console.log(res.data));
+
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
