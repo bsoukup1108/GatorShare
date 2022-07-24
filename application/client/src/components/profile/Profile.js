@@ -98,8 +98,8 @@ const Profile = () => {
 			document
 				.getElementById('profile-btn-2')
 				.classList.toggle('btn-warning');
-		} else {
 			onSubmitForm();
+		} else {
 			setEdit(true);
 			document
 				.getElementById('profile-btn-2')
@@ -139,6 +139,7 @@ const Profile = () => {
 
 	const onSubmitForm = () => {
 		alert('success', 'profile changed');
+		window.location.reload();
 	};
 
 	return (
@@ -193,12 +194,7 @@ const Profile = () => {
 											>
 												{edit && isLoaded && (
 													<div id='edit-user-form-1'>
-														<form
-															className='form'
-															onSubmit={(e) =>
-																onSubmitForm(e)
-															}
-														>
+														<form className='form'>
 															<h1>
 																<b>
 																	Edit Profile
