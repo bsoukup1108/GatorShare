@@ -370,8 +370,8 @@ label {
 	color: black;
 }
 
-.who-check {
-
+.who-radio {
+display:inline;
 	margin-top: 5px;
 	text-align: center;
 }
@@ -1089,8 +1089,9 @@ li::marker {
 
 	&:focus,
 	&:hover {
-		background: $primary-bg;
-		color: rgb(253, 221, 91);
+		background: lighten($color: $secondary-bg, $amount: 10);
+		color: white;
+		border-color: black;
 	}
 }
 
@@ -1284,4 +1285,17 @@ footer a {
 	overflow: auto;
 	display: flex;
 	flex-direction: column-reverse;
+}
+
+.category-dropdown{
+	color:white;
+	background-color: black;
+	border-color: black;
+
+	&:hover,
+	&:focus
+	{
+		background-color: black;
+		border-color: black;
+	}
 }

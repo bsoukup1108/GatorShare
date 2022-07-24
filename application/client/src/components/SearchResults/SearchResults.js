@@ -13,13 +13,13 @@ const SearchResults = (props) => {
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
 	let searchTerm = ReactSession.get('searchTerm');
-	let category = ReactSession.get('category');
+	let category = ReactSession.get('Category');
 
 	let searchURL = `/search?query=${searchTerm}`;
 
 	if (category) {
 		if (category === '') {
-			document.getElementById('search-button-1').innerHTML = 'category';
+			document.getElementById('search-button-1').innerHTML = 'Category';
 		} else {
 			document.getElementById('search-button-1').value = category;
 			document.getElementById('search-button-1').innerHTML = category;
@@ -30,7 +30,7 @@ const SearchResults = (props) => {
 		let p = [];
 		http.get(searchURL)
 			.then((res) => {
-				if (category == 'articles&essay') {
+				if (category == 'Articles&Essays') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -42,7 +42,7 @@ const SearchResults = (props) => {
 						setPosts(p);
 						setIsLoaded(true);
 					}
-				} else if (category == 'art&films') {
+				} else if (category == 'Art&Films') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -54,7 +54,7 @@ const SearchResults = (props) => {
 						setPosts(p);
 						setIsLoaded(true);
 					}
-				} else if (category == 'clubs') {
+				} else if (category == 'Clubs') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -66,7 +66,7 @@ const SearchResults = (props) => {
 						setPosts(p);
 						setIsLoaded(true);
 					}
-				} else if (category == 'other') {
+				} else if (category == 'Other') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -78,7 +78,7 @@ const SearchResults = (props) => {
 						setPosts(p);
 						setIsLoaded(true);
 					}
-				} else if (category == 'discords') {
+				} else if (category == 'Discords') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -90,7 +90,7 @@ const SearchResults = (props) => {
 						setPosts(p);
 						setIsLoaded(true);
 					}
-				} else if (category == 'tutoring') {
+				} else if (category == 'Tutoring') {
 					{
 						res.data.map((post, i) => {
 							if (post.tag) {
@@ -173,32 +173,32 @@ const SearchResults = (props) => {
 			)}
 			{isLoaded && !!posts && posts !== [] && (
 				<div>
-					{category == 'articles&essay' ? (
+					{category == 'Articles&Essays' ? (
 						<div class='header-image-1'>
 							<h1 className='header-text'> Articles & Essays </h1>
 						</div>
 					) : null}
-					{category == 'art&films' ? (
+					{category == 'Art&Films' ? (
 						<div class='header-image-2'>
 							<h1 className='header-text'> Art & Films </h1>
 						</div>
 					) : null}
-					{category == 'discords' ? (
+					{category == 'Discords' ? (
 						<div class='header-image-3'>
 							<h1 className='header-text'> Discords </h1>
 						</div>
 					) : null}
-					{category == 'clubs' ? (
+					{category == 'Clubs' ? (
 						<div class='header-image-4'>
 							<h1 className='header-text'> Clubs </h1>
 						</div>
 					) : null}
-					{category == 'other' ? (
+					{category == 'Other' ? (
 						<div class='header-image-5'>
 							<h1 className='header-text'>Other</h1>
 						</div>
 					) : null}
-					{category == 'tutoring' ? (
+					{category == 'Tutoring' ? (
 						<div class='header-image-6'>
 							<h1 className='header-text'> Tutoring </h1>
 						</div>

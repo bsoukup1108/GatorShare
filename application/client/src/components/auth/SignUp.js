@@ -60,7 +60,7 @@ const SignUp = () => {
 							id='username-hint-2'
 							class='alert alert-secondary text-muted'
 						>
-							At least 3 charaters
+							At least 3 characters
 						</div>
 					</div>
 
@@ -75,7 +75,7 @@ const SignUp = () => {
 							id='username-hint-4'
 							class='alert alert-secondary text-muted'
 						>
-							At least 3 charaters
+							At least 3 characters
 						</div>
 					</div>
 					<div id='hint-username-3'>
@@ -91,7 +91,7 @@ const SignUp = () => {
 							id='username-hint-6'
 							class='alert alert-secondary text-muted '
 						>
-							At least 8 charachters
+							At least 8 characters
 						</div>
 						<div
 							id='username-hint-7'
@@ -268,7 +268,7 @@ const SignUp = () => {
 								<label className='who-label' htmlFor='who-btns'>
 									Who are you?
 								</label>{' '}
-								<div>
+								<div className='who-radio'>
 									<input
 										type='radio'
 										id='student'
@@ -287,7 +287,7 @@ const SignUp = () => {
 										Student
 									</label>{' '}
 								</div>
-								<div>
+								<div className='who-radio'>
 									<input
 										type='radio'
 										id='professor'
@@ -305,7 +305,7 @@ const SignUp = () => {
 										Professor
 									</label>
 								</div>
-								<div>
+								<div className='who-radio'>
 									<input
 										type='radio'
 										id='tutor'

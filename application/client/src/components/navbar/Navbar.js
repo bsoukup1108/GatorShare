@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
 
-	const [category, setCategory] = useState('category');
+	const [category, setCategory] = useState('Category');
 
 	const changeCategory = (e) => {
 		e.preventDefault();
@@ -204,7 +204,7 @@ const Navbar = (props) => {
 						/>
 						<div className='btn-group dropdown me-1 '>
 							<button
-								className='btn btn-primary dropdown-toggle'
+								className='btn btn-primary dropdown-toggle category-dropdown'
 								data-bs-toggle='dropdown'
 								name='category'
 								value={category}
@@ -220,7 +220,7 @@ const Navbar = (props) => {
 									href='#'
 									className='dropdown-item'
 									name='dropdown-all'
-									value='all posts'
+									value='All Posts'
 									onClick={(e) => changeCategory(e)}
 								/>
 								<div className='dropdown-divider'></div>
@@ -228,16 +228,7 @@ const Navbar = (props) => {
 									type='button'
 									href='#'
 									className='dropdown-item'
-									value='articles&essay'
-									onClick={(e) => changeCategory(e)}
-								/>
-
-								<div className='dropdown-divider'></div>
-								<input
-									type='button'
-									href='#'
-									className='dropdown-item'
-									value='art&films'
+									value='Articles&Essays'
 									onClick={(e) => changeCategory(e)}
 								/>
 
@@ -246,7 +237,7 @@ const Navbar = (props) => {
 									type='button'
 									href='#'
 									className='dropdown-item'
-									value='clubs'
+									value='Art&Films'
 									onClick={(e) => changeCategory(e)}
 								/>
 
@@ -255,7 +246,7 @@ const Navbar = (props) => {
 									type='button'
 									href='#'
 									className='dropdown-item'
-									value='discords'
+									value='Clubs'
 									onClick={(e) => changeCategory(e)}
 								/>
 
@@ -264,7 +255,7 @@ const Navbar = (props) => {
 									type='button'
 									href='#'
 									className='dropdown-item'
-									value='tutoring'
+									value='Discords'
 									onClick={(e) => changeCategory(e)}
 								/>
 
@@ -273,7 +264,16 @@ const Navbar = (props) => {
 									type='button'
 									href='#'
 									className='dropdown-item'
-									value='other'
+									value='Tutoring'
+									onClick={(e) => changeCategory(e)}
+								/>
+
+								<div className='dropdown-divider'></div>
+								<input
+									type='button'
+									href='#'
+									className='dropdown-item'
+									value='Other'
 									onClick={(e) => changeCategory(e)}
 								/>
 

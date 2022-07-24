@@ -331,7 +331,8 @@ label {
   color: black;
 }
 
-.who-check {
+.who-radio {
+  display: inline;
   margin-top: 5px;
   text-align: center;
 }
@@ -956,8 +957,9 @@ li::marker {
   border-color: rgba(255, 255, 255, 0.281);
 }
 .btn-dark:focus, .btn-dark:hover {
-  background: rgba(74, 33, 123, 0.5);
-  color: rgb(253, 221, 91);
+  background: #eda829;
+  color: white;
+  border-color: black;
 }
 
 .btn-secondary {
@@ -1110,4 +1112,14 @@ footer a :hover {
   overflow: auto;
   display: flex;
   flex-direction: column-reverse;
+}
+
+.category-dropdown {
+  color: white;
+  background-color: black;
+  border-color: black;
+}
+.category-dropdown:hover, .category-dropdown:focus {
+  background-color: black;
+  border-color: black;
 }
