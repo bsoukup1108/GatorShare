@@ -16,6 +16,19 @@ const SearchResults = (props) => {
 	let category = ReactSession.get('category');
 
 	let searchURL = `/search?query=${searchTerm}`;
+	if (category == 'Articles&Essays') {
+		searchURL = `/search/{Article}?query=${searchTerm}`;
+	} else if (category == 'Art&Films') {
+		searchURL = `/search/{ArtAndFilm}?query=${searchTerm}`;
+	} else if (category == 'Clubs') {
+		searchURL = `/search/{Clubs}?query=${searchTerm}`;
+	} else if (category == 'Discords') {
+		searchURL = `/search/{Discord}?query=${searchTerm}`;
+	} else if (category == 'Other') {
+		searchURL = `/search/{Other}?query=${searchTerm}`;
+	} else if (category == 'Tutoring') {
+		searchURL = `/search/{Tutoring}?query=${searchTerm}`;
+	}
 
 	if (category) {
 		if (category === '') {
@@ -27,85 +40,11 @@ const SearchResults = (props) => {
 	}
 
 	useEffect(() => {
-		let p = [];
 		http.get(searchURL)
 			.then((res) => {
-				if (category == 'Articles&Essays') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'article') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else if (category == 'Art&Films') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'artandfilm') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else if (category == 'Clubs') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'clubs') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else if (category == 'Other') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'other') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else if (category == 'Discords') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'discord') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else if (category == 'Tutoring') {
-					{
-						res.data.map((post, i) => {
-							if (post.tag) {
-								if (post.tag.toLowerCase() == 'turoring') {
-									p[p.length] = res.data[i];
-								}
-							}
-						});
-						setPosts(p);
-						setIsLoaded(true);
-					}
-				} else {
-					setPosts(res.data);
-					setIsLoaded(true);
-				}
+				console.log(searchURL);
+				setPosts(res.data);
+				setIsLoaded(true);
 			})
 
 			.catch((e) => {
@@ -113,8 +52,6 @@ const SearchResults = (props) => {
 				console.log(e);
 			});
 	}, []);
-
-	console.log(category);
 
 	const filterByName = () => {
 		let datafil = posts;
@@ -176,39 +113,39 @@ const SearchResults = (props) => {
 			{isLoaded && !!posts && posts !== [] && (
 				<div>
 					{category == 'Articles&Essays' ? (
-						<div class='header-image-1'>
+						<div className='header-image-1'>
 							<h1 className='header-text'> Articles & Essays </h1>
 						</div>
 					) : null}
 					{category == 'Art&Films' ? (
-						<div class='header-image-2'>
+						<div className='header-image-2'>
 							<h1 className='header-text'> Art & Films </h1>
 						</div>
 					) : null}
 					{category == 'Discords' ? (
-						<div class='header-image-3'>
+						<div className='header-image-3'>
 							<h1 className='header-text'> Discords </h1>
 						</div>
 					) : null}
 					{category == 'Clubs' ? (
-						<div class='header-image-4'>
+						<div className='header-image-4'>
 							<h1 className='header-text'> Clubs </h1>
 						</div>
 					) : null}
 					{category == 'Other' ? (
-						<div class='header-image-5'>
+						<div className='header-image-5'>
 							<h1 className='header-text'>Other</h1>
 						</div>
 					) : null}
 					{category == 'Tutoring' ? (
-						<div class='header-image-6'>
+						<div className='header-image-6'>
 							<h1 className='header-text'> Tutoring </h1>
 						</div>
 					) : null}
 					{(category == '') |
 					(category == 'Category') |
 					(category == 'All Posts') ? (
-						<div class='header-image-7'>
+						<div className='header-image-7'>
 							<h1 className='header-text'> SEARCH RESULTS </h1>
 						</div>
 					) : null}
