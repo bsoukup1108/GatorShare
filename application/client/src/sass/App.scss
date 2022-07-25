@@ -1317,3 +1317,34 @@ footer a {
 	padding: 2rem;
 	border: 1px solid purple;
 }
+
+
+.edit-btn{
+	margin: 5px 20px auto;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: black;
+	border-radius: remy(35px);
+	border-color: lighten($color: $secondary-bg, $amount: 10);
+	background: lighten($color: $secondary-bg, $amount: 10);
+		&:hover,
+		&:focus {
+			background: lighten($color: $secondary-bg, $amount: 15);
+		}
+}
+
+.delete-btn{
+	margin: 5px 20px auto;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: black;
+	border-radius: remy(35px);
+	border-color: red;
+	background: rgb(248, 41, 41);
+		&:hover,
+		&:focus {
+			background: lighten($color: rgb(248, 41, 41), $amount: 10);
+		}
+}
