@@ -1,3 +1,10 @@
+/**************************************************************
+ * Class:  CSC-648 Summer 2022
+ * Author: Aleksandr Gusev, Brianna Soukup
+ * Project: Gatorshare website
+ * File: CreatePost.js
+ * Description: this file includes all functions required for creating a post
+ **************************************************************/
 import React from 'react';
 import { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';

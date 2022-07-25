@@ -4,13 +4,12 @@
  * Project: Gatorshare website
  * File: auth.js
  * Description: this file includes all functions required for authentification
- *
  **************************************************************/
-
 import { ReactSession } from 'react-client-session';
 
 import http from '../http-common';
 import { alert } from './alert';
+
 
 // login function handles data for the Login page.
 export const login = (formData) => {
@@ -79,7 +78,7 @@ export const register = (formData) => {
 		role: [role],
 	})
 		.then((res) => {
-			// append success message
+			
 			alert('success', 'successfully signed up');
 
 			// redirects to login if succes or append an error message
@@ -91,13 +90,15 @@ export const register = (formData) => {
 		// handle errors
 		.catch(function (err) {
 			console.log(err);
-			// append error message if can't sign up
+			
 			alert('danger', 'failed to sign up...');
 
 			// reload page if the request failed
 			return window.location.reload();
 		});
 };
+
+
 
 // logout function handles signing out
 export const logout = () => {
@@ -106,9 +107,9 @@ export const logout = () => {
 
 	// if user logged in then clear the token
 	if (token) {
-		// append success message
+		
 		alert('warning', 'successfully logged out');
-		// clear local storage
+		
 		localStorage.clear();
 	} else {
 		// if can't log out, append and error message
