@@ -36,6 +36,12 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%Tutoring%'")
     List <Post> SearchWhereInputIsTutoring();
 
+    @Query("SELECT p FROM Post p where p.Tag LIke '%Clubs%'")
+    List <Post> SearchWhereInputIsClubs();
+
+    @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
+    List <Post> SearchWhereInputIsOthers();
+
     @Query("SELECT p FROM Post p ORDER BY p ASC")
     List <Post> SortAlphabetically();
 

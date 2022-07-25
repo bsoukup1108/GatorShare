@@ -97,6 +97,14 @@ public class postService implements PostServiceInterface{
         List<Post> posts = postrepo.SearchWhereInputIsAEssay();
         return posts;
     }
+    public List<Post> SearchWhereInputIsClub(){
+        List<Post> posts = postrepo.SearchWhereInputIsClubs();
+        return posts;
+    }
+    public List<Post> SearchWhereInputIsOthers(){
+        List<Post> posts = postrepo.SearchWhereInputIsOthers();
+        return posts;
+    }
 
     public List<Post> SearchWhereInputIsArtAndFilm(){
         List<Post> posts = postrepo.SearchWhereInputIsArtAndFilm();

@@ -189,6 +189,14 @@ public class GatorShareApplication {
 	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay(){
 		return ResponseEntity.ok(PostService.SearchWhereInputIsAEssa());
 	}
+	@GetMapping("search/{Clubs}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsClubs(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsClub());
+	}
+	@GetMapping("search/{Others}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsOthers(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
+	}
 
 
 

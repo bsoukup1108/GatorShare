@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.GatorShare.Dto.Admin;
 import com.GatorShare.Repo.AdminRepo;
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @Service
 
@@ -37,12 +38,13 @@ public class AdminService {
         String servletPath = request.getServletPath();
         String pathInfo = request.getPathInfo();
         String query = request.getQueryString();
+        LocalDateTime log_time = LocalDateTime.now();
 
         String other_info = scheme + serverName + portNumber + contextPath + servletPath + pathInfo + query;
 
         String clientIp = requestService.getClientIp(request);
 
-        String info_sys = "Here is the details : \n OS Name:- " + info + "IP_address:- " + clientIp + "\n Other Info:- " + other_info;
+        String info_sys = "Here is the details : \n OS Name:- " + info + "IP_address:- " + clientIp + "\n Other Info:- " + other_info + "\n logged time:- " + log_time;
 
 
         long Admin_id = 1;
@@ -60,6 +62,7 @@ public class AdminService {
     }
 
     public void Admin_info(){
+//        user info, student, teacher and tutor page updated
 
 //        the admin table is hardcoded because admin work close with dev team.It is not neccery for admin to create
 

@@ -23,7 +23,7 @@ import java.util.Set;
 @Table(name = "Admin")
 @Data
 public class Admin {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
