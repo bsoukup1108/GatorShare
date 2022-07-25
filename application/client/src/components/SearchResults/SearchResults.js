@@ -43,7 +43,7 @@ const SearchResults = () => {
 		searchURL = `/search/{Tutoring}?query=${searchTerm}`;
 	}
 
-	// set pager header to indicate category
+	// set search category dropdown to indicate category
 	if (category) {
 		if (category === '') {
 			document.getElementById('search-button-1').innerHTML = 'Category';
