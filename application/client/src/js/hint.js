@@ -20,6 +20,7 @@ let validationArr = {
 		lowerCase: false,
 		upperCase: false,
 		number: false,
+		special: false,
 	},
 	password2Flag: {
 		passwordsMatch: false,
@@ -58,6 +59,7 @@ const setOpacityToNull = () => {
 	document.getElementById('username-hint-8').style.opacity = 0;
 	document.getElementById('username-hint-9').style.opacity = 0;
 	document.getElementById('username-hint-10').style.opacity = 0;
+	document.getElementById('username-hint-11').style.opacity = 0;
 };
 
 export const validateUsername = (username) => {
@@ -191,11 +193,13 @@ export const validatePassword = (password) => {
 	document.getElementById('username-hint-7').style.opacity = 1;
 	document.getElementById('username-hint-8').style.opacity = 1;
 	document.getElementById('username-hint-9').style.opacity = 1;
+	document.getElementById('username-hint-11').style.opacity = 1;
 
 	passwordMinLength(password);
 	passwordContainsLowercase(password);
 	passwordContainsUppercase(password);
 	passwordContainsNumber(password);
+	passwordContainsSpecial(password);
 };
 
 let passwordMinLength = (password) => {
@@ -257,6 +261,22 @@ let passwordContainsNumber = (password) => {
 		el.classList.remove('alert-success');
 		el.classList.add('alert-secondary');
 		validationArr.passwordFlag.number = false;
+	}
+};
+
+let passwordContainsSpecial = (password) => {
+	let el = document.getElementById('username-hint-11');
+
+	let containsSpecialCh = /(?=.*[_!@#$%^&*])/;
+
+	if (containsSpecialCh.test(password)) {
+		el.classList.remove('alert-secondary');
+		el.classList.add('alert-success');
+		validationArr.passwordFlag.Special = true;
+	} else {
+		el.classList.remove('alert-success');
+		el.classList.add('alert-secondary');
+		validationArr.passwordFlag.Special = false;
 	}
 };
 

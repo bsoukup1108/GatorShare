@@ -111,6 +111,12 @@ const SignUp = () => {
 						>
 							contains a number
 						</div>
+						<div
+							id='username-hint-11'
+							class='alert alert-secondary text-muted '
+						>
+							contains a number
+						</div>
 						<div id='hint-username-5'>
 							<div
 								id='username-hint-10'
