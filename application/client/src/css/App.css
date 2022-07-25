@@ -508,6 +508,15 @@ label {
   height: 80vh !important;
 }
 
+#react-chat-inputBox {
+  margin-bottom: 0.1rem;
+  border: 1px solid;
+}
+
+#chat-container {
+  height: 90% !important;
+}
+
 .posts:hover {
   cursor: pointer;
   border-width: thick;

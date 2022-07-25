@@ -63,55 +63,21 @@ const Messages = () => {
 	};
 
 	return (
-		<div id='chat-container'>
-			<div id='side-bar'>
-				<button
-					type='button'
-					className='btn btn-lg btn-light message-btn'
-					style={{
-						width: '100%',
-						border: 'grey 1px solid ',
-						margin: '0rem auto',
-					}}
-				>
-					<span>AG</span> Avocado Green
-				</button>
-				<button
-					type='button'
-					className='btn btn-lg btn-light message-btn'
-					style={{
-						width: '100%',
-						border: 'grey 1px solid ',
-						margin: '0rem auto',
-					}}
-				>
-					<span>JD</span> John Doe
-				</button>
-				<button
-					type='button'
-					className='btn btn-lg btn-light message-btn'
-					style={{
-						width: '100%',
-						border: 'grey 1px solid ',
-						margin: '0rem auto',
-					}}
-				>
-					<span>MP</span> Max Payne
-				</button>
+		<>
+			<div id='group-chat-1'>
+				<h1>Group Chat</h1>
 			</div>
-			<div id='chat-window'>
-				<ChatBox
-					messages={messages}
-					userId={1}
-					onSendMessage={handleOnSendMessage}
-				/>
+			<div id='chat-container'>
+				<div id='chat-window'>
+					<ChatBox
+						messages={messages}
+						userId={1}
+						onSendMessage={handleOnSendMessage}
+					/>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
-
-// </>
-// );
-// };
 
 export default Messages;

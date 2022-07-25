@@ -580,7 +580,14 @@ label {
 	height: 80vh !important;
 }
 
+#react-chat-inputBox {
+	margin-bottom: 0.1rem;
+	border: 1px solid;
+}
 
+#chat-container {
+	height: 90% !important;
+}
 
 .posts:hover {
 	cursor: pointer;
@@ -1319,7 +1326,7 @@ footer a {
 }
 
 
-.edit-btn{
+.edit-btn {
 	margin: 5px 20px auto;
 	font-size: 0.95rem;
 	font-weight: 600;
@@ -1328,13 +1335,14 @@ footer a {
 	border-radius: remy(35px);
 	border-color: lighten($color: $secondary-bg, $amount: 10);
 	background: lighten($color: $secondary-bg, $amount: 10);
-		&:hover,
-		&:focus {
-			background: lighten($color: $secondary-bg, $amount: 15);
-		}
+
+	&:hover,
+	&:focus {
+		background: lighten($color: $secondary-bg, $amount: 15);
+	}
 }
 
-.delete-btn{
+.delete-btn {
 	margin: 5px 20px auto;
 	font-size: 0.95rem;
 	font-weight: 600;
@@ -1343,8 +1351,9 @@ footer a {
 	border-radius: remy(35px);
 	border-color: red;
 	background: rgb(248, 41, 41);
-		&:hover,
-		&:focus {
-			background: lighten($color: rgb(248, 41, 41), $amount: 10);
-		}
+
+	&:hover,
+	&:focus {
+		background: lighten($color: rgb(248, 41, 41), $amount: 10);
+	}
 }
