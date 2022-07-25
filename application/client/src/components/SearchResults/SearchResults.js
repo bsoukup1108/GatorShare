@@ -1,3 +1,12 @@
+/**************************************************************
+ * Class:  CSC-648 Summer 2022
+ * Author: Aleksandr Gusev, Brianna Soukup
+ * Project: Gatorshare website
+ * File: SearchResults.js
+ * Description: this file includes all functions and components
+ * required for search functionality
+ **************************************************************/
+
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
@@ -6,15 +15,19 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import { ReactSession } from 'react-client-session';
 
-import header from '../../img/Articles&Essays-header.jpg';
-
-const SearchResults = (props) => {
+// the main component that handles search results
+const SearchResults = () => {
+	// flag to indicate when results are fetched
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
+	// redirects to another component within react component
 	const navigate = useNavigate();
+	// what we search for
 	let searchTerm = ReactSession.get('searchTerm');
+	// get the searched category
 	let category = ReactSession.get('category');
 
+	// define the endpoint for the search depending on the category
 	let searchURL = `/search?query=${searchTerm}`;
 	if (category == 'Articles&Essays') {
 		searchURL = `/search/{Article}?query=${searchTerm}`;
@@ -30,6 +43,7 @@ const SearchResults = (props) => {
 		searchURL = `/search/{Tutoring}?query=${searchTerm}`;
 	}
 
+	// set pager header to indicate category
 	if (category) {
 		if (category === '') {
 			document.getElementById('search-button-1').innerHTML = 'Category';
@@ -39,20 +53,24 @@ const SearchResults = (props) => {
 		}
 	}
 
+	// the search request.
 	useEffect(() => {
 		http.get(searchURL)
 			.then((res) => {
 				console.log(searchURL);
+				// set results when fetched
 				setPosts(res.data);
+				// indicate that the page can be loaded
 				setIsLoaded(true);
 			})
-
+			// handle errors
 			.catch((e) => {
 				setIsLoaded(false);
 				console.log(e);
 			});
 	}, []);
 
+	// filtering withing the category by name
 	const filterByName = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
@@ -68,6 +86,8 @@ const SearchResults = (props) => {
 		});
 		return val;
 	};
+
+	// filtering withing the category by most recent
 	const filterByDate = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
@@ -85,6 +105,7 @@ const SearchResults = (props) => {
 		return val;
 	};
 
+	// filtering withing the category by most popular
 	const filterByLike = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
@@ -102,14 +123,17 @@ const SearchResults = (props) => {
 		return val;
 	};
 
+	// render the results
 	return (
 		<>
+			{/* load spinner until results are ready to be rendereds */}
 			{!isLoaded && <Spinner />}
 			{!isLoaded && posts === [] && (
 				<div>
 					<h1>NO RESULTS</h1>
 				</div>
 			)}
+			{/* render a header depending on the categorys */}
 			{isLoaded && !!posts && posts !== [] && (
 				<div>
 					{category == 'Articles&Essays' ? (
@@ -149,6 +173,7 @@ const SearchResults = (props) => {
 							<h1 className='header-text'> SEARCH RESULTS </h1>
 						</div>
 					) : null}
+					{/* sort dropdown */}
 					<div id='sort'>
 						<div className='dropdown'>
 							<button
@@ -195,6 +220,7 @@ const SearchResults = (props) => {
 						</div>
 					</div>
 
+					{/* return if no posts found */}
 					{posts.length === 0 ? (
 						<h1>WE DIDN'T FIND ANYTHING</h1>
 					) : (
@@ -202,6 +228,7 @@ const SearchResults = (props) => {
 							style={{ marginBottom: '1rem', marginTop: '1rem' }}
 						>
 							<div className='row row-cols-1 row-cols-md-3 g-4'>
+								{/* map through possts array and render each post */}
 								{posts.map((post, i) => {
 									return posts.length === 0 ? (
 										<div>
@@ -293,4 +320,5 @@ const SearchResults = (props) => {
 	);
 };
 
+// export SearchResults as default
 export default SearchResults;
