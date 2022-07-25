@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 
 
 import com.GatorShare.Dto.*;
+import com.GatorShare.Message.MessageDto;
+import com.GatorShare.Message.MessageService;
 import com.GatorShare.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -37,6 +39,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 @Slf4j
 
@@ -59,6 +62,8 @@ public class GatorShareApplication {
 	@Autowired
 	private RequestService requestService;
 
+	@Autowired
+	private MessageService messageService;
 
 	@Autowired
 	private postService PostService;
@@ -126,6 +131,9 @@ public class GatorShareApplication {
 	}
 
 
+
+
+
 	@GetMapping("login/id/{id}")
 	public ResponseEntity<User> getUserByID( @PathVariable(name = "id") final Long userId)
 	{
@@ -155,6 +163,12 @@ public class GatorShareApplication {
 		}
 	}
 
+	@PostMapping(value = "message")
+	@Transactional
+	public void sendMessage(@RequestBody MessageDto massageSent)
+	{
+		messageService.sendMessage(massageSent);
+	}
 	@GetMapping("search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));

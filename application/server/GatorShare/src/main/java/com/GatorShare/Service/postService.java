@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.GatorShare.Dto.Post;
-import com.GatorShare.Dto.User;
+import com.GatorShare.Dto.postimageDao;
+import com.GatorShare.Service.UserService;
 import com.GatorShare.Repo.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import com.GatorShare.Repo.PostRepo;
@@ -87,6 +88,10 @@ public class postService implements PostServiceInterface{
         List<Post> posts = postrepo.searchPosts(query);
         return posts;
     }
+
+
+
+
 
     public List<Post> SearchWhereInputIsArticle(){
         List<Post> posts = postrepo.SearchWhereInputIsArticle();
