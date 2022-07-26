@@ -18,5 +18,15 @@ public class MessageService
     @Transactional
     public void sendMessage(MessageDto massageDto){
         messageDao.sendMessage(massageDto);
+
     }
+
+    public List<Message> getMessages(String email, Integer User_ID){
+        return messageDao.getMessages(email, User_ID);
+    }
+
+    public void updatedMessageTobeSeen(String email, Integer User_id){
+        messageDao.updateMessagesToBeSeen(email, User_id);
+    }
+
 }

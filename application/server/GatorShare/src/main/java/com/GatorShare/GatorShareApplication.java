@@ -5,11 +5,13 @@ import java.util.NoSuchElementException;
 
 
 import com.GatorShare.Dto.*;
+import com.GatorShare.Message.Message;
 import com.GatorShare.Message.MessageDto;
 import com.GatorShare.Message.MessageService;
 import com.GatorShare.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -75,10 +77,7 @@ public class GatorShareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
-	// @RequestMapping("/test")
-	// public String test(){
-	// return "{Test: test}";
-	// }
+
 	@GetMapping("/")
 	public String index(HttpServletRequest request) {
 
@@ -169,7 +168,17 @@ public class GatorShareApplication {
 	{
 		messageService.sendMessage(massageSent);
 	}
-	@GetMapping("search")
+
+	@GetMapping(value = "message/all/UserId")
+	public List<Message> getMessages(@RequestHeader(value="email") String email, @PathVariable Integer User_ID){
+		return messageService.getMessages(email, User_ID);
+	}
+
+	@GetMapping(value = "message/{userID}")
+	public void updatedMessages(@RequestHeader(value="email") String email, Integer User_ID){
+		messageService.updatedMessageTobeSeen(email, User_ID);
+	}
+	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));
 	}
@@ -199,7 +208,7 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsTutoring());
 	}
 
-	@GetMapping("search/{ESSAY}")
+	@GetMapping("search/{Essay}")
 	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay(){
 		return ResponseEntity.ok(PostService.SearchWhereInputIsAEssa());
 	}
@@ -207,8 +216,10 @@ public class GatorShareApplication {
 	public ResponseEntity<List<Post>> SearchWhereInputIsClubs(){
 		return ResponseEntity.ok(PostService.SearchWhereInputIsClub());
 	}
+
 	@GetMapping("search/{Others}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsOthers(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsOthers()
+	{
 		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
 	}
 
@@ -273,21 +284,5 @@ public class GatorShareApplication {
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-	// @GetMapping("/search")
-	// public ResponseEntity<List<AboutUsDto>> searchPost(@RequestParam("query")
-	// String query){
-	// return ResponseEntity.ok(userService.searchPost(query));
-	// }
 
 }
