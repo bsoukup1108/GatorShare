@@ -313,3 +313,88 @@ export const validateRole = (role) => {
 let roleExist = (role) => {
 	validationArr.roleFlag = true;
 };
+
+const checkUsername = (username) => {
+	/**
+	 * RegEx explanation
+	 * ^			--> Start of the string
+	 * [A-Za-z]		--> Matches first charachter in the range between (a and z) and (A and Z)
+	 * [A-Za-z0-9]	--> Matches any charachter in the range between (a and z) and (A and Z) and (0 and 9)
+	 * {7,}			--> matches the previous token between 7 and unlimited times
+	 * $			--> end of the string
+	 */
+	let onlyAlphaNumWithFirstLetterMin8 = /^[A-Za-z][A-Za-z0-9]{7,}$/;
+
+	return onlyAlphaNumWithFirstLetterMin8.test(username);
+};
+
+const checkEmail = (email) => {
+	/**
+	 * RegEx explanation
+	 * ^			--> Start of the string
+	 * [-.\w]		--> Matches a single character: . or - or _ or digit or any word character (equivalent to [a-zA-Z0-9_])
+	 * {3,}			--> matches the previous token between 3 and unlimited times
+	 * \.			--> matches the character .
+	 * \@ 			--> matches the character @
+	 * + 			--> matches the previous token between one and unlimited times
+	 * $			--> end of the string
+	 */
+	let isEmail = /^[-.\w]{3,}\@[-.\w]{3,}\.[-.\w]+$/;
+
+	return isEmail.test(email);
+};
+
+const checkPassword = (password) => {
+	/**
+	 * RegEx explanation
+	 * ^			--> Start of the string
+	 * ?=			--> Positive Lookahead
+	 * . 			--> matches any character (
+	 * *			--> matches the previous token between zero and unlimited times
+	 * ()			--> Capturing Group - matches any position
+	 * {8,}			--> matches the previous token between 8 and unlimited times
+	 * [a-z]		--> matches a single character in the range between a and z (case sensitive)
+	 * [A-Z]		--> matches a single character in the range between A and Z (case sensitive)
+	 * [0-9]		--> matches a single character in the range between 0 and 9 (case sensitive)
+	 * [_!@#$%^&*]	--> matches a single character present in the list [_!@#$%^&*]
+	 * \w			--> matches a single character present in the list [a-zA-Z0-9_]
+	 * $			--> end of the string
+	 */
+	let isPassword =
+		/(?=.*[0-9])(?=.*[_!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[!@#$%^&*\w]{8,}/;
+
+	return isPassword.test(password);
+};
+
+const checkPassword2 = (password, password2) => {
+	return password === password2;
+};
+
+const checkAge = (age) => {
+	return age >= 13;
+};
+
+const checkAgreement = (agreement) => {
+	return agreement;
+};
+
+export const registrationValidation = (req, res, next) => {
+	let firstname = document.getElementById('sign-up-fn-1').value;
+	let lastname = document.getElementById('sign-up-ln-1').value;
+	let email = document.getElementById('sign-up-em-1').value;
+	let password = document.getElementById('signup-password').value;
+	let password2 = document.getElementById('signup-password-2').value;
+	let role1 = document.getElementById('student').checked;
+	let role2 = document.getElementById('professor').checked;
+	let role3 = document.getElementById('tutor').checked;
+
+	if ((password !== password2) | !firstname | !lastname | !email) {
+		alert('danger', "passwords don't match");
+		return false;
+	} else if (!(role1 | role2 | role3)) {
+		alert('danger', 'choose a role');
+		return false;
+	} else {
+		return true;
+	}
+};

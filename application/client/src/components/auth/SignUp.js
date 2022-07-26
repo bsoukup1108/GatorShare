@@ -11,8 +11,8 @@ import {
 	validateEmail,
 	validatePassword,
 	validatePassword2,
-	getValidationFlag,
 	validateRole,
+	registrationValidation,
 } from '../../js/hint';
 
 const SignUp = () => {
@@ -35,9 +35,9 @@ const SignUp = () => {
 	const onSubmit = async (e) => {
 		e.preventDefault();
 
-		!getValidationFlag()
-			? alert('the information is not valid')
-			: register(formData);
+		registrationValidation()
+			? register(formData)
+			: alert('the information is not valid');
 	};
 
 	// redirect if logged in
@@ -94,6 +94,12 @@ const SignUp = () => {
 							At least 8 characters
 						</div>
 						<div
+							id='username-hint-11'
+							class='alert alert-secondary text-muted '
+						>
+							contains a special character
+						</div>
+						<div
 							id='username-hint-7'
 							class='alert alert-secondary text-muted '
 						>
@@ -111,12 +117,7 @@ const SignUp = () => {
 						>
 							contains a number
 						</div>
-						<div
-							id='username-hint-11'
-							class='alert alert-secondary text-muted '
-						>
-							contains a number
-						</div>
+
 						<div id='hint-username-5'>
 							<div
 								id='username-hint-10'
@@ -171,6 +172,7 @@ const SignUp = () => {
 								</label>
 
 								<input
+									id='sign-up-fn-1'
 									className='form-control'
 									type='text'
 									placeholder='FirstName'
@@ -192,6 +194,7 @@ const SignUp = () => {
 									Last Name
 								</label>
 								<input
+									id='sign-up-ln-1'
 									className='form-control'
 									type='text'
 									placeholder='LastName'
@@ -214,6 +217,7 @@ const SignUp = () => {
 							<input
 								className='form-control'
 								type='email'
+								id='sign-up-em-1'
 								placeholder='Email Address'
 								name='email'
 								value={email}
