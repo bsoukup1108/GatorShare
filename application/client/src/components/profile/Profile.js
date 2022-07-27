@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { getToken } from '../../js/useToken';
@@ -27,32 +27,28 @@ const Profile = () => {
 	const [userData, setUserData] = useState([]);
 	const [edit, setEdit] = useState(false);
 
-	useEffect(() => {
-		http('login/id/' + userId).then((res) => {
-			setUserData(res.data);
-		});
-	}, [userId]);
+	http('login/id/' + userId).then((res) => {
+		setUserData(res.data);
+	});
 
-	useEffect(() => {
-		http('/posts')
-			.then((res) => {
-				setIsLoaded(false);
+	http('/posts')
+		.then((res) => {
+			setIsLoaded(false);
 
-				let p = [];
-				res.data.map((post, i) => {
-					if (post.id === userId) {
-						p[p.length] = res.data[i];
-					}
-				});
-				setPosts(p);
-				console.log(posts);
-				setIsLoaded(true);
-			})
-			.catch((e) => {
-				setIsLoaded(false);
-				console.log(e);
+			let p = [];
+			res.data.map((post, i) => {
+				if (post.id === userId) {
+					p[p.length] = res.data[i];
+				}
 			});
-	}, [userId]);
+			setPosts(p);
+			setIsLoaded(true);
+		})
+		.catch((e) => {
+			setIsLoaded(false);
+			console.log(e);
+		});
+
 	let eMail = '';
 	let role = 'Student';
 	let firstname = 'Anonymous';

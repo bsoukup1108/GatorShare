@@ -1178,7 +1178,7 @@ footer a :hover {
   background: #fa5a5a;
 }
 
-#navbar-right-2 {
+.navbar-right-2 {
   display: flex;
   height: fit-content;
 }

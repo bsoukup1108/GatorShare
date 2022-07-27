@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ChatFeed, Message } from 'react-chat-ui';
 import ChatBox, { ChatFrame } from 'react-chat-plugin';

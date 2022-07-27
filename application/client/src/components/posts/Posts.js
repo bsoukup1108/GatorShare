@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
+import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -21,7 +23,6 @@ const Posts = () => {
 				setIsLoaded(false);
 			});
 	}, []);
-	console.log(posts);
 
 	const filterByName = () => {
 		let datafil = posts;
@@ -70,6 +71,10 @@ const Posts = () => {
 		});
 		console.log(val);
 		return val;
+	};
+
+	const saveIdToLoacalStorage = (postId) => {
+		ReactSession.set('postId', postId);
 	};
 
 	return (
@@ -130,11 +135,12 @@ const Posts = () => {
 									<div
 										key={`posts-post-${i}`}
 										className='col'
+										onClick={saveIdToLoacalStorage(post.id)}
 									>
 										<div
 											className='card posts'
 											onClick={() => {
-												navigate(`/post/${post.id}`);
+												navigate(`/posts/${post.id}`);
 												return false;
 											}}
 										>

@@ -6,21 +6,19 @@ import About from './components/about/About';
 import Footer from './components/footer/Footer';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
-import Profile from './components/profile/Profile';
 import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
-
+import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
 
 import { ReactSession } from 'react-client-session';
+import Aboutus from './components/about/About';
 
-const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
-const PostLayout = React.lazy(() => import('./components/posts/Post'));
-const UserProfile = React.lazy(() => import('./components/profile/Profile'));
+import Post from './components/posts/Post';
+import Profile from './components/profile/Profile';
 
-const Aboutus = React.lazy(() => import('./components/about/About'));
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')
 );
@@ -69,23 +67,12 @@ const App = () => {
 							/>
 
 							<Route path='/rules' element={<Agreement />} />
-							<Route
-								path='/about'
-								element={
-									<Suspense fallback={<Spinner />}>
-										<About />
-									</Suspense>
-								}
-							/>
+							<Route path='/about' element={<Aboutus />} />
 
 							<Route
 								exact
 								path='/profile'
-								element={
-									<Suspense fallback={<Spinner />}>
-										<UserProfile />
-									</Suspense>
-								}
+								element={<Profile />}
 							/>
 							<Route
 								exact
@@ -99,25 +86,8 @@ const App = () => {
 									element={<CreatePost />}
 								/>
 							)}
-							<Route
-								exact
-								path='/posts'
-								element={
-									<Suspense fallback={<Spinner />}>
-										<PostsLayout />
-									</Suspense>
-								}
-							/>
-							{
-								<Route
-									path='/post/:id'
-									element={
-										<Suspense fallback={<Spinner />}>
-											<PostLayout />
-										</Suspense>
-									}
-								/>
-							}
+							<Route exact path='/posts' element={<Posts />} />
+							{<Route path='/posts/:id' element={<Post />} />}
 						</Routes>
 					</div>
 					<Footer />

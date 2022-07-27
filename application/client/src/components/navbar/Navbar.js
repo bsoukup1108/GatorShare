@@ -20,7 +20,7 @@ const Navbar = (props) => {
 	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
 	const authLinks = (
 		<>
-			<div id='navbar-right-2'>
+			<div className='navbar-right-2'>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
@@ -113,7 +113,7 @@ const Navbar = (props) => {
 	);
 	const guestLinks = (
 		<>
-			<div>
+			<div className='navbar-right-2'>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
@@ -127,29 +127,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 			</div>
-			{/* <div className='dropdown me-1 '>
-				<a
-					className='btn btn-secondary dropdown-toggle'
-					href='/#'
-					role='button'
-					id='dropdownMenuLink'
-					data-bs-toggle='dropdown'
-					aria-expanded='false'
-				>
-					<i className='fa-solid fa-bell '></i>
-				</a>
 
-				<ul
-					className='dropdown-menu dropdown-menu-end'
-					aria-labelledby='dropdownMenuOffset'
-				>
-					<li>
-						<a className='dropdown-item' href='/login'>
-							You must sign in to see notifications
-						</a>
-					</li>
-				</ul>
-			</div> */}
 			<div className='dropdown me-1'>
 				<a
 					className='btn btn-secondary dropdown-toggle'

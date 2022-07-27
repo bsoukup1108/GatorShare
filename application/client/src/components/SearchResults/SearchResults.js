@@ -57,7 +57,6 @@ const SearchResults = () => {
 	useEffect(() => {
 		http.get(searchURL)
 			.then((res) => {
-				console.log(searchURL);
 				// set results when fetched
 				setPosts(res.data);
 				// indicate that the page can be loaded

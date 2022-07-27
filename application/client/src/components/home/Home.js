@@ -13,7 +13,6 @@ const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		http(`/posts`)
 			.then((res) => {
