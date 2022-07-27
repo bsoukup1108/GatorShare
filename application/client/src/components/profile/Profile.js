@@ -354,7 +354,7 @@ const Profile = () => {
 																	className='card posts'
 																	onClick={() => {
 																		navigate(
-																			`/post/${post.id}`
+																			`/posts/${post.id}`
 																		);
 																		return false;
 																	}}
