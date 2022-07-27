@@ -45,6 +45,9 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p ORDER BY p ASC")
     List <Post> SortAlphabetically();
 
+    @Query("SELECT p FROM Post p ORDER BY p.photo_Like DESC")
+    List <Post> SortByLIke();
+
     List<Post> findPostByUserOrderById(User user);
 
     List<Post> findAllByOrderByIdDesc();

@@ -31,6 +31,9 @@ public class Post {
 	@Column(columnDefinition = "TEXT")
 	private String Description;
 
+	@Column(columnDefinition = "integer")
+	private Integer photo_Like;
+
 	@Column(name = "picture", length = Integer.MAX_VALUE, nullable = true)
 	private byte [] photos;
 
@@ -82,6 +85,14 @@ public class Post {
 
 	public void SetTitle(String Title){
 		this.Title = Title;
+	}
+
+	public int getLikes() {
+		return photo_Like;
+	}
+
+	public void setLikes(int likes) {
+		photo_Like = likes;
 	}
 
 	public Date getCreatedDate() {

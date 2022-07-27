@@ -1,5 +1,6 @@
 package com.GatorShare.Message;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,19 +24,30 @@ public class Message {
     @GeneratedValue
     Long id;
 
-    @Column(name = "from_user_id")
-    Long fromUserId;
+    @JsonIgnoreProperties
+    @Column(name = "senderName")
+    private String senderName;
 
-    @Column(name = "to_user_id")
-    Long toUserId;
-    @Column
-    String message;
+
+    @JsonIgnoreProperties
+    @Column(name = "receiverName")
+    private String receiverName;
+
+    @JsonIgnoreProperties
+    @Column(name="message")
+    private String message;
 
     @Column(name = "message_seen")
-    Boolean messageSeen;
+    private Boolean messageSeen;
+
+    @Column(name = "status")
+    private String status;
+
 
     @Column(name = "Date_sent")
     LocalDateTime dateSent;
+
+
 
     public Boolean getMessageSeen() {
         return messageSeen;
@@ -45,20 +57,10 @@ public class Message {
         this.messageSeen = messageSeen;
     }
 
-    public Long getToUserId() {
-        return toUserId;
+    public String getSenderName() {
+        return senderName;
     }
 
-    public void setToUserId(Long toUserId) {
-        this.toUserId = toUserId;
-    }
-    public Long getFromId() {
-        return fromUserId;
-    }
-
-    public void setFromId(Long tofromId) {
-        this.fromUserId = tofromId;
-    }
 
 
     public Long getMessageId() {
@@ -77,15 +79,9 @@ public class Message {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", fromUserId=" + fromUserId +
-                ", toUserId=" + toUserId +
-                ", message='" + message + '\'' +
-                ", dateSent=" + dateSent +
-                '}';
-    }
 
+
+    public String getReceiverName() {
+        return receiverName;
+    }
 }

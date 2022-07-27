@@ -5,13 +5,14 @@ import java.util.NoSuchElementException;
 
 
 import com.GatorShare.Dto.*;
-import com.GatorShare.Message.Message;
-import com.GatorShare.Message.MessageDto;
-import com.GatorShare.Message.MessageService;
+import com.GatorShare.Message.*;
 import com.GatorShare.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +42,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 
 @Slf4j
 
@@ -64,8 +64,7 @@ public class GatorShareApplication {
 	@Autowired
 	private RequestService requestService;
 
-	@Autowired
-	private MessageService messageService;
+
 
 	@Autowired
 	private postService PostService;
@@ -74,6 +73,9 @@ public class GatorShareApplication {
 	private AdminService adminService;
 	@Autowired
 	public HttpServletRequest request;
+
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
@@ -93,6 +95,14 @@ public class GatorShareApplication {
 
 		return new ResponseEntity<List<AboutUsDto>>(Aboutusers, HttpStatus.OK);
 	}
+
+//	@PostMapping("message")
+//	public void sendMessagePersonal(@DestinationVariable String to, MessageDto message) {
+//
+//		messageService.sendMessage(to,message);
+//
+//	}
+
 
 	@GetMapping("aboutus/id/{id}")
 	public ResponseEntity<AboutUsDto> getUserById(
@@ -144,6 +154,22 @@ public class GatorShareApplication {
 				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@MessageMapping("/message")
+	@SendTo("/chatroom/public")
+	public Message receiveMessage(@Payload Message message){
+		return message;
+	}
+	@MessageMapping("/private-message")
+	public Message recMessage(@Payload Message message){
+		simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
+		System.out.println(message.toString());
+		return message;
+	}
+
+
+
+
 	@GetMapping(value = "/posts")
 	public ResponseEntity<List<Post>> getAllPost() {
 		List<Post> posts = this.PostService.getAllPosts();
@@ -162,22 +188,12 @@ public class GatorShareApplication {
 		}
 	}
 
-	@PostMapping(value = "message")
-	@Transactional
-	public void sendMessage(@RequestBody MessageDto massageSent)
-	{
-		messageService.sendMessage(massageSent);
-	}
 
-	@GetMapping(value = "message/all/UserId")
-	public List<Message> getMessages(@RequestHeader(value="email") String email, @PathVariable Integer User_ID){
-		return messageService.getMessages(email, User_ID);
-	}
 
-	@GetMapping(value = "message/{userID}")
-	public void updatedMessages(@RequestHeader(value="email") String email, Integer User_ID){
-		messageService.updatedMessageTobeSeen(email, User_ID);
-	}
+//	@GetMapping(value = "message/{userID}")
+//	public void updatedMessages(@RequestHeader(value="email") String email, Integer User_ID){
+//		messageService.updatedMessageTobeSeen(email, User_ID);
+//	}
 	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));
@@ -223,14 +239,19 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
 	}
 
+	@GetMapping("search/{Like}")
+	public ResponseEntity<List<Post>> SortByLike()
+	{
+		return ResponseEntity.ok(PostService.SortByLike());
+	}
 
 
 
 	@PostMapping("post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("Likes") int Likes) {
 		String message = "";
 		try{
-			PostService.store(Image, tag, Titile, DEsc);
+			PostService.store(Image, tag, Titile, DEsc, Likes);
 			message = "uploaded the post successfully: "+ Image.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){

@@ -46,7 +46,7 @@ public class postService implements PostServiceInterface{
 
     public HttpServletRequest request;
 
-    public void store(MultipartFile image, String tag, String Title, String description) throws IOException {
+    public void store(MultipartFile image, String tag, String Title, String description, int photo_likes) throws IOException {
         String uploadDic = request.getServletContext().getRealPath(uploadfolder);
         String fileName = image.getOriginalFilename();
         String FilePath = Paths.get(uploadDic, fileName).toString();
@@ -73,6 +73,7 @@ public class postService implements PostServiceInterface{
         post.setPhotos(imageData);
         post.setDescription(description);
         post.setTag(tag);
+        post.setLikes(photo_likes);
         post.setCreatedDate(createDate);
         postrepo.save(post);
     }
@@ -128,6 +129,10 @@ public class postService implements PostServiceInterface{
 
     public List<Post> SearchWhereInputIsDiscords(){
         List<Post> posts = postrepo.SearchWhereInputIsDiscords();
+        return posts;
+    }
+    public List<Post> SortByLike(){
+        List<Post> posts = postrepo.SortByLIke();
         return posts;
     }
 

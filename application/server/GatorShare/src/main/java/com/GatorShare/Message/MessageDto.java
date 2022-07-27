@@ -1,5 +1,6 @@
 package com.GatorShare.Message;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,33 @@ import lombok.Setter;
 @NoArgsConstructor
 
 public class MessageDto {
-    Long fromUserId;
 
-    Long toUserId;
+    @JsonIgnoreProperties
+    private String message;
+    private int fromLogin;
 
-    String message;
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getFromLogin() {
+        return fromLogin;
+    }
+
+    public void setFromLogin(int fromLogin) {
+        this.fromLogin = fromLogin;
+    }
+
+    @Override
+    public String toString() {
+        return "MessageDTO{" +
+                "message='" + message + '\'' +
+                ", fromLogin=" + fromLogin +
+                '}';
+    }
 
 }
