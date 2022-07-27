@@ -376,8 +376,8 @@ label {
 	text-align: center;
 }
 
-.who-check{
-	width : max-content;
+.who-check {
+	width: max-content;
 }
 
 .who-input {
@@ -814,6 +814,7 @@ label {
 	align-items: center;
 	justify-content: center;
 	align-content: center;
+	flex-wrap: nowrap;
 }
 
 .gradient-hor {
@@ -1360,4 +1361,58 @@ footer a {
 	&:focus {
 		background: lighten($color: rgb(248, 41, 41), $amount: 10);
 	}
+}
+
+#navbar-right-2 {
+	display: flex;
+	height: fit-content;
+}
+
+#navbar-right {
+	width: 100%;
+
+}
+
+#navbar-left-1 {
+	display: flex;
+	flex-wrap: nowrap;
+	width: 100%;
+}
+
+@media screen and (max-width: 760px) {
+	.flex-center {
+		align-content: flex-start;
+		flex-wrap: wrap;
+	}
+
+	.navbar-right {
+		width: 100%;
+		justify-content: flex-end;
+	}
+
+	#navbar-right-2 {
+		width: 100%;
+
+		>* {
+			width: 30%
+		}
+	}
+
+	#wrapper {
+		grid-template-rows: 110px auto 150px;
+
+	}
+
+	footer {
+		height: 100% !important;
+	}
+
+	#createPostWrapper {
+		width: max-content
+	}
+
+	#chat-container {
+		min-width: 0;
+	}
+
 }

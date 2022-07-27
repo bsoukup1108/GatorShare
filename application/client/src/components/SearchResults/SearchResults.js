@@ -38,7 +38,7 @@ const SearchResults = () => {
 	} else if (category == 'Discords') {
 		searchURL = `/search/{Discord}?query=${searchTerm}`;
 	} else if (category == 'Other') {
-		searchURL = `/search/{Other}?query=${searchTerm}`;
+		searchURL = `/search/{Others}?query=${searchTerm}`;
 	} else if (category == 'Tutoring') {
 		searchURL = `/search/{Tutoring}?query=${searchTerm}`;
 	}
