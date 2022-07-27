@@ -1378,6 +1378,16 @@ footer a {
 }
 
 @media screen and (max-width: 760px) {
+	.auth {
+		flex-direction: column;
+		height: 100%;
+		width: 100%
+	}
+
+	#login-btn-1 {
+		margin: 60px 0 0;
+	}
+
 	.flex-center {
 		align-content: flex-start;
 		flex-wrap: wrap;
@@ -1388,11 +1398,12 @@ footer a {
 		justify-content: flex-end;
 	}
 
-	#navbar-right-2 {
+	.navbar-right-2 {
 		width: 100%;
 
 		>* {
-			width: 30%
+			width: -webkit-fill-available;
+			;
 		}
 	}
 
@@ -1413,4 +1424,14 @@ footer a {
 		min-width: 0;
 	}
 
+	.container-home-links>* {
+		flex-direction: column;
+
+		>* {
+			padding: 2rem
+		}
+	}
+
 }
+
+@media screen and (max-width: 480px) {}
