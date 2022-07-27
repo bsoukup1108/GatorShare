@@ -550,28 +550,23 @@ label {
 
 
 	#home-content::after {
-		content: " Home";
+		content: "";
 		color: white;
 
-	}
-
-	#about-content::after {
-		content: "  About";
-		color: white;
 	}
 
 	#messages-content::after {
-		content: "  Messages";
+		content: "";
 		color: white;
 	}
 
 	#posts-content::after {
-		content: " Posts";
+		content: "";
 		color: white;
 	}
 
 	#create-content::after {
-		content: " Create Post";
+		content: "";
 		color: white;
 	}
 }
@@ -807,14 +802,17 @@ label {
 }
 
 
-
+#search-text {
+	min-width: 50px;
+}
 
 .flex-center {
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	align-content: center;
 	flex-wrap: nowrap;
+	align-items: stretch;
+
 }
 
 .gradient-hor {

@@ -484,23 +484,19 @@ label {
     content: "";
   }
   #home-content::after {
-    content: " Home";
-    color: white;
-  }
-  #about-content::after {
-    content: "  About";
+    content: "";
     color: white;
   }
   #messages-content::after {
-    content: "  Messages";
+    content: "";
     color: white;
   }
   #posts-content::after {
-    content: " Posts";
+    content: "";
     color: white;
   }
   #create-content::after {
-    content: " Create Post";
+    content: "";
     color: white;
   }
 }
@@ -722,12 +718,16 @@ label {
   width: 100%;
 }
 
+#search-text {
+  min-width: 50px;
+}
+
 .flex-center {
   display: flex;
   align-items: center;
-  justify-content: center;
   align-content: center;
   flex-wrap: nowrap;
+  align-items: stretch;
 }
 
 .gradient-hor {
