@@ -55,11 +55,11 @@
 		"type": "git",
 		"url": "git+https://github.com/sfsu-joseo/csc648-848-01-sw-engineering-summer-22-team01.git"
 	},
-	"proxy": "http://localhost:1234",
+	"proxy": "http://ec2-54-193-53-30.us-west-1.compute.amazonaws.com:5000/",
 	"author": "Team 01",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/sfsu-joseo/csc648-848-01-sw-engineering-summer-22-team01/issues"
 	},
-	"homepage": "https://github.com/sfsu-joseo/csc648-848-01-sw-engineering-summer-22-team01#readme"
+	"homepage": "./"
 }
