@@ -27,7 +27,7 @@ export const login = (formData) => {
 				const token = response.data.token;
 				// user's id
 				id = response.data.id;
-				username = response.data.username;
+				username = response.data.firstName || 'Unknown';
 
 				// store token and logged in user id
 				ReactSession.set('token', token);
