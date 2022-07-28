@@ -76,11 +76,7 @@ const App = () => {
 								path='/profile'
 								element={<Profile />}
 							/>
-							<Route
-								exact
-								path='/messages'
-								element={<Messages />}
-							/>
+							<Route exact path='/xxx' element={<Messages />} />
 							{isAuthenticated && (
 								<Route
 									exact
@@ -91,7 +87,7 @@ const App = () => {
 							{isAuthenticated && (
 								<Route
 									exact
-									path='/chatRoom'
+									path='/messages'
 									element={<ChatRoom />}
 								/>
 							)}

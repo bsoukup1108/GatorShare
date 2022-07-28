@@ -1,11 +1,17 @@
 package com.GatorShare.Dto;
 
+import com.GatorShare.Message.Message;
+
 public class UserDTO {
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+
+
+    Message lastMessage;
+
 
     public String getfirstName(){
         return firstName;

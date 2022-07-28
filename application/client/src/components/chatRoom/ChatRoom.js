@@ -4,6 +4,7 @@ import SockJS from 'sockjs-client';
 import { ReactSession } from 'react-client-session';
 
 var stompClient = null;
+
 const ChatRoom = () => {
 	const [privateChats, setPrivateChats] = useState(new Map());
 	const [publicChats, setPublicChats] = useState([]);
@@ -14,14 +15,12 @@ const ChatRoom = () => {
 		connected: false,
 		message: '',
 	});
+
+	let username = ReactSession.get('username') | 'unknown';
+
 	useEffect(() => {
-		console.log(userData);
-	}, [userData]);
-
-	let username = ReactSession.get('username');
-
-	// username
-	setUserData({ ...userData, username: username });
+		setUserData({ ...userData, username: username });
+	}, []);
 
 	const connect = () => {
 		let Sock = new SockJS('http://localhost:1234/ChatRoom');

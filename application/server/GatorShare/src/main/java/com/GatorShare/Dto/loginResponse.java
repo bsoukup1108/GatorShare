@@ -6,6 +6,26 @@ public class loginResponse {
 
     private Long id;
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    private String firstName;
+
+    private String lastname;
+
     public String getStatus(){
         return status;
     }
@@ -28,7 +48,8 @@ public class loginResponse {
 
 
 
-    public loginResponse(String status, String token, Long Id){
+    public loginResponse(String status, String token, Long Id, String firstName){
+        this.firstName = firstName;
         this.id = Id;
         this.token = token;
         this.status= status;

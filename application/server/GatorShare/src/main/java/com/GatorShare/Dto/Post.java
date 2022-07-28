@@ -25,9 +25,17 @@ public class Post {
 	@Column(columnDefinition="TEXT")
 	private String Title;
 
+	@Column(columnDefinition = "TEXT")
+	private String Tag;
 
-	@Column(columnDefinition="TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String Description;
+
+	@Column(columnDefinition = "integer")
+	private Integer photo_Like;
+
+	@Column(name = "picture", length = Integer.MAX_VALUE, nullable = true)
+	private byte [] photos;
 
 	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
@@ -43,8 +51,20 @@ public class Post {
 		this.id = id;
 	}
 
+	public void setTag(String tag){
+		this.Tag = tag;
+	}
+
+	public void setPhotos(byte [] Photo){
+		this.photos = Photo;
+	}
+
 	public User getUser() {
 		return user;
+	}
+
+	public byte [] getPhoto(){
+		return photos;
 	}
 
 	public String getTitle(){
@@ -65,6 +85,14 @@ public class Post {
 
 	public void SetTitle(String Title){
 		this.Title = Title;
+	}
+
+	public int getLikes() {
+		return photo_Like;
+	}
+
+	public void setLikes(int likes) {
+		photo_Like = likes;
 	}
 
 	public Date getCreatedDate() {
