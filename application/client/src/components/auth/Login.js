@@ -4,10 +4,7 @@ import { login } from '../../js/auth';
 import { getToken } from '../../js/useToken';
 import { ReactSession } from 'react-client-session';
 
-const Login = (props) => {
-	// const [isAuthenticated, setIsAuthenticated] = useState(props.isAuthenticated);
-	const { isAuthenticated } = props;
-
+const Login = () => {
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',

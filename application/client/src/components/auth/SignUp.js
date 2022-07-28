@@ -11,6 +11,8 @@ import {
 	validateEmail,
 	validatePassword,
 	validatePassword2,
+	validateRole,
+	registrationValidation,
 } from '../../js/hint';
 
 const SignUp = () => {
@@ -28,18 +30,14 @@ const SignUp = () => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
-			[e.target.lastname]: e.target.value,
 		});
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		// if (password !== password2) {
-		// 	console.log('passwords do not match', 'danger');
-		// } else {
-		document.getElementById('signup-btn-1').style.visibility = 'hidden';
 
-		register(formData);
-		// }
+		registrationValidation()
+			? register(formData)
+			: alert('the information is not valid');
 	};
 
 	// redirect if logged in
@@ -62,7 +60,7 @@ const SignUp = () => {
 							id='username-hint-2'
 							class='alert alert-secondary text-muted'
 						>
-							At least 3 charaters
+							At least 3 characters
 						</div>
 					</div>
 
@@ -77,7 +75,7 @@ const SignUp = () => {
 							id='username-hint-4'
 							class='alert alert-secondary text-muted'
 						>
-							At least 3 charaters
+							At least 3 characters
 						</div>
 					</div>
 					<div id='hint-username-3'>
@@ -93,7 +91,13 @@ const SignUp = () => {
 							id='username-hint-6'
 							class='alert alert-secondary text-muted '
 						>
-							At least 8 charachters
+							At least 8 characters
+						</div>
+						<div
+							id='username-hint-11'
+							class='alert alert-secondary text-muted '
+						>
+							contains a special character
 						</div>
 						<div
 							id='username-hint-7'
@@ -113,6 +117,7 @@ const SignUp = () => {
 						>
 							contains a number
 						</div>
+
 						<div id='hint-username-5'>
 							<div
 								id='username-hint-10'
@@ -167,6 +172,7 @@ const SignUp = () => {
 								</label>
 
 								<input
+									id='sign-up-fn-1'
 									className='form-control'
 									type='text'
 									placeholder='FirstName'
@@ -188,6 +194,7 @@ const SignUp = () => {
 									Last Name
 								</label>
 								<input
+									id='sign-up-ln-1'
 									className='form-control'
 									type='text'
 									placeholder='LastName'
@@ -210,6 +217,7 @@ const SignUp = () => {
 							<input
 								className='form-control'
 								type='email'
+								id='sign-up-em-1'
 								placeholder='Email Address'
 								name='email'
 								value={email}
@@ -269,43 +277,62 @@ const SignUp = () => {
 							<div className='who-check'>
 								<label className='who-label' htmlFor='who-btns'>
 									Who are you?
-								</label>
-								<input
-									type='checkbox'
-									id='student'
-									name='role'
-									value='student'
-									onChange={(e) => onChange(e)}
-								/>
-								<label className='who-input' htmlFor='student'>
-									{' '}
-									Student
-								</label>
-								<input
-									type='checkbox'
-									id='professor'
-									name='role'
-									value='professor'
-									onChange={(e) => onChange(e)}
-								/>
-								<label
-									className='who-input'
-									htmlFor='professor'
-								>
-									{' '}
-									Professor
-								</label>
-								<input
-									type='checkbox'
-									id='tutor'
-									name='role'
-									value='tutor'
-									onChange={(e) => onChange(e)}
-								/>
-								<label className='who-input' htmlFor='tutor'>
-									{' '}
-									Tutor
-								</label>
+								</label>{' '}
+								<div className='who-radio'>
+									<input
+										type='radio'
+										id='student'
+										name='role'
+										value='Student'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='student'
+									>
+										{' '}
+										Student
+									</label>{' '}
+								</div>
+								<div className='who-radio'>
+									<input
+										type='radio'
+										id='professor'
+										name='role'
+										value='Professor'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='professor'
+									>
+										Professor
+									</label>
+								</div>
+								<div className='who-radio'>
+									<input
+										type='radio'
+										id='tutor'
+										name='role'
+										value='Tutor'
+										onChange={(e) => {
+											validateRole(e.target.value);
+											onChange(e);
+										}}
+									/>
+									<label
+										className='who-input'
+										htmlFor='tutor'
+									>
+										Tutor
+									</label>
+								</div>
 							</div>
 							<ul className='list-inline'>
 								<li className='policy'>
@@ -314,7 +341,7 @@ const SignUp = () => {
 										type='checkbox'
 										name='agreement'
 										value={true}
-										onChange={(e) => onChange(e)}
+										//onChange={(e) => onChange(e)}
 										required
 										// onChange='validateAgreement(event.target)'
 									/>
@@ -328,7 +355,6 @@ const SignUp = () => {
 										type='submit'
 										value='Sign Up'
 										id='signup-btn-1'
-										
 									>
 										Sign Up
 									</button>

@@ -21,8 +21,6 @@ const getType = (type) => {
 	}
 };
 
-
-
 const setMessageFadeOut = (alertMessage) => {
 	setTimeout(() => {
 		let currentOpacity = 1.0;
@@ -48,14 +46,16 @@ export const alert = (type = 'danger', message = 'sdfsf') => {
 	document.getElementById('notifications').appendChild(div);
 
 	let notif = document.createElement('p');
-    let innerTextNodeNotif = document.createTextNode(message);
-    notif.appendChild(innerTextNodeNotif);
-    notif.appendChild(innerTextNodeNotif);
-    document.getElementById('notifications-1').appendChild(notif);
+	let innerTextNodeNotif = document.createTextNode(message);
+	notif.appendChild(innerTextNodeNotif);
+	notif.appendChild(innerTextNodeNotif);
+	if (document.getElementById('notifications-1')) {
+		document.getElementById('notifications-1').appendChild(notif);
+	}
 
 	if (document.getElementById('eeee')) {
-        document.getElementById('eeee').remove();
-    }
+		document.getElementById('eeee').remove();
+	}
 
 	setMessageFadeOut(div);
 
@@ -63,5 +63,3 @@ export const alert = (type = 'danger', message = 'sdfsf') => {
 		setMessageFadeOut(div);
 	}
 };
-
-

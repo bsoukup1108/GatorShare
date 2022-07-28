@@ -2,19 +2,25 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import logo from '../../img/logo.png';
-import { getToken } from '../../js/useToken';
 import { logout } from '../../js/auth';
-import SearchResults from '../SearchResults/SearchResults';
 import { ReactSession } from 'react-client-session';
 
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
 
+	const [category, setCategory] = useState('Category');
+
+	const changeCategory = (e) => {
+		e.preventDefault();
+		let newCategory = e.target.value;
+		setCategory(newCategory);
+	};
+
 	const navigate = useNavigate();
 	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
 	const authLinks = (
 		<>
-			<div>
+			<div className='navbar-right-2'>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
@@ -28,7 +34,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 				<button type='button' className='btn btn-secondary'>
-					<Link to='/create'>
+					<Link to='/post'>
 						<i className='fa-solid fa-plus '></i>
 						<span id='create-content'></span>
 					</Link>
@@ -57,14 +63,11 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						{/* <div className='dropdown-item' href='/login' id='eeee'>
-							You don't have any notifications.
-						</div> */}
-						<div className='dropdown-item' href='/login' id='notifications-1'>
-						<i className="fas fa-thumbs-up notif"></i> User liked your post!
-			<br/>
-						<i className="fas fa-comment notif"></i> Your post received a new comment!
-						</div>
+						<div
+							className='dropdown-item'
+							href='/login'
+							id='notifications-1'
+						></div>
 					</li>
 				</ul>
 			</div>
@@ -110,7 +113,7 @@ const Navbar = (props) => {
 	);
 	const guestLinks = (
 		<>
-			<div>
+			<div className='navbar-right-2'>
 				<button type='button' className='btn btn-secondary'>
 					<Link to='/'>
 						<i className='fa-solid fa-house '></i>
@@ -124,29 +127,7 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 			</div>
-			{/* <div className='dropdown me-1 '>
-				<a
-					className='btn btn-secondary dropdown-toggle'
-					href='/#'
-					role='button'
-					id='dropdownMenuLink'
-					data-bs-toggle='dropdown'
-					aria-expanded='false'
-				>
-					<i className='fa-solid fa-bell '></i>
-				</a>
 
-				<ul
-					className='dropdown-menu dropdown-menu-end'
-					aria-labelledby='dropdownMenuOffset'
-				>
-					<li>
-						<a className='dropdown-item' href='/login'>
-							You must sign in to see notifications
-						</a>
-					</li>
-				</ul>
-			</div> */}
 			<div className='dropdown me-1'>
 				<a
 					className='btn btn-secondary dropdown-toggle'
@@ -181,38 +162,125 @@ const Navbar = (props) => {
 
 	return (
 		<nav className='navbar sticky-top navbar-light bg-light border-bottom gradient-hor bg-pan-right flex-center'>
-			<div id='logo-content'>
-				<a className='navbar-brand' href='/'>
-					<img id='logo' src={logo} alt='logo' />
-				</a>{' '}
-			</div>
-			<div id='searchBar'>
-				<div className='container-fluid'>
-					<form className='d-flex'>
-						<input
-							id='search-text'
-							className='form-control me-2'
-							type='text'
-							placeholder='Search for posts'
-						/>
-						<button
-							id='search-button'
-							className='btn btn-secondary'
-							type='submit'
-							onClick={(e) => {
-								let searchTerm =
-									document.getElementById(
-										'search-text'
-									).value;
-								ReactSession.set('searchTerm', searchTerm);
-								navigate(`/search`);
+			<div id='navbar-left-1'>
+				<div id='logo-content'>
+					<a className='navbar-brand' href='/'>
+						<img id='logo' src={logo} alt='logo' />
+					</a>{' '}
+				</div>
+				<div id='searchBar'>
+					<div className='container-fluid'>
+						<form className='d-flex'>
+							<input
+								id='search-text'
+								className='form-control me-2'
+								type='text'
+								placeholder='Search for posts (example: Society of Women Engineers Club)'
+							/>
+							<div className='btn-group dropdown me-1 '>
+								<button
+									className='btn btn-primary dropdown-toggle category-dropdown'
+									data-bs-toggle='dropdown'
+									name='Category'
+									value={category}
+									id='search-button-1'
+								>
+									{category}
+								</button>
 
-								return false;
-							}}
-						>
-							<i className='fa-solid fa-magnifying-glass'></i>
-						</button>
-					</form>
+								<div className='dropdown-menu'>
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										name='dropdown-all'
+										value='All Posts'
+										onClick={(e) => changeCategory(e)}
+									/>
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Articles&Essays'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Art&Films'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Clubs'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Discords'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Tutoring'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+									<input
+										type='button'
+										href='#'
+										className='dropdown-item'
+										value='Other'
+										onClick={(e) => changeCategory(e)}
+									/>
+
+									<div className='dropdown-divider'></div>
+								</div>
+							</div>
+
+							<button
+								id='search-button'
+								className='btn btn-secondary'
+								type='submit'
+								onClick={(e) => {
+									let searchTerm =
+										document.getElementById(
+											'search-text'
+										).value;
+									ReactSession.set('searchTerm', searchTerm);
+									ReactSession.set(
+										'category',
+										document.getElementById(
+											'search-button-1'
+										).value
+									);
+									navigate(`/search`);
+
+									return false;
+								}}
+							>
+								<i className='fa-solid fa-magnifying-glass'></i>
+							</button>
+						</form>
+					</div>
 				</div>
 			</div>
 			<div className='navbar-right'>
