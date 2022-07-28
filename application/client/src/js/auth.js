@@ -10,12 +10,12 @@ import { ReactSession } from 'react-client-session';
 import http from '../http-common';
 import { alert } from './alert';
 
-
 // login function handles data for the Login page.
 export const login = (formData) => {
 	// the data for the axios request is stored here
 	const { email, password } = formData;
 	let id;
+	let username;
 
 	// post request to the backend
 	http.post('/login', {
@@ -27,9 +27,11 @@ export const login = (formData) => {
 				const token = response.data.token;
 				// user's id
 				id = response.data.id;
+				username = response.data.username;
 
 				// store token and logged in user id
 				ReactSession.set('token', token);
+				ReactSession.set('username', username);
 				ReactSession.set('currentUserId', id);
 				// append success alert message
 				alert('success', 'successfully logged in');
@@ -78,7 +80,6 @@ export const register = (formData) => {
 		role: [role],
 	})
 		.then((res) => {
-			
 			alert('success', 'successfully signed up');
 
 			// redirects to login if succes or append an error message
@@ -90,15 +91,13 @@ export const register = (formData) => {
 		// handle errors
 		.catch(function (err) {
 			console.log(err);
-			
+
 			alert('danger', 'failed to sign up...');
 
 			// reload page if the request failed
 			return window.location.reload();
 		});
 };
-
-
 
 // logout function handles signing out
 export const logout = () => {
@@ -107,9 +106,8 @@ export const logout = () => {
 
 	// if user logged in then clear the token
 	if (token) {
-		
 		alert('warning', 'successfully logged out');
-		
+
 		localStorage.clear();
 	} else {
 		// if can't log out, append and error message

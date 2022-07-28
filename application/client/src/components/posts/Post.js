@@ -185,6 +185,7 @@ const Post = () => {
 											className='form-control'
 											placeholder='Leave a comment'
 											name='commentArea'
+											maxlength='250'
 											onChange={(e) => {
 												onComment(e);
 											}}

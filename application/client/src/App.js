@@ -18,6 +18,7 @@ import Aboutus from './components/about/About';
 
 import Post from './components/posts/Post';
 import Profile from './components/profile/Profile';
+import ChatRoom from './components/chatRoom/ChatRoom';
 
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')
@@ -30,6 +31,7 @@ const App = () => {
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const token = ReactSession.get('token') || '';
+
 	useEffect(() => {
 		if (!!token) {
 			setIsAuthenticated(true);
@@ -84,6 +86,13 @@ const App = () => {
 									exact
 									path='/post'
 									element={<CreatePost />}
+								/>
+							)}
+							{isAuthenticated && (
+								<Route
+									exact
+									path='/chatRoom'
+									element={<ChatRoom />}
 								/>
 							)}
 							<Route exact path='/posts' element={<Posts />} />

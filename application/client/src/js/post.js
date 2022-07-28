@@ -9,7 +9,7 @@ export const createPost = (formData) => {
 		postTitle: 'ffff',
 		Descrption: 'ffff',
 		//link: link,
-		//Image: image64,
+		Image: null,
 		//Tag: 'fff',
 	})
 		.then((response) => {
