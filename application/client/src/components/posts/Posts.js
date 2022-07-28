@@ -52,7 +52,6 @@ const Posts = () => {
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 
@@ -69,7 +68,6 @@ const Posts = () => {
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 

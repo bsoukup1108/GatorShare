@@ -37,11 +37,12 @@ const Post = () => {
 	const incLikes = () => {
 		setLikes(likes + 1);
 	};
-	console.log(postId);
+
 	useEffect(() => {
-		http.get(`/posts/${postId}`)
+		http.get(`/AllPosts/%7Bid%7D?query=${postId}`)
 			.then((res) => {
-				setPost(res.data);
+				setPost(res.data[0]);
+
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -89,14 +90,18 @@ const Post = () => {
 		el.appendChild(div);
 		setComment('');
 	};
-	console.log(post);
-	const { content, createdDate, title } = post;
-
+	const { content, createdDate, title, photo_Like } = post;
 	let fname;
 	let lname;
-	fname = post.user ? post.user.firstName : '';
-	lname = post.user ? post.user.lastName : '';
+	let phLikes;
 
+	fname = post.user ? post.user.firstName : '_';
+	lname = post.user ? post.user.lastName : '';
+	phLikes = post.photo_Like ? post.photo_Like : 0;
+
+	useEffect(() => {
+		setLikes(phLikes);
+	}, [phLikes]);
 	if (isLoaded) {
 		return (
 			<>
@@ -178,14 +183,13 @@ const Post = () => {
 							</div>
 							{isAuth && (
 								<>
-									{' '}
 									<div className='' id='commentArea'>
 										<textarea
 											id='leaveComment'
 											className='form-control'
 											placeholder='Leave a comment'
 											name='commentArea'
-											maxlength='250'
+											maxLength='250'
 											onChange={(e) => {
 												onComment(e);
 											}}
