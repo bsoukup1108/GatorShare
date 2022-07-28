@@ -47,9 +47,7 @@ public class User {
         return id;
     }
 
-    public String getfirstName(){
-        return firstName;
-    }
+
 
     public String getlastName(){
         return lastName;
@@ -100,5 +98,14 @@ public class User {
 
     public User (){
 
+    }
+
+    public String getFirstname() {
+        return firstName;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
     }
 }
