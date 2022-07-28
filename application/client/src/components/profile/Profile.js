@@ -31,7 +31,7 @@ const Profile = () => {
 		setUserData(res.data);
 	});
 
-	http('/posts')
+	http('/AllPosts')
 		.then((res) => {
 			setIsLoaded(false);
 
