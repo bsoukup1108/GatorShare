@@ -1,29 +1,13 @@
 package com.GatorShare.Service;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Date;
+import java.util.Base64;
 import java.util.List;
 
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.GatorShare.Dto.Post;
-import com.GatorShare.Dto.postimageDao;
-import com.GatorShare.Service.UserService;
 import com.GatorShare.Repo.UserRepository;
-import org.springframework.beans.factory.annotation.Value;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,51 +26,35 @@ public class postService implements PostServiceInterface{
     private UserRepository userRepository;
 
 
-    private String uploadfolder;
 
-    public HttpServletRequest request;
 
-    public void store(MultipartFile image, String tag, String Title, String description, int photo_likes) throws IOException {
-        String uploadDic = request.getServletContext().getRealPath(uploadfolder);
-        String fileName = image.getOriginalFilename();
-        String FilePath = Paths.get(uploadDic, fileName).toString();
-        System.out.println("FileName: " + image.getOriginalFilename());
-        try{
-            File dir = new File(uploadDic);
-            if(!dir.exists()){
-                System.out.println("Folder created");
-                dir.mkdir();
-            }
-            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(FilePath)));
-            stream.write(image.getBytes());
-            stream.close();
-
-        }catch (Exception e){
-            System.out.println("in catch");
-            e.printStackTrace();
-
+    public void store(MultipartFile file, String Title, String tag, String description,Integer likes) throws IOException {
+        Post newPost = new Post();
+        String PostName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(PostName.contains("..")){
+            System.out.println("post is not valid");
         }
-        Date createDate = new Date();
-        byte [] imageData = image.getBytes();
-        Post post = new Post();
-        post.SetTitle(Title);
-        post.setPhotos(imageData);
-        post.setDescription(description);
-        post.setTag(tag);
-        post.setLikes(photo_likes);
-        post.setCreatedDate(createDate);
-        postrepo.save(post);
+        try {
+            newPost.setContent(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        newPost.setLikes(likes);
+        newPost.setTag(tag);
+        newPost.setContent(description);
+        newPost.SetTitle(Title);
+        postrepo.save(newPost);
     }
-//    public Post savePost(UserDTO userDTO, String content){
-//        Post post = new Post();
-//        User user = userRepository.findByEmail(userDTO.getEmail());
-//        post.setUser(user);
-//        post.setContent(content);
-//        return postrepo.save(post);
-//    }
+
     @Override
     public List<Post> searchPosts(String query){
         List<Post> posts = postrepo.searchPosts(query);
+        return posts;
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        List<Post> posts = postrepo.getallposts();
         return posts;
     }
 
@@ -144,13 +112,7 @@ public class postService implements PostServiceInterface{
 
 
 
-    public Post getPost(Integer id) {
-        return postrepo.findById(id).get();
-    }
 
-    public List<Post> getAllPosts() {
-        return postrepo.findAll();
-    }
 
     public void ChangePostTitle(Integer id, String NewTitile){
         Post newTi = new Post();
@@ -165,5 +127,6 @@ public class postService implements PostServiceInterface{
         newDEsc.setContent(Newdisc);
         postrepo.save(newDEsc);
     }
+
 
 }

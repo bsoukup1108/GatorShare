@@ -52,7 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = {"com.GatorShare"})
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com", "http://gatorshare.com"})
+@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com", "http://gatorshare.com", "http://localhost:3000"})
 
 
 public class GatorShareApplication {
@@ -64,13 +64,13 @@ public class GatorShareApplication {
 	@Autowired
 	private RequestService requestService;
 
-
-
 	@Autowired
 	private postService PostService;
 
 	@Autowired
 	private AdminService adminService;
+
+
 	@Autowired
 	public HttpServletRequest request;
 
@@ -96,12 +96,7 @@ public class GatorShareApplication {
 		return new ResponseEntity<List<AboutUsDto>>(Aboutusers, HttpStatus.OK);
 	}
 
-//	@PostMapping("message")
-//	public void sendMessagePersonal(@DestinationVariable String to, MessageDto message) {
-//
-//		messageService.sendMessage(to,message);
-//
-//	}
+
 
 
 	@GetMapping("aboutus/id/{id}")
@@ -170,30 +165,11 @@ public class GatorShareApplication {
 
 
 
-	@GetMapping(value = "/posts")
-	public ResponseEntity<List<Post>> getAllPost() {
-		List<Post> posts = this.PostService.getAllPosts();
-		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
-	}
-
-	@GetMapping("posts/{id}")
-	public ResponseEntity<Post> getPostByID( @PathVariable(name = "id") final Integer postId)
-	{
-		String PostNotFound = "{Wrong Entry: Try Some Thing Else}";
-		try {
-			final Post post = this.PostService.getPost(postId);
-			return new ResponseEntity<Post>(post, HttpStatus.OK);
-		} catch (NoSuchElementException e) {
-			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
-		}
-	}
 
 
 
-//	@GetMapping(value = "message/{userID}")
-//	public void updatedMessages(@RequestHeader(value="email") String email, Integer User_ID){
-//		messageService.updatedMessageTobeSeen(email, User_ID);
-//	}
+
+
 	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));
@@ -242,9 +218,15 @@ public class GatorShareApplication {
 	@GetMapping("search/{Like}")
 	public ResponseEntity<List<Post>> SortByLike()
 	{
+
 		return ResponseEntity.ok(PostService.SortByLike());
 	}
 
+	@GetMapping("AllPosts")
+	public ResponseEntity<List<Post>> getAllPosts()
+	{
+		return ResponseEntity.ok(PostService.getAllPosts());
+	}
 
 
 	@PostMapping("post")
@@ -260,6 +242,19 @@ public class GatorShareApplication {
 		}
 	}
 
+
+
+//	@GetMapping("posts/{id}")
+//	public ResponseEntity<Post> getPostByID( @PathVariable(name = "id") final Integer postId)
+//	{
+//		String PostNotFound = "{Wrong Entry: Try Some Thing Else}";
+//		try {
+//			final Post post = this.PostService.findAllByUserId(postId);
+//			return new ResponseEntity<Post>(post, HttpStatus.OK);
+//		} catch (NoSuchElementException e) {
+//			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
+//		}
+//	}
 
 
 	@PostMapping("/changePostTitle")
