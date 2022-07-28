@@ -58,6 +58,13 @@ public class postService implements PostServiceInterface{
         return posts;
     }
 
+    @Override
+    public List<Post> getallpostsbyid(int postId)
+    {
+        List<Post> posts = postrepo.getallpostsbyid(postId);
+        return posts;
+    }
+
 
 
 
@@ -127,6 +134,7 @@ public class postService implements PostServiceInterface{
         newDEsc.setContent(Newdisc);
         postrepo.save(newDEsc);
     }
+
 
 
 }

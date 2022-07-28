@@ -244,17 +244,11 @@ public class GatorShareApplication {
 
 
 
-//	@GetMapping("posts/{id}")
-//	public ResponseEntity<Post> getPostByID( @PathVariable(name = "id") final Integer postId)
-//	{
-//		String PostNotFound = "{Wrong Entry: Try Some Thing Else}";
-//		try {
-//			final Post post = this.PostService.findAllByUserId(postId);
-//			return new ResponseEntity<Post>(post, HttpStatus.OK);
-//		} catch (NoSuchElementException e) {
-//			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
-//		}
-//	}
+
+	@GetMapping(value = "AllPosts/{id}")
+	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
+		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
 
 
 	@PostMapping("/changePostTitle")

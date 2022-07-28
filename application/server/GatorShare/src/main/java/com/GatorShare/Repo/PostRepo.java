@@ -21,6 +21,9 @@ JpaRepository<Post, Integer>{
             "Or p.Description LIKE CONCAT('%', :query, '%')")
     List<Post> searchPosts(String query);
 
+    @Query("SELECT p FROM Post p WHERE p.id LIKE CONCAT('%',:query, '%')")
+    List<Post> getallpostsbyid(int query);
+
     @Query("SELECT p FROM Post p where p.Tag LIke '%Article%'")
     List <Post> SearchWhereInputIsArticle();
 
@@ -50,6 +53,8 @@ JpaRepository<Post, Integer>{
 
     @Query("SELECT p FROM Post p")
     List<Post> getallposts();
+
+
 
     List<Post> findPostByUserOrderById(User user);
 
