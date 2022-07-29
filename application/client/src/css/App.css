@@ -882,6 +882,7 @@ label {
 #main-carroussel {
   margin: 1rem 0;
   display: flex;
+  justify-content: space-between;
 }
 
 .carousel-item:hover {
@@ -893,13 +894,9 @@ label {
   background-color: lightgray;
 }
 
-#carousel-1,
-#carousel-2 {
-  max-width: 50%;
-}
-
-#carroussel-caps {
+.carroussel-caps {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
 }
 
@@ -1233,6 +1230,15 @@ footer a :hover {
   }
   .container-home-links > * > * {
     padding: 2rem;
+  }
+  #main-carroussel {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 480px) {
+  #main-carroussel {
+    flex-direction: column;
+    margin: 0;
   }
 }
 .register {

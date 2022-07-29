@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import test from '../../img/sfsu.jpeg';
-import test1 from '../../img/sfsu1.png';
 import { ReactSession } from 'react-client-session';
 
 const Home = () => {
@@ -157,176 +154,202 @@ const Home = () => {
 								</button>
 							</div>
 						</div>
-						<div id='carroussel-caps'>
-							<h2 className='text-muted'>Most Recent Posts</h2>
-							<h2 className='text-muted'>Most Popular Posts</h2>
-						</div>
 						<div id='main-carroussel'>
-							<div
-								id='carousel-2'
-								className='carousel carousel-dark slide'
-								data-bs-ride='carousel'
-								onClick={() => navigate(`/posts`)}
-							>
-								{' '}
-								<div className='carousel-inner'>
-									{posts.map((post, i) => {
-										return (
-											<div
-												key={`car-1-${i}`}
-												className={
-													i === 1
-														? 'carousel-item active'
-														: 'carousel-item'
-												}
-												data-bs-interval='10000'
-											>
-												<img
-													src={test}
-													className='d-block w-100'
-													alt='...'
-												/>
-												<div className='carousel-caption d-none d-md-block'>
-													<h5>
-														<strong>
-															{post.title
-																? post.title
-																: 'No title ...'}
-														</strong>
-													</h5>
-													<p>
-														<small>
-															Created by:{' '}
-														</small>
-														<i>
-															{post.user
-																? post.user
-																		.firstName
-																: 'Anonimous'}{' '}
-															{post.user
-																? post.user
-																		.lastName
-																: '...'}
-														</i>
-													</p>
+							<div className='carroussel-caps'>
+								<h2 className='text-muted'>
+									Most Recent Posts
+								</h2>
+
+								<div
+									id='carousel-2'
+									className='carousel carousel-dark'
+									data-bs-ride='carousel'
+									onClick={() => {
+										ReactSession.set('searchRes', 'recent');
+										navigate(`/search`);
+									}}
+								>
+									<div className='carousel-inner'>
+										{posts.map((post, i) => {
+											return (
+												<div
+													key={`car-1-${i}`}
+													className={
+														i === 1
+															? 'carousel-item active'
+															: 'carousel-item'
+													}
+													data-bs-interval='10000'
+												>
+													<img
+														src={
+															post.image
+																? post.image
+																: noImage
+														}
+														className='d-block w-100'
+														alt='...'
+													/>
+													<div className='carousel-caption d-none d-md-block'>
+														<h5>
+															<strong>
+																{post.title
+																	? post.title
+																	: 'No title ...'}
+															</strong>
+														</h5>
+														<p>
+															<small>
+																Created by:{' '}
+															</small>
+															<i>
+																{post.user
+																	? post.user
+																			.firstName
+																	: 'Anonimous'}{' '}
+																{post.user
+																	? post.user
+																			.lastName
+																	: '...'}
+															</i>
+														</p>
+													</div>
 												</div>
-											</div>
-										);
-									})}
+											);
+										})}
+									</div>
+									<button
+										className='carousel-control-prev'
+										type='button'
+										data-bs-target='#carousel-2'
+										data-bs-slide='prev'
+										onClick={(e) => e.stopPropagation()}
+									>
+										<span
+											className='carousel-control-prev-icon'
+											aria-hidden='true'
+										></span>
+										<span className='visually-hidden'>
+											Previous
+										</span>
+									</button>
+									<button
+										className='carousel-control-next'
+										type='button'
+										data-bs-target='#carousel-2'
+										data-bs-slide='next'
+										onClick={(e) => e.stopPropagation()}
+									>
+										<span
+											className='carousel-control-next-icon'
+											aria-hidden='true'
+										></span>
+										<span className='visually-hidden'>
+											Next
+										</span>
+									</button>
 								</div>
-								<button
-									className='carousel-control-prev'
-									type='button'
-									data-bs-target='#carousel-2'
-									data-bs-slide='prev'
-									onClick={(e) => e.stopPropagation()}
-								>
-									<span
-										className='carousel-control-prev-icon'
-										aria-hidden='true'
-									></span>
-									<span className='visually-hidden'>
-										Previous
-									</span>
-								</button>
-								<button
-									className='carousel-control-next'
-									type='button'
-									data-bs-target='#carousel-2'
-									data-bs-slide='next'
-									onClick={(e) => e.stopPropagation()}
-								>
-									<span
-										className='carousel-control-next-icon'
-										aria-hidden='true'
-									></span>
-									<span className='visually-hidden'>
-										Next
-									</span>
-								</button>
 							</div>
-							<div
-								id='carousel-1'
-								className='carousel carousel-dark slide'
-								data-bs-ride='carousel'
-								onClick={() => navigate(`/posts`)}
-							>
-								{' '}
-								<div className='carousel-inner'>
-									{posts.map((post, i) => {
-										return (
-											<div
-												key={`car-1-${i}`}
-												className={
-													i === 1
-														? 'carousel-item active'
-														: 'carousel-item'
-												}
-												data-bs-interval='10000'
-											>
-												<img
-													src={test1}
-													className='d-block w-100'
-													alt='...'
-												/>
-												<div className='carousel-caption d-none d-md-block'>
-													<h5>
-														<strong>
-															{post.title
-																? post.title
-																: 'No title ...'}
-														</strong>
-													</h5>
-													<p>
-														<small>
-															Created by:{' '}
-														</small>
-														<i>
-															{post.user
-																? post.user
-																		.firstName
-																: 'Anonimous'}{' '}
-															{post.user
-																? post.user
-																		.lastName
-																: '...'}
-														</i>
-													</p>
-												</div>
-											</div>
-										);
-									})}
+							<div className='carroussel-caps'>
+								<h2 className='text-muted'>
+									Most Popular Posts
+								</h2>
+								<div className='carussel-flex-1'>
+									<div
+										id='carousel-1'
+										className='carousel carousel-dark '
+										data-bs-ride='carousel'
+										onClick={() => {
+											ReactSession.set(
+												'searchRes',
+												'popular'
+											);
+											navigate(`/search`);
+										}}
+									>
+										<div className='carousel-inner'>
+											{posts.map((post, i) => {
+												return (
+													<div
+														key={`car-1-${i}`}
+														className={
+															i === 1
+																? 'carousel-item active'
+																: 'carousel-item'
+														}
+														data-bs-interval='10000'
+													>
+														<img
+															src={
+																post.image
+																	? post.image
+																	: noImage
+															}
+															className='d-block w-100'
+															alt='...'
+														/>
+														<div className='carousel-caption d-none d-md-block'>
+															<h5>
+																<strong>
+																	{post.title
+																		? post.title
+																		: 'No title ...'}
+																</strong>
+															</h5>
+															<p>
+																<small>
+																	Created by:{' '}
+																</small>
+																<i>
+																	{post.user
+																		? post
+																				.user
+																				.firstName
+																		: 'Anonimous'}{' '}
+																	{post.user
+																		? post
+																				.user
+																				.lastName
+																		: '...'}
+																</i>
+															</p>
+														</div>
+													</div>
+												);
+											})}
+										</div>
+										<button
+											className='carousel-control-prev'
+											type='button'
+											data-bs-target='#carousel-1'
+											data-bs-slide='prev'
+											onClick={(e) => e.stopPropagation()}
+										>
+											<span
+												className='carousel-control-prev-icon'
+												aria-hidden='true'
+											></span>
+											<span className='visually-hidden'>
+												Previous
+											</span>
+										</button>
+										<button
+											className='carousel-control-next'
+											type='button'
+											data-bs-target='#carousel-1'
+											data-bs-slide='next'
+											onClick={(e) => e.stopPropagation()}
+										>
+											<span
+												className='carousel-control-next-icon'
+												aria-hidden='true'
+											></span>
+											<span className='visually-hidden'>
+												Next
+											</span>
+										</button>
+									</div>
 								</div>
-								<button
-									className='carousel-control-prev'
-									type='button'
-									data-bs-target='#carousel-1'
-									data-bs-slide='prev'
-									onClick={(e) => e.stopPropagation()}
-								>
-									<span
-										className='carousel-control-prev-icon'
-										aria-hidden='true'
-									></span>
-									<span className='visually-hidden'>
-										Previous
-									</span>
-								</button>
-								<button
-									className='carousel-control-next'
-									type='button'
-									data-bs-target='#carousel-1'
-									data-bs-slide='next'
-									onClick={(e) => e.stopPropagation()}
-								>
-									<span
-										className='carousel-control-next-icon'
-										aria-hidden='true'
-									></span>
-									<span className='visually-hidden'>
-										Next
-									</span>
-								</button>
 							</div>
 						</div>
 					</div>

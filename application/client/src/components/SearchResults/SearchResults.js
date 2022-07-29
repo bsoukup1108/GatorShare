@@ -27,9 +27,19 @@ const SearchResults = () => {
 	// get the searched category
 	let category = ReactSession.get('category');
 
+	let homeSearch = ReactSession.get('searchRes');
+
 	// define the endpoint for the search depending on the category
 	let searchURL = `/search?query=${searchTerm}`;
-	if (category == 'Articles&Essays') {
+
+	if (homeSearch) {
+		if (homeSearch == 'recent') {
+			searchURL = `/search/{ASC}`;
+		} else {
+			searchURL = `/search/{Like}`;
+		}
+		ReactSession.remove('searchRes');
+	} else if (category == 'Articles&Essays') {
 		searchURL = `/search/{Article}?query=${searchTerm}`;
 	} else if (category == 'Art&Films') {
 		searchURL = `/search/{ArtAndFilm}?query=${searchTerm}`;
