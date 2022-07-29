@@ -79,7 +79,11 @@ const App = () => {
 								path='/profile'
 								element={<Profile />}
 							/>
-							<Route exact path='/xxx' element={<Messages />} />
+							<Route
+								exact
+								path='/messages'
+								element={<Messages />}
+							/>
 							{isAuthenticated && (
 								<Route
 									exact
@@ -87,13 +91,13 @@ const App = () => {
 									element={<CreatePost />}
 								/>
 							)}
-							{isAuthenticated && (
+							{/* {isAuthenticated && (
 								<Route
 									exact
 									path='/messages'
 									element={<ChatRoom />}
 								/>
-							)}
+							)} */}
 							<Route exact path='/posts' element={<Posts />} />
 							{<Route path='/posts/:id' element={<Post />} />}
 						</Routes>

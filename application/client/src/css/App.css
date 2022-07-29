@@ -1366,3 +1366,12 @@ ul {
 .message.self {
   justify-content: end;
 }
+
+#link-profile {
+  color: rgb(209, 142, 18) !important;
+}
+
+#link-profile :hover {
+  cursor: pointer;
+  color: rgb(74, 33, 123);
+}

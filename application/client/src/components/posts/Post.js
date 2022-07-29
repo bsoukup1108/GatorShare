@@ -84,17 +84,22 @@ const Post = () => {
 
 				console.log(e);
 			});
-
 		setComment('');
 	};
-	const { content, createdDate, title, photo_Like } = post;
+	const { content, createdDate, title, photo_Like, user } = post;
 	let fname;
 	let lname;
 	let phLikes;
+	let userId;
 
 	fname = post.user ? post.user.firstName : '_';
-	lname = post.user ? post.user.lastName : '';
+	lname = post.user ? post.user.lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
+	userId = post.user
+		? post.user.user !== null
+			? post.user.user
+			: null
+		: null;
 
 	useEffect(() => {
 		setLikes(phLikes);
@@ -142,9 +147,21 @@ const Post = () => {
 											<p className='card-text-bottom'>
 												<small className='text-muted'>
 													Created by{' '}
-													<i>
-														{fname} {lname}
-													</i>
+													{userId === null ? (
+														<i>
+															{fname} {lname}
+														</i>
+													) : (
+														<a
+															href={`/user/${userId}`}
+															className='text-muted'
+															id='link-profile'
+														>
+															<i>
+																{fname} {lname}
+															</i>
+														</a>
+													)}
 												</small>
 											</p>
 											<p className='card-text-bottom'>

@@ -1584,3 +1584,13 @@ ul {
 .message.self {
 	justify-content: end;
 }
+
+#link-profile {
+	color: $secondary-bg  !important;
+}
+
+#link-profile :hover {
+	cursor: pointer;
+	color: $primary;
+
+}
