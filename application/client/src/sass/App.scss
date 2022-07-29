@@ -447,7 +447,6 @@ label {
 }
 
 .createpost-btn {
-	margin: 50px 40% auto;
 	padding: 0.5rem 4rem;
 	font-size: 0.95rem;
 	font-weight: 600;
@@ -1062,6 +1061,15 @@ li::marker {
 
 }
 
+#create-btn-post {
+	margin: 0 !important
+}
+
+#create-post-btn-1 {
+	display: flex;
+	justify-content: center;
+	margin: 50px 40% auto;
+}
 
 .home-btn {
 	margin-left: auto;

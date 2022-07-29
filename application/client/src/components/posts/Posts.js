@@ -77,55 +77,56 @@ const Posts = () => {
 
 	return (
 		<>
-			{!isLoaded && <Spinner />}
-			{isLoaded && (
-				<div>
-					<h1>All Posts</h1>
-					<div id='sort'>
-						<div className='dropdown'>
-							<button
-								className='btn btn-secondary dropdown-toggle sort-btn'
-								type='button'
-								id='dropdownMenuButton1'
-								data-bs-toggle='dropdown'
-								aria-expanded='false'
-							>
-								Sort by
-							</button>
-							<ul
-								className='dropdown-menu'
-								aria-labelledby='dropdownMenuButton1'
-							>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByName())}
-									>
-										Alphabetically
-									</a>
-								</li>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByLike())}
-									>
-										Most recent
-									</a>
-								</li>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByName())}
-									>
-										Most popular
-									</a>
-								</li>
-							</ul>
-						</div>
+			<div>
+				<h1>All Posts</h1>
+				<div id='sort'>
+					<div className='dropdown'>
+						<button
+							className='btn btn-secondary dropdown-toggle sort-btn'
+							type='button'
+							id='dropdownMenuButton1'
+							data-bs-toggle='dropdown'
+							aria-expanded='false'
+						>
+							Sort by
+						</button>
+						<ul
+							className='dropdown-menu'
+							aria-labelledby='dropdownMenuButton1'
+						>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#'
+									onClick={() => setPosts(filterByName())}
+								>
+									Alphabetically
+								</a>
+							</li>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#'
+									onClick={() => setPosts(filterByLike())}
+								>
+									Most recent
+								</a>
+							</li>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#'
+									onClick={() => setPosts(filterByName())}
+								>
+									Most popular
+								</a>
+							</li>
+						</ul>
 					</div>
+				</div>
+
+				{!isLoaded && <Spinner />}
+				{isLoaded && (
 					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
 						<div className='row row-cols-1 row-cols-md-3 g-4'>
 							{posts.map((post, i) => {
@@ -208,8 +209,8 @@ const Posts = () => {
 							})}
 						</div>
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 };

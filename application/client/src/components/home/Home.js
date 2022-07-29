@@ -40,67 +40,66 @@ const Home = () => {
 
 	return (
 		<>
-			{!isLoaded && <Spinner />}
-			{isLoaded && (
-				<>
-					<img
-						className='kenburns-top homeImg img-fluid'
-						alt='...'
-						src={Sfsu}
-					></img>
-					<div className='container1'>
-						{' '}
-						<div className='gradient-hor bg-pan-right flex-center-1'>
-							<div className='content'>
-								<h4>
-									For{' '}
-									<span className='text-warning'>SFSU</span>{' '}
-									students, by{' '}
-									<span className='text-warning'>SFSU</span>{' '}
-									students
-									<br />
-									<br />
-									Here at GatorShare, you can experience a new
-									way to share content, receive feedback, and
-									connect with SFSU students and faculty.
-								</h4>
+			<>
+				<img
+					className='kenburns-top homeImg img-fluid'
+					alt='...'
+					src={Sfsu}
+				></img>
+				<div className='container1'>
+					{' '}
+					<div className='gradient-hor bg-pan-right flex-center-1'>
+						<div className='content'>
+							<h4>
+								For <span className='text-warning'>SFSU</span>{' '}
+								students, by{' '}
+								<span className='text-warning'>SFSU</span>{' '}
+								students
 								<br />
+								<br />
+								Here at GatorShare, you can experience a new way
+								to share content, receive feedback, and connect
+								with SFSU students and faculty.
+							</h4>
+							<br />
 
-								{!ReactSession.get('token') && (
-									<div id='auth-hook'>
-										<h4>Get started today!</h4>
-										<div>
-											<button
-												type='button'
-												className='signup-btn'
+							{!ReactSession.get('token') && (
+								<div id='auth-hook'>
+									<h4>Get started today!</h4>
+									<div>
+										<button
+											type='button'
+											className='signup-btn'
+										>
+											<a
+												className='nav-link'
+												href='/login'
 											>
-												<a
-													className='nav-link'
-													href='/login'
-												>
-													Log In
-												</a>
-											</button>
-										</div>
-										<h4 className='home-or'>or</h4>
-										<div>
-											<button
-												type='button'
-												className='signup-btn'
-											>
-												<a
-													className='nav-link'
-													href='/signup'
-												>
-													Sign Up
-												</a>
-											</button>
-										</div>
+												Log In
+											</a>
+										</button>
 									</div>
-								)}
-							</div>
+									<h4 className='home-or'>or</h4>
+									<div>
+										<button
+											type='button'
+											className='signup-btn'
+										>
+											<a
+												className='nav-link'
+												href='/signup'
+											>
+												Sign Up
+											</a>
+										</button>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
+				</div>
+				{!isLoaded && <Spinner />}
+				{isLoaded && (
 					<div className='container-home'>
 						<div className='container-home-links'>
 							<div className='btn-group ' role='group'>
@@ -365,8 +364,8 @@ const Home = () => {
 							</div>
 						</div>
 					</div>
-				</>
-			)}
+				)}
+			</>
 		</>
 	);
 };

@@ -238,14 +238,16 @@ const CreatePost = () => {
 								</label>
 							</div>
 						</div>
-						<button
-							id='create-btn-post'
-							className='createpost-btn'
-							type='submit'
-							value='Post'
-						>
-							Post
-						</button>
+						<div id='create-post-btn-1'>
+							<button
+								id='create-btn-post'
+								className='createpost-btn'
+								type='submit'
+								value='Post'
+							>
+								Post
+							</button>
+						</div>
 
 						<div></div>
 					</form>
