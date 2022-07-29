@@ -6,9 +6,18 @@ import java.util.NoSuchElementException;
 
 import com.GatorShare.Dto.*;
 import com.GatorShare.Message.*;
-import com.GatorShare.Service.*;
+import com.GatorShare.Repo.CommentRepo;
+import com.GatorShare.Repo.PostRepo;
+import com.GatorShare.Service.postService;
+import com.GatorShare.Service.UserService;
+import com.GatorShare.Service.AboutUsService;
+import com.GatorShare.Service.AdminService;
+import com.GatorShare.Service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -73,6 +82,12 @@ public class GatorShareApplication {
 
 	@Autowired
 	public HttpServletRequest request;
+
+	@Autowired
+	private PostRepo postRepo;
+
+	@Autowired
+	private CommentRepo commentRepo;
 
 	@Autowired
 	private SimpMessagingTemplate simpMessagingTemplate;
@@ -162,14 +177,6 @@ public class GatorShareApplication {
 		return message;
 	}
 
-
-
-
-
-
-
-
-
 	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));
@@ -229,6 +236,11 @@ public class GatorShareApplication {
 	}
 
 
+	@GetMapping("/posts")
+	public Page<Post> getAllPosts(Pageable pageable) {
+		return postRepo.findAll(pageable);
+	}
+
 	@PostMapping("post")
 	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("Likes") int Likes) {
 		String message = "";
@@ -251,6 +263,14 @@ public class GatorShareApplication {
 	}
 
 
+
+	@PostMapping("post/{postid}/comments")
+	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
+		return postRepo.findById(postid).map(post -> {
+			Comments.setPost(post);
+			return commentRepo.save(Comments);
+		}).orElseThrow();
+	}
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
 							  @RequestParam("newPostname") String name)

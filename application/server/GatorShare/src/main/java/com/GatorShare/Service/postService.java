@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class postService implements PostServiceInterface{
 
-    private PostRepo postrepo;
+    private static PostRepo postrepo;
 
     public postService(PostRepo postrepo){
         this.postrepo = postrepo;

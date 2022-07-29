@@ -10,7 +10,7 @@ import com.GatorShare.Dto.User;
 import javax.persistence.Table;
 
 
-@EntityScan
+
 @Repository
 
 public interface PostRepo extends
@@ -53,6 +53,8 @@ JpaRepository<Post, Integer>{
 
     @Query("SELECT p FROM Post p")
     List<Post> getallposts();
+
+
 
 
 
