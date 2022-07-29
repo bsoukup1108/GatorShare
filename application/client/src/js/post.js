@@ -1,5 +1,5 @@
 import { ReactSession } from 'react-client-session';
-import http from '../http-common-2';
+import http from '../http-common';
 import { alert } from './alert';
 
 export const createPost = (formData) => {

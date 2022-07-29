@@ -67,7 +67,9 @@ const Navbar = (props) => {
 							className='dropdown-item'
 							href='/login'
 							id='notifications-1'
-						></div>
+						>
+							<p>You don't have any notifications yet</p>
+						</div>
 					</li>
 				</ul>
 			</div>

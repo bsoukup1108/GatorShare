@@ -28,30 +28,30 @@ const Profile = () => {
 	useEffect(() => {
 		http('login/id/' + userId).then((res) => {
 			setUserData(res.data);
-			setPosts(p);
+
 			setIsLoaded(true);
 		});
 	}, []);
 
-	// useEffect(() => {
-	// 	http('/AllPosts')
-	// 		.then((res) => {
-	// 			setIsLoaded(false);
+	useEffect(() => {
+		http('/AllPosts')
+			.then((res) => {
+				setIsLoaded(false);
 
-	let p = [];
-	// res.data.map((post, i) => {
-	// 	if (post.id === userId) {
-	// 		p[p.length] = res.data[i];
-	// 	}
-	// });
-	// setPosts(p);
-	// setIsLoaded(true);
-	// 		})
-	// 		.catch((e) => {
-	// 			setIsLoaded(false);
-	// 			console.log(e);
-	// 		});
-	// }, []);
+				let p = [];
+				res.data.map((post, i) => {
+					if (post.id === userId) {
+						p[p.length] = res.data[i];
+					}
+				});
+				setPosts(p);
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
+	}, []);
 
 	let eMail = '';
 	let role = 'Student';

@@ -6,6 +6,6 @@ export default axios.create({
 	headers: {
 		'Content-type': 'application/json',
 		'Access-Control-Allow-Origin': '*',
-		// 'Access-Control-Max-Age': 3000,
+		'Access-Control-Max-Age': 3000,
 	},
 });

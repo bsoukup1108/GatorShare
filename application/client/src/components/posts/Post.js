@@ -53,12 +53,13 @@ const Post = () => {
 	const [comment, setComment] = useState({
 		comment: '',
 	});
-
 	const onComment = (e) => {
 		setComment({
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	const onCommentSend = () => {};
 
 	// const appendComment = () => {
 	// 	let el = document.getElementById('leftComment');
@@ -71,23 +72,19 @@ const Post = () => {
 
 	const postComment = (e) => {
 		e.preventDefault();
-		if (document.getElementById('postCommentList')) {
-			document.getElementById('postCommentList').remove();
-		}
-		document.getElementById('leaveComment').value = '';
-		alert('primary', 'post has been commented!');
 
-		let el = document.getElementById('leftComment');
-		let div = document.createElement('div');
-		div.setAttribute('class', 'commentMessage');
+		http.post(`/post/${postId}/comments`, {
+			text: comment.commentArea,
+		})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
 
-		// DON'T CHANGE CLASS TO CLASSNAME below !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		div.innerHTML = `<p class='commentAuthor'> <small class='text-muted text-left'>Author: anonimous</small></p>`;
-		div.innerHTML += `<p class='commentContent'>${comment.commentArea}</p>`;
-		div.innerHTML += `<p class='commentDate'><small class='text-muted'><i>${moment().fromNow()}</i></small></p>`;
-		// DON'T CHANGE CLASS TO CLASSNAME up !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				console.log(e);
+			});
 
-		el.appendChild(div);
 		setComment('');
 	};
 	const { content, createdDate, title, photo_Like } = post;
@@ -199,9 +196,7 @@ const Post = () => {
 										className='comment-btn'
 										type='submit'
 										value='Leave a comment'
-										onClick={(e) => {
-											postComment(e);
-										}}
+										onClick={(e) => postComment(e)}
 									/>
 								</>
 							)}
