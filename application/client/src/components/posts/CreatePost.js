@@ -43,7 +43,7 @@ const CreatePost = () => {
 		//let img = await getBase64(file).then((data) => data.toString());
 		setFormData({
 			...formData,
-			image64: file,
+			Image: file,
 		});
 	};
 

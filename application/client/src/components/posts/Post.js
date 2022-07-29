@@ -124,7 +124,7 @@ const Post = () => {
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={test}
+										src={post.image ? post.image : noImage}
 										className='img-fluid rounded-start'
 										alt='...'
 									/>

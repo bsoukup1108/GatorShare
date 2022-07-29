@@ -143,7 +143,11 @@ const Posts = () => {
 											}}
 										>
 											<img
-												src={test}
+												src={
+													post.image
+														? post.image
+														: noImage
+												}
 												className='card-img-top'
 												alt='No image...'
 											/>

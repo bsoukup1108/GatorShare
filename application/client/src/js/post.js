@@ -1,17 +1,14 @@
 import { ReactSession } from 'react-client-session';
-import http from '../http-common';
+import http from '../http-common-2';
 import { alert } from './alert';
 
 export const createPost = (formData) => {
-	const { title, description, link, image64, category } = formData;
+	const { title, description, link, Image, category } = formData;
 	console.log(formData);
-	http.post('/post', {
-		postTitle: 'ffff',
-		Descrption: 'ffff',
-		//link: link,
-		Image: null,
-		//Tag: 'fff',
-	})
+	http.post(
+		'/post?Descrption=dfvvd&Likes=22&postTitle=fvvfv&Tag=ccdddddddc',
+		{}
+	)
 		.then((response) => {
 			document.getElementById('create-btn-post').style.visibility =
 				'hidden';

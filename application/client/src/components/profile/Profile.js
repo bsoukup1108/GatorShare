@@ -3,9 +3,6 @@ import { Navigate } from 'react-router-dom';
 
 import { getToken } from '../../js/useToken';
 import noProfile from '../../img/noProfile.png';
-
-import test from '../../img/sfsu.jpeg';
-
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
@@ -13,6 +10,7 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import { ReactSession } from 'react-client-session';
 import { alert } from '../../js/alert';
+import { useEffect } from 'react';
 
 const Profile = () => {
 	// redirect if not logged in
@@ -27,27 +25,33 @@ const Profile = () => {
 	const [userData, setUserData] = useState([]);
 	const [edit, setEdit] = useState(false);
 
-	http('login/id/' + userId).then((res) => {
-		setUserData(res.data);
-	});
-
-	http('/AllPosts')
-		.then((res) => {
-			setIsLoaded(false);
-
-			let p = [];
-			res.data.map((post, i) => {
-				if (post.id === userId) {
-					p[p.length] = res.data[i];
-				}
-			});
+	useEffect(() => {
+		http('login/id/' + userId).then((res) => {
+			setUserData(res.data);
 			setPosts(p);
 			setIsLoaded(true);
-		})
-		.catch((e) => {
-			setIsLoaded(false);
-			console.log(e);
 		});
+	}, []);
+
+	// useEffect(() => {
+	// 	http('/AllPosts')
+	// 		.then((res) => {
+	// 			setIsLoaded(false);
+
+	let p = [];
+	// res.data.map((post, i) => {
+	// 	if (post.id === userId) {
+	// 		p[p.length] = res.data[i];
+	// 	}
+	// });
+	// setPosts(p);
+	// setIsLoaded(true);
+	// 		})
+	// 		.catch((e) => {
+	// 			setIsLoaded(false);
+	// 			console.log(e);
+	// 		});
+	// }, []);
 
 	let eMail = '';
 	let role = 'Student';
@@ -361,7 +365,9 @@ const Profile = () => {
 																>
 																	<img
 																		src={
-																			test
+																			post.image
+																				? post.image
+																				: noImage
 																		}
 																		className='card-img-top'
 																		alt='No image...'

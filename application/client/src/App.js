@@ -1,6 +1,8 @@
 import './css/App.css';
 import React, { useEffect, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
+
 import Navbar from './components/navbar/Navbar';
 import About from './components/about/About';
 import Footer from './components/footer/Footer';
@@ -12,12 +14,11 @@ import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
-
-import { ReactSession } from 'react-client-session';
 import Aboutus from './components/about/About';
-
 import Post from './components/posts/Post';
 import Profile from './components/profile/Profile';
+import User from './components/profile/User';
+
 import ChatRoom from './components/chatRoom/ChatRoom';
 
 const Search = React.lazy(() =>
@@ -70,6 +71,8 @@ const App = () => {
 
 							<Route path='/rules' element={<Agreement />} />
 							<Route path='/about' element={<Aboutus />} />
+
+							<Route exact path='/user/:id' element={<User />} />
 
 							<Route
 								exact
