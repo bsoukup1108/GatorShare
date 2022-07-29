@@ -5,6 +5,7 @@ import ChatBox, { ChatFrame } from 'react-chat-plugin';
 
 import { getToken } from '../../js/useToken';
 import http from '../../http-common';
+import { useEffect } from 'react';
 
 const Messages = () => {
 	// redirect if not logged in
@@ -20,29 +21,29 @@ const Messages = () => {
 	]);
 
 	const handleOnSendMessage = (message) => {
-		http.post('/message', { message: message, fromUserId: 3, toUserId: 3 })
-			.then((res) => {
-				//console.log(res);
-			})
+		// http.post('/message', { message: message, fromUserId: 3, toUserId: 3 })
+		// 	.then((res) => {
+		// 		//console.log(res);
+		// 	})
 
-			// handle errors
-			.catch(function (err) {
-				console.log(err);
-				alert('danger', 'failed to send a message');
-			});
+		// 	// handle errors
+		// 	.catch(function (err) {
+		// 		console.log(err);
+		// 		alert('danger', 'failed to send a message');
+		// 	});
 
-		http.get('/message/all/3', {
-			User_ID: 3,
-		})
-			.then((res) => {
-				console.log(res.data);
-			})
+		// http.get('/message/all/3', {
+		// 	User_ID: 3,
+		// })
+		// 	.then((res) => {
+		// 		console.log(res.data);
+		// 	})
 
-			// handle errors
-			.catch(function (err) {
-				console.log(err);
-				alert('danger', 'failed to send a message');
-			});
+		// 	// handle errors
+		// 	.catch(function (err) {
+		// 		console.log(err);
+		// 		alert('danger', 'failed to send a message');
+		// 	});
 
 		setMessages(
 			messages.concat(
@@ -69,6 +70,30 @@ const Messages = () => {
 			)
 		);
 	};
+
+	useEffect(() => {
+		let notif = document.getElementById('notif-nav-1');
+		if (notif) notif.setAttribute('class', 'dropdown me-1 notif-nav-2');
+
+		let notifBox = document.getElementById('notifications-1');
+
+		if (notifBox) {
+			if (
+				notifBox.innerHTML ===
+				"<p>You don't have any notifications yet</p>"
+			) {
+				notifBox.innerHTML = '';
+			}
+			let para = document.createElement('p');
+			let innerTextNode = document.createTextNode(
+				'new message in Group Chat'
+			);
+			para.appendChild(innerTextNode);
+			para.appendChild(innerTextNode);
+
+			notifBox.appendChild(para);
+		}
+	}, [messages]);
 
 	return (
 		<>

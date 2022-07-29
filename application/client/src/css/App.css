@@ -1375,3 +1375,8 @@ ul {
   cursor: pointer;
   color: rgb(74, 33, 123);
 }
+
+.notif-nav-2 > *,
+.notif-nav-2 > * > * {
+  color: red;
+}
