@@ -8,14 +8,26 @@ import { ReactSession } from 'react-client-session';
 
 const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [posts, setPosts] = useState([]);
+	const [post1, setPost1] = useState([]);
+	const [post2, setPost2] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		http(`/AllPosts`)
+		http(`/search/{ASC}`)
 			.then((res) => {
-				setPosts(res.data);
-				setIsLoaded(true);
+				setPost1(res.data);
+				setIsLoaded(false);
 			})
+			.then(
+				http(`/search/{Like}`)
+					.then((res) => {
+						setPost2(res.data);
+						setIsLoaded(true);
+					})
+					.catch((e) => {
+						setIsLoaded(false);
+						console.log(e);
+					})
+			)
 			.catch((e) => {
 				setIsLoaded(false);
 				console.log(e);
@@ -170,7 +182,7 @@ const Home = () => {
 									}}
 								>
 									<div className='carousel-inner'>
-										{posts.map((post, i) => {
+										{post1.map((post, i) => {
 											return (
 												<div
 													key={`car-1-${i}`}
@@ -268,7 +280,7 @@ const Home = () => {
 										}}
 									>
 										<div className='carousel-inner'>
-											{posts.map((post, i) => {
+											{post2.map((post, i) => {
 												return (
 													<div
 														key={`car-1-${i}`}
