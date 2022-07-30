@@ -2,51 +2,55 @@ package com.GatorShare;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 
 import com.GatorShare.Dto.*;
+import com.GatorShare.Message.*;
+import com.GatorShare.Repo.CommentRepo;
+import com.GatorShare.Repo.PostRepo;
+import com.GatorShare.Service.postService;
+import com.GatorShare.Service.UserService;
+import com.GatorShare.Service.AboutUsService;
+import com.GatorShare.Service.AdminService;
+import com.GatorShare.Service.RequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.*;
-
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.GatorShare.Excpetions.AuthenticationFailException;
 import com.GatorShare.Excpetions.CustomeException;
-import com.GatorShare.Repo.PostRepo;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.GatorShare.Service.postService;
-import com.GatorShare.Dto.postResponse;
 import com.GatorShare.Dto.Post;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.*;
-import com.GatorShare.Repo.PostRepo;
-import com.GatorShare.Service.AboutUsService;
-import com.GatorShare.Service.UserService;
 import com.GatorShare.Excpetions.FileResponseMassage;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+
+import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 
@@ -54,33 +58,64 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.GatorShare" })
+@ComponentScan(basePackages = {"com.GatorShare"})
 @RequestMapping("/api/")
 @EnableJpaRepositories
+@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com", "http://gatorshare.com", "http://localhost:3000"})
 
-@CrossOrigin(origins = "http://localhost:3000/")
+
 public class GatorShareApplication {
 	@Autowired
 	private AboutUsService userServicetDto;
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private RequestService requestService;
 
 	@Autowired
 	private postService PostService;
 
+	@Autowired
+	private AdminService adminService;
 
 
+	@Autowired
+	public HttpServletRequest request;
+
+	@Autowired
+	private PostRepo postRepo;
+
+	@Autowired
+	private CommentRepo commentRepo;
+
+	@Autowired
+	private SimpMessagingTemplate simpMessagingTemplate;
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
 
+<<<<<<< HEAD
+=======
+	@GetMapping("/")
+	public String index(HttpServletRequest request) {
+
+		adminService.store_userinfo(request);
+
+		return "client info saved in the database";
+	}
+
+>>>>>>> backend
 
 	@GetMapping(value = "aboutus")
 	public ResponseEntity<List<AboutUsDto>> listAllUsers() {
 		List<AboutUsDto> Aboutusers = this.userServicetDto.listAll();
+
 		return new ResponseEntity<List<AboutUsDto>>(Aboutusers, HttpStatus.OK);
 	}
+
+
+
 
 	@GetMapping("aboutus/id/{id}")
 	public ResponseEntity<AboutUsDto> getUserById(
@@ -118,6 +153,9 @@ public class GatorShareApplication {
 	}
 
 
+
+
+
 	@GetMapping("login/id/{id}")
 	public ResponseEntity<User> getUserByID( @PathVariable(name = "id") final Long userId)
 	{
@@ -129,32 +167,121 @@ public class GatorShareApplication {
 				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	}
-	@GetMapping(value = "/posts")
-	public ResponseEntity<List<Post>> getAllPost() {
-		List<Post> posts = this.PostService.getAllPosts();
-		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+
+	@MessageMapping("/message")
+	@SendTo("/chatroom/public")
+	public Message receiveMessage(@Payload Message message){
+		return message;
+	}
+	@MessageMapping("/private-message")
+	public Message recMessage(@Payload Message message){
+		simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
+		System.out.println(message.toString());
+		return message;
 	}
 
-	@GetMapping("search")
+	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
 		return ResponseEntity.ok(PostService.searchPosts(query));
 	}
 
+	@GetMapping("search/{ArtAndFilm}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsArtAndFilm(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsArtAndFilm());
+	}
+
+	@GetMapping("search/{Article}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsArticle(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsArticle());
+	}
+
+	@GetMapping("search/{Discord}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsDiscords(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsDiscords());
+	}
+
+	@GetMapping("search/{ASC}")
+	public ResponseEntity<List<Post>> SortAlphabetically(){
+		return ResponseEntity.ok(PostService.SortAlphabetically());
+	}
+
+	@GetMapping("search/{Tutoring}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsTutoring());
+	}
+
+	@GetMapping("search/{Essay}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsAEssa());
+	}
+	@GetMapping("search/{Clubs}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsClubs(){
+		return ResponseEntity.ok(PostService.SearchWhereInputIsClub());
+	}
+
+	@GetMapping("search/{Others}")
+	public ResponseEntity<List<Post>> SearchWhereInputIsOthers()
+	{
+		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
+	}
+
+	@GetMapping("search/{Like}")
+	public ResponseEntity<List<Post>> SortByLike()
+	{
+
+		return ResponseEntity.ok(PostService.SortByLike());
+	}
+
+	@GetMapping("AllPosts")
+	public ResponseEntity<List<Post>> getAllPosts()
+	{
+		return ResponseEntity.ok(PostService.getAllPosts());
+	}
+
+
+	@GetMapping("/posts")
+	public Page<Post> getAllPosts(Pageable pageable) {
+		return postRepo.findAll(pageable);
+	}
+
 	@PostMapping("post")
+<<<<<<< HEAD
 	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart(required = false) MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
 			PostService.store(posts, Titile, DEsc,like,tag);
 			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
+=======
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("Likes") int Likes) {
+		String message = "";
+		try{
+			PostService.store(Image, tag, Titile, DEsc, Likes);
+			message = "uploaded the post successfully: "+ Image.getOriginalFilename();
+>>>>>>> backend
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
-			message = "Post could not be uploaded " + posts.getOriginalFilename() + ".";
+			message = "Post could not be uploaded " + Image.getOriginalFilename() + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
 		}
 	}
 
 
 
+
+	@GetMapping(value = "AllPosts/{id}")
+	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
+		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
+
+
+
+	@PostMapping("post/{postid}/comments")
+	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
+		return postRepo.findById(postid).map(post -> {
+			Comments.setPost(post);
+			return commentRepo.save(Comments);
+		}).orElseThrow();
+	}
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
 							  @RequestParam("newPostname") String name)
@@ -198,10 +325,13 @@ public class GatorShareApplication {
 	}
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> backend
 
 }

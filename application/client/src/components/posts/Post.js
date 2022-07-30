@@ -5,6 +5,9 @@ import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
+import { ReactSession } from 'react-client-session';
+
+import { useParams } from 'react-router-dom';
 
 import { alert } from '../../js/alert';
 import { getToken } from '../../js/useToken';
@@ -13,14 +16,11 @@ const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
-
 	const [isAuth, setIsAuth] = useState(!!getToken());
 
 	const [likes, setLikes] = useState(0);
 
 	const navigate = useNavigate();
-
-	const postId = 1;
 
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
@@ -31,19 +31,17 @@ const Post = () => {
 			icon.style.color === 'rebeccapurple' ? 'grey' : 'rebeccapurple';
 	};
 
+	const { id } = useParams();
+	let postId = id | 1;
+
 	const incLikes = () => {
 		setLikes(likes + 1);
 	};
-
+	console.log(postId);
 	useEffect(() => {
-		http(`/posts`)
+		http.get(`/posts/${postId}`)
 			.then((res) => {
-				setPost(
-					res.data.map((post) => {
-						return post.id === postId ? post : '';
-					})
-				);
-
+				setPost(res.data);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -51,7 +49,6 @@ const Post = () => {
 				console.log(e);
 			});
 	}, []);
-
 	const [comment, setComment] = useState({
 		comment: '',
 	});
@@ -92,11 +89,15 @@ const Post = () => {
 		el.appendChild(div);
 		setComment('');
 	};
+	console.log(post);
+	const { content, createdDate, title } = post;
+
+	let fname;
+	let lname;
+	fname = post.user ? post.user.firstName : '';
+	lname = post.user ? post.user.lastName : '';
 
 	if (isLoaded) {
-		const { content, createdDate, title } = post[0];
-		const { firstName, lastName } = post[0].user;
-
 		return (
 			<>
 				{isLoaded && (
@@ -140,7 +141,7 @@ const Post = () => {
 												<small className='text-muted'>
 													Created by{' '}
 													<i>
-														{firstName} {lastName}
+														{fname} {lname}
 													</i>
 												</small>
 											</p>
@@ -184,6 +185,7 @@ const Post = () => {
 											className='form-control'
 											placeholder='Leave a comment'
 											name='commentArea'
+											maxlength='250'
 											onChange={(e) => {
 												onComment(e);
 											}}

@@ -9,5 +9,8 @@ import java.util.List;
 public interface PostServiceInterface {
 
     List<Post> searchPosts(String query);
+    List<Post> getAllPosts();
+
+    List<Post> getallpostsbyid(int query);
 
 }

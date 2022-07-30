@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
@@ -17,17 +17,15 @@ const About = () => {
 	const [users, setUsers] = useState([]);
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		http(`/aboutus`)
-			.then((res) => {
-				setUsers(res.data);
-				setIsLoaded(true);
-			})
-			.catch((e) => {
-				setIsLoaded(false);
-				console.log(e);
-			});
-	}, []);
+	http(`/aboutus`)
+		.then((res) => {
+			setUsers(res.data);
+			setIsLoaded(true);
+		})
+		.catch((e) => {
+			setIsLoaded(false);
+			console.log(e);
+		});
 
 	const getPic = (name) => {
 		switch (name) {

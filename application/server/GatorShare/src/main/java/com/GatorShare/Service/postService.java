@@ -1,21 +1,20 @@
 package com.GatorShare.Service;
+import java.io.IOException;
+import java.util.Base64;
+import java.util.List;
+
 
 import com.GatorShare.Dto.Post;
-import com.GatorShare.Dto.User;
 import com.GatorShare.Repo.UserRepository;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 
 
+<<<<<<< HEAD
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
@@ -25,11 +24,14 @@ import java.util.function.Function;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
+=======
+
+>>>>>>> backend
 
 @Service
 public class postService implements PostServiceInterface{
 
-    private PostRepo postrepo;
+    private static PostRepo postrepo;
 
     public postService(PostRepo postrepo){
         this.postrepo = postrepo;
@@ -38,8 +40,14 @@ public class postService implements PostServiceInterface{
     private UserRepository userRepository;
 
 
+<<<<<<< HEAD
     public void store(MultipartFile file, String Title, String description, Integer photo_like, String tag) throws IOException {
         System.out.println("Original Image Byte Size - " + file.getBytes().length);
+=======
+
+
+    public void store(MultipartFile file, String Title, String tag, String description,Integer likes) throws IOException {
+>>>>>>> backend
         Post newPost = new Post();
         String PostName = file.getOriginalFilename();
         String postContnenttypr = file.getContentType();
@@ -53,11 +61,17 @@ public class postService implements PostServiceInterface{
         } catch (Exception e){
             e.printStackTrace();
         }
+<<<<<<< HEAD
 
         Date date = new Date();
 
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
+=======
+        newPost.setLikes(likes);
+        newPost.setTag(tag);
+        newPost.setContent(description);
+>>>>>>> backend
         newPost.SetTitle(Title);
         newPost.setPicByte(compressBytes(file.getBytes()));
         newPost.setTag(tag);
@@ -65,6 +79,7 @@ public class postService implements PostServiceInterface{
         postrepo.save(newPost);
     }
 
+<<<<<<< HEAD
     public static byte[] compressBytes(byte[] data) {
 
         Deflater deflater = new Deflater();
@@ -105,21 +120,82 @@ public class postService implements PostServiceInterface{
 
 
 
+=======
+>>>>>>> backend
     @Override
     public List<Post> searchPosts(String query){
         List<Post> posts = postrepo.searchPosts(query);
         return posts;
     }
 
-
-
-    public Post getPost(Integer id) {
-        return postrepo.findById(id).get();
-    }
-
+    @Override
     public List<Post> getAllPosts() {
-        return postrepo.findAll();
+        List<Post> posts = postrepo.getallposts();
+        return posts;
     }
+
+    @Override
+    public List<Post> getallpostsbyid(int postId)
+    {
+        List<Post> posts = postrepo.getallpostsbyid(postId);
+        return posts;
+    }
+
+
+
+
+
+    public List<Post> SearchWhereInputIsArticle(){
+        List<Post> posts = postrepo.SearchWhereInputIsArticle();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsAEssa(){
+        List<Post> posts = postrepo.SearchWhereInputIsAEssay();
+        return posts;
+    }
+    public List<Post> SearchWhereInputIsClub(){
+        List<Post> posts = postrepo.SearchWhereInputIsClubs();
+        return posts;
+    }
+    public List<Post> SearchWhereInputIsOthers(){
+        List<Post> posts = postrepo.SearchWhereInputIsOthers();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsArtAndFilm(){
+        List<Post> posts = postrepo.SearchWhereInputIsArtAndFilm();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsTutoring(){
+        List<Post> posts = postrepo.SearchWhereInputIsTutoring();
+        return posts;
+    }
+
+    public List<Post> SortAlphabetically(){
+        List<Post> posts = postrepo.SortAlphabetically();
+        return posts;
+    }
+
+    public List<Post> SearchWhereInputIsDiscords(){
+        List<Post> posts = postrepo.SearchWhereInputIsDiscords();
+        return posts;
+    }
+    public List<Post> SortByLike(){
+        List<Post> posts = postrepo.SortByLIke();
+        return posts;
+    }
+
+
+
+
+
+
+
+
+
+
 
     public void ChangePostTitle(Integer id, String NewTitile){
         Post newTi = new Post();
@@ -134,5 +210,7 @@ public class postService implements PostServiceInterface{
         newDEsc.setContent(Newdisc);
         postrepo.save(newDEsc);
     }
+
+
 
 }

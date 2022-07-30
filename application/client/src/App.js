@@ -4,10 +4,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import About from './components/about/About';
 import Footer from './components/footer/Footer';
-import SearchResults from './components/SearchResults/SearchResults';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
-import Profile from './components/profile/Profile';
 import Messages from './components/messages/Messages';
 import CreatePost from './components/posts/CreatePost';
 import Posts from './components/posts/Posts';
@@ -15,22 +13,25 @@ import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
 
-import { alert } from './js/alert';
-
 import { ReactSession } from 'react-client-session';
+import Aboutus from './components/about/About';
 
-const PostsLayout = React.lazy(() => import('./components/posts/Posts'));
-const PostLayout = React.lazy(() => import('./components/posts/Post'));
-const Aboutus = React.lazy(() => import('./components/about/About'));
+import Post from './components/posts/Post';
+import Profile from './components/profile/Profile';
+import ChatRoom from './components/chatRoom/ChatRoom';
+
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')
 );
 
 const App = () => {
 	ReactSession.setStoreType('localStorage');
+	//registered user nav
+	//ReactSession.set('token', 'token');
 
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 	const token = ReactSession.get('token') || '';
+
 	useEffect(() => {
 		if (!!token) {
 			setIsAuthenticated(true);
@@ -68,51 +69,30 @@ const App = () => {
 							/>
 
 							<Route path='/rules' element={<Agreement />} />
-							<Route
-								path='/about'
-								element={
-									<Suspense fallback={<Spinner />}>
-										<About />
-									</Suspense>
-								}
-							/>
+							<Route path='/about' element={<Aboutus />} />
 
 							<Route
 								exact
 								path='/profile'
 								element={<Profile />}
 							/>
-							<Route
-								exact
-								path='/messages'
-								element={<Messages />}
-							/>
+							<Route exact path='/xxx' element={<Messages />} />
 							{isAuthenticated && (
 								<Route
 									exact
-									path='/create'
+									path='/post'
 									element={<CreatePost />}
 								/>
 							)}
-							<Route
-								exact
-								path='/posts'
-								element={
-									<Suspense fallback={<Spinner />}>
-										<PostsLayout />
-									</Suspense>
-								}
-							/>
-							{
+							{isAuthenticated && (
 								<Route
-									path='/post/:id'
-									element={
-										<Suspense fallback={<Spinner />}>
-											<PostLayout />
-										</Suspense>
-									}
+									exact
+									path='/messages'
+									element={<ChatRoom />}
 								/>
-							}
+							)}
+							<Route exact path='/posts' element={<Posts />} />
+							{<Route path='/posts/:id' element={<Post />} />}
 						</Routes>
 					</div>
 					<Footer />

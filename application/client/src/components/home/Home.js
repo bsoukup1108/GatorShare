@@ -7,12 +7,12 @@ import Spinner from '../misc/Spinner';
 import moment from 'moment';
 import test from '../../img/sfsu.jpeg';
 import test1 from '../../img/sfsu1.png';
+import { ReactSession } from 'react-client-session';
 
 const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		http(`/posts`)
 			.then((res) => {
@@ -24,6 +24,10 @@ const Home = () => {
 				console.log(e);
 			});
 	}, []);
+
+	const setCategory = (e) => {
+		ReactSession.set('category', e.target.name);
+	};
 
 	return (
 		<>
@@ -45,7 +49,46 @@ const Home = () => {
 									students, by{' '}
 									<span className='text-warning'>SFSU</span>{' '}
 									students
+									<br />
+									<br />
+									Here at GatorShare, you can experience a new
+									way to share content, receive feedback, and
+									connect with SFSU students and faculty.
 								</h4>
+								<br />
+
+								{!ReactSession.get('token') && (
+									<div id='auth-hook'>
+										<h4>Get started today!</h4>
+										<div>
+											<button
+												type='button'
+												className='signup-btn'
+											>
+												<a
+													className='nav-link'
+													href='/login'
+												>
+													Log In
+												</a>
+											</button>
+										</div>
+										<h4 className='home-or'>or</h4>
+										<div>
+											<button
+												type='button'
+												className='signup-btn'
+											>
+												<a
+													className='nav-link'
+													href='/signup'
+												>
+													Sign Up
+												</a>
+											</button>
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
@@ -53,32 +96,62 @@ const Home = () => {
 						<div className='container-home-links'>
 							<div className='btn-group ' role='group'>
 								<button type='button' className='btn btn-dark'>
-									<a className='nav-link' href='/posts'>
-										Articles and Essays
+									<a
+										className='nav-link'
+										href='/search'
+										name='Articles&Essays'
+										onClick={(e) => setCategory(e)}
+									>
+										Articles & Essays
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a
+										className='nav-link'
+										href='/search'
+										name='Art&Films'
+										onClick={(e) => setCategory(e)}
+									>
 										Art & Film
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a
+										className='nav-link'
+										href='/search'
+										name='Clubs'
+										onClick={(e) => setCategory(e)}
+									>
 										Clubs
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a
+										className='nav-link'
+										href='/search'
+										name='Discords'
+										onClick={(e) => setCategory(e)}
+									>
 										Discords
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a
+										className='nav-link'
+										href='/search'
+										name='Tutoring'
+										onClick={(e) => setCategory(e)}
+									>
 										Tutoring
 									</a>
 								</button>
 								<button type='button' className='btn btn-dark '>
-									<a className='nav-link' href='/posts'>
+									<a
+										className='nav-link'
+										href='/search'
+										name='Other'
+										onClick={(e) => setCategory(e)}
+									>
 										Other
 									</a>
 								</button>

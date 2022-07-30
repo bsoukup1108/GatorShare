@@ -13,7 +13,8 @@ import javax.persistence.Table;
 import lombok.Data;
 
 import javax.persistence.*;
-
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -35,13 +36,18 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable( name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     public Long getID(){
         return id;
     }
 
-    public String getfirstName(){
-        return firstName;
-    }
+
 
     public String getlastName(){
         return lastName;
@@ -53,6 +59,10 @@ public class User {
 
     public String getPassword(){
         return password;
+    }
+
+    public Set<Role> getRole_name(){
+        return roles;
     }
 
     public void setID(Long id){
@@ -71,6 +81,10 @@ public class User {
         this.email = email;
     }
 
+    public void setRoles(Set<Role> roles){
+        this.roles = roles;
+    }
+
 
 
 //    getter and setter
@@ -84,5 +98,14 @@ public class User {
 
     public User (){
 
+    }
+
+    public String getFirstname() {
+        return firstName;
+    }
+
+
+    public String getFirstName() {
+        return firstName;
     }
 }
