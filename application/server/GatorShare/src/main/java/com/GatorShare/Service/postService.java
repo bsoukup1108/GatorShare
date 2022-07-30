@@ -13,12 +13,18 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import java.io.ByteArrayOutputStream;
+
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
 public class postService implements PostServiceInterface{
@@ -32,28 +38,73 @@ public class postService implements PostServiceInterface{
     private UserRepository userRepository;
 
 
-    public void store(MultipartFile file, String Title, String description) throws IOException {
+    public void store(MultipartFile file, String Title, String description, Integer photo_like, String tag) throws IOException {
+        System.out.println("Original Image Byte Size - " + file.getBytes().length);
         Post newPost = new Post();
-        String PostName = StringUtils.cleanPath(file.getOriginalFilename());
+        String PostName = file.getOriginalFilename();
+        String postContnenttypr = file.getContentType();
+
+
         if(PostName.contains("..")){
             System.out.println("post is not valid");
         }
         try {
-            newPost.setContent(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e){
+            newPost.setContent(postContnenttypr);
+        } catch (Exception e){
             e.printStackTrace();
         }
-        newPost.setContent(description);
+
+        Date date = new Date();
+
+        newPost.setCreatedDate(date);
+        newPost.setDescription(description);
         newPost.SetTitle(Title);
+        newPost.setPicByte(compressBytes(file.getBytes()));
+        newPost.setTag(tag);
+        newPost.setPhoto_Like(photo_like);
         postrepo.save(newPost);
     }
-//    public Post savePost(UserDTO userDTO, String content){
-//        Post post = new Post();
-//        User user = userRepository.findByEmail(userDTO.getEmail());
-//        post.setUser(user);
-//        post.setContent(content);
-//        return postrepo.save(post);
-//    }
+
+    public static byte[] compressBytes(byte[] data) {
+
+        Deflater deflater = new Deflater();
+        deflater.setInput(data);
+        deflater.finish();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!deflater.finished()) {
+            int count = deflater.deflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+        }
+        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+        return outputStream.toByteArray();
+
+    }
+    public static byte[] decompressBytes(byte[] data) {
+
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        try {
+            while (!inflater.finished()) {
+                int count = inflater.inflate(buffer);
+                outputStream.write(buffer, 0, count);
+            }
+            outputStream.close();
+        } catch (IOException ioe) {
+        } catch (DataFormatException e) {
+        }
+        return outputStream.toByteArray();
+
+    }
+
+
+
     @Override
     public List<Post> searchPosts(String query){
         List<Post> posts = postrepo.searchPosts(query);

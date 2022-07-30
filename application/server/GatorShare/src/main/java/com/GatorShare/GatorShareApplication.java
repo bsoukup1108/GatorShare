@@ -74,10 +74,7 @@ public class GatorShareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
-	// @RequestMapping("/test")
-	// public String test(){
-	// return "{Test: test}";
-	// }
+
 
 	@GetMapping(value = "aboutus")
 	public ResponseEntity<List<AboutUsDto>> listAllUsers() {
@@ -144,10 +141,10 @@ public class GatorShareApplication {
 	}
 
 	@PostMapping("post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("posts") MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart(required = false) MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
-			PostService.store(posts, Titile, DEsc);
+			PostService.store(posts, Titile, DEsc,like,tag);
 			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
@@ -201,34 +198,10 @@ public class GatorShareApplication {
 	}
 
 
-	@GetMapping("login/{userName}/post")
-	public String post() {
-		return "{Title: title" + "Description: description" + "attachedImage: []" + "}";
-	}
-
-	@GetMapping("login/{UserID}/search")
-	public String search() {
-		return "{SELECT * FROM <tableName> WHERE <Name Of attribute>='%' or <Name Of attribute>=\"+\"'\"+\"%\"+\"';"
-				+ "}";
-	}
-
-	@GetMapping(value = "login/{UserID}/Message")
-	public String Message() {
-		return "{[Message input]" + "}";
-	}
-
-	@GetMapping(value = "login/{userID}/comment")
-	public String Comment() {
-		return "{[commnet input]" + "}";
-	}
 
 
 
 
-	// @GetMapping("/search")
-	// public ResponseEntity<List<AboutUsDto>> searchPost(@RequestParam("query")
-	// String query){
-	// return ResponseEntity.ok(userService.searchPost(query));
-	// }
+
 
 }
