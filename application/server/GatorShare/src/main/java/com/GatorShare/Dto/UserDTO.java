@@ -1,6 +1,6 @@
 package com.GatorShare.Dto;
 
-import com.GatorShare.Message.Message;
+
 
 public class UserDTO {
     private Long id;
@@ -10,7 +10,7 @@ public class UserDTO {
     private String password;
 
 
-    Message lastMessage;
+
 
 
     public String getfirstName(){

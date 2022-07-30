@@ -5,14 +5,13 @@ import java.util.NoSuchElementException;
 
 
 import com.GatorShare.Dto.*;
-import com.GatorShare.Message.*;
+
 import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
-import com.GatorShare.Service.AdminService;
-import com.GatorShare.Service.RequestService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
@@ -70,14 +69,12 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private RequestService requestService;
+
 
 	@Autowired
 	private postService PostService;
 
-	@Autowired
-	private AdminService adminService;
+
 
 
 	@Autowired
@@ -89,20 +86,13 @@ public class GatorShareApplication {
 	@Autowired
 	private CommentRepo commentRepo;
 
-	@Autowired
-	private SimpMessagingTemplate simpMessagingTemplate;
+
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
 
 
-	@GetMapping("/")
-	public String index(HttpServletRequest request) {
 
-		adminService.store_userinfo(request);
-
-		return "client info saved in the database";
-	}
 
 
 
@@ -167,17 +157,7 @@ public class GatorShareApplication {
 		}
 	}
 
-	@MessageMapping("/message")
-	@SendTo("/chatroom/public")
-	public Message receiveMessage(@Payload Message message){
-		return message;
-	}
-	@MessageMapping("/private-message")
-	public Message recMessage(@Payload Message message){
-		simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
-		System.out.println(message.toString());
-		return message;
-	}
+
 
 	@GetMapping(value = "search")
 	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
@@ -199,10 +179,7 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsDiscords());
 	}
 
-	@GetMapping("search/{ASC}")
-	public ResponseEntity<List<Post>> SortAlphabetically(){
-		return ResponseEntity.ok(PostService.SortAlphabetically());
-	}
+
 
 	@GetMapping("search/{Tutoring}")
 	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring(){
@@ -224,35 +201,27 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
 	}
 
-	@GetMapping("search/{Like}")
-	public ResponseEntity<List<Post>> SortByLike()
-	{
 
-		return ResponseEntity.ok(PostService.SortByLike());
-	}
-
-	@GetMapping("AllPosts")
+	@GetMapping("posts")
 	public ResponseEntity<List<Post>> getAllPosts()
 	{
+
 		return ResponseEntity.ok(PostService.getAllPosts());
 	}
 
 
-	@GetMapping("/posts")
-	public Page<Post> getAllPosts(Pageable pageable) {
-		return postRepo.findAll(pageable);
-	}
+
 
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart(required = false) MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
-			PostService.store(posts, Titile, DEsc,tag, like);
-			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
+			PostService.store(Titile, DEsc,tag, like);
+			message = "uploaded the post successfully: "+ Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
-			message = "Post could not be uploaded " + posts.getOriginalFilename() + ".";
+			message = "Post could not be uploaded " + Titile + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
 
 		}
@@ -265,6 +234,8 @@ public class GatorShareApplication {
 	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
 	}
+
+
 
 
 

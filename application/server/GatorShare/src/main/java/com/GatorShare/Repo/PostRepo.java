@@ -45,22 +45,6 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
 
-    @Query("SELECT p FROM Post p ORDER BY p ASC")
-    List <Post> SortAlphabetically();
-
-    @Query("SELECT p FROM Post p ORDER BY p.photo_Like DESC")
-    List <Post> SortByLIke();
-
-    @Query("SELECT p FROM Post p")
-    List<Post> getallposts();
-
-
-
-
-
-    List<Post> findPostByUserOrderById(User user);
-
-    List<Post> findAllByOrderByIdDesc();
 
 
 }

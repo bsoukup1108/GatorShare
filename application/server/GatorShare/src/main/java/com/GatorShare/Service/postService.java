@@ -1,33 +1,27 @@
 package com.GatorShare.Service;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 
 
+import com.GatorShare.Dto.AboutUsDto;
 import com.GatorShare.Dto.Post;
 import com.GatorShare.Repo.UserRepository;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 
 
-
-import java.io.IOException;
-import java.util.Base64;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 
 @Service
-public class postService implements PostServiceInterface{
+public class postService {
 
     private static PostRepo postrepo;
 
@@ -41,21 +35,13 @@ public class postService implements PostServiceInterface{
 
 
 
-    public void store(MultipartFile file, String Title, String tag, String description,Integer likes) throws IOException {
+    public void store(String Title, String tag, String description,Integer likes) throws IOException {
 
         Post newPost = new Post();
-        String PostName = file.getOriginalFilename();
-        String postContnenttypr = file.getContentType();
 
 
-        if(PostName.contains("..")){
-            System.out.println("post is not valid");
-        }
-        try {
-            newPost.setContent(postContnenttypr);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+
+
 
 
         Date date = new Date();
@@ -68,7 +54,7 @@ public class postService implements PostServiceInterface{
         newPost.setContent(description);
 
         newPost.SetTitle(Title);
-        newPost.setPicByte(compressBytes(file.getBytes()));
+
 
         postrepo.save(newPost);
     }
@@ -115,19 +101,21 @@ public class postService implements PostServiceInterface{
 
 
 
-    @Override
+
     public List<Post> searchPosts(String query){
         List<Post> posts = postrepo.searchPosts(query);
         return posts;
     }
 
-    @Override
+
     public List<Post> getAllPosts() {
-        List<Post> posts = postrepo.getallposts();
+        List<Post> posts = postrepo.findAll();
         return posts;
     }
 
-    @Override
+
+
+
     public List<Post> getallpostsbyid(int postId)
     {
         List<Post> posts = postrepo.getallpostsbyid(postId);
@@ -166,29 +154,12 @@ public class postService implements PostServiceInterface{
         return posts;
     }
 
-    public List<Post> SortAlphabetically(){
-        List<Post> posts = postrepo.SortAlphabetically();
-        return posts;
-    }
+
 
     public List<Post> SearchWhereInputIsDiscords(){
         List<Post> posts = postrepo.SearchWhereInputIsDiscords();
         return posts;
     }
-    public List<Post> SortByLike(){
-        List<Post> posts = postrepo.SortByLIke();
-        return posts;
-    }
-
-
-
-
-
-
-
-
-
-
 
     public void ChangePostTitle(Integer id, String NewTitile){
         Post newTi = new Post();

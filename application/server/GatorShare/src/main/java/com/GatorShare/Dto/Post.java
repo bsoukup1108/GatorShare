@@ -27,10 +27,6 @@ public class Post {
 
 	@Column(columnDefinition = "TEXT")
 	private String Tag;
-
-
-
-
 	@Column(columnDefinition = "TEXT")
 
 	private String Description;
@@ -38,17 +34,9 @@ public class Post {
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
 
-
-	@Column(name = "picture", length = Integer.MAX_VALUE, nullable = true)
-	private byte [] photos;
-
-
 	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
 
-	@Lob
-	@Column(name = "picByte")
-	private byte[] picByte;
 
 	public Post() {
 	}
@@ -65,17 +53,13 @@ public class Post {
 		this.Tag = tag;
 	}
 
-	public void setPhotos(byte [] Photo){
-		this.photos = Photo;
-	}
+
 
 	public User getUser() {
 		return user;
 	}
 
-	public byte [] getPhoto(){
-		return photos;
-	}
+
 
 	public String getTitle(){
 		return Title;
@@ -113,13 +97,7 @@ public class Post {
 		this.createdDate = createdDate;
 	}
 
-	public byte[] getPicByte() {
-		return picByte;
-	}
 
-	public void setPicByte(byte[] picByte) {
-		this.picByte = picByte;
-	}
 
 	public Integer getPhoto_Like() {
 		return photo_Like;
@@ -128,4 +106,6 @@ public class Post {
 	public void setPhoto_Like(Integer photo_Like) {
 		this.photo_Like = photo_Like;
 	}
+
+
 }
