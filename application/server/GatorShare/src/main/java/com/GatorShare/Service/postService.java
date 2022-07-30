@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 
 
-<<<<<<< HEAD
+
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Date;
@@ -24,9 +24,7 @@ import java.util.function.Function;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-=======
 
->>>>>>> backend
 
 @Service
 public class postService implements PostServiceInterface{
@@ -40,14 +38,11 @@ public class postService implements PostServiceInterface{
     private UserRepository userRepository;
 
 
-<<<<<<< HEAD
-    public void store(MultipartFile file, String Title, String description, Integer photo_like, String tag) throws IOException {
-        System.out.println("Original Image Byte Size - " + file.getBytes().length);
-=======
+
 
 
     public void store(MultipartFile file, String Title, String tag, String description,Integer likes) throws IOException {
->>>>>>> backend
+
         Post newPost = new Post();
         String PostName = file.getOriginalFilename();
         String postContnenttypr = file.getContentType();
@@ -61,25 +56,24 @@ public class postService implements PostServiceInterface{
         } catch (Exception e){
             e.printStackTrace();
         }
-<<<<<<< HEAD
+
 
         Date date = new Date();
 
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
-=======
+
         newPost.setLikes(likes);
         newPost.setTag(tag);
         newPost.setContent(description);
->>>>>>> backend
+
         newPost.SetTitle(Title);
         newPost.setPicByte(compressBytes(file.getBytes()));
-        newPost.setTag(tag);
-        newPost.setPhoto_Like(photo_like);
+
         postrepo.save(newPost);
     }
 
-<<<<<<< HEAD
+
     public static byte[] compressBytes(byte[] data) {
 
         Deflater deflater = new Deflater();
@@ -120,8 +114,7 @@ public class postService implements PostServiceInterface{
 
 
 
-=======
->>>>>>> backend
+
     @Override
     public List<Post> searchPosts(String query){
         List<Post> posts = postrepo.searchPosts(query);

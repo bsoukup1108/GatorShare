@@ -27,23 +27,22 @@ public class Post {
 
 	@Column(columnDefinition = "TEXT")
 	private String Tag;
-<<<<<<< HEAD
-	@Column(columnDefinition="TEXT")
-=======
+
+
+
 
 	@Column(columnDefinition = "TEXT")
->>>>>>> backend
+
 	private String Description;
 
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
-<<<<<<< HEAD
-=======
+
 
 	@Column(name = "picture", length = Integer.MAX_VALUE, nullable = true)
 	private byte [] photos;
 
->>>>>>> backend
+
 	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
 

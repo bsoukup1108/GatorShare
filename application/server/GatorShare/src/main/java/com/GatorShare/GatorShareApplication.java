@@ -95,8 +95,7 @@ public class GatorShareApplication {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
 
-<<<<<<< HEAD
-=======
+
 	@GetMapping("/")
 	public String index(HttpServletRequest request) {
 
@@ -105,7 +104,7 @@ public class GatorShareApplication {
 		return "client info saved in the database";
 	}
 
->>>>>>> backend
+
 
 	@GetMapping(value = "aboutus")
 	public ResponseEntity<List<AboutUsDto>> listAllUsers() {
@@ -245,23 +244,17 @@ public class GatorShareApplication {
 	}
 
 	@PostMapping("post")
-<<<<<<< HEAD
+
 	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart(required = false) MultipartFile posts, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
-			PostService.store(posts, Titile, DEsc,like,tag);
+			PostService.store(posts, Titile, DEsc,tag, like);
 			message = "uploaded the post successfully: "+ posts.getOriginalFilename();
-=======
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("Likes") int Likes) {
-		String message = "";
-		try{
-			PostService.store(Image, tag, Titile, DEsc, Likes);
-			message = "uploaded the post successfully: "+ Image.getOriginalFilename();
->>>>>>> backend
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
-			message = "Post could not be uploaded " + Image.getOriginalFilename() + ".";
+			message = "Post could not be uploaded " + posts.getOriginalFilename() + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
+
 		}
 	}
 
@@ -325,13 +318,6 @@ public class GatorShareApplication {
 	}
 
 
-<<<<<<< HEAD
 
-
-
-
-
-=======
->>>>>>> backend
 
 }
