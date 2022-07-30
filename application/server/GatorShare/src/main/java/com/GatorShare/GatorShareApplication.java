@@ -2,12 +2,14 @@ package com.GatorShare;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 
 import com.GatorShare.Dto.*;
 
 import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
+import com.GatorShare.Service.ImageStorageService;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -47,6 +50,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,6 +79,8 @@ public class GatorShareApplication {
 	private postService PostService;
 
 
+	@Autowired
+	private ImageStorageService imageStorageService;
 
 
 	@Autowired
@@ -226,13 +232,51 @@ public class GatorShareApplication {
 
 		}
 	}
-
-
-
-
 	@GetMapping(value = "AllPosts/{id}")
 	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
+
+	@PostMapping("post/{postID}/upload")
+	public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image") MultipartFile file) {
+		String message = "";
+		try {
+			imageStorageService.store(file);
+
+			message = "Uploaded the file successfully: " + file.getOriginalFilename();
+			return ResponseEntity.status(HttpStatus.OK).body(new ResponesImageMessage(message));
+		} catch (Exception e) {
+			message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage(message));
+		}
+	}
+
+	@GetMapping("Images")
+	public ResponseEntity<List<ResponseImage>> getListFiles() {
+		List<ResponseImage> files = imageStorageService.getAllfiles().map(dbFile -> {
+			String fileDownloadUri = ServletUriComponentsBuilder
+					.fromCurrentContextPath()
+					.path("/files/")
+					.path(dbFile.getId())
+					.toUriString();
+
+			return new ResponseImage(
+					dbFile.getName(),
+					fileDownloadUri,
+					dbFile.getType(),
+					dbFile.getData().length);
+		}).collect(Collectors.toList());
+
+		return ResponseEntity.status(HttpStatus.OK).body(files);
+	}
+
+	@GetMapping("/Images/{id}")
+	public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+		Imageupload imageupload = imageStorageService.getfile(id);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageupload.getName() + "\"")
+				.body(imageupload.getData());
 	}
 
 
@@ -278,9 +322,6 @@ public class GatorShareApplication {
 		}
 		return message;
 	}
-
-
-
 
 
 	@PostMapping("/signup")
