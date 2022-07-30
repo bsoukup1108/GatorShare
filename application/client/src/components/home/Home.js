@@ -12,26 +12,28 @@ const Home = () => {
 	const [post2, setPost2] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		http(`/search/{ASC}`)
-			.then((res) => {
-				setPost1(res.data);
-				setIsLoaded(false);
-			})
-			.then(
-				http(`/search/{Like}`)
-					.then((res) => {
-						setPost2(res.data);
-						setIsLoaded(true);
-					})
-					.catch((e) => {
-						setIsLoaded(false);
-						console.log(e);
-					})
-			)
-			.catch((e) => {
-				setIsLoaded(false);
-				console.log(e);
-			});
+		setPost1([]);
+		setPost2([]);
+		// http(`/search/{ASC}`)
+		// 	.then((res) => {
+		// 		setPost1(res.data);
+		// 		setIsLoaded(false);
+		// 	})
+		// 	.then(
+		// 		http(`/search/{Like}`)
+		// 			.then((res) => {
+		// 				setPost2(res.data);
+		// 				setIsLoaded(true);
+		// 			})
+		// 			.catch((e) => {
+		// 				setIsLoaded(false);
+		// 				console.log(e);
+		// 			})
+		// 	)
+		// 	.catch((e) => {
+		// 		setIsLoaded(false);
+		// 		console.log(e);
+		// 	});
 	}, []);
 
 	const setCategory = (e) => {

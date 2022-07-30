@@ -61,10 +61,11 @@ const Messages = () => {
 
 	useEffect(() => {
 		let notif = document.getElementById('notif-nav-1');
-		if (notif) notif.setAttribute('class', 'dropdown me-1 notif-nav-2');
+		if (notif && window.location.pathname !== '/messages')
+			notif.setAttribute('class', 'dropdown me-1 notif-nav-2');
 		let notifBox = document.getElementById('notifications-1');
 
-		if (notifBox) {
+		if (notifBox && window.location.pathname !== '/messages') {
 			if (
 				notifBox.innerHTML ===
 				"<p>You don't have any notifications yet</p>"

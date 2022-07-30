@@ -45,6 +45,7 @@ a:hover {
 /* Container */
 .container {
   min-width: 320px;
+  max-width: -webkit-fill-available !important;
 }
 
 /* -------------------------------------------- */
@@ -1191,7 +1192,23 @@ footer a :hover {
   width: 100%;
 }
 
+@media screen and (min-width: 1600px) {
+  .container {
+    margin: 0 30rem;
+  }
+  #chat-container {
+    max-height: 100%;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .container {
+    margin: 0 5rem;
+  }
+}
 @media screen and (max-width: 760px) {
+  .container {
+    margin: 0 5rem;
+  }
   .auth {
     flex-direction: column;
     height: 100%;
@@ -1237,6 +1254,9 @@ footer a :hover {
   }
 }
 @media screen and (max-width: 480px) {
+  .container {
+    margin: 0 1rem;
+  }
   #main-carroussel {
     flex-direction: column;
     margin: 0;

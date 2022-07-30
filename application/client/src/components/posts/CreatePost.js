@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 import http from '../../http-form-data';
 import { alert } from '../../js/alert';
+import noImage from '../../img/noImage.jpeg';
 
 const CreatePost = () => {
 	//redirect if not logged in
@@ -19,22 +20,25 @@ const CreatePost = () => {
 		return <Navigate to='/login' />;
 	}
 
-	const [formDataImg, setFormDataImg] = useState({
-		image: null,
-	});
+	const i = String(noImage.indexOf('base64,'));
+	const buffer = Buffer.from(noImage.slice(i + 7), 'base64');
+	let fakeFile = new File(buffer, 'fake');
 
 	const userId = ReactSession.get('currentUserId');
-	console.log(userId);
+
+	{
+	}
+
 	const [formData, setFormData] = useState({
 		userId: userId,
 		postTitle: '',
 		Descrption: '',
 		likes: 0,
 		tag: 'Other',
+		image: fakeFile,
 	});
 
 	const { postTitle, Descrption } = formData;
-	const { image } = formDataImg;
 
 	const onChange = (e) => {
 		setFormData({
@@ -43,20 +47,22 @@ const CreatePost = () => {
 		});
 	};
 
-	const onImageUpload = (e) => {
+	const onImageUpload = async (e) => {
 		let file = e.target.files[0];
 		console.log(file);
-		// setFormDataImg({
-		// 	...formDataImg,
-		// 	[e.target.name]: file,
-		// });
+		setFormData({
+			...formData,
+			image: file,
+		});
 	};
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
+		console.log(formData);
 		http.post('/post', formData)
 			.then((response) => {
 				console.log(formData);
+				console.log(response);
 
 				document.getElementById('create-btn-post').style.visibility =
 					'hidden';
@@ -70,6 +76,7 @@ const CreatePost = () => {
 					return null;
 				}
 			})
+			.then(() => {})
 			.catch(function (err) {
 				document.getElementById('create-btn-post').style.visibility =
 					'visible';
@@ -149,7 +156,7 @@ const CreatePost = () => {
 								accept='image/*'
 								id='formFile'
 								name='image'
-								value={image}
+								//	value={image}
 								onInput={(e) => onImageUpload(e)}
 							/>
 						</div>

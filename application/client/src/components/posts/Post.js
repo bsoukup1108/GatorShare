@@ -13,6 +13,8 @@ const Post = () => {
 	const [comments, setComments] = useState([]);
 	const isAuth = !!getToken();
 
+	const [bImage, setBImage] = useState(null);
+
 	const [likes, setLikes] = useState(0);
 
 	const onLike = (e) => {
@@ -32,10 +34,22 @@ const Post = () => {
 	};
 
 	useEffect(() => {
-		http.get(`/AllPosts/%7Bid%7D?query=${postId}`)
+		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
+				let b = res.data[0].data;
+				let src = 'data:image/png;base64,';
+				src += b;
+
+				if (src.length > 30 && res.data[0].name !== 'fake') {
+					setBImage(src);
+					setIsLoaded(true);
+				}
+
 				setPost(res.data[0]);
-				setIsLoaded(true);
+
+				if ((src.length < 30) | (res.data[0].name === 'fake')) {
+					setIsLoaded(true);
+				}
 			})
 			.catch((e) => {
 				setIsLoaded(false);
@@ -54,7 +68,7 @@ const Post = () => {
 	const postComment = (e) => {
 		e.preventDefault();
 
-		http.post(`/post/${postId}/comments`, {
+		http.post(`/comments/${postId}/comments`, {
 			text: comment.commentArea,
 		})
 			.then((res) => {
@@ -67,7 +81,7 @@ const Post = () => {
 			});
 		setComment('');
 	};
-	const { content, user, createdDate, title, tag } = post;
+	const { content, user, createdDate, title, tag, image } = post;
 	let fname;
 	let lname;
 	let phLikes;
@@ -81,7 +95,7 @@ const Post = () => {
 	userId = post.user ? (post.user.id ? post.user.id : null) : null;
 	Tag = content !== null ? content : 'No description';
 	contentDesc = tag !== null ? tag : 'No tag';
-
+	console.log(post);
 	useEffect(() => {
 		setLikes(phLikes);
 	}, [phLikes]);
@@ -118,7 +132,7 @@ const Post = () => {
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={post.image ? post.image : noImage}
+										src={bImage !== null ? bImage : noImage}
 										className='img-fluid rounded-start'
 										alt='...'
 									/>
