@@ -8,13 +8,13 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 
-import com.GatorShare.Dto.ResponesImageMessage;
+import com.GatorShare.Dto.ResponsePostImage;
 
 @ControllerAdvice
 public class ImageUploadExecption extends ResponseEntityExceptionHandler{
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public ResponseEntity<ResponesImageMessage> handleMaxSizeException(MaxUploadSizeExceededException exc) {
-        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage("File is too large. Try again!"));
+    public ResponseEntity<ResponsePostImage> handleMaxSizeException(MaxUploadSizeExceededException exc) {
+        return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponsePostImage("File is too large. Try again!"));
     }
 }

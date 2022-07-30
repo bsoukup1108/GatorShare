@@ -208,12 +208,12 @@ public class GatorShareApplication {
 	}
 
 
-//	@GetMapping("posts")
-//	public ResponseEntity<List<Post>> getAllPosts()
-//	{
-//
-//		return ResponseEntity.ok(PostService.getAllPosts());
-//	}
+	@GetMapping("posts")
+	public ResponseEntity<List<Post>> getAllPosts()
+	{
+
+		return ResponseEntity.ok(PostService.getAllPosts());
+	}
 
 
 
@@ -253,15 +253,15 @@ public class GatorShareApplication {
 //	}
 
 	@GetMapping("postsImage")
-	public ResponseEntity<List<ResponseImage>> getListFiles() {
-		List<ResponseImage> files = postService.getAllfiles().map(dbFile -> {
+	public ResponseEntity<List<ResponsePost>> getListFiles() {
+		List<ResponsePost> files = postService.getAllfiles().map(dbFile -> {
 			String fileDownloadUri = ServletUriComponentsBuilder
 					.fromCurrentContextPath()
 					.path("/files/")
 					.path(String.valueOf(dbFile.getId()))
 					.toUriString();
 
-			return new ResponseImage(
+			return new ResponsePost(
 					dbFile.getName(),
 					fileDownloadUri,
 					dbFile.getType());

@@ -1,10 +1,28 @@
 package com.GatorShare.Dto;
 
-public class ResponseImage {
+import javax.persistence.Column;
+import javax.persistence.Lob;
+import java.util.Date;
 
+public class ResponsePost {
+
+    private String Title;
+    private String Tag;
+    private String Description;
+    private Integer photo_Like;
     private String name;
-    private String url;
     private String type;
+
+    private Date createdDate;
+
+
+
+    private byte[] data;
+
+
+
+    private String url;
+
 
 
     public String getName() {
@@ -32,7 +50,7 @@ public class ResponseImage {
     }
 
 
-    public ResponseImage(String name, String url, String type) {
+    public ResponsePost(String name, String url, String type) {
         this.name = name;
         this.url = url;
         this.type = type;

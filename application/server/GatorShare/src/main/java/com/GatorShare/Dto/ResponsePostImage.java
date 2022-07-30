@@ -1,11 +1,11 @@
 package com.GatorShare.Dto;
 
-public class ResponesImageMessage {
+public class ResponsePostImage {
 
 
     private String message;
 
-    public ResponesImageMessage(String message) {
+    public ResponsePostImage(String message) {
         this.message = message;
     }
 
