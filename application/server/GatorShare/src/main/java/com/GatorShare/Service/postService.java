@@ -38,12 +38,6 @@ public class postService {
     public void store(String Title, String tag, String description,Integer likes) throws IOException {
 
         Post newPost = new Post();
-
-
-
-
-
-
         Date date = new Date();
 
         newPost.setCreatedDate(date);
