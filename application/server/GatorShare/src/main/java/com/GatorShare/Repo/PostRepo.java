@@ -16,6 +16,7 @@ import javax.persistence.Table;
 public interface PostRepo extends
 JpaRepository<Post, Integer>{
 
+
     @Query("SELECT p FROM Post p WHERE " +
             "p.Title LIKE CONCAT('%',:query, '%')" +
             "Or p.Description LIKE CONCAT('%', :query, '%')")
@@ -44,7 +45,6 @@ JpaRepository<Post, Integer>{
 
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
-
 
 
 

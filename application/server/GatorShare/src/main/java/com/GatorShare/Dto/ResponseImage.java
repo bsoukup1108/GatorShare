@@ -5,7 +5,7 @@ public class ResponseImage {
     private String name;
     private String url;
     private String type;
-    private long size;
+
 
     public String getName() {
         return name;
@@ -31,18 +31,11 @@ public class ResponseImage {
         this.type = type;
     }
 
-    public long getSize() {
-        return size;
-    }
 
-    public void setSize(long size) {
-        this.size = size;
-    }
-
-    public ResponseImage(String name, String url, String type, long size) {
+    public ResponseImage(String name, String url, String type) {
         this.name = name;
         this.url = url;
         this.type = type;
-        this.size = size;
+
     }
 }

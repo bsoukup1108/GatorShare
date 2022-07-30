@@ -4,17 +4,20 @@ import java.util.List;
 
 
 import com.GatorShare.Dto.AboutUsDto;
+
 import com.GatorShare.Dto.Post;
 import com.GatorShare.Repo.UserRepository;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.stream.Stream;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -35,23 +38,41 @@ public class postService {
 
 
 
-    public void store(String Title, String tag, String description,Integer likes) throws IOException {
+    public void store(MultipartFile image, String Title, String tag, String description,Integer likes) throws IOException {
 
         Post newPost = new Post();
         Date date = new Date();
 
+        String filename = StringUtils.cleanPath(image.getOriginalFilename());
+        String imagetype = image.getContentType();
+        byte [] imagebyte = image.getBytes();
+
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
-
+        newPost.setData(imagebyte);
         newPost.setLikes(likes);
         newPost.setTag(tag);
-        newPost.setContent(description);
+        newPost.setName(filename);
+        newPost.setType(imagetype);
 
         newPost.SetTitle(Title);
 
-
         postrepo.save(newPost);
+
+
+
     }
+    public static Post getfile(int id){
+        return postrepo.findById(id).get();
+    }
+
+    public static Stream<Post> getAllfiles(){
+
+        return postrepo.findAll().stream();
+    }
+
+
+
 
 
     public static byte[] compressBytes(byte[] data) {

@@ -9,7 +9,7 @@ import com.GatorShare.Dto.*;
 
 import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
-import com.GatorShare.Service.ImageStorageService;
+//import com.GatorShare.Service.ImageStorageService;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
@@ -79,8 +79,8 @@ public class GatorShareApplication {
 	private postService PostService;
 
 
-	@Autowired
-	private ImageStorageService imageStorageService;
+//	@Autowired
+//	private ImageStorageService imageStorageService;
 
 
 	@Autowired
@@ -208,22 +208,23 @@ public class GatorShareApplication {
 	}
 
 
-	@GetMapping("posts")
-	public ResponseEntity<List<Post>> getAllPosts()
-	{
-
-		return ResponseEntity.ok(PostService.getAllPosts());
-	}
+//	@GetMapping("posts")
+//	public ResponseEntity<List<Post>> getAllPosts()
+//	{
+//
+//		return ResponseEntity.ok(PostService.getAllPosts());
+//	}
 
 
 
 
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
-			PostService.store(Titile, DEsc,tag, like);
+			PostService.store(image, Titile, DEsc,tag, like);
+
 			message = "uploaded the post successfully: "+ Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
@@ -237,46 +238,45 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
 	}
 
-	@PostMapping("post/{postID}/upload")
-	public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image") MultipartFile file) {
-		String message = "";
-		try {
-			imageStorageService.store(file);
+//	@PostMapping("post/{postID}/upload")
+//	public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image") MultipartFile file) {
+//		String message = "";
+//		try {
+//			imageStorageService.store(file);
+//
+//			message = "Uploaded the file successfully: " + file.getOriginalFilename();
+//			return ResponseEntity.status(HttpStatus.OK).body(new ResponesImageMessage(message));
+//		} catch (Exception e) {
+//			message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+//			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage(message));
+//		}
+//	}
 
-			message = "Uploaded the file successfully: " + file.getOriginalFilename();
-			return ResponseEntity.status(HttpStatus.OK).body(new ResponesImageMessage(message));
-		} catch (Exception e) {
-			message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage(message));
-		}
-	}
-
-	@GetMapping("Images")
+	@GetMapping("postsImage")
 	public ResponseEntity<List<ResponseImage>> getListFiles() {
-		List<ResponseImage> files = imageStorageService.getAllfiles().map(dbFile -> {
+		List<ResponseImage> files = postService.getAllfiles().map(dbFile -> {
 			String fileDownloadUri = ServletUriComponentsBuilder
 					.fromCurrentContextPath()
 					.path("/files/")
-					.path(dbFile.getId())
+					.path(String.valueOf(dbFile.getId()))
 					.toUriString();
 
 			return new ResponseImage(
 					dbFile.getName(),
 					fileDownloadUri,
-					dbFile.getType(),
-					dbFile.getData().length);
+					dbFile.getType());
 		}).collect(Collectors.toList());
 
 		return ResponseEntity.status(HttpStatus.OK).body(files);
 	}
 
 	@GetMapping("/Images/{id}")
-	public ResponseEntity<byte[]> getFile(@PathVariable String id) {
-		Imageupload imageupload = imageStorageService.getfile(id);
+	public ResponseEntity<byte[]> getFile(@PathVariable int id) {
+		Post post = postService.getfile(id);
 
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + imageupload.getName() + "\"")
-				.body(imageupload.getData());
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + post.getName() + "\"")
+				.body(post.getData());
 	}
 
 
