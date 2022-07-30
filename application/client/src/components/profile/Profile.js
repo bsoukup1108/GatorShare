@@ -36,7 +36,6 @@ const Profile = () => {
 		http('/posts')
 			.then((res) => {
 				setIsLoaded(false);
-
 				let p = [];
 				res.data.map((post, i) => {
 					if (post.user) {
@@ -44,6 +43,7 @@ const Profile = () => {
 							p[p.length] = res.data[i];
 						}
 					}
+					return p;
 				});
 				setPosts(p);
 				setIsLoaded(true);
@@ -153,7 +153,7 @@ const Profile = () => {
 							<img
 								src={noProfile}
 								className='profile-pic'
-								alt='No image...'
+								alt='Loading...'
 							/>
 
 							<h1>{role}</h1>
@@ -371,7 +371,7 @@ const Profile = () => {
 																				: noImage
 																		}
 																		className='card-img-top'
-																		alt='No image...'
+																		alt='Loading...'
 																	/>
 																	<div className='card-body'>
 																		<h5 className='card-title'>

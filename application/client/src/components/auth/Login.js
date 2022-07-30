@@ -89,7 +89,10 @@ const Login = () => {
 						<div>
 							<ul className='list-inline'>
 								<li>
-									<a className='forgotpass-link' href='#'>
+									<a
+										className='forgotpass-link'
+										href='/signup'
+									>
 										Forgot your password?
 									</a>
 								</li>

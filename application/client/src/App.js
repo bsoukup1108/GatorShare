@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ReactSession } from 'react-client-session';
 
 import Navbar from './components/navbar/Navbar';
-import About from './components/about/About';
 import Footer from './components/footer/Footer';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
@@ -19,7 +18,7 @@ import Post from './components/posts/Post';
 import Profile from './components/profile/Profile';
 import User from './components/profile/User';
 
-import ChatRoom from './components/chatRoom/ChatRoom';
+//import ChatRoom from './components/chatRoom/ChatRoom';
 
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')

@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
-import Spinner from '../misc/Spinner';
-import moment from 'moment';
-
+import { useEffect } from 'react';
 import aleksPic from '../../img/alex.jpg';
 import briannasPic from '../../img/brianna.jpg';
 import Estefanos from '../../img/Estefanos.jpg';
 import donna from '../../img/donna.jpg';
 import MohamedPic from '../../img/Mohamed.jpg';
 import BrianPic from '../../img/Brian.JPG';
-import { useEffect } from 'react';
+import noImage from '../../img/noImage.jpeg';
+import http from '../../http-common';
+import Spinner from '../misc/Spinner';
 
 const About = () => {
 	const [isLoaded, setIsLoaded] = useState(false);

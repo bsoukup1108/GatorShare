@@ -28,7 +28,7 @@ const SignUp = () => {
 		role: '',
 	});
 
-	const { name, lastname, email, password, password2, role } = formData;
+	const { name, lastname, email, password, password2 } = formData;
 	const onChange = (e) =>
 		setFormData({
 			...formData,

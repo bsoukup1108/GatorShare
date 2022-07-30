@@ -50,7 +50,7 @@ export const login = (formData) => {
 					});
 
 				// redirects to home page if successfull
-				return window.location.href('/');
+				return (window.location = '/');
 			} else {
 				// append fail alert if cant get user's role
 				alert('danger', 'failed to log in...');

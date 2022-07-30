@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { useParams } from 'react-router-dom';
 import { alert } from '../../js/alert';
@@ -12,11 +11,9 @@ const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
-	const [isAuth, setIsAuth] = useState(!!getToken());
+	const isAuth = !!getToken();
 
 	const [likes, setLikes] = useState(0);
-
-	const navigate = useNavigate();
 
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
@@ -38,7 +35,6 @@ const Post = () => {
 		http.get(`/AllPosts/%7Bid%7D?query=${postId}`)
 			.then((res) => {
 				setPost(res.data[0]);
-				console.log(res.data);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -62,7 +58,6 @@ const Post = () => {
 			text: comment.commentArea,
 		})
 			.then((res) => {
-				console.log(res);
 				let commentDiv = document.getElementById('leaveComment');
 				commentDiv.innerHTML = '';
 			})
@@ -83,13 +78,11 @@ const Post = () => {
 	fname = post.user ? user.firstName : '_';
 	lname = post.user ? user.lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
-	userId = user ? (user.user !== null ? user.user : null) : null;
+	userId = post.user ? (post.user.id ? post.user.id : null) : null;
 	Tag = content !== null ? content : 'No description';
 	contentDesc = tag !== null ? tag : 'No tag';
 
 	useEffect(() => {
-		console.log(post);
-
 		setLikes(phLikes);
 	}, [phLikes]);
 	if (isLoaded) {
@@ -146,7 +139,12 @@ const Post = () => {
 													Created by{' '}
 													{userId === null ? (
 														<i>
-															{fname} {lname}
+															{!!fname
+																? fname
+																: 'Anonymous'}{' '}
+															{!!lname
+																? lname
+																: 'User'}
 														</i>
 													) : (
 														<a
@@ -155,7 +153,12 @@ const Post = () => {
 															id='link-profile'
 														>
 															<i>
-																{fname} {lname}
+																{!!fname
+																	? fname
+																	: 'Anonymous'}{' '}
+																{!!lname
+																	? lname
+																	: 'User'}
 															</i>
 														</a>
 													)}

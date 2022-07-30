@@ -56,6 +56,7 @@ const User = () => {
 				let p = [];
 				res.data.map((post, i) => {
 					p[p.length] = post;
+					return p;
 				});
 				if (p) {
 					setPosts(p);
@@ -116,7 +117,7 @@ const User = () => {
 						<img
 							src={noProfile}
 							className='profile-pic'
-							alt='No image...'
+							alt='Loading...'
 						/>
 
 						<h1>{role}</h1>
@@ -169,7 +170,7 @@ const User = () => {
 																		: noImage
 																}
 																className='card-img-top'
-																alt='No image...'
+																alt='Loading...'
 															/>
 															<div className='card-body'>
 																<h5 className='card-title'>

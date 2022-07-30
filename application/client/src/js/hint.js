@@ -169,7 +169,7 @@ export const validateEmail = (email) => {
 
 const validateIsEmail = (email) => {
 	let el = document.getElementById('username-hint-5');
-	let isEmail = /^[-.\w]{1,}\@[-.\w]{3,}\.[-.\w]+$/;
+	let isEmail = /^[-.\w]{1,}@[-.\w]{3,}\.[-.\w]+$/;
 
 	if (isEmail.test(email)) {
 		el.classList.remove('alert-secondary');

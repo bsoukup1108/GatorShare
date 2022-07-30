@@ -9,6 +9,7 @@ import React from 'react';
 import { useState } from 'react';
 import { getToken } from '../../js/useToken';
 import { Navigate } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 import http from '../../http-form-data';
 import { alert } from '../../js/alert';
 
@@ -18,17 +19,22 @@ const CreatePost = () => {
 		return <Navigate to='/login' />;
 	}
 
+	const [formDataImg, setFormDataImg] = useState({
+		image: null,
+	});
+
+	const userId = ReactSession.get('currentUserId');
+	console.log(userId);
 	const [formData, setFormData] = useState({
+		userId: userId,
 		postTitle: '',
 		Descrption: '',
 		likes: 0,
 		tag: 'Other',
 	});
 
-	let image = '';
-	let link = '';
-
-	const { postTitle, Descrption, tag } = formData;
+	const { postTitle, Descrption } = formData;
+	const { image } = formDataImg;
 
 	const onChange = (e) => {
 		setFormData({
@@ -38,9 +44,11 @@ const CreatePost = () => {
 	};
 
 	const onImageUpload = (e) => {
-		// let file = e.target.files[0];
-		// setFormData({
-		// 	...formData,
+		let file = e.target.files[0];
+		console.log(file);
+		// setFormDataImg({
+		// 	...formDataImg,
+		// 	[e.target.name]: file,
 		// });
 	};
 
@@ -48,11 +56,14 @@ const CreatePost = () => {
 		e.preventDefault();
 		http.post('/post', formData)
 			.then((response) => {
+				console.log(formData);
+
 				document.getElementById('create-btn-post').style.visibility =
 					'hidden';
 				if (response.status === 200) {
+					//			let postId = response.data.id;
 					alert('success', 'Post has been created');
-					window.location = '/posts';
+					//	window.location = '/posts';
 				} else {
 					// TODO errors
 					console.log('create post error');
@@ -67,6 +78,24 @@ const CreatePost = () => {
 
 				//return window.location.reload();
 			});
+
+		// http.post('/post', formDataImg)
+		// 	.then((response) => {
+		// 		console.log(formDataImg);
+		// 		if (response.status === 200) {
+		// 			alert('success', 'Image has been uploaded');
+		// 			window.location = '/posts';
+		// 		} else {
+		// 			// TODO errors
+		// 			console.log('create post error');
+		// 			return null;
+		// 		}
+		// 	})
+		// 	.catch(function (err) {
+		// 		console.log(err);
+
+		// 		//return window.location.reload();
+		// 	});
 	};
 
 	return (
@@ -107,21 +136,6 @@ const CreatePost = () => {
 								onChange={(e) => onChange(e)}
 								required
 							></textarea>
-						</div>
-
-						<div className='form-group'>
-							<label className='form-label' htmlFor='link'>
-								Add a link
-							</label>
-							<input
-								className='form-control'
-								type='link'
-								placeholder='Link'
-								name='link'
-								value={link}
-								onChange={(e) => onChange(e)}
-								//required
-							/>
 						</div>
 
 						<div className='mb-3'>

@@ -105,7 +105,7 @@ const Posts = () => {
 							<li>
 								<a
 									className='dropdown-item'
-									href='#'
+									href='#!'
 									onClick={() => setPosts(filterByName())}
 								>
 									Alphabetically
@@ -114,7 +114,7 @@ const Posts = () => {
 							<li>
 								<a
 									className='dropdown-item'
-									href='#'
+									href='#!'
 									onClick={() => setPosts(filterByDate())}
 								>
 									Most recent
@@ -123,7 +123,7 @@ const Posts = () => {
 							<li>
 								<a
 									className='dropdown-item'
-									href='#'
+									href='#!'
 									onClick={() => setPosts(filterByLike())}
 								>
 									Most popular
@@ -141,8 +141,6 @@ const Posts = () => {
 							className='row row-cols-1 row-cols-md-3 g-4'
 						>
 							{posts.map((post, i) => {
-								console.log(post);
-
 								return (
 									<div
 										key={`posts-post-${i}`}
@@ -175,7 +173,7 @@ const Posts = () => {
 														: noImage
 												}
 												className='card-img-top'
-												alt='No image...'
+												alt='Loading...'
 											/>
 											<div className='card-body'>
 												<h5 className='card-title'>
@@ -216,7 +214,7 @@ const Posts = () => {
 														</i>
 														by{' '}
 														<strong>
-															{post.user
+															{!!post.user
 																? post.user
 																		.firstName
 																: 'Anonymous'}{' '}
