@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import test from '../../img/sfsu.jpeg';
-import { ReactSession } from 'react-client-session';
-import { useEffect } from 'react';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -14,7 +13,7 @@ const Posts = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		http(`/AllPosts`)
+		http(`/posts`)
 			.then((res) => {
 				setPosts(res.data);
 				setIsLoaded(true);
@@ -27,8 +26,17 @@ const Posts = () => {
 	const filterByName = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
-			let dateA = a.title[0].toLowerCase();
-			let dateB = b.title[0].toLowerCase();
+			if (a.title[0] === undefined || b.title[0] === undefined) {
+				return -1;
+			}
+			let dateA =
+				a.title[0] === undefined
+					? 'No title...'
+					: a.title[0].toLowerCase();
+			let dateB =
+				b.title[0] === undefined
+					? 'No title...'
+					: b.title[0].toLowerCase();
 
 			if (dateA < dateB) {
 				return -1;
@@ -107,7 +115,7 @@ const Posts = () => {
 								<a
 									className='dropdown-item'
 									href='#'
-									onClick={() => setPosts(filterByLike())}
+									onClick={() => setPosts(filterByDate())}
 								>
 									Most recent
 								</a>
@@ -116,7 +124,7 @@ const Posts = () => {
 								<a
 									className='dropdown-item'
 									href='#'
-									onClick={() => setPosts(filterByName())}
+									onClick={() => setPosts(filterByLike())}
 								>
 									Most popular
 								</a>
@@ -128,8 +136,13 @@ const Posts = () => {
 				{!isLoaded && <Spinner />}
 				{isLoaded && (
 					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-						<div className='row row-cols-1 row-cols-md-3 g-4'>
+						<div
+							id='posts-render'
+							className='row row-cols-1 row-cols-md-3 g-4'
+						>
 							{posts.map((post, i) => {
+								console.log(post);
+
 								return (
 									<div
 										key={`posts-post-${i}`}
@@ -143,6 +156,18 @@ const Posts = () => {
 												return false;
 											}}
 										>
+											{' '}
+											<div id='post-top-2'>
+												<div id='post-tag-2'>
+													<p>
+														<span className='badge badge-primary'>
+															{!!post.description
+																? post.description
+																: 'No tag'}
+														</span>
+													</p>
+												</div>
+											</div>
 											<img
 												src={
 													post.image

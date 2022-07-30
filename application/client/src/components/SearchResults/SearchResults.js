@@ -9,11 +9,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import { ReactSession } from 'react-client-session';
 
 // the main component that handles search results
 const SearchResults = () => {

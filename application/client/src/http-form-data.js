@@ -4,7 +4,7 @@ export default axios.create({
 	// baseURL:
 	// 	'http://ec2-54-193-53-30.us-west-1.compute.amazonaws.com:5000/api/',
 	headers: {
-		'Content-type': 'application/json',
+		'Content-type': 'multipart/form-data',
 		'Access-Control-Allow-Origin': '*',
 	},
 });

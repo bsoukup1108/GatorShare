@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
+import { alert } from '../../js/alert';
+import { getToken } from '../../js/useToken';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import test from '../../img/sfsu.jpeg';
-import { ReactSession } from 'react-client-session';
-
-import { useParams } from 'react-router-dom';
-
-import { alert } from '../../js/alert';
-import { getToken } from '../../js/useToken';
 
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -32,7 +28,7 @@ const Post = () => {
 	};
 
 	const { id } = useParams();
-	let postId = id | 1;
+	let postId = id || 1;
 
 	const incLikes = () => {
 		setLikes(likes + 1);
@@ -42,7 +38,7 @@ const Post = () => {
 		http.get(`/AllPosts/%7Bid%7D?query=${postId}`)
 			.then((res) => {
 				setPost(res.data[0]);
-
+				console.log(res.data);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -59,17 +55,6 @@ const Post = () => {
 		});
 	};
 
-	const onCommentSend = () => {};
-
-	// const appendComment = () => {
-	// 	let el = document.getElementById('leftComment');
-	// 	console.log(el);
-	// 	let div = document.createElement('div');
-	// 	div.setAttribute('className', 'comment');
-	// 	div.innerHTML = `<p>${comment}</p>`;
-	// 	el.appendChild(div);
-	// };
-
 	const postComment = (e) => {
 		e.preventDefault();
 
@@ -78,30 +63,33 @@ const Post = () => {
 		})
 			.then((res) => {
 				console.log(res);
+				let commentDiv = document.getElementById('leaveComment');
+				commentDiv.innerHTML = '';
 			})
 			.catch((e) => {
 				setIsLoaded(false);
-
 				console.log(e);
 			});
 		setComment('');
 	};
-	const { content, createdDate, title, photo_Like, user } = post;
+	const { content, user, createdDate, title, tag } = post;
 	let fname;
 	let lname;
 	let phLikes;
 	let userId;
+	let contentDesc;
+	let Tag;
 
-	fname = post.user ? post.user.firstName : '_';
-	lname = post.user ? post.user.lastName : 'Anonymous';
+	fname = post.user ? user.firstName : '_';
+	lname = post.user ? user.lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
-	userId = post.user
-		? post.user.user !== null
-			? post.user.user
-			: null
-		: null;
+	userId = user ? (user.user !== null ? user.user : null) : null;
+	Tag = content !== null ? content : 'No description';
+	contentDesc = tag !== null ? tag : 'No tag';
 
 	useEffect(() => {
+		console.log(post);
+
 		setLikes(phLikes);
 	}, [phLikes]);
 	if (isLoaded) {
@@ -109,19 +97,30 @@ const Post = () => {
 			<>
 				{isLoaded && (
 					<div style={{ marginBottom: '1rem' }}>
-						<div className='likePost' onClick={() => incLikes()}>
-							<button
-								className='btn-like'
-								onClick={(e) => onLike(e)}
+						<div id='post-top'>
+							<div
+								className='likePost'
+								onClick={() => incLikes()}
 							>
-								<i
-									id='like-icon'
-									className='fa-regular fa-thumbs-up fa-xl'
-								></i>
-							</button>
-							<small> {likes} liked this post</small>
+								<button
+									className='btn-like'
+									onClick={(e) => onLike(e)}
+								>
+									<i
+										id='like-icon'
+										className='fa-regular fa-thumbs-up fa-xl'
+									></i>
+								</button>
+								<small> {likes} liked this post</small>
+							</div>
+							<div id='post-tag-1'>
+								<p>
+									<span className='badge badge-primary'>
+										{Tag}
+									</span>
+								</p>
+							</div>
 						</div>
-
 						<div className='card mb-3'>
 							<div className='row g-0'>
 								<div className='col-md-4'>
@@ -138,9 +137,7 @@ const Post = () => {
 												{title ? title : 'No title...'}
 											</h5>
 											<p className='card-text'>
-												{content
-													? content
-													: 'No description...'}
+												{contentDesc}
 											</p>
 										</div>
 										<div>

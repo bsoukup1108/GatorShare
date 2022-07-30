@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import { getToken } from '../../js/useToken';
-import noProfile from '../../img/noProfile.png';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
+import noProfile from '../../img/noProfile.png';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import { ReactSession } from 'react-client-session';
 import { alert } from '../../js/alert';
-import { useEffect } from 'react';
 
 const Profile = () => {
 	// redirect if not logged in
@@ -34,14 +33,16 @@ const Profile = () => {
 	}, []);
 
 	useEffect(() => {
-		http('/AllPosts')
+		http('/posts')
 			.then((res) => {
 				setIsLoaded(false);
 
 				let p = [];
 				res.data.map((post, i) => {
-					if (post.id === userId) {
-						p[p.length] = res.data[i];
+					if (post.user) {
+						if (post.user.id === userId) {
+							p[p.length] = res.data[i];
+						}
 					}
 				});
 				setPosts(p);

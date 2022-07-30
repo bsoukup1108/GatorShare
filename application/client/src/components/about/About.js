@@ -11,21 +11,23 @@ import Estefanos from '../../img/Estefanos.jpg';
 import donna from '../../img/donna.jpg';
 import MohamedPic from '../../img/Mohamed.jpg';
 import BrianPic from '../../img/Brian.JPG';
+import { useEffect } from 'react';
 
 const About = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [users, setUsers] = useState([]);
-	const navigate = useNavigate();
 
-	http(`/aboutus`)
-		.then((res) => {
-			setUsers(res.data);
-			setIsLoaded(true);
-		})
-		.catch((e) => {
-			setIsLoaded(false);
-			console.log(e);
-		});
+	useEffect(() => {
+		http(`/aboutus`)
+			.then((res) => {
+				setUsers(res.data);
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
+	}, []);
 
 	const getPic = (name) => {
 		switch (name) {
@@ -79,51 +81,57 @@ const About = () => {
 
 	return (
 		<>
-			<div className='container'>
-				<h1>
-					CSC 648 Software Engineering
-					<br />
-					SFSU
-					<br />
-					Summer 2022
-					<br></br>Section 01<br></br>Team 01
-				</h1>
-				<h2>About the Team</h2>
+			{!isLoaded && <Spinner />}
+			{isLoaded && (
+				<div className='container'>
+					<h1>
+						CSC 648 Software Engineering
+						<br />
+						SFSU
+						<br />
+						Summer 2022
+						<br></br>Section 01<br></br>Team 01
+					</h1>
+					<h2>About the Team</h2>
 
-				<div style={{ marginBottom: '1rem' }}>
-					{users.map((user, i) => {
-						return (
-							<div key={`about-${i}`} className='card mb-3'>
-								<div className='row g-0'>
-									<div className='col-md-4'>
-										<img
-											src={getPic(user.firstName)}
-											className='img-fluid rounded-start'
-											alt='...'
-											style={{ width: '100%' }}
-										/>
-									</div>
-									<div className='col-md-8'>
-										<div className='card-body'>
-											<h5 className='card-title'>
-												{user.firstName} {user.lastName}
-											</h5>
-											<p className='card-text'>
-												{user.information}
-											</p>
-											<p className='card-text'>
-												<small className='text-muted'>
-													{getRole(user.firstName)}
-												</small>
-											</p>
+					<div style={{ marginBottom: '1rem' }}>
+						{users.map((user, i) => {
+							return (
+								<div key={`about-${i}`} className='card mb-3'>
+									<div className='row g-0'>
+										<div className='col-md-4'>
+											<img
+												src={getPic(user.firstName)}
+												className='img-fluid rounded-start'
+												alt='...'
+												style={{ width: '100%' }}
+											/>
+										</div>
+										<div className='col-md-8'>
+											<div className='card-body'>
+												<h5 className='card-title'>
+													{user.firstName}{' '}
+													{user.lastName}
+												</h5>
+												<p className='card-text'>
+													{user.information}
+												</p>
+												<p className='card-text'>
+													<small className='text-muted'>
+														{getRole(
+															user.firstName
+														)}
+													</small>
+												</p>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
+					</div>
 				</div>
-			</div>
+			)}
 		</>
 	);
 };

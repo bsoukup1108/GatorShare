@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { login } from '../../js/auth';
-import { getToken } from '../../js/useToken';
 import { ReactSession } from 'react-client-session';
 
 const Login = () => {
+	// redirect if logged in
+	if (ReactSession.get('token')) {
+		return <Navigate to='/' />;
+	}
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -23,11 +27,6 @@ const Login = () => {
 		document.getElementById('login-btn-1').style.visibility = 'hidden';
 		login(formData);
 	};
-
-	// redirect if logged in
-	if (ReactSession.get('token')) {
-		return <Navigate to='/' />;
-	}
 
 	return (
 		<>

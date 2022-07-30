@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import logo from '../../img/logo.png';
 import { logout } from '../../js/auth';
 import { ReactSession } from 'react-client-session';
 
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
-
 	const [category, setCategory] = useState('Category');
 
 	const changeCategory = (e) => {
@@ -24,7 +22,7 @@ const Navbar = (props) => {
 	};
 
 	const navigate = useNavigate();
-	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
+
 	const authLinks = (
 		<>
 			<div className='navbar-right-2'>
@@ -74,7 +72,11 @@ const Navbar = (props) => {
 					aria-labelledby='dropdownMenuOffset'
 				>
 					<li>
-						<div className='dropdown-item' id='notifications-1'>
+						<div
+							className='dropdown-item'
+							id='notifications-1'
+							onClick={() => (window.location = '/messages')}
+						>
 							<p>You don't have any notifications yet</p>
 						</div>
 					</li>

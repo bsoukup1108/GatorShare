@@ -1122,6 +1122,9 @@ footer a :hover {
   display: flex;
   flex-direction: column-reverse;
 }
+#notifications-1 > * {
+  cursor: pointer;
+}
 
 .category-dropdown {
   color: white;
@@ -1379,4 +1382,31 @@ ul {
 .notif-nav-2 > *,
 .notif-nav-2 > * > * {
   color: red;
+}
+
+#post-top,
+#post-top-2 {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
+  margin: 0.5rem 0;
+  justify-content: space-between;
+}
+
+#post-top-2 {
+  margin: -0.5rem -0.5rem 0 0;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+#post-tag-1 {
+  height: 1.1rem;
+}
+
+.badge {
+  background-color: rgba(74, 33, 123, 0.5);
+}
+
+#posts-render > * > * {
+  height: 100% !important;
 }

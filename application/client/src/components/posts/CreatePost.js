@@ -7,9 +7,9 @@
  **************************************************************/
 import React from 'react';
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
 import { getToken } from '../../js/useToken';
-import { createPost } from '../../js/post';
+import { Navigate } from 'react-router-dom';
+import http from '../../http-form-data';
 import { alert } from '../../js/alert';
 
 const CreatePost = () => {
@@ -19,53 +19,54 @@ const CreatePost = () => {
 	}
 
 	const [formData, setFormData] = useState({
-		title: 'www',
-		description: 'www',
-		// link: '',
-		// image: '',
-		image64: '',
-		// category: 'OTHER',
+		postTitle: '',
+		Descrption: '',
+		likes: 0,
+		tag: 'Other',
 	});
 
-	const { title, description, link, image, category } = formData;
+	let image = '';
+	let link = '';
+
+	const { postTitle, Descrption, tag } = formData;
 
 	const onChange = (e) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});
-		console.log(formData);
 	};
 
 	const onImageUpload = (e) => {
-		let file = e.target.files[0];
-		console.log(file);
-		//let img = await getBase64(file).then((data) => data.toString());
-		setFormData({
-			...formData,
-			Image: file,
-		});
-	};
-
-	const decodeBase64 = (file) => {
-		const i = String(file.indexOf('base64,'));
-		const buffer = Buffer.from(file.slice(i + 7), 'base64');
-		const name = `${Math.random().toString(36).slice(-5)}.png`;
-		const file1 = new File(buffer, name);
-	};
-
-	const getBase64 = (file) => {
-		return new Promise((resolve, reject) => {
-			const reader = new FileReader();
-			reader.readAsDataURL(file);
-			reader.onload = () => resolve(reader.result);
-			reader.onerror = (error) => reject(error);
-		});
+		// let file = e.target.files[0];
+		// setFormData({
+		// 	...formData,
+		// });
 	};
 
 	const onSubmit = async (e) => {
 		e.preventDefault();
-		createPost(formData);
+		http.post('/post', formData)
+			.then((response) => {
+				document.getElementById('create-btn-post').style.visibility =
+					'hidden';
+				if (response.status === 200) {
+					alert('success', 'Post has been created');
+					window.location = '/posts';
+				} else {
+					// TODO errors
+					console.log('create post error');
+					return null;
+				}
+			})
+			.catch(function (err) {
+				document.getElementById('create-btn-post').style.visibility =
+					'visible';
+
+				console.log(err);
+
+				//return window.location.reload();
+			});
 	};
 
 	return (
@@ -81,29 +82,30 @@ const CreatePost = () => {
 							Post
 						</h2>
 						<div className='form-group'>
-							<label className='form-label' htmlFor='title'>
+							<label className='form-label' htmlFor='postTitle'>
 								Add title
 							</label>
 							<input
 								className='form-control'
 								type='text'
 								placeholder='Title'
-								name='title'
-								value={title}
+								name='postTitle'
+								value={postTitle}
 								onChange={(e) => onChange(e)}
-								// required
+								required
 							/>
 						</div>
 						<div className='' id='descInput'>
-							<label className='form-label' htmlFor='description'>
+							<label className='form-label' htmlFor='Descrption'>
 								Add description
 							</label>
 							<textarea
 								className='form-control'
 								placeholder='Description'
-								name='description'
-								value={description}
+								name='Descrption'
+								value={Descrption}
 								onChange={(e) => onChange(e)}
+								required
 							></textarea>
 						</div>
 
@@ -118,7 +120,7 @@ const CreatePost = () => {
 								name='link'
 								value={link}
 								onChange={(e) => onChange(e)}
-								// required
+								//required
 							/>
 						</div>
 
@@ -145,7 +147,7 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio1'
 									value='Articles & Essays'
 									onChange={(e) => onChange(e)}
@@ -161,7 +163,7 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio2'
 									value='Art & Film'
 									onChange={(e) => onChange(e)}
@@ -177,7 +179,7 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio3'
 									value='Clubs'
 									onChange={(e) => onChange(e)}
@@ -193,7 +195,7 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio4'
 									value='Discords'
 									onChange={(e) => onChange(e)}
@@ -209,7 +211,7 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio5'
 									value='Tutoring'
 									onChange={(e) => onChange(e)}
@@ -225,9 +227,10 @@ const CreatePost = () => {
 								<input
 									className='form-check-input'
 									type='radio'
-									name='category'
+									name='tag'
 									id='flexRadio6'
 									value='Other'
+									checked
 									onChange={(e) => onChange(e)}
 								/>
 								<label
