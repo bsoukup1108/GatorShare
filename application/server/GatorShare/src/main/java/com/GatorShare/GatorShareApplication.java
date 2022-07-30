@@ -214,7 +214,7 @@ public class GatorShareApplication {
 
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("number of like") Integer like, @RequestParam("tag") String tag) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
 			PostService.store(Titile, DEsc,tag, like);
