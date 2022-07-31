@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
+import { computeHeadingLevel } from '@testing-library/react';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -141,6 +142,23 @@ const Posts = () => {
 							className='row row-cols-1 row-cols-md-3 g-4'
 						>
 							{posts.map((post, i) => {
+								let srcImg = noImage;
+								if (post.data) {
+									let src = 'data:image/png;base64,';
+									src += post.data;
+									if (
+										src.length > 30 &&
+										post.name !== 'fake'
+									) {
+										srcImg = src;
+									}
+								}
+
+								{
+									/* if ((src.length < 30) | (res.data[0].name === 'fake')) {
+								setIsLoaded(true);
+								} */
+								}
 								return (
 									<div
 										key={`posts-post-${i}`}
@@ -167,11 +185,7 @@ const Posts = () => {
 												</div>
 											</div>
 											<img
-												src={
-													post.image
-														? post.image
-														: noImage
-												}
+												src={srcImg}
 												className='card-img-top'
 												alt='Loading...'
 											/>

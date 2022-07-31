@@ -13,6 +13,7 @@ import { ReactSession } from 'react-client-session';
 import http from '../../http-form-data';
 import { alert } from '../../js/alert';
 import noImage from '../../img/noImage.jpeg';
+import Spinner from '../misc/Spinner';
 
 const CreatePost = () => {
 	//redirect if not logged in
@@ -20,6 +21,7 @@ const CreatePost = () => {
 		return <Navigate to='/login' />;
 	}
 
+	const [isLoaded, setIsLoaded] = useState(true);
 	const i = String(noImage.indexOf('base64,'));
 	const buffer = Buffer.from(noImage.slice(i + 7), 'base64');
 	let fakeFile = new File(buffer, 'fake');
@@ -57,6 +59,7 @@ const CreatePost = () => {
 	};
 
 	const onSubmit = async (e) => {
+		setIsLoaded(false);
 		e.preventDefault();
 		console.log(formData);
 		http.post('/post', formData)
@@ -64,23 +67,19 @@ const CreatePost = () => {
 				console.log(formData);
 				console.log(response);
 
-				document.getElementById('create-btn-post').style.visibility =
-					'hidden';
 				if (response.status === 200) {
-					//			let postId = response.data.id;
 					alert('success', 'Post has been created');
-					//	window.location = '/posts';
+					window.location = '/posts';
 				} else {
 					// TODO errors
 					console.log('create post error');
 					return null;
 				}
+				setIsLoaded(true);
 			})
-			.then(() => {})
-			.catch(function (err) {
-				document.getElementById('create-btn-post').style.visibility =
-					'visible';
 
+			.catch(function (err) {
+				isLoaded(true);
 				console.log(err);
 
 				//return window.location.reload();
@@ -263,20 +262,25 @@ const CreatePost = () => {
 							</div>
 						</div>
 						<div id='create-post-btn-1'>
-							<button
-								id='create-btn-post'
-								className='createpost-btn'
-								type='submit'
-								value='Post'
-							>
-								Post
-							</button>
+							{isLoaded ? (
+								<button
+									id='create-btn-post'
+									className='createpost-btn'
+									type='submit'
+									value='Post'
+								>
+									Post
+								</button>
+							) : (
+								<Spinner />
+							)}
 						</div>
 
 						<div></div>
 					</form>
 				</div>
 			</div>
+			)
 		</>
 	);
 };
