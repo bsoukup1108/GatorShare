@@ -931,7 +931,13 @@ label {
 }
 
 
+[id *="profile-btn"] {
+	border-radius: 0 !important;
 
+	>a {
+		color: black;
+	}
+}
 
 
 .flex-center-1 {
@@ -1377,13 +1383,17 @@ footer a {
 	text-transform: uppercase;
 	color: black;
 	border-radius: remy(35px);
-	border-color: lighten($color: $secondary-bg, $amount: 10);
-	background: lighten($color: $secondary-bg, $amount: 10);
+	background: $primary-bg;
+
 
 	&:hover,
 	&:focus {
 		background: lighten($color: $secondary-bg, $amount: 15);
 	}
+}
+
+.edit-btn {
+	border-radius: 0;
 }
 
 .delete-btn {
@@ -1392,7 +1402,7 @@ footer a {
 	font-weight: 600;
 	text-transform: uppercase;
 	color: black;
-	border-radius: remy(35px);
+	//border-radius: remy(35px);
 	border-color: red;
 	background: rgb(248, 41, 41);
 
@@ -1650,6 +1660,22 @@ footer a {
 		}
 	}
 
+	::-webkit-scrollbar {
+		display: none;
+	}
+
+	#auth-hook {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.flex-center-1 {
+		padding: 0;
+	}
+
+	.content>h4 {
+		text-align: center;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -1904,4 +1930,9 @@ ul {
 
 #posts-render>*>* {
 	height: 100% !important
+}
+
+html,
+body {
+	overflow: visible !important;
 }

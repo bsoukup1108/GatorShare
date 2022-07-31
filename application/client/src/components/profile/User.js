@@ -54,13 +54,14 @@ const User = () => {
 			.then((res) => {
 				setIsLoaded2(false);
 				let p = [];
-				res.data.map((post, i) => {
-					p[p.length] = post;
-					return p;
-				});
-				if (p) {
-					setPosts(p);
+				if (res.data) {
+					res.data.map((post, i) => {
+						p[p.length] = post;
+						return p;
+					});
 				}
+
+				setPosts(p);
 
 				if ((posts !== []) | (p === [])) {
 					setIsLoaded2(true);
@@ -124,6 +125,14 @@ const User = () => {
 						<p>Email: {eMail}</p>
 						<div id='profile-btn-1'>
 							<button
+								htmlFor='edit-user-form-2'
+								id='profile-btn-2'
+								type='submit'
+								className='edit-btn'
+							>
+								<a href={`mailto:${eMail}`}>Send Email</a>
+							</button>
+							<button
 								htmlFor='edit-user-form-1'
 								id='profile-btn-2'
 								type='submit'
@@ -131,7 +140,7 @@ const User = () => {
 								value={edit}
 								onClick={(e) => messageUser(e)}
 							>
-								Message User
+								Go To Group Chat
 							</button>
 						</div>
 					</div>

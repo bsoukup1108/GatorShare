@@ -822,6 +822,13 @@ label {
   background: #eda829;
 }
 
+[id*=profile-btn] {
+  border-radius: 0 !important;
+}
+[id*=profile-btn] > a {
+  color: black;
+}
+
 .flex-center-1 {
   display: flex;
   align-items: left;
@@ -1191,11 +1198,14 @@ footer a :hover {
   text-transform: uppercase;
   color: black;
   border-radius: 2.1875rem;
-  border-color: #eda829;
-  background: #eda829;
+  background: rgba(74, 33, 123, 0.5);
 }
 .edit-btn:hover, .edit-btn:focus {
   background: #efb241;
+}
+
+.edit-btn {
+  border-radius: 0;
 }
 
 .delete-btn {
@@ -1204,7 +1214,6 @@ footer a :hover {
   font-weight: 600;
   text-transform: uppercase;
   color: black;
-  border-radius: 2.1875rem;
   border-color: red;
   background: rgb(248, 41, 41);
 }
@@ -1396,6 +1405,19 @@ html {
   }
   .form-child > form > * > ul > li > button {
     margin-top: 3rem;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  #auth-hook {
+    flex-direction: column;
+    align-items: center;
+  }
+  .flex-center-1 {
+    padding: 0;
+  }
+  .content > h4 {
+    text-align: center;
   }
 }
 @media screen and (max-width: 480px) {
@@ -1611,4 +1633,9 @@ ul {
 
 #posts-render > * > * {
   height: 100% !important;
+}
+
+html,
+body {
+  overflow: visible !important;
 }

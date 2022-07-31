@@ -23,6 +23,7 @@ const Profile = () => {
 
 	const [userData, setUserData] = useState([]);
 	const [edit, setEdit] = useState(false);
+	const [editPost, setEditPost] = useState(false);
 
 	useEffect(() => {
 		http('login/id/' + userId).then((res) => {
@@ -36,16 +37,18 @@ const Profile = () => {
 		http('/posts')
 			.then((res) => {
 				setIsLoaded(false);
-				let p = [];
-				res.data.map((post, i) => {
-					if (post.user) {
-						if (post.user.id === userId) {
-							p[p.length] = res.data[i];
-						}
-					}
-					return p;
-				});
-				setPosts(p);
+
+				let p;
+				// res.data.map((post, i) => {
+				// 	if (post.user) {
+				// 		if (post.user.id === userId) {
+				// 			p[p.length] = res.data[i];
+				// 		}
+				// 	}
+				// 	return p;
+				// });
+				p = res.data;
+				setPosts([p]);
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -84,8 +87,29 @@ const Profile = () => {
 					: 'Guest';
 		}
 	}
+	let title = 'sdvfsfvs';
+	let descrption = 'sdvfsvesc';
 
 	const [formData, setFormData] = useState();
+	const [formDataPost, setFormDataPost] = useState({
+		id: 0,
+		postTitle: title,
+		Descrption: descrption,
+	});
+
+	const { postTitle, Descrption } = formDataPost;
+
+	const confirmPostEdit = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+		if (editPost) {
+			setEditPost(false);
+			document.getElementById('edit-post-form-1').hidden = true;
+		} else {
+			setEditPost(true);
+			document.getElementById('edit-post-form-1').hidden = false;
+		}
+	};
 
 	const confirmUserEdit = (e) => {
 		e.stopPropagation();
@@ -125,10 +149,16 @@ const Profile = () => {
 	const confirmUserDeletion = (e) => {
 		e.stopPropagation();
 		e.preventDefault();
-		console.log(e.target.value);
 		window.confirm('Do you really want to delete the post?');
 
 		alert('warning', 'USER HAS BEEN DELETED...');
+	};
+
+	const onChangePost = (e) => {
+		setFormDataPost({
+			...formDataPost,
+			[e.target.name]: e.target.value,
+		});
 	};
 
 	const onChange = (e) => {
@@ -143,6 +173,36 @@ const Profile = () => {
 		window.location.reload();
 	};
 
+	const onSavePost = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+
+		let postId = document.getElementById('edit-btn-5').value;
+		const { id, postTitle } = formDataPost;
+
+		let newPostname = postTitle;
+
+		setFormDataPost({ id: postId });
+		console.log(formDataPost);
+		// http.post('/changePostTitle', { id, newPostname })
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 	})
+		// 	.catch((e) => {
+		// 		console.log(e);
+		// 	});
+
+		// http.post('/changePostDescription', formDataPost)
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 	})
+		// 	.catch((e) => {
+		// 		console.log(e);
+		// 	});
+
+		alert('success', 'post changed');
+		console.log(formDataPost);
+	};
 	return (
 		<>
 			{!isLoaded && <Spinner />}
@@ -274,6 +334,77 @@ const Profile = () => {
 														</form>
 													</div>
 												)}
+
+												<div
+													id='edit-post-form-1'
+													hidden
+												>
+													<form className='form form-save-post'>
+														<h1>
+															<b>Edit Post</b>
+														</h1>
+
+														<div className='form-group'>
+															<label
+																className='form-label'
+																htmlFor='postTitle'
+															>
+																Add title
+															</label>
+															<input
+																className='form-control'
+																id='post-change-1'
+																type='text'
+																placeholder='Title'
+																name='postTitle'
+																value={
+																	postTitle
+																}
+																onChange={(e) =>
+																	onChangePost(
+																		e
+																	)
+																}
+															/>
+														</div>
+														<div
+															className=''
+															id='descInput'
+														>
+															<label
+																className='form-label'
+																htmlFor='Descrption'
+															>
+																Add description
+															</label>
+															<textarea
+																className='form-control'
+																placeholder='Description'
+																name='Descrption'
+																value={
+																	Descrption
+																}
+																onChange={(e) =>
+																	onChangePost(
+																		e
+																	)
+																}
+															></textarea>
+														</div>
+														<button
+															id='save-btn-post'
+															className='createpost-btn'
+															type='submit'
+															value='Post'
+															onClick={(e) => {
+																onSavePost(e);
+															}}
+														>
+															Save
+														</button>
+													</form>
+												</div>
+
 												<h3 className='text-mute'>
 													CREATED POSTS
 												</h3>
@@ -361,6 +492,24 @@ const Profile = () => {
 																				</strong>
 																			</small>
 																		</p>
+																		<button
+																			id='edit-btn-5'
+																			type='button'
+																			className='edit-btn'
+																			value={
+																				post.id
+																			}
+																			onClick={(
+																				e
+																			) =>
+																				confirmPostEdit(
+																					e,
+																					post.id
+																				)
+																			}
+																		>
+																			Edit
+																		</button>
 																		<button
 																			type='button'
 																			className='delete-btn'
