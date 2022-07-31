@@ -10,6 +10,7 @@ import com.GatorShare.Dto.*;
 import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
 //import com.GatorShare.Service.ImageStorageService;
+import com.GatorShare.Service.commentService;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
@@ -73,7 +74,8 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
-
+	@Autowired
+	private commentService CommentService;
 
 	@Autowired
 	private postService PostService;
@@ -220,10 +222,10 @@ public class GatorShareApplication {
 
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag, @RequestParam(value = "user_id" , required = false) Long user_id) {
 		String message = "";
 		try{
-			PostService.store(image, Titile, DEsc,tag, like);
+			PostService.store(image, Titile, DEsc,tag, like, user_id);
 
 			message = "uploaded the post successfully: "+ Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
@@ -290,6 +292,13 @@ public class GatorShareApplication {
 			return commentRepo.save(Comments);
 		}).orElseThrow();
 	}
+
+	@GetMapping("comment/{post_id}/post_id")
+	public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
+		return ResponseEntity.ok(CommentService.getallpostsbyid(query));
+	}
+
+
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
 							  @RequestParam("newPostname") String name)

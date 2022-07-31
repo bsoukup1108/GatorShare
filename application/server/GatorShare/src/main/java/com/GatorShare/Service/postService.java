@@ -38,7 +38,7 @@ public class postService {
 
 
 
-    public void store(MultipartFile image, String Title, String tag, String description,Integer likes) throws IOException {
+    public void store(MultipartFile image, String Title, String tag, String description,Integer likes, Long user_id) throws IOException {
 
         Post newPost = new Post();
         Date date = new Date();
@@ -46,7 +46,7 @@ public class postService {
         String filename = StringUtils.cleanPath(image.getOriginalFilename());
         String imagetype = image.getContentType();
         byte [] imagebyte = image.getBytes();
-
+        newPost.setUserID(user_id);
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
         newPost.setData(imagebyte);
@@ -54,6 +54,7 @@ public class postService {
         newPost.setTag(tag);
         newPost.setName(filename);
         newPost.setType(imagetype);
+        newPost.getUser_id();
 
         newPost.SetTitle(Title);
 
@@ -65,6 +66,7 @@ public class postService {
     public static Post getfile(int id){
         return postrepo.findById(id).get();
     }
+
 
     public static Stream<Post> getAllfiles(){
 

@@ -32,6 +32,9 @@ public class Post {
 	private String Description;
 
 
+	public void setUserID(Long id){
+		this.user.setID(id);
+	}
 	public String getType() {
 		return type;
 	}
@@ -67,6 +70,10 @@ public class Post {
 
 	public void setTag(String tag){
 		this.Tag = tag;
+	}
+
+	public Long getUser_id(){
+		return user.getID();
 	}
 
 
