@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import { getToken } from '../../js/useToken';
-import noProfile from '../../img/noProfile.png';
-
-import test from '../../img/sfsu.jpeg';
-
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
+import noProfile from '../../img/noProfile.png';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import { ReactSession } from 'react-client-session';
 import { alert } from '../../js/alert';
 
 const Profile = () => {
@@ -27,27 +24,35 @@ const Profile = () => {
 	const [userData, setUserData] = useState([]);
 	const [edit, setEdit] = useState(false);
 
-	http('login/id/' + userId).then((res) => {
-		setUserData(res.data);
-	});
+	useEffect(() => {
+		http('login/id/' + userId).then((res) => {
+			setUserData(res.data);
 
-	http('/posts')
-		.then((res) => {
-			setIsLoaded(false);
-
-			let p = [];
-			res.data.map((post, i) => {
-				if (post.id === userId) {
-					p[p.length] = res.data[i];
-				}
-			});
-			setPosts(p);
 			setIsLoaded(true);
-		})
-		.catch((e) => {
-			setIsLoaded(false);
-			console.log(e);
 		});
+	}, []);
+
+	useEffect(() => {
+		http('/posts')
+			.then((res) => {
+				setIsLoaded(false);
+				let p = [];
+				res.data.map((post, i) => {
+					if (post.user) {
+						if (post.user.id === userId) {
+							p[p.length] = res.data[i];
+						}
+					}
+					return p;
+				});
+				setPosts(p);
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
+	}, []);
 
 	let eMail = '';
 	let role = 'Student';
@@ -143,12 +148,12 @@ const Profile = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div className='profile'>
-					<div className='flex-container'>
+					<div className='flex-container profile-page-1'>
 						<div className='flex-left'>
 							<img
 								src={noProfile}
 								className='profile-pic'
-								alt='No image...'
+								alt='Error loading...'
 							/>
 
 							<h1>{role}</h1>
@@ -342,9 +347,25 @@ const Profile = () => {
 														</form>
 													</div>
 												)}
-												<h3>CREATED POSTS</h3>
+												<h3 className='text-mute'>
+													CREATED POSTS
+												</h3>
 												<div className='row row-cols-1 row-cols-md-2 g-4'>
 													{posts.map((post, i) => {
+														let srcImg = noImage;
+														if (post.data) {
+															let src =
+																'data:image/png;base64,';
+															src += post.data;
+															if (
+																src.length >
+																	30 &&
+																post.name !==
+																	'fake'
+															) {
+																srcImg = src;
+															}
+														}
 														return (
 															<div
 																key={`posts-post-${i}`}
@@ -361,10 +382,10 @@ const Profile = () => {
 																>
 																	<img
 																		src={
-																			test
+																			srcImg
 																		}
 																		className='card-img-top'
-																		alt='No image...'
+																		alt='Error loading...'
 																	/>
 																	<div className='card-body'>
 																		<h5 className='card-title'>

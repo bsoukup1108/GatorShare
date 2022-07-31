@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { over } from 'stompjs';
 import SockJS from 'sockjs-client';
 import { ReactSession } from 'react-client-session';
+import Spinner from '../misc/Spinner';
 
-var stompClient = null;
+let stompClient = null;
 
 const ChatRoom = () => {
 	const [privateChats, setPrivateChats] = useState(new Map());
@@ -15,8 +16,7 @@ const ChatRoom = () => {
 		connected: false,
 		message: '',
 	});
-
-	let username = ReactSession.get('username') | 'unknown';
+	let username = ReactSession.get('username') || 'unknown';
 
 	useEffect(() => {
 		setUserData({ ...userData, username: username });
@@ -39,15 +39,15 @@ const ChatRoom = () => {
 	};
 
 	const userJoin = () => {
-		var chatMessage = {
-			senderName: userData.username,
+		let chatMessage = {
+			senderName: username,
 			status: 'JOIN',
 		};
 		stompClient.send('/app/message', {}, JSON.stringify(chatMessage));
 	};
 
 	const onMessageReceived = (payload) => {
-		var payloadData = JSON.parse(payload.body);
+		let payloadData = JSON.parse(payload.body);
 		switch (payloadData.status) {
 			case 'JOIN':
 				if (!privateChats.get(payloadData.senderName)) {
@@ -64,7 +64,7 @@ const ChatRoom = () => {
 
 	const onPrivateMessage = (payload) => {
 		console.log(payload);
-		var payloadData = JSON.parse(payload.body);
+		let payloadData = JSON.parse(payload.body);
 		if (privateChats.get(payloadData.senderName)) {
 			privateChats.get(payloadData.senderName).push(payloadData);
 			setPrivateChats(new Map(privateChats));
@@ -84,9 +84,10 @@ const ChatRoom = () => {
 		const { value } = event.target;
 		setUserData({ ...userData, message: value });
 	};
+
 	const sendValue = () => {
 		if (stompClient) {
-			var chatMessage = {
+			let chatMessage = {
 				senderName: userData.username,
 				message: userData.message,
 				status: 'MESSAGE',
@@ -99,7 +100,7 @@ const ChatRoom = () => {
 
 	const sendPrivateValue = () => {
 		if (stompClient) {
-			var chatMessage = {
+			let chatMessage = {
 				senderName: userData.username,
 				receiverName: tab,
 				message: userData.message,
@@ -119,16 +120,17 @@ const ChatRoom = () => {
 		}
 	};
 
-	const handleUsername = (event) => {
-		const { value } = event.target;
-		setUserData({ ...userData, username: value });
-	};
-
 	const registerUser = () => {
+		setUserData({ ...userData, username: username });
 		connect();
 	};
+
+	useState(() => {
+		registerUser();
+	}, [username]);
+
 	return (
-		<div className='container'>
+		<>
 			{userData.connected ? (
 				<div className='chat-box'>
 					<div className='member-list'>
@@ -181,7 +183,7 @@ const ChatRoom = () => {
 										{chat.senderName ===
 											userData.username && (
 											<div className='avatar self'>
-												{chat.senderName}
+												'{chat.senderName}'
 											</div>
 										)}
 									</li>
@@ -258,21 +260,9 @@ const ChatRoom = () => {
 					)}
 				</div>
 			) : (
-				<div className='register'>
-					<input
-						id='user-name'
-						placeholder='Enter your name'
-						name='userName'
-						value={userData.username}
-						onChange={handleUsername}
-						margin='normal'
-					/>
-					<button type='button' onClick={registerUser}>
-						connect
-					</button>
-				</div>
+				<Spinner />
 			)}
-		</div>
+		</>
 	);
 };
 

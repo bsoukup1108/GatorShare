@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ReactSession } from 'react-client-session';
 
 // export default function useToken() {

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
+import { useEffect } from 'react';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import test from '../../img/sfsu.jpeg';
-import { ReactSession } from 'react-client-session';
-import { useEffect } from 'react';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -27,8 +26,17 @@ const Posts = () => {
 	const filterByName = () => {
 		let datafil = posts;
 		let val = datafil.sort(function (a, b) {
-			let dateA = a.title[0].toLowerCase();
-			let dateB = b.title[0].toLowerCase();
+			if (a.title[0] === undefined || b.title[0] === undefined) {
+				return -1;
+			}
+			let dateA =
+				a.title[0] === undefined
+					? 'No title...'
+					: a.title[0].toLowerCase();
+			let dateB =
+				b.title[0] === undefined
+					? 'No title...'
+					: b.title[0].toLowerCase();
 
 			if (dateA < dateB) {
 				return -1;
@@ -45,14 +53,13 @@ const Posts = () => {
 			let dateA = a.createdDate;
 			let dateB = b.createdDate;
 
-			if (dateA < dateB) {
+			if (dateA > dateB) {
 				return -1;
-			} else if (dateA > dateB) {
+			} else if (dateA < dateB) {
 				return 1;
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 
@@ -69,7 +76,6 @@ const Posts = () => {
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 
@@ -79,58 +85,74 @@ const Posts = () => {
 
 	return (
 		<>
-			{!isLoaded && <Spinner />}
-			{isLoaded && (
-				<div>
-					<h1>All Posts</h1>
-					<div id='sort'>
-						<div className='dropdown'>
-							<button
-								className='btn btn-secondary dropdown-toggle sort-btn'
-								type='button'
-								id='dropdownMenuButton1'
-								data-bs-toggle='dropdown'
-								aria-expanded='false'
-							>
-								Sort by
-							</button>
-							<ul
-								className='dropdown-menu'
-								aria-labelledby='dropdownMenuButton1'
-							>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByName())}
-									>
-										Alphabetically
-									</a>
-								</li>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByLike())}
-									>
-										Most recent
-									</a>
-								</li>
-								<li>
-									<a
-										className='dropdown-item'
-										href='#'
-										onClick={() => setPosts(filterByName())}
-									>
-										Most popular
-									</a>
-								</li>
-							</ul>
-						</div>
+			<div>
+				<h1>All Posts</h1>
+				<div id='sort'>
+					<div className='dropdown'>
+						<button
+							className='btn btn-secondary dropdown-toggle sort-btn'
+							type='button'
+							id='dropdownMenuButton1'
+							data-bs-toggle='dropdown'
+							aria-expanded='false'
+						>
+							Sort by
+						</button>
+						<ul
+							className='dropdown-menu'
+							aria-labelledby='dropdownMenuButton1'
+						>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#!'
+									onClick={() => setPosts(filterByName())}
+								>
+									Alphabetically
+								</a>
+							</li>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#!'
+									onClick={() => setPosts(filterByDate())}
+								>
+									Most recent
+								</a>
+							</li>
+							<li>
+								<a
+									className='dropdown-item'
+									href='#!'
+									onClick={() => setPosts(filterByLike())}
+								>
+									Most popular
+								</a>
+							</li>
+						</ul>
 					</div>
+				</div>
+
+				{!isLoaded && <Spinner />}
+				{isLoaded && (
 					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-						<div className='row row-cols-1 row-cols-md-3 g-4'>
+						<div
+							id='posts-render'
+							className='row row-cols-1 row-cols-md-3 g-4'
+						>
 							{posts.map((post, i) => {
+								let srcImg = noImage;
+								if (post.data) {
+									let src = 'data:image/png;base64,';
+									src += post.data;
+									if (
+										src.length > 30 &&
+										post.name !== 'fake'
+									) {
+										srcImg = src;
+									}
+								}
+
 								return (
 									<div
 										key={`posts-post-${i}`}
@@ -144,12 +166,24 @@ const Posts = () => {
 												return false;
 											}}
 										>
+											{' '}
+											<div id='post-top-2'>
+												<div id='post-tag-2'>
+													<p>
+														<span className='badge badge-primary'>
+															{!!post.description
+																? post.description
+																: 'No tag'}
+														</span>
+													</p>
+												</div>
+											</div>
 											<img
-												src={test}
+												src={srcImg}
 												className='card-img-top'
-												alt='No image...'
+												alt='Error loading...'
 											/>
-											<div className='card-body'>
+											<div className='card-body posts-body-1'>
 												<h5 className='card-title'>
 													<i>
 														{post.title
@@ -188,7 +222,7 @@ const Posts = () => {
 														</i>
 														by{' '}
 														<strong>
-															{post.user
+															{!!post.user
 																? post.user
 																		.firstName
 																: 'Anonymous'}{' '}
@@ -206,8 +240,8 @@ const Posts = () => {
 							})}
 						</div>
 					</div>
-				</div>
-			)}
+				)}
+			</div>
 		</>
 	);
 };

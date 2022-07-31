@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { useParams } from 'react-router-dom';
+import { alert } from '../../js/alert';
+import { getToken } from '../../js/useToken';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import test from '../../img/sfsu.jpeg';
-import { ReactSession } from 'react-client-session';
-
-import { useParams } from 'react-router-dom';
-
-import { alert } from '../../js/alert';
-import { getToken } from '../../js/useToken';
 
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
-	const [isAuth, setIsAuth] = useState(!!getToken());
+	const isAuth = !!getToken();
+
+	const [bImage, setBImage] = useState(null);
 
 	const [likes, setLikes] = useState(0);
-
-	const navigate = useNavigate();
 
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
@@ -32,17 +27,29 @@ const Post = () => {
 	};
 
 	const { id } = useParams();
-	let postId = id | 1;
+	let postId = id || 1;
 
 	const incLikes = () => {
 		setLikes(likes + 1);
 	};
-	console.log(postId);
+
 	useEffect(() => {
-		http.get(`/posts/${postId}`)
+		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
-				setPost(res.data);
-				setIsLoaded(true);
+				let b = res.data[0].data;
+				let src = 'data:image/png;base64,';
+				src += b;
+
+				if (src.length > 30 && res.data[0].name !== 'fake') {
+					setBImage(src);
+					setIsLoaded(true);
+				}
+
+				setPost(res.data[0]);
+
+				if ((src.length < 30) | (res.data[0].name === 'fake')) {
+					setIsLoaded(true);
+				}
 			})
 			.catch((e) => {
 				setIsLoaded(false);
@@ -52,75 +59,81 @@ const Post = () => {
 	const [comment, setComment] = useState({
 		comment: '',
 	});
-
 	const onComment = (e) => {
 		setComment({
 			[e.target.name]: e.target.value,
 		});
 	};
 
-	// const appendComment = () => {
-	// 	let el = document.getElementById('leftComment');
-	// 	console.log(el);
-	// 	let div = document.createElement('div');
-	// 	div.setAttribute('className', 'comment');
-	// 	div.innerHTML = `<p>${comment}</p>`;
-	// 	el.appendChild(div);
-	// };
-
 	const postComment = (e) => {
 		e.preventDefault();
-		if (document.getElementById('postCommentList')) {
-			document.getElementById('postCommentList').remove();
-		}
-		document.getElementById('leaveComment').value = '';
-		alert('primary', 'post has been commented!');
 
-		let el = document.getElementById('leftComment');
-		let div = document.createElement('div');
-		div.setAttribute('class', 'commentMessage');
-
-		// DON'T CHANGE CLASS TO CLASSNAME below !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		div.innerHTML = `<p class='commentAuthor'> <small class='text-muted text-left'>Author: anonimous</small></p>`;
-		div.innerHTML += `<p class='commentContent'>${comment.commentArea}</p>`;
-		div.innerHTML += `<p class='commentDate'><small class='text-muted'><i>${moment().fromNow()}</i></small></p>`;
-		// DON'T CHANGE CLASS TO CLASSNAME up !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-		el.appendChild(div);
+		http.post(`/comments/${postId}/comments`, {
+			text: comment.commentArea,
+		})
+			.then((res) => {
+				let commentDiv = document.getElementById('leaveComment');
+				commentDiv.innerHTML = '';
+			})
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
 		setComment('');
 	};
-	console.log(post);
-	const { content, createdDate, title } = post;
-
+	const { content, user, createdDate, title, tag, image } = post;
 	let fname;
 	let lname;
-	fname = post.user ? post.user.firstName : '';
-	lname = post.user ? post.user.lastName : '';
+	let phLikes;
+	let userId;
+	let contentDesc;
+	let Tag;
 
+	fname = post.user ? user.firstName : '_';
+	lname = post.user ? user.lastName : 'Anonymous';
+	phLikes = post.photo_Like ? post.photo_Like : 0;
+	userId = post.user ? (post.user.id ? post.user.id : null) : null;
+	Tag = content !== null ? content : 'No description';
+	contentDesc = tag !== null ? tag : 'No tag';
+	console.log(post);
+	useEffect(() => {
+		setLikes(phLikes);
+	}, [phLikes]);
 	if (isLoaded) {
 		return (
 			<>
 				{isLoaded && (
 					<div style={{ marginBottom: '1rem' }}>
-						<div className='likePost' onClick={() => incLikes()}>
-							<button
-								className='btn-like'
-								onClick={(e) => onLike(e)}
+						<div id='post-top'>
+							<div
+								className='likePost'
+								onClick={() => incLikes()}
 							>
-								<i
-									id='like-icon'
-									className='fa-regular fa-thumbs-up fa-xl'
-								></i>
-							</button>
-							<small> {likes} liked this post</small>
+								<button
+									className='btn-like'
+									onClick={(e) => onLike(e)}
+								>
+									<i
+										id='like-icon'
+										className='fa-regular fa-thumbs-up fa-xl'
+									></i>
+								</button>
+								<small> {likes} liked this post</small>
+							</div>
+							<div id='post-tag-1'>
+								<p>
+									<span className='badge badge-primary'>
+										{Tag}
+									</span>
+								</p>
+							</div>
 						</div>
-
 						<div className='card mb-3'>
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={test}
-										className='img-fluid rounded-start'
+										src={bImage !== null ? bImage : noImage}
+										className='img-fluid rounded-start post-image-individual-1'
 										alt='...'
 									/>
 								</div>
@@ -131,18 +144,38 @@ const Post = () => {
 												{title ? title : 'No title...'}
 											</h5>
 											<p className='card-text'>
-												{content
-													? content
-													: 'No description...'}
+												{contentDesc}
 											</p>
 										</div>
 										<div>
 											<p className='card-text-bottom'>
 												<small className='text-muted'>
 													Created by{' '}
-													<i>
-														{fname} {lname}
-													</i>
+													{userId === null ? (
+														<i>
+															{!!fname
+																? fname
+																: 'Anonymous'}{' '}
+															{!!lname
+																? lname
+																: 'User'}
+														</i>
+													) : (
+														<a
+															href={`/user/${userId}`}
+															className='text-muted'
+															id='link-profile'
+														>
+															<i>
+																{!!fname
+																	? fname
+																	: 'Anonymous'}{' '}
+																{!!lname
+																	? lname
+																	: 'User'}
+															</i>
+														</a>
+													)}
 												</small>
 											</p>
 											<p className='card-text-bottom'>
@@ -178,14 +211,13 @@ const Post = () => {
 							</div>
 							{isAuth && (
 								<>
-									{' '}
 									<div className='' id='commentArea'>
 										<textarea
 											id='leaveComment'
 											className='form-control'
 											placeholder='Leave a comment'
 											name='commentArea'
-											maxlength='250'
+											maxLength='250'
 											onChange={(e) => {
 												onComment(e);
 											}}
@@ -195,9 +227,7 @@ const Post = () => {
 										className='comment-btn'
 										type='submit'
 										value='Leave a comment'
-										onClick={(e) => {
-											postComment(e);
-										}}
+										onClick={(e) => postComment(e)}
 									/>
 								</>
 							)}

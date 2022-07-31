@@ -2,9 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { register } from '../../js/auth';
-
 import { getToken } from '../../js/useToken';
-
 import {
 	validateUsername,
 	validateUserLastname,
@@ -16,6 +14,11 @@ import {
 } from '../../js/hint';
 
 const SignUp = () => {
+	// redirect if logged in
+	if (getToken()) {
+		return <Navigate to='/' />;
+	}
+
 	const [formData, setFormData] = useState({
 		name: '',
 		lastname: '',
@@ -25,7 +28,7 @@ const SignUp = () => {
 		role: '',
 	});
 
-	const { name, lastname, email, password, password2, role } = formData;
+	const { name, lastname, email, password, password2 } = formData;
 	const onChange = (e) =>
 		setFormData({
 			...formData,
@@ -39,11 +42,6 @@ const SignUp = () => {
 			? register(formData)
 			: alert('the information is not valid');
 	};
-
-	// redirect if logged in
-	if (getToken()) {
-		return <Navigate to='/' />;
-	}
 
 	return (
 		<>

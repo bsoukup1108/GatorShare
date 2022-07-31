@@ -1,8 +1,9 @@
 import './css/App.css';
 import React, { useEffect, useState, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
+
 import Navbar from './components/navbar/Navbar';
-import About from './components/about/About';
 import Footer from './components/footer/Footer';
 import SignUp from './components/auth/SignUp';
 import Login from './components/auth/Login';
@@ -12,13 +13,12 @@ import Posts from './components/posts/Posts';
 import Home from './components/home/Home';
 import Spinner from './components/misc/Spinner';
 import Agreement from './components/misc/Agreement';
-
-import { ReactSession } from 'react-client-session';
 import Aboutus from './components/about/About';
-
 import Post from './components/posts/Post';
 import Profile from './components/profile/Profile';
-import ChatRoom from './components/chatRoom/ChatRoom';
+import User from './components/profile/User';
+
+//import ChatRoom from './components/chatRoom/ChatRoom';
 
 const Search = React.lazy(() =>
 	import('./components/SearchResults/SearchResults')
@@ -71,12 +71,18 @@ const App = () => {
 							<Route path='/rules' element={<Agreement />} />
 							<Route path='/about' element={<Aboutus />} />
 
+							<Route exact path='/user/:id' element={<User />} />
+
 							<Route
 								exact
 								path='/profile'
 								element={<Profile />}
 							/>
-							<Route exact path='/xxx' element={<Messages />} />
+							<Route
+								exact
+								path='/messages'
+								element={<Messages />}
+							/>
 							{isAuthenticated && (
 								<Route
 									exact
@@ -84,13 +90,13 @@ const App = () => {
 									element={<CreatePost />}
 								/>
 							)}
-							{isAuthenticated && (
+							{/* {isAuthenticated && (
 								<Route
 									exact
 									path='/messages'
 									element={<ChatRoom />}
 								/>
-							)}
+							)} */}
 							<Route exact path='/posts' element={<Posts />} />
 							{<Route path='/posts/:id' element={<Post />} />}
 						</Routes>

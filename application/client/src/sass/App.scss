@@ -8,9 +8,7 @@ $secondary-bg: rgb(209, 142, 18);
 
 /* *********************************************** */
 /* Reset global settings */
-html {
-	min-width: 600px;
-}
+
 
 * {
 	box-sizing: border-box;
@@ -23,7 +21,15 @@ html {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	max-width: 100vw !important;
+	overflow-x: hidden;
 	// background-color: $secondary-bg;
+}
+
+body,
+html {
+	overflow-x: hidden;
+	max-width: 100vw !important
 }
 
 /* *********************************************** */
@@ -53,6 +59,7 @@ a:hover {
 /* Container */
 .container {
 	min-width: 320px;
+	max-width: -webkit-fill-available !important;
 }
 
 /* -------------------------------------------- */
@@ -190,7 +197,7 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
-	//   background: $primary-bg;
+	background: $primary-bg;
 	border-radius: 10px;
 }
 
@@ -456,7 +463,6 @@ label {
 }
 
 .createpost-btn {
-	margin: 50px 40% auto;
 	padding: 0.5rem 4rem;
 	font-size: 0.95rem;
 	font-weight: 600;
@@ -693,6 +699,11 @@ label {
 	justify-content: space-between;
 }
 
+.posts-body-1 {
+	justify-content: flex-end;
+
+}
+
 .card-text-bottom {
 	text-align: right
 }
@@ -734,6 +745,7 @@ label {
 	color: gold;
 }
 
+
 .flex-container {
 	display: flex;
 	flex-direction: row;
@@ -744,13 +756,16 @@ label {
 .flex-left {
 	width: 30%;
 	height: 100%;
-	border-right: black solid 1px;
+	//border-right: black solid 1px;
 	text-align: center;
 }
 
 .flex-right {
 	width: 70%;
+}
 
+.flex-down h3 {
+	margin: 2rem 0;
 }
 
 .profile {
@@ -773,7 +788,7 @@ label {
 .flex-up {
 	height: 10%;
 	width: 100%;
-	border-bottom: black solid 1px;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 }
 
 .flex-up h1 {
@@ -937,6 +952,11 @@ label {
 	z-index: -100;
 }
 
+.post-image-individual-1 {
+	box-shadow: 0px remy(3px) remy(7px) rgba(0, 0, 0, 0.25);
+
+}
+
 .container-home {
 	margin-top: 20%;
 
@@ -999,6 +1019,7 @@ label {
 #main-carroussel {
 	margin: 1rem 0;
 	display: flex;
+	justify-content: space-between;
 }
 
 .carousel-item:hover {
@@ -1010,13 +1031,11 @@ label {
 	background-color: lightgray;
 }
 
-#carousel-1,
-#carousel-2 {
-	max-width: 50%
-}
 
-#carroussel-caps {
+
+.carroussel-caps {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
 }
 
@@ -1072,6 +1091,15 @@ li::marker {
 
 }
 
+#create-btn-post {
+	margin: 0 !important
+}
+
+#create-post-btn-1 {
+	display: flex;
+	justify-content: center;
+	margin: 50px 40% auto;
+}
 
 .home-btn {
 	margin-left: auto;
@@ -1301,6 +1329,10 @@ footer a {
 	overflow: auto;
 	display: flex;
 	flex-direction: column-reverse;
+
+	>* {
+		cursor: pointer;
+	}
 }
 
 .category-dropdown {
@@ -1325,7 +1357,16 @@ footer a {
 #edit-user-form-1 {
 	margin-bottom: 5rem;
 	padding: 2rem;
-	border: 1px solid purple;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+
+}
+
+.me-2 {
+	margin-right: 0 !important;
+}
+
+.me-1 {
+	margin-right: 0 !important;
 }
 
 
@@ -1377,7 +1418,55 @@ footer a {
 	width: 100%;
 }
 
+#leaveComment {
+	width: -webkit-fill-available;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+}
+
+.card {
+	border: 0.2rem solid rgba(74, 33, 123, 0.1);
+	height: 100%
+}
+
+@media screen and (min-width: 1600px) {
+	.container {
+		margin: 0 30rem;
+	}
+
+	#chat-container {
+
+		max-height: 100%;
+
+	}
+}
+
+
+@media screen and (min-width: 1200px) {
+	.container {
+		margin: 0 5rem;
+	}
+
+
+}
+
 @media screen and (max-width: 760px) {
+
+	.dropdown-menu[data-bs-popper] {
+		top: 40%;
+	}
+
+
+	body,
+	html {
+		overflow-x: hidden;
+		max-width: 100vw !important
+	}
+
+
+	.container {
+		margin: 0 5rem;
+	}
+
 	.auth {
 		flex-direction: column;
 		height: 100%;
@@ -1432,16 +1521,180 @@ footer a {
 		}
 	}
 
+	#main-carroussel {
+		flex-direction: column;
+	}
+
+	nav {
+		padding: 0 !important;
+		height: 6rem !important;
+	}
+
+	#wrapper {
+
+		grid-template-columns: repeat(12, [col-start] 1fr);
+		grid-template-rows: 150px auto 250px;
+
+	}
+
+	#navbar-left-1 {
+		flex-wrap: wrap;
+
+	}
+
+	//
+
+	#footerContent {
+		flex-direction: column-reverse;
+		margin-right: 1rem;
+
+		>* {
+			width: 100%;
+			margin: 0;
+		}
+	}
+
+	footer {
+		margin: 0;
+		padding: 0
+	}
+
+	#footer-right {
+		text-align: center;
+	}
+
+	#footer-left {
+		padding-left: 1rem;
+		margin: 0.5rem 0;
+	}
+
+	.comment-btn {
+		margin: 1rem 0;
+	}
+
+	#postComments {
+		text-align: center;
+	}
+
+	#leaveComment {
+		height: 10rem;
+	}
+
+	.profile-page-1 {
+		flex-direction: column;
+	}
+
+	.flex-right h3,
+	.flex-right h1 {
+		text-align: center
+	}
+
+	.flex-left {
+		width: 100%;
+		height: 100%;
+		border-right: none;
+		text-align: center;
+
+		>* {
+			margin: 1rem 0;
+		}
+
+		#profile-btn-1 {
+			margin: 1rem 0;
+
+			>button {
+				padding: 1rem 0;
+				margin: 1rem 5rem;
+			}
+		}
+	}
+
+	.flex-right {
+		width: 100%;
+	}
+
+	.container-fluid {
+		padding: 0
+	}
+
+	#root {
+		min-height: 0px !important;
+
+	}
+
 }
 
-@media screen and (max-width: 480px) {}
+@media screen and (max-width: 480px) {
+
+	.dropdown-menu[data-bs-popper] {
+		top: 25%;
+	}
+
+	.container {
+		margin: 0 1rem;
+	}
+
+	#main-carroussel {
+		flex-direction: column;
+		margin: 0
+	}
+
+	nav {
+		height: 9rem !important;
+	}
 
 
 
+	#wrapper {
+
+		grid-template-columns: repeat(12, [col-start] 1fr);
+		grid-template-rows: 150px auto 250px;
+
+	}
+
+	#navbar-left-1 {
+		flex-wrap: wrap;
+
+	}
+
+	#footerContent {
+		flex-direction: column-reverse;
+		margin-right: 1rem;
+
+		>* {
+			width: 100%;
+			margin: 0;
+		}
+
+		footer {
+			margin: 0;
+			padding: 0
+		}
+
+		#footer-right {
+			text-align: center;
+		}
+
+		#footer-left {
+			padding-left: 1rem;
+			margin: 0.5rem 0;
+		}
+
+
+	}
+}
+
+
+
+
+
+///////////  masseging
 .register {
 	position: fixed;
 	padding: 30px;
-	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+	border-radius: remy(3px);
+	background: #fafafa;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 	top: 35%;
 	left: 32%;
 	display: flex;
@@ -1449,36 +1702,57 @@ footer a {
 }
 
 .chat-box {
-	box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
-	margin: 40px 50px;
-	height: 600px;
-	padding: 10px;
+	border-radius: remy(3px);
+	background: #fafafa;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+
+	max-height: 80vh;
 	display: flex;
 	flex-direction: row;
+
+	width: 100%;
+	margin: 0 -15px;
+	padding: 0;
+	height: 100%;
 }
 
 .member-list {
 	width: 20%;
+	background: #fafafa;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 }
 
 .chat-content {
 	width: 80%;
-	margin-left: 10px;
+	margin: 1rem 0;
+	background: #fafafa;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 }
 
 .chat-messages {
-	height: 80%;
+	height: 88%;
 	border: 1px solid #000;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+	overflow: overlay;
+
 }
 
 .send-message {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+
+
+	>* {
+		margin: 0 1rem;
+		box-shadow: 0px remy(0px) remy(10px) $primary;
+
+	}
 }
 
 .input-message {
 	width: 90%;
+	height: 2.5rem;
 	border-radius: 50px;
 }
 
@@ -1488,19 +1762,29 @@ ul {
 }
 
 .send-button {
-	width: 10%;
-	border-radius: 50px;
-	margin-left: 5px;
+
 	cursor: pointer;
+
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: white;
+	background: $primary;
+	padding: 0 1rem;
+	margin-left: 5px;
+
+}
+
+.member-list {
+	margin: 1rem 0;
 }
 
 .member {
 	padding: 10px;
-	background: #eee;
-	border: #000;
+	background: $secondary;
 	cursor: pointer;
-	margin: 5px 2px;
-	box-shadow: 0 8px 8px -4px lightblue;
+	margin: 1px;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 }
 
 .member.active {
@@ -1530,9 +1814,14 @@ ul {
 	width: auto;
 	display: flex;
 	flex-direction: row;
-	box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 	margin: 5px 10px;
 }
+
+.flex-container {
+	box-shadow: grey;
+}
+
 
 .message-data {
 	padding: 5px;
@@ -1540,4 +1829,50 @@ ul {
 
 .message.self {
 	justify-content: end;
+}
+
+#link-profile {
+	color: $secondary-bg  !important;
+}
+
+#link-profile :hover {
+	cursor: pointer;
+	color: $primary;
+
+}
+
+/////////////////////////////
+/// 
+/// 
+/// 
+.notif-nav-2>*,
+.notif-nav-2>*>* {
+	color: red
+}
+
+#post-top,
+#post-top-2 {
+	display: flex;
+	flex-wrap: nowrap;
+	align-items: flex-end;
+	margin: 0.5rem 0;
+	justify-content: space-between;
+}
+
+#post-top-2 {
+	margin: -0.5rem -0.5rem 0 0;
+	justify-content: flex-end;
+	z-index: 1;
+}
+
+#post-tag-1 {
+	height: 1.5rem;
+}
+
+.badge {
+	background-color: $primary-bg;
+}
+
+#posts-render>*>* {
+	height: 100% !important
 }

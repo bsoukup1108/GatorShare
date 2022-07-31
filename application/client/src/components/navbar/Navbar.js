@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import logo from '../../img/logo.png';
 import { logout } from '../../js/auth';
 import { ReactSession } from 'react-client-session';
 
 const Navbar = (props) => {
 	const { isAuthenticated } = props;
-
 	const [category, setCategory] = useState('Category');
 
 	const changeCategory = (e) => {
@@ -16,8 +14,15 @@ const Navbar = (props) => {
 		setCategory(newCategory);
 	};
 
+	const setWhite = () => {
+		let notif = document.getElementById('notif-nav-1');
+		if (notif) {
+			notif.setAttribute('class', 'dropdown me-1');
+		}
+	};
+
 	const navigate = useNavigate();
-	// const [isAuthenticated, setIsAuthenticated] = useState(!!getToken());
+
 	const authLinks = (
 		<>
 			<div className='navbar-right-2'>
@@ -46,7 +51,11 @@ const Navbar = (props) => {
 					</Link>
 				</button>
 			</div>
-			<div className='dropdown me-1 '>
+			<div
+				className='dropdown me-1 '
+				id='notif-nav-1'
+				onClick={() => setWhite()}
+			>
 				<a
 					className='btn btn-secondary dropdown-toggle'
 					href='/#'
@@ -55,7 +64,7 @@ const Navbar = (props) => {
 					data-bs-toggle='dropdown'
 					aria-expanded='false'
 				>
-					<i className='fa-solid fa-bell '></i>
+					<i className='fa-solid fa-bell ' id='dropdownBell'></i>
 				</a>
 
 				<ul
@@ -65,9 +74,11 @@ const Navbar = (props) => {
 					<li>
 						<div
 							className='dropdown-item'
-							href='/login'
 							id='notifications-1'
-						></div>
+							onClick={() => (window.location = '/messages')}
+						>
+							<p>You don't have any notifications yet</p>
+						</div>
 					</li>
 				</ul>
 			</div>

@@ -9,11 +9,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { ReactSession } from 'react-client-session';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import moment from 'moment';
-import { ReactSession } from 'react-client-session';
 
 // the main component that handles search results
 const SearchResults = () => {
@@ -27,19 +27,29 @@ const SearchResults = () => {
 	// get the searched category
 	let category = ReactSession.get('category');
 
+	let homeSearch = ReactSession.get('searchRes');
+
 	// define the endpoint for the search depending on the category
 	let searchURL = `/search?query=${searchTerm}`;
-	if (category == 'Articles&Essays') {
+
+	if (homeSearch) {
+		if (homeSearch === 'recent') {
+			searchURL = `/search/{ASC}`;
+		} else {
+			searchURL = `/search/{Like}`;
+		}
+		ReactSession.remove('searchRes');
+	} else if (category === 'Articles&Essays') {
 		searchURL = `/search/{Article}?query=${searchTerm}`;
-	} else if (category == 'Art&Films') {
+	} else if (category === 'Art&Films') {
 		searchURL = `/search/{ArtAndFilm}?query=${searchTerm}`;
-	} else if (category == 'Clubs') {
+	} else if (category === 'Clubs') {
 		searchURL = `/search/{Clubs}?query=${searchTerm}`;
-	} else if (category == 'Discords') {
+	} else if (category === 'Discords') {
 		searchURL = `/search/{Discord}?query=${searchTerm}`;
-	} else if (category == 'Other') {
+	} else if (category === 'Other') {
 		searchURL = `/search/{Others}?query=${searchTerm}`;
-	} else if (category == 'Tutoring') {
+	} else if (category === 'Tutoring') {
 		searchURL = `/search/{Tutoring}?query=${searchTerm}`;
 	}
 
@@ -135,39 +145,39 @@ const SearchResults = () => {
 			{/* render a header depending on the categorys */}
 			{isLoaded && !!posts && posts !== [] && (
 				<div>
-					{category == 'Articles&Essays' ? (
+					{category === 'Articles&Essays' ? (
 						<div className='header-image-1'>
 							<h1 className='header-text'> Articles & Essays </h1>
 						</div>
 					) : null}
-					{category == 'Art&Films' ? (
+					{category === 'Art&Films' ? (
 						<div className='header-image-2'>
 							<h1 className='header-text'> Art & Films </h1>
 						</div>
 					) : null}
-					{category == 'Discords' ? (
+					{category === 'Discords' ? (
 						<div className='header-image-3'>
 							<h1 className='header-text'> Discords </h1>
 						</div>
 					) : null}
-					{category == 'Clubs' ? (
+					{category === 'Clubs' ? (
 						<div className='header-image-4'>
 							<h1 className='header-text'> Clubs </h1>
 						</div>
 					) : null}
-					{category == 'Other' ? (
+					{category === 'Other' ? (
 						<div className='header-image-5'>
 							<h1 className='header-text'>Other</h1>
 						</div>
 					) : null}
-					{category == 'Tutoring' ? (
+					{category === 'Tutoring' ? (
 						<div className='header-image-6'>
 							<h1 className='header-text'> Tutoring </h1>
 						</div>
 					) : null}
-					{(category == '') |
-					(category == 'Category') |
-					(category == 'All Posts') ? (
+					{(category === '') |
+					(category === 'Category') |
+					(category === 'All Posts') ? (
 						<div className='header-image-7'>
 							<h1 className='header-text'> SEARCH RESULTS </h1>
 						</div>
@@ -191,7 +201,7 @@ const SearchResults = () => {
 								<li>
 									<a
 										className='dropdown-item'
-										href='#'
+										href='#!'
 										onClick={() => setPosts(filterByName())}
 									>
 										Alphabetically{' '}
@@ -200,7 +210,7 @@ const SearchResults = () => {
 								<li>
 									<a
 										className='dropdown-item'
-										href='#'
+										href='#!'
 										onClick={() => setPosts(filterByDate())}
 									>
 										Most recent
@@ -209,7 +219,7 @@ const SearchResults = () => {
 								<li>
 									<a
 										className='dropdown-item'
-										href='#'
+										href='#!'
 										onClick={() => setPosts(filterByLike())}
 									>
 										Most popular
@@ -254,7 +264,7 @@ const SearchResults = () => {
 															: noImage
 													}
 													className='card-img-top'
-													alt='No image...'
+													alt='Error loading...'
 												/>
 												<div className='card-body'>
 													<h5 className='card-title'>
