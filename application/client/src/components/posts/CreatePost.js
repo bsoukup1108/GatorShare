@@ -28,11 +28,8 @@ const CreatePost = () => {
 
 	const userId = ReactSession.get('currentUserId');
 
-	{
-	}
-
 	const [formData, setFormData] = useState({
-		userId: userId,
+		//user_id: userId,
 		postTitle: '',
 		Descrption: '',
 		likes: 0,
@@ -79,7 +76,7 @@ const CreatePost = () => {
 			})
 
 			.catch(function (err) {
-				isLoaded(true);
+				setIsLoaded(true);
 				console.log(err);
 
 				//return window.location.reload();
