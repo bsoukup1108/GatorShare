@@ -1622,6 +1622,34 @@ footer a {
 
 	}
 
+	.container {
+		margin: 3rem;
+		margin-top: 0;
+		padding: 0;
+	}
+
+	.form-background {
+		justify-content: center;
+	}
+
+	.form-child {
+		padding: 2rem 0;
+
+		width: 100%;
+
+		>form {
+			padding: 0 2rem;
+
+			>*>ul>li {
+				text-align: center;
+
+				>button {
+					margin-top: 3rem
+				}
+			}
+		}
+	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -1631,7 +1659,8 @@ footer a {
 	}
 
 	.container {
-		margin: 0 1rem;
+		margin: 0;
+		padding: 0;
 	}
 
 	#main-carroussel {

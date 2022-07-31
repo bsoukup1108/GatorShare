@@ -1376,13 +1376,35 @@ html {
   #root {
     min-height: 0px !important;
   }
+  .container {
+    margin: 3rem;
+    margin-top: 0;
+    padding: 0;
+  }
+  .form-background {
+    justify-content: center;
+  }
+  .form-child {
+    padding: 2rem 0;
+    width: 100%;
+  }
+  .form-child > form {
+    padding: 0 2rem;
+  }
+  .form-child > form > * > ul > li {
+    text-align: center;
+  }
+  .form-child > form > * > ul > li > button {
+    margin-top: 3rem;
+  }
 }
 @media screen and (max-width: 480px) {
   .dropdown-menu[data-bs-popper] {
     top: 25%;
   }
   .container {
-    margin: 0 1rem;
+    margin: 0;
+    padding: 0;
   }
   #main-carroussel {
     flex-direction: column;
