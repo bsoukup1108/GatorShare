@@ -10,16 +10,20 @@ import com.GatorShare.Dto.User;
 import javax.persistence.Table;
 
 
-@EntityScan
+
 @Repository
 
 public interface PostRepo extends
 JpaRepository<Post, Integer>{
 
+
     @Query("SELECT p FROM Post p WHERE " +
             "p.Title LIKE CONCAT('%',:query, '%')" +
             "Or p.Description LIKE CONCAT('%', :query, '%')")
     List<Post> searchPosts(String query);
+
+    @Query("SELECT p FROM Post p WHERE p.id LIKE CONCAT('%',:query, '%')")
+    List<Post> getallpostsbyid(int query);
 
     @Query("SELECT p FROM Post p where p.Tag LIke '%Article%'")
     List <Post> SearchWhereInputIsArticle();
@@ -42,18 +46,6 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
 
-    @Query("SELECT p FROM Post p ORDER BY p ASC")
-    List <Post> SortAlphabetically();
-
-    @Query("SELECT p FROM Post p ORDER BY p.photo_Like DESC")
-    List <Post> SortByLIke();
-
-    @Query("SELECT p FROM Post p")
-    List<Post> getallposts();
-
-    List<Post> findPostByUserOrderById(User user);
-
-    List<Post> findAllByOrderByIdDesc();
 
 
 }

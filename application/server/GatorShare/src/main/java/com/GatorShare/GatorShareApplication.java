@@ -2,13 +2,25 @@ package com.GatorShare;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 
 import com.GatorShare.Dto.*;
-import com.GatorShare.Message.*;
-import com.GatorShare.Service.*;
+
+import com.GatorShare.Repo.CommentRepo;
+import com.GatorShare.Repo.PostRepo;
+//import com.GatorShare.Service.ImageStorageService;
+import com.GatorShare.Service.commentService;
+import com.GatorShare.Service.postService;
+import com.GatorShare.Service.UserService;
+import com.GatorShare.Service.AboutUsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -39,6 +51,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -62,31 +75,33 @@ public class GatorShareApplication {
 	private UserService userService;
 
 	@Autowired
-	private RequestService requestService;
+	private commentService CommentService;
 
 	@Autowired
 	private postService PostService;
 
-	@Autowired
-	private AdminService adminService;
+
+//	@Autowired
+//	private ImageStorageService imageStorageService;
 
 
 	@Autowired
 	public HttpServletRequest request;
 
 	@Autowired
-	private SimpMessagingTemplate simpMessagingTemplate;
+	private PostRepo postRepo;
+
+	@Autowired
+	private CommentRepo commentRepo;
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
 
-	@GetMapping("/")
-	public String index(HttpServletRequest request) {
 
-		adminService.store_userinfo(request);
 
-		return "client info saved in the database";
-	}
+
 
 
 	@GetMapping(value = "aboutus")
@@ -150,24 +165,6 @@ public class GatorShareApplication {
 		}
 	}
 
-	@MessageMapping("/message")
-	@SendTo("/chatroom/public")
-	public Message receiveMessage(@Payload Message message){
-		return message;
-	}
-	@MessageMapping("/private-message")
-	public Message recMessage(@Payload Message message){
-		simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
-		System.out.println(message.toString());
-		return message;
-	}
-
-
-
-
-
-
-
 
 
 	@GetMapping(value = "search")
@@ -190,10 +187,7 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsDiscords());
 	}
 
-	@GetMapping("search/{ASC}")
-	public ResponseEntity<List<Post>> SortAlphabetically(){
-		return ResponseEntity.ok(PostService.SortAlphabetically());
-	}
+
 
 	@GetMapping("search/{Tutoring}")
 	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring(){
@@ -215,46 +209,94 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
 	}
 
-	@GetMapping("search/{Like}")
-	public ResponseEntity<List<Post>> SortByLike()
-	{
 
-		return ResponseEntity.ok(PostService.SortByLike());
-	}
-
-	@GetMapping("AllPosts")
+	@GetMapping("posts")
 	public ResponseEntity<List<Post>> getAllPosts()
 	{
+
 		return ResponseEntity.ok(PostService.getAllPosts());
 	}
 
 
+
+
 	@PostMapping("post")
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("Image") MultipartFile Image, @RequestParam("Tag") String tag, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("Likes") int Likes) {
+
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag, @RequestParam(value = "user_id" , required = false) Long user_id) {
 		String message = "";
 		try{
-			PostService.store(Image, tag, Titile, DEsc, Likes);
-			message = "uploaded the post successfully: "+ Image.getOriginalFilename();
+			PostService.store(image, Titile, DEsc,tag, like, user_id);
+
+			message = "uploaded the post successfully: "+ Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
 		} catch (Exception e){
-			message = "Post could not be uploaded " + Image.getOriginalFilename() + ".";
+			message = "Post could not be uploaded " + Titile + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
+
 		}
+	}
+	@GetMapping(value = "AllPosts/{id}")
+	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
+		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
+
+//	@PostMapping("post/{postID}/upload")
+//	public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image") MultipartFile file) {
+//		String message = "";
+//		try {
+//			imageStorageService.store(file);
+//
+//			message = "Uploaded the file successfully: " + file.getOriginalFilename();
+//			return ResponseEntity.status(HttpStatus.OK).body(new ResponesImageMessage(message));
+//		} catch (Exception e) {
+//			message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+//			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage(message));
+//		}
+//	}
+
+	@GetMapping("postsImage")
+	public ResponseEntity<List<ResponsePost>> getListFiles() {
+		List<ResponsePost> files = postService.getAllfiles().map(dbFile -> {
+			String fileDownloadUri = ServletUriComponentsBuilder
+					.fromCurrentContextPath()
+					.path("/files/")
+					.path(String.valueOf(dbFile.getId()))
+					.toUriString();
+
+			return new ResponsePost(
+					dbFile.getName(),
+					fileDownloadUri,
+					dbFile.getType());
+		}).collect(Collectors.toList());
+
+		return ResponseEntity.status(HttpStatus.OK).body(files);
+	}
+
+	@GetMapping("/Images/{id}")
+	public ResponseEntity<byte[]> getFile(@PathVariable int id) {
+		Post post = postService.getfile(id);
+
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + post.getName() + "\"")
+				.body(post.getData());
 	}
 
 
 
-//	@GetMapping("posts/{id}")
-//	public ResponseEntity<Post> getPostByID( @PathVariable(name = "id") final Integer postId)
-//	{
-//		String PostNotFound = "{Wrong Entry: Try Some Thing Else}";
-//		try {
-//			final Post post = this.PostService.findAllByUserId(postId);
-//			return new ResponseEntity<Post>(post, HttpStatus.OK);
-//		} catch (NoSuchElementException e) {
-//			return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
-//		}
-//	}
+
+
+	@PostMapping("post/{postid}/comments")
+	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
+		return postRepo.findById(postid).map(post -> {
+			Comments.setPost(post);
+			return commentRepo.save(Comments);
+		}).orElseThrow();
+	}
+
+	@GetMapping("comment/{post_id}/post_id")
+	public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
+		return ResponseEntity.ok(CommentService.getallpostsbyid(query));
+	}
 
 
 	@PostMapping("/changePostTitle")
@@ -291,13 +333,11 @@ public class GatorShareApplication {
 	}
 
 
-
-
-
 	@PostMapping("/signup")
 	public singupResponse signup(@RequestBody signupDTO signupdto) throws CustomeException{
 		return userService.signUp(signupdto);
 	}
+
 
 
 

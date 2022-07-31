@@ -27,18 +27,35 @@ public class Post {
 
 	@Column(columnDefinition = "TEXT")
 	private String Tag;
-
 	@Column(columnDefinition = "TEXT")
+
 	private String Description;
+
+
+	public void setUserID(Long id){
+		this.user.setID(id);
+	}
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
 
-	@Column(name = "picture", length = Integer.MAX_VALUE, nullable = true)
-	private byte [] photos;
+	private String name;
+
+	private String type;
 
 	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
+
+
+	@Lob
+	private byte[] data;
 
 	public Post() {
 	}
@@ -55,17 +72,25 @@ public class Post {
 		this.Tag = tag;
 	}
 
-	public void setPhotos(byte [] Photo){
-		this.photos = Photo;
+	public Long getUser_id(){
+		return user.getID();
 	}
+
+
 
 	public User getUser() {
 		return user;
 	}
 
-	public byte [] getPhoto(){
-		return photos;
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 
 	public String getTitle(){
 		return Title;
@@ -102,4 +127,24 @@ public class Post {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+
+
+
+	public Integer getPhoto_Like() {
+		return photo_Like;
+	}
+
+	public void setPhoto_Like(Integer photo_Like) {
+		this.photo_Like = photo_Like;
+	}
+
+	public byte[] getData() {
+		return data;
+	}
+
+	public void setData(byte[] data) {
+		this.data = data;
+	}
+
+
 }

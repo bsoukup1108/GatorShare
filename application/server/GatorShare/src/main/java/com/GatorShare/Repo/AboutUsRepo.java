@@ -9,7 +9,6 @@ import java.util.List;
 public interface AboutUsRepo  extends
 JpaRepository<AboutUsDto, Long> {
 
-//    @Query("SELECT information FROM aboutus")
-//    List<AboutUsDto> searchPost(String query);
+
 }
 
