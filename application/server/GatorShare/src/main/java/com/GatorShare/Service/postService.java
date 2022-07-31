@@ -6,6 +6,7 @@ import java.util.List;
 import com.GatorShare.Dto.AboutUsDto;
 
 import com.GatorShare.Dto.Post;
+import com.GatorShare.Dto.User;
 import com.GatorShare.Repo.UserRepository;
 import com.GatorShare.Repo.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,26 +39,21 @@ public class postService {
 
 
 
-    public void store(MultipartFile image, String Title, String tag, String description,Integer likes, Long user_id) throws IOException {
+    public void store(MultipartFile image, String Title, String tag, String description,Integer likes) throws IOException {
 
         Post newPost = new Post();
         Date date = new Date();
-
-        String filename = StringUtils.cleanPath(image.getOriginalFilename());
         String imagetype = image.getContentType();
-        byte [] imagebyte = image.getBytes();
-        newPost.setUserID(user_id);
+        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
-        newPost.setData(imagebyte);
+        byte [] imagebytes = fileName.getBytes();
+        newPost.setPicByte(compressBytes(imagebytes));
         newPost.setLikes(likes);
         newPost.setTag(tag);
-        newPost.setName(filename);
+        newPost.setName(fileName);
         newPost.setType(imagetype);
-        newPost.getUser_id();
-
         newPost.SetTitle(Title);
-
         postrepo.save(newPost);
 
 
@@ -72,6 +68,8 @@ public class postService {
 
         return postrepo.findAll().stream();
     }
+
+
 
 
 
@@ -96,24 +94,7 @@ public class postService {
         return outputStream.toByteArray();
 
     }
-    public static byte[] decompressBytes(byte[] data) {
 
-        Inflater inflater = new Inflater();
-        inflater.setInput(data);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
-        byte[] buffer = new byte[1024];
-        try {
-            while (!inflater.finished()) {
-                int count = inflater.inflate(buffer);
-                outputStream.write(buffer, 0, count);
-            }
-            outputStream.close();
-        } catch (IOException ioe) {
-        } catch (DataFormatException e) {
-        }
-        return outputStream.toByteArray();
-
-    }
 
 
 
@@ -137,8 +118,13 @@ public class postService {
     {
         List<Post> posts = postrepo.getallpostsbyid(postId);
         return posts;
+
+
     }
 
+    public static Stream<Post> getListfiles(){
+        return postrepo.findAll().stream();
+    }
 
 
 

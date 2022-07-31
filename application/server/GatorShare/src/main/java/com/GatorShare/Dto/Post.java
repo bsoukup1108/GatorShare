@@ -1,11 +1,9 @@
 package com.GatorShare.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,9 +16,9 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id",referencedColumnName = "id")
-	private User user;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "user_id",referencedColumnName = "id")
+//	private User users;
 
 	@Column(columnDefinition="TEXT")
 	private String Title;
@@ -32,9 +30,12 @@ public class Post {
 	private String Description;
 
 
-	public void setUserID(Long id){
-		this.user.setID(id);
-	}
+
+	@Column(name = "picByte")
+	private byte[] picByte;
+
+
+
 	public String getType() {
 		return type;
 	}
@@ -54,8 +55,6 @@ public class Post {
 	private Date createdDate;
 
 
-	@Lob
-	private byte[] data;
 
 	public Post() {
 	}
@@ -72,15 +71,15 @@ public class Post {
 		this.Tag = tag;
 	}
 
-	public Long getUser_id(){
-		return user.getID();
-	}
+//	public Long getUser_id(){
+//		return users.getID();
+//	}
 
 
 
-	public User getUser() {
-		return user;
-	}
+//	public User getUser() {
+//		return users;
+//	}
 
 	public String getName() {
 		return name;
@@ -96,9 +95,9 @@ public class Post {
 		return Title;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public void setUser(User user) {
+//		this.users = user;
+//	}
 
 	public String getContent() {
 		return Description;
@@ -138,13 +137,15 @@ public class Post {
 		this.photo_Like = photo_Like;
 	}
 
-	public byte[] getData() {
-		return data;
+
+
+
+	public byte[] getPicByte() {
+		return picByte;
 	}
 
-	public void setData(byte[] data) {
-		this.data = data;
+	public void setPicByte(byte[] picByte) {
+		this.picByte = picByte;
 	}
-
 
 }

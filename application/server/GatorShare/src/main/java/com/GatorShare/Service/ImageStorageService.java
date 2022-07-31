@@ -29,7 +29,5 @@
 //        return imageRepo.findById(id).get();
 //    }
 //
-//    public Stream<Imageupload> getAllfiles(){
-//        return imageRepo.findAll().stream();
-//    }
+//
 //}
