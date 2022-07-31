@@ -6,6 +6,8 @@ import java.util.Date;
 
 public class ResponsePost {
 
+
+
     private String Title;
     private String Tag;
     private String Description;
@@ -49,8 +51,49 @@ public class ResponsePost {
         this.type = type;
     }
 
+    public String getTitle() {
+        return Title;
+    }
 
-    public ResponsePost(String name, String url, String type) {
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getTag() {
+        return Tag;
+    }
+
+    public void setTag(String tag) {
+        Tag = tag;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public Integer getPhoto_Like() {
+        return photo_Like;
+    }
+
+    public void setPhoto_Like(Integer photo_Like) {
+        this.photo_Like = photo_Like;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+
+    public ResponsePost(byte [] data, String name, String url, String type) {
+        this.data = data;
         this.name = name;
         this.url = url;
         this.type = type;

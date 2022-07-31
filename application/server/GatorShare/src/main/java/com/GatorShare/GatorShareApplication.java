@@ -1,16 +1,21 @@
 package com.GatorShare;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
+import java.util.zip.Inflater;
 
 
 import com.GatorShare.Dto.*;
 
-import com.GatorShare.Repo.CommentRepo;
+//import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
 //import com.GatorShare.Service.ImageStorageService;
-import com.GatorShare.Service.commentService;
+//import com.GatorShare.Service.commentService;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
@@ -56,6 +61,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+
 @Slf4j
 
 @EntityScan
@@ -74,11 +81,13 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private commentService CommentService;
+//	@Autowired
+//	private commentService CommentService;
 
 	@Autowired
 	private postService PostService;
+
+
 
 
 //	@Autowired
@@ -91,8 +100,8 @@ public class GatorShareApplication {
 	@Autowired
 	private PostRepo postRepo;
 
-	@Autowired
-	private CommentRepo commentRepo;
+//	@Autowired
+//	private CommentRepo commentRepo;
 
 
 	public static void main(String[] args) {
@@ -211,10 +220,14 @@ public class GatorShareApplication {
 
 
 	@GetMapping("posts")
-	public ResponseEntity<List<Post>> getAllPosts()
-	{
+	public Post getImage() throws IOException {
+		Optional<Post> retrievedposts = postRepo.getallposts();
 
-		return ResponseEntity.ok(PostService.getAllPosts());
+		Post post = new Post( retrievedposts.get().getId(),retrievedposts.get().getContent(), retrievedposts.get().getName(), retrievedposts.get().getDescription(), decompressBytes(retrievedposts.get().getPicByte()),retrievedposts.get().getLikes(), retrievedposts.get().getTag(), retrievedposts.get().getTitle(), retrievedposts.get().getCreatedDate());
+
+		return post;
+
+
 	}
 
 
@@ -222,10 +235,10 @@ public class GatorShareApplication {
 
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag, @RequestParam(value = "user_id" , required = false) Long user_id) {
+	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try{
-			PostService.store(image, Titile, DEsc,tag, like, user_id);
+			PostService.store(image, Titile, DEsc,tag, like);
 
 			message = "uploaded the post successfully: "+ Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
@@ -238,6 +251,26 @@ public class GatorShareApplication {
 	@GetMapping(value = "AllPosts/{id}")
 	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
+
+
+	public static byte[] decompressBytes(byte[] data) {
+
+		Inflater inflater = new Inflater();
+		inflater.setInput(data);
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+		byte[] buffer = new byte[1024];
+		try {
+			while (!inflater.finished()) {
+				int count = inflater.inflate(buffer);
+				outputStream.write(buffer, 0, count);
+			}
+			outputStream.close();
+		} catch (IOException ioe) {
+		} catch (DataFormatException e) {
+		}
+		return outputStream.toByteArray();
+
 	}
 
 //	@PostMapping("post/{postID}/upload")
@@ -254,49 +287,50 @@ public class GatorShareApplication {
 //		}
 //	}
 
-	@GetMapping("postsImage")
-	public ResponseEntity<List<ResponsePost>> getListFiles() {
-		List<ResponsePost> files = postService.getAllfiles().map(dbFile -> {
-			String fileDownloadUri = ServletUriComponentsBuilder
-					.fromCurrentContextPath()
-					.path("/files/")
-					.path(String.valueOf(dbFile.getId()))
-					.toUriString();
+//	@GetMapping("postsImage")
+//	public ResponseEntity<List<ResponsePost>> getListFiles() {
+//		List<ResponsePost> files = postService.getListfiles().map(dbFile -> {
+//			String fileDownloadUri = ServletUriComponentsBuilder
+//					.fromCurrentContextPath()
+//					.path("/files/")
+//					.path(dbFile.getId())
+//					.toUriString();
+//
+//			return new ResponsePost(
+//					dbFile.getData(),
+//					dbFile.getName(),
+//					fileDownloadUri,
+//					dbFile.getType());
+//		}).collect(Collectors.toList());
+//
+//		return ResponseEntity.status(HttpStatus.OK).body(files);
+//	}
 
-			return new ResponsePost(
-					dbFile.getName(),
-					fileDownloadUri,
-					dbFile.getType());
-		}).collect(Collectors.toList());
-
-		return ResponseEntity.status(HttpStatus.OK).body(files);
-	}
-
-	@GetMapping("/Images/{id}")
-	public ResponseEntity<byte[]> getFile(@PathVariable int id) {
-		Post post = postService.getfile(id);
-
-		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + post.getName() + "\"")
-				.body(post.getData());
-	}
-
-
-
+//	@GetMapping("/Images/{id}")
+//	public ResponseEntity<byte[]> getFile(@PathVariable int id) {
+//		Post post = postService.getfile(id);
+//
+//		return ResponseEntity.ok()
+//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + post.getName() + "\"")
+//				.body(post.getData());
+//	}
 
 
-	@PostMapping("post/{postid}/comments")
-	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
-		return postRepo.findById(postid).map(post -> {
-			Comments.setPost(post);
-			return commentRepo.save(Comments);
-		}).orElseThrow();
-	}
 
-	@GetMapping("comment/{post_id}/post_id")
-	public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
-		return ResponseEntity.ok(CommentService.getallpostsbyid(query));
-	}
+
+
+//	@PostMapping("post/{postid}/comments")
+//	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
+//		return postRepo.findById(postid).map(post -> {
+//			Comments.setPost(post);
+//			return commentRepo.save(Comments);
+//		}).orElseThrow();
+//	}
+//
+//	@GetMapping("comment/{post_id}/post_id")
+//	public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
+//		return ResponseEntity.ok(CommentService.getallpostsbyid(query));
+//	}
 
 
 	@PostMapping("/changePostTitle")
