@@ -1,21 +1,8 @@
-#root {
-  max-width: 100vw;
-}
-
-body,
-html {
-  overflow-x: hidden;
-}
-
 /* *********************************************** */
 /* colors */
 /* *********************************************** */
 /* *********************************************** */
 /* Reset global settings */
-html {
-  min-width: 600px;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -27,6 +14,14 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 100vw !important;
+  overflow-x: hidden;
+}
+
+body,
+html {
+  overflow-x: hidden;
+  max-width: 100vw !important;
 }
 
 /* *********************************************** */
@@ -1256,9 +1251,13 @@ footer a :hover {
   }
 }
 @media screen and (max-width: 760px) {
+  .dropdown-menu[data-bs-popper] {
+    top: 40%;
+  }
   body,
 html {
     overflow-x: hidden;
+    max-width: 100vw !important;
   }
   .container {
     margin: 0 5rem;
@@ -1307,6 +1306,7 @@ html {
     flex-direction: column;
   }
   nav {
+    padding: 0 !important;
     height: 6rem !important;
   }
   #wrapper {
@@ -1373,8 +1373,14 @@ html {
   .container-fluid {
     padding: 0;
   }
+  #root {
+    min-height: 0px !important;
+  }
 }
 @media screen and (max-width: 480px) {
+  .dropdown-menu[data-bs-popper] {
+    top: 25%;
+  }
   .container {
     margin: 0 1rem;
   }
