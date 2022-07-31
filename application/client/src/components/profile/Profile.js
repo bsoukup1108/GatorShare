@@ -148,7 +148,7 @@ const Profile = () => {
 			{!isLoaded && <Spinner />}
 			{isLoaded && (
 				<div className='profile'>
-					<div className='flex-container'>
+					<div className='flex-container profile-page-1'>
 						<div className='flex-left'>
 							<img
 								src={noProfile}

@@ -1,3 +1,7 @@
+#root {
+	max-width: 100vw;
+}
+
 /* *********************************************** */
 /* colors */
 $primary: rgba(74, 33, 123, 1);
@@ -1432,6 +1436,9 @@ footer a {
 }
 
 @media screen and (max-width: 760px) {
+	body {
+		overflow-x: hidden
+	}
 
 	.container {
 		margin: 0 5rem;
@@ -1495,9 +1502,100 @@ footer a {
 		flex-direction: column;
 	}
 
+	nav {
+		height: 6rem !important;
+	}
+
+	#wrapper {
+
+		grid-template-columns: repeat(12, [col-start] 1fr);
+		grid-template-rows: 150px auto 250px;
+
+	}
+
+	#navbar-left-1 {
+		flex-wrap: wrap;
+
+	}
+
+	//
+
+	#footerContent {
+		flex-direction: column-reverse;
+		margin-right: 1rem;
+
+		>* {
+			width: 100%;
+			margin: 0;
+		}
+	}
+
+	footer {
+		margin: 0;
+		padding: 0
+	}
+
+	#footer-right {
+		text-align: center;
+	}
+
+	#footer-left {
+		padding-left: 1rem;
+		margin: 0.5rem 0;
+	}
+
+	.comment-btn {
+		margin: 1rem 0;
+	}
+
+	#postComments {
+		text-align: center;
+	}
+
+	#leaveComment {
+		height: 10rem;
+	}
+
+	.profile-page-1 {
+		flex-direction: column;
+	}
+
+	.flex-right h3,
+	.flex-right h1 {
+		text-align: center
+	}
+
+	.flex-left {
+		width: 100%;
+		height: 100%;
+		border-right: none;
+		text-align: center;
+
+		>* {
+			margin: 1rem 0;
+		}
+
+		#profile-btn-1 {
+			margin: 1rem 0;
+
+			>button {
+				padding: 1rem 0;
+				margin: 1rem 5rem;
+			}
+		}
+	}
+
+	.flex-right {
+		width: 100%;
+
+	}
+
 }
 
 @media screen and (max-width: 480px) {
+
+
+
 	.container {
 		margin: 0 1rem;
 	}
@@ -1505,6 +1603,50 @@ footer a {
 	#main-carroussel {
 		flex-direction: column;
 		margin: 0
+	}
+
+	nav {
+		height: 9rem !important;
+	}
+
+
+
+	#wrapper {
+
+		grid-template-columns: repeat(12, [col-start] 1fr);
+		grid-template-rows: 150px auto 250px;
+
+	}
+
+	#navbar-left-1 {
+		flex-wrap: wrap;
+
+	}
+
+	#footerContent {
+		flex-direction: column-reverse;
+		margin-right: 1rem;
+
+		>* {
+			width: 100%;
+			margin: 0;
+		}
+
+		footer {
+			margin: 0;
+			padding: 0
+		}
+
+		#footer-right {
+			text-align: center;
+		}
+
+		#footer-left {
+			padding-left: 1rem;
+			margin: 0.5rem 0;
+		}
+
+
 	}
 }
 

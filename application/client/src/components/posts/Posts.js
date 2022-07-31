@@ -6,7 +6,6 @@ import { useEffect } from 'react';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
-import { computeHeadingLevel } from '@testing-library/react';
 
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -54,9 +53,9 @@ const Posts = () => {
 			let dateA = a.createdDate;
 			let dateB = b.createdDate;
 
-			if (dateA < dateB) {
+			if (dateA > dateB) {
 				return -1;
-			} else if (dateA > dateB) {
+			} else if (dateA < dateB) {
 				return 1;
 			}
 			return 0;
