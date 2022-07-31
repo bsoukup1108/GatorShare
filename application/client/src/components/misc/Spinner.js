@@ -11,7 +11,7 @@ const Spinner = () => {
 				role='status'
 				style={{ width: '10rem', height: '10rem' }}
 			>
-				<span className='sr-only'>Loading...</span>
+				<span className='sr-only'>Error loading...</span>
 			</div>
 		</div>
 	);

@@ -264,7 +264,7 @@ const SearchResults = () => {
 															: noImage
 													}
 													className='card-img-top'
-													alt='Loading...'
+													alt='Error loading...'
 												/>
 												<div className='card-body'>
 													<h5 className='card-title'>

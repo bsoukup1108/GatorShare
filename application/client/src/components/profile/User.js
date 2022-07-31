@@ -117,7 +117,7 @@ const User = () => {
 						<img
 							src={noProfile}
 							className='profile-pic'
-							alt='Loading...'
+							alt='Error loading...'
 						/>
 
 						<h1>{role}</h1>
@@ -149,6 +149,18 @@ const User = () => {
 									{isLoaded2 && (
 										<div className='row row-cols-1 row-cols-md-2 g-4'>
 											{posts.map((post, i) => {
+												let srcImg = noImage;
+												if (post.data) {
+													let src =
+														'data:image/png;base64,';
+													src += post.data;
+													if (
+														src.length > 30 &&
+														post.name !== 'fake'
+													) {
+														srcImg = src;
+													}
+												}
 												return (
 													<div
 														key={`posts-post-${i}`}
@@ -164,13 +176,9 @@ const User = () => {
 															}}
 														>
 															<img
-																src={
-																	post.image
-																		? post.image
-																		: noImage
-																}
+																src={srcImg}
 																className='card-img-top'
-																alt='Loading...'
+																alt='Error loading...'
 															/>
 															<div className='card-body'>
 																<h5 className='card-title'>

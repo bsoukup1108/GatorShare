@@ -133,7 +133,7 @@ const Post = () => {
 								<div className='col-md-4'>
 									<img
 										src={bImage !== null ? bImage : noImage}
-										className='img-fluid rounded-start'
+										className='img-fluid rounded-start post-image-individual-1'
 										alt='...'
 									/>
 								</div>

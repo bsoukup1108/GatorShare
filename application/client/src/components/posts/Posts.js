@@ -154,11 +154,6 @@ const Posts = () => {
 									}
 								}
 
-								{
-									/* if ((src.length < 30) | (res.data[0].name === 'fake')) {
-								setIsLoaded(true);
-								} */
-								}
 								return (
 									<div
 										key={`posts-post-${i}`}
@@ -187,9 +182,9 @@ const Posts = () => {
 											<img
 												src={srcImg}
 												className='card-img-top'
-												alt='Loading...'
+												alt='Error loading...'
 											/>
-											<div className='card-body'>
+											<div className='card-body posts-body-1'>
 												<h5 className='card-title'>
 													<i>
 														{post.title

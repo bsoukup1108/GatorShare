@@ -165,6 +165,7 @@ footer {
 }
 
 ::-webkit-scrollbar-thumb {
+  background: rgba(74, 33, 123, 0.5);
   border-radius: 10px;
 }
 
@@ -393,7 +394,18 @@ label {
   text-align: right;
 }
 
-c .create-btn:focus, .create-btn:hover {
+.create-btn {
+  margin-top: 50px;
+  padding: 0.5rem 4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgb(209, 142, 18);
+  border-color: rgb(209, 142, 18);
+  border-radius: 2.1875rem;
+}
+.create-btn:focus, .create-btn:hover {
   background: #eda829;
 }
 
@@ -602,6 +614,10 @@ c .create-btn:focus, .create-btn:hover {
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.posts-body-1 {
+  justify-content: flex-end;
 }
 
 .card-text-bottom {
@@ -814,6 +830,10 @@ c .create-btn:focus, .create-btn:hover {
   top: 0;
   width: 100%;
   z-index: -100;
+}
+
+.post-image-individual-1 {
+  box-shadow: 0px 0.1875rem 0.4375rem rgba(0, 0, 0, 0.25);
 }
 
 .container-home {
@@ -1146,7 +1166,7 @@ footer a :hover {
 #edit-user-form-1 {
   margin-bottom: 5rem;
   padding: 2rem;
-  border: 1px solid purple;
+  box-shadow: 0px 0rem 0.625rem rgb(74, 33, 123);
 }
 
 .edit-btn {
@@ -1190,6 +1210,16 @@ footer a :hover {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
+}
+
+#leaveComment {
+  width: -webkit-fill-available;
+  box-shadow: 0px 0rem 0.625rem rgb(74, 33, 123);
+}
+
+.card {
+  border: 0.2rem solid rgba(74, 33, 123, 0.1);
+  height: 100%;
 }
 
 @media screen and (min-width: 1600px) {
@@ -1382,6 +1412,10 @@ ul {
   margin: 5px 10px;
 }
 
+.flex-container {
+  box-shadow: grey;
+}
+
 .message-data {
   padding: 5px;
 }
@@ -1420,7 +1454,7 @@ ul {
 }
 
 #post-tag-1 {
-  height: 1.1rem;
+  height: 1.5rem;
 }
 
 .badge {
