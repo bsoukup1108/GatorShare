@@ -184,6 +184,18 @@ const Home = () => {
 								>
 									<div className='carousel-inner'>
 										{post1.map((post, i) => {
+											let srcImg = noImage;
+											if (post.data) {
+												let src =
+													'data:image/png;base64,';
+												src += post.data;
+												if (
+													src.length > 30 &&
+													post.name !== 'fake'
+												) {
+													srcImg = src;
+												}
+											}
 											return (
 												<div
 													key={`car-1-${i}`}
@@ -195,11 +207,7 @@ const Home = () => {
 													data-bs-interval='10000'
 												>
 													<img
-														src={
-															post.image
-																? post.image
-																: noImage
-														}
+														src={srcImg}
 														className='d-block w-100'
 														alt='...'
 													/>
@@ -282,6 +290,18 @@ const Home = () => {
 									>
 										<div className='carousel-inner'>
 											{post2.map((post, i) => {
+												let srcImg = noImage;
+												if (post.data) {
+													let src =
+														'data:image/png;base64,';
+													src += post.data;
+													if (
+														src.length > 30 &&
+														post.name !== 'fake'
+													) {
+														srcImg = src;
+													}
+												}
 												return (
 													<div
 														key={`car-1-${i}`}
@@ -293,11 +313,7 @@ const Home = () => {
 														data-bs-interval='10000'
 													>
 														<img
-															src={
-																post.image
-																	? post.image
-																	: noImage
-															}
+															src={srcImg}
 															className='d-block w-100'
 															alt='...'
 														/>
