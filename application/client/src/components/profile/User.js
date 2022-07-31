@@ -144,7 +144,7 @@ const User = () => {
 							</div>
 							<div className='flex-down'>
 								<div style={{ marginBottom: '1rem' }}>
-									<h3>CREATED POSTS</h3>
+									<h3 className='text-mute'>CREATED POSTS</h3>
 									{!isLoaded2 && <Spinner />}
 									{isLoaded2 && (
 										<div className='row row-cols-1 row-cols-md-2 g-4'>

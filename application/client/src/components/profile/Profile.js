@@ -347,7 +347,9 @@ const Profile = () => {
 														</form>
 													</div>
 												)}
-												<h3>CREATED POSTS</h3>
+												<h3 className='text-mute'>
+													CREATED POSTS
+												</h3>
 												<div className='row row-cols-1 row-cols-md-2 g-4'>
 													{posts.map((post, i) => {
 														let srcImg = noImage;

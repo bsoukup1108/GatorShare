@@ -2,6 +2,11 @@
 	max-width: 100vw;
 }
 
+body,
+html {
+	overflow-x: hidden
+}
+
 /* *********************************************** */
 /* colors */
 $primary: rgba(74, 33, 123, 1);
@@ -743,6 +748,7 @@ label {
 	color: gold;
 }
 
+
 .flex-container {
 	display: flex;
 	flex-direction: row;
@@ -753,13 +759,16 @@ label {
 .flex-left {
 	width: 30%;
 	height: 100%;
-	border-right: black solid 1px;
+	//border-right: black solid 1px;
 	text-align: center;
 }
 
 .flex-right {
 	width: 70%;
+}
 
+.flex-down h3 {
+	margin: 2rem 0;
 }
 
 .profile {
@@ -782,7 +791,7 @@ label {
 .flex-up {
 	height: 10%;
 	width: 100%;
-	border-bottom: black solid 1px;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
 }
 
 .flex-up h1 {
@@ -1355,6 +1364,14 @@ footer a {
 
 }
 
+.me-2 {
+	margin-right: 0 !important;
+}
+
+.me-1 {
+	margin-right: 0 !important;
+}
+
 
 .edit-btn {
 	margin: 5px 20px auto;
@@ -1436,7 +1453,9 @@ footer a {
 }
 
 @media screen and (max-width: 760px) {
-	body {
+
+	body,
+	html {
 		overflow-x: hidden
 	}
 
@@ -1587,7 +1606,10 @@ footer a {
 
 	.flex-right {
 		width: 100%;
+	}
 
+	.container-fluid {
+		padding: 0
 	}
 
 }
