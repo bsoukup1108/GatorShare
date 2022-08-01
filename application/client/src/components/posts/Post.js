@@ -66,6 +66,7 @@ const Post = () => {
 			.then((res) => {
 				if (res.data) {
 					res.data.map((el) => {
+						console.log(el);
 						setComments(res.data);
 					});
 					//			setIsLoadedC(true);
@@ -95,7 +96,6 @@ const Post = () => {
 				text: comment.commentArea,
 			})
 			.then((res) => {
-				console.log(res);
 				if (res.status === 200) {
 					let commentDiv = document.getElementById('leaveComment');
 					commentDiv.value = '';
@@ -252,9 +252,9 @@ const Post = () => {
 													<small>
 														<a
 															className='badge badge-primary'
-															href={`/User/${5}`}
+															href={`/User/${el.userID}`}
 														>
-															user
+															go to user's profile
 														</a>
 													</small>
 													<p>{el.text}</p>
