@@ -1029,14 +1029,66 @@ label {
 
 .message-123 {
 	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+
+	>* {
+		margin: 0;
+	}
+}
+
+.message-123>.alert {
+	padding: 0.5rem;
+	line-break: anywhere;
+}
+
+.message-123-right {
+	justify-content: flex-end;
+	align-items: flex-end;
+	margin-bottom: 1rem
+}
+
+.message-123-left {
+	justify-content: flex-start;
+	align-items: flex-start;
+
+
+}
+
+#mess-box {
+	height: 73vh;
+	overflow: overlay;
+	width: 100%;
+	padding: 0 2rem;
+	margin: 0 20rem;
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+
 }
 
 #input-123 {
+	box-shadow: 0px remy(0px) remy(10px) $primary;
+	margin-bottom: 0.5rem;
 	display: flex;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+
+	>* {
+		width: 100%;
+		height: 3rem !important;
+
+	}
+
+	>button {
+		max-width: 10rem;
+	}
 }
 
 #messages-111 {
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #main-carroussel {
