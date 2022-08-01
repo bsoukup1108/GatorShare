@@ -21,16 +21,20 @@ public class Comments {
     private String text;
 
 
-    @Column(columnDefinition = "Integer")
-    private Integer UserId;
+
 
     @Column(columnDefinition = "Integer")
     private Integer PostID;
 
+    @Column(name = "UserID")
+    private Integer userID;
 
+    public Integer getUserID() {
+        return userID;
+    }
 
-    public void setUserId(Integer userId) {
-        this.UserId = userId;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
     }
 
     public Integer getPostID() {

@@ -31,7 +31,7 @@ public class commentService {
         Comments comments = new Comments();
 
         comments.setText(text);
-        comments.setUserId(userId);
+        comments.setUserID(userId);
         comments.setPostID(PostId);
 
         commentRepo.save(comments);

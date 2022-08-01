@@ -347,7 +347,7 @@ public class GatorShareApplication {
 
 	@GetMapping(value = "comments/{id}")
 	public ResponseEntity<List<Comments>> getCommentByID(@RequestParam("query") Integer query) {
-		return ResponseEntity.ok(commentRepo.getAllCommentByPost_Id(query));
+		return ResponseEntity.ok(CommentService.getCommetnsById(query));
 	}
 
 
