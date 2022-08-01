@@ -29,7 +29,7 @@ const CreatePost = () => {
 	const userId = ReactSession.get('currentUserId');
 
 	const [formData, setFormData] = useState({
-		//user_id: userId,
+		user_ID: userId,
 		postTitle: '',
 		Descrption: '',
 		likes: 0,
