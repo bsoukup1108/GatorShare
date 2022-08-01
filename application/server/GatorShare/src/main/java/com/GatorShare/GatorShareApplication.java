@@ -65,7 +65,7 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = { "com.GatorShare" })
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = { "https://gatorshare.com", "http://localhost:3000" })
+@CrossOrigin(origins = { "http://gatorshare.com", "http://localhost:3000" })
 
 public class GatorShareApplication {
 	@Autowired
@@ -271,6 +271,11 @@ public class GatorShareApplication {
 	@GetMapping(value = "AllPosts/{id}")
 	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query) {
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
+	}
+
+	@GetMapping(value = "posts/{userId}")
+	public ResponseEntity<List<Post>> getPostByUserID(@RequestParam("query") Integer query) {
+		return ResponseEntity.ok(PostService.getAllPostByUserID(query));
 	}
 
 	public static byte[] decompressBytes(byte[] data) {

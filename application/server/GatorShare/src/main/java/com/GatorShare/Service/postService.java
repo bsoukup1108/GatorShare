@@ -89,6 +89,11 @@ public class postService {
 
     }
 
+    public List<Post> getAllPostByUserID(int UserID){
+        List<Post> posts = postrepo.getallpostsUserid(UserID);
+        return posts;
+    }
+
 
 
     public List<Post> SearchWhereInputIsArticle() {
