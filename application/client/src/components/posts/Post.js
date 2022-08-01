@@ -8,8 +8,11 @@ import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { ReactSession } from 'react-client-session';
 import httpFormData from '../../http-form-data';
+
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
+	const [isLoadedC, setIsLoadedC] = useState(false);
+
 	const [post, setPost] = useState([]);
 	const [comments, setComments] = useState([]);
 	const isAuth = !!getToken();
@@ -26,6 +29,9 @@ const Post = () => {
 		icon.style.color =
 			icon.style.color === 'rebeccapurple' ? 'grey' : 'rebeccapurple';
 	};
+	let inc = 0;
+
+	const [userQ, setUserQ] = useState([]);
 
 	const { id } = useParams();
 	let postId = id || 1;
@@ -34,19 +40,18 @@ const Post = () => {
 	const incLikes = () => {
 		setLikes(likes + 1);
 	};
-
+	let userId_post;
 	useEffect(() => {
 		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
-				// let b = res.data[0].data;
-				// let src = 'data:image/png;base64,';
-				// src += b;
-
-				// if (src.length > 30 && res.data[0].name !== 'fake') {
-				// 	setBImage(src);
-				// 	setIsLoaded(true);
-				// }
 				setPost(res.data[0]);
+
+				if (res.data[0].user_ID) {
+					let user = res.data[0].user_ID;
+					http.get(`/login/id/${user}`).then((res) => {
+						setUserQ(res.data);
+					});
+				}
 
 				setIsLoaded(true);
 			})
@@ -55,9 +60,26 @@ const Post = () => {
 				console.log(e);
 			});
 	}, []);
+
+	useEffect(() => {
+		http.get(`/comments/{id}?query=${postId}`)
+			.then((res) => {
+				if (res.data) {
+					res.data.map((el) => {
+						setComments(res.data);
+					});
+					//			setIsLoadedC(true);
+				}
+			})
+			.catch((e) => {
+				setIsLoadedC(false);
+				console.log(e);
+			});
+	}, [inc]);
 	const [comment, setComment] = useState({
 		comment: '',
 	});
+
 	const onComment = (e) => {
 		setComment({
 			[e.target.name]: e.target.value,
@@ -79,6 +101,7 @@ const Post = () => {
 					commentDiv.value = '';
 					setComment('');
 					setIsLoaded(true);
+					window.location.reload();
 				}
 			})
 			.catch((e) => {
@@ -93,12 +116,25 @@ const Post = () => {
 	let userId;
 	let contentDesc;
 	let Tag;
-	fname = post.user ? user.firstName : '_';
-	lname = post.user ? user.lastName : 'Anonymous';
+
+	const { firstName, lastName, id: userrrID } = userQ;
+
+	fname = firstName ? firstName : '_';
+	lname = lastName ? lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
-	userId = post.user ? (post.user.id ? post.user.id : null) : null;
+	userId = userrrID ? userrrID : null;
+
 	Tag = tag !== null ? tag : 'No description';
 	contentDesc = tag !== null ? tag : 'No tag';
+
+	let commentss;
+
+	commentss = comments.length > 0 ? comments : null;
+
+	if (!isLoadedC && commentss !== null) {
+		setIsLoadedC(true);
+	}
+
 	useEffect(() => {
 		setLikes(phLikes);
 	}, [phLikes]);
@@ -206,9 +242,27 @@ const Post = () => {
 									Comments
 								</label>
 								<div id='postCommentList'>
-									{comments === []
-										? ''
-										: 'there is no comments yet ... Be the first to comment!'}
+									{isLoadedC &&
+										comments.map((el, i) => {
+											return (
+												<div
+													key={`1111111-${i}`}
+													className='comment alert alert-primary'
+												>
+													<small>
+														<a
+															className='badge badge-primary'
+															href={`/User/${5}`}
+														>
+															user
+														</a>
+													</small>
+													<p>{el.text}</p>
+												</div>
+											);
+										})}
+									{!isLoadedC &&
+										'there is no comments yet ... Be the first to comment!'}
 								</div>
 								<div id='leftComment'></div>
 							</div>

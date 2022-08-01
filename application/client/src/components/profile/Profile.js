@@ -55,21 +55,22 @@ const Profile = () => {
 
 				let p = [];
 				res.data.map((post, i) => {
-					// if (post.id === 5) {
-					// 	p = post;
-					// }
 					if (post) {
 						if (post.user_ID === userId) {
 							console.log(post);
-							p[p.lengths] = res.data[i];
+							p[p.length] = res.data[i];
 						}
 					}
 					return p;
 				});
 				if (p !== []) {
-					setPosts([p]);
+					console.log(posts);
+					setPosts(p);
 				}
 				setIsLoaded(true);
+			})
+			.then((res) => {
+				setIsLoaded(false);
 			})
 			.catch((e) => {
 				setIsLoaded(false);
@@ -491,6 +492,8 @@ const Profile = () => {
 												<div className='row row-cols-1 row-cols-md-2 g-4'>
 													{posts.map((post, i) => {
 														let img;
+
+														console.log(post);
 
 														let tagg = post.tag
 															? post.tag

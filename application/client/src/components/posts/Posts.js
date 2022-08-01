@@ -243,17 +243,6 @@ const Posts = () => {
 																			.fromNow()
 																	: ''}{' '}
 															</i>
-															by{' '}
-															<strong>
-																{!!post.user
-																	? post.user
-																			.firstName
-																	: 'Anonymous'}{' '}
-																{post.user
-																	? post.user
-																			.lastName
-																	: 'User'}
-															</strong>
 														</small>
 													</p>
 												</div>
