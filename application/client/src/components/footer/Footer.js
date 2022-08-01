@@ -1,5 +1,49 @@
 import React from 'react';
 import logo from '../../img/logo.png';
+import http from '../../http-common';
+import { ReactSession } from 'react-client-session';
+let currNum = 0;
+let prevNum = 0;
+
+setInterval(function () {
+	const currUser = ReactSession.get('currentUserId');
+	if (currUser) {
+		http('GroupChat', {})
+			.then((res) => {
+				currNum = res.data.length;
+			})
+			.catch((e) => {
+				console.log(e);
+			});
+		if (currNum > prevNum && prevNum != 0) {
+			let diff = currNum - prevNum;
+
+			let notif = document.getElementById('notif-nav-1');
+			if (notif && window.location.pathname !== '/messages')
+				notif.setAttribute('class', 'dropdown me-1 notif-nav-2');
+			let notifBox = document.getElementById('notifications-1');
+
+			if (notifBox) {
+				if (
+					notifBox.innerHTML ===
+					"<p>You don't have any notifications yet</p>"
+				) {
+					notifBox.innerHTML = '';
+				}
+
+				let para = document.createElement('p');
+				let innerTextNode = document.createTextNode(
+					`${diff} new message(s) in Group Chat`
+				);
+				para.appendChild(innerTextNode);
+				para.appendChild(innerTextNode);
+
+				notifBox.appendChild(para);
+			}
+		}
+		prevNum = currNum;
+	}
+}, 1000);
 
 const Footer = () => {
 	return (

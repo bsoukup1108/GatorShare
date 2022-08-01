@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { ReactSession } from 'react-client-session';
 import http from '../../http-form-data';
 import noImage from '../../img/tutor.jpg';
+import moment from 'moment';
 let postIdArr = [];
 
 const Messages = () => {
@@ -18,19 +19,33 @@ const Messages = () => {
 	const username = ReactSession.get('username') || 'Anonimous';
 	const [messages, setMessages] = useState([]);
 
-	const createDiv = (message, id, userName, dateSent) => {
+	const createDiv = (message, id, userName, dateSent, user_id) => {
 		let mainDiv = document.createElement('div');
 		mainDiv.setAttribute('id', id);
-		mainDiv.className = 'message-123';
+
+		if (currUser === user_id) {
+			mainDiv.className = 'message-123 message-123-right';
+		} else {
+			mainDiv.className = 'message-123 message-123-left';
+		}
 
 		let messDiv = document.createElement('div');
-		messDiv.innerHTML = message;
-
+		if (currUser === user_id) {
+			messDiv.className = 'alert alert-primary';
+		} else {
+			messDiv.className = 'alert alert-secondary';
+		}
+		messDiv.innerHTML = `<strong>${message}</strong>`;
 		let authorDiv = document.createElement('div');
-		authorDiv.innerHTML = userName;
 
+		if (currUser !== user_id) {
+			authorDiv.innerHTML = `<a class='badge badge-primary' href='/user/${user_id}'>${userName}</a>`;
+		}
+
+		let date = moment(dateSent).format('LLL');
 		let dateDiv = document.createElement('div');
-		dateDiv.innerHTML = dateSent;
+		dateDiv.className = 'text-muted';
+		dateDiv.innerHTML = `<small>${date}</small>`;
 
 		mainDiv.appendChild(messDiv);
 		mainDiv.appendChild(authorDiv);
@@ -45,37 +60,54 @@ const Messages = () => {
 	}, 5000);
 
 	const retrieveMessages = () => {
-		http('GroupChat', {}).then((res) => {
-			res.data.map((el) => {
-				let div = document.getElementById('mess-box');
-				if (!postIdArr[el.id]) {
+		http('GroupChat', {})
+			.then((res) => {
+				res.data.map((el) => {
+					let div = document.getElementById('mess-box');
+					if (!postIdArr[el.id]) {
+						let newDiv = createDiv(
+							el.message,
+							el.id,
+							el.userName,
+							el.dateSent,
+							el.user_id
+						);
+						div.appendChild(newDiv);
+						postIdArr[el.id] = el.id;
+
+						// auto scrolls down
+						let objDiv = document.getElementById('mess-box');
+						objDiv.scrollTop = objDiv.scrollHeight;
+					}
+				});
+			})
+			.catch((e) => {
+				console.log(e);
+			});
+	};
+
+	useEffect(() => {
+		http('GroupChat', {})
+			.then((res) => {
+				res.data.map((el) => {
+					postIdArr[el.id] = [el.id];
+					let div = document.getElementById('mess-box');
 					let newDiv = createDiv(
 						el.message,
 						el.id,
 						el.userName,
-						el.dateSent
+						el.dateSent,
+						el.user_id
 					);
 					div.appendChild(newDiv);
-					postIdArr[el.id] = el.id;
-				}
+					// auto scrolls down
+					let objDiv = document.getElementById('mess-box');
+					objDiv.scrollTop = objDiv.scrollHeight;
+				});
+			})
+			.catch((e) => {
+				console.log(e);
 			});
-		});
-	};
-
-	useEffect(() => {
-		http('GroupChat', {}).then((res) => {
-			res.data.map((el) => {
-				postIdArr[el.id] = [el.id];
-				let div = document.getElementById('mess-box');
-				let newDiv = createDiv(
-					el.message,
-					el.id,
-					el.userName,
-					el.dateSent
-				);
-				div.appendChild(newDiv);
-			});
-		});
 	}, []);
 
 	const sendMessage = (e) => {
@@ -92,6 +124,9 @@ const Messages = () => {
 			})
 			.catch(function (err) {
 				console.log(err);
+			})
+			.catch((e) => {
+				console.log(e);
 			});
 
 		console.log(inp.value);
@@ -128,10 +163,9 @@ const Messages = () => {
 		<>
 			<div id='messages-111'>
 				<div id='mess-box'></div>
-
 				<div id='input-123'>
 					<input
-						className='input-message'
+						className='input-group-text input-message '
 						type='text'
 						name='messsage'
 						placeholder='send a message'
@@ -139,7 +173,7 @@ const Messages = () => {
 					/>
 					<button
 						id='message-btn-1'
-						className='send-btn '
+						className='btn btn-secondary send-btn '
 						type='submit'
 						value='send'
 						onClick={(e) => {
