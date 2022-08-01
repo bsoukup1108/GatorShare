@@ -1,10 +1,4 @@
 package com.GatorShare.Dto;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,32 +7,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.*;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.jetbrains.annotations.NotNull;
-
 @Entity
 @Table(name = "comments")
-public class comments {
+public class Comments {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
-    @Lob
+
+
+    @Column(columnDefinition = "TEXT")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "postid", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "postid")
     private Post post;
+
 
 
 
     public Integer getId() {
         return id;
     }
+
+
 
     public void setId(Integer id) {
         this.id = id;

@@ -296,18 +296,32 @@ public class GatorShareApplication {
 	// .body(post.getData());
 	// }
 
-	 @PostMapping("post/{postid}/comments")
-	 public comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
-	 return postRepo.findById(postid).map(post -> {
-	 Comments.setPost(post);
-	 return commentRepo.save(Comments);
-	 }).orElseThrow();
-	 }
 
-	 @GetMapping("comment/{post_id}/post_id")
-	 public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
-	 return ResponseEntity.ok(CommentService.getallpostsbyid(query));
-	 }
+
+	@GetMapping(value = "comments/{id}")
+	public ResponseEntity<List<Comments>> getCommentByID(@RequestParam("query") Integer query) {
+		return ResponseEntity.ok(commentRepo.getAllCommentByPost_Id(query));
+	}
+
+
+	@PostMapping("comments")
+	public ResponseEntity<FileResponseMassage> UploadPost(
+			@RequestParam("text") String text) {
+		String message = "";
+		try {
+			CommentService.storeComment(text);
+
+			message = "Commented successfully ";
+			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
+		} catch (Exception e) {
+			message = "Comment could not be saved";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
+
+		}
+	}
+
+
+
 
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
