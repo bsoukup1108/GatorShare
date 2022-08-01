@@ -1,7 +1,7 @@
 package com.GatorShare.Service;
+
 import java.io.IOException;
 import java.util.List;
-
 
 import com.GatorShare.Dto.AboutUsDto;
 
@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayOutputStream;
 
-
 import java.util.Date;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -23,57 +22,39 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-
 @Service
 public class postService {
 
     private static PostRepo postrepo;
 
-    public postService(PostRepo postrepo){
+    public postService(PostRepo postrepo) {
         this.postrepo = postrepo;
     }
+
     @Autowired
     private UserRepository userRepository;
 
-
-
-
-
-    public void store(MultipartFile image, String Title, String tag, String description,Integer likes) throws IOException {
+    public void store(String Title, String tag, String description, Integer likes) throws IOException {
 
         Post newPost = new Post();
         Date date = new Date();
-        String imagetype = image.getContentType();
-        String fileName = StringUtils.cleanPath(image.getOriginalFilename());
         newPost.setCreatedDate(date);
         newPost.setDescription(description);
-        byte [] imagebytes = fileName.getBytes();
-        newPost.setPicByte(compressBytes(imagebytes));
         newPost.setLikes(likes);
         newPost.setTag(tag);
-        newPost.setName(fileName);
-        newPost.setType(imagetype);
         newPost.SetTitle(Title);
         postrepo.save(newPost);
 
-
-
     }
-    public static Post getfile(int id){
+
+    public static Post getfile(int id) {
         return postrepo.findById(id).get();
     }
 
-
-    public static Stream<Post> getAllfiles(){
+    public static Stream<Post> getAllfiles() {
 
         return postrepo.findAll().stream();
     }
-
-
-
-
-
-
 
     public static byte[] compressBytes(byte[] data) {
 
@@ -95,89 +76,73 @@ public class postService {
 
     }
 
-
-
-
-
-
-    public List<Post> searchPosts(String query){
+    public List<Post> searchPosts(String query) {
         List<Post> posts = postrepo.searchPosts(query);
         return posts;
     }
 
-
     public List<Post> getAllPosts() {
-        List<Post> posts = postrepo.findAll();
+        List<Post> posts = postrepo.getallposts();
         return posts;
     }
 
-
-
-
-    public List<Post> getallpostsbyid(int postId)
-    {
+    public List<Post> getallpostsbyid(int postId) {
         List<Post> posts = postrepo.getallpostsbyid(postId);
         return posts;
 
-
     }
 
-    public static Stream<Post> getListfiles(){
+    public static Stream<Post> getListfiles() {
         return postrepo.findAll().stream();
     }
 
-
-
-
-    public List<Post> SearchWhereInputIsArticle(){
+    public List<Post> SearchWhereInputIsArticle() {
         List<Post> posts = postrepo.SearchWhereInputIsArticle();
         return posts;
     }
 
-    public List<Post> SearchWhereInputIsAEssa(){
+    public List<Post> SearchWhereInputIsAEssa() {
         List<Post> posts = postrepo.SearchWhereInputIsAEssay();
         return posts;
     }
-    public List<Post> SearchWhereInputIsClub(){
+
+    public List<Post> SearchWhereInputIsClub() {
         List<Post> posts = postrepo.SearchWhereInputIsClubs();
         return posts;
     }
-    public List<Post> SearchWhereInputIsOthers(){
+
+    public List<Post> SearchWhereInputIsOthers() {
         List<Post> posts = postrepo.SearchWhereInputIsOthers();
         return posts;
     }
 
-    public List<Post> SearchWhereInputIsArtAndFilm(){
+    public List<Post> SearchWhereInputIsArtAndFilm() {
         List<Post> posts = postrepo.SearchWhereInputIsArtAndFilm();
         return posts;
     }
 
-    public List<Post> SearchWhereInputIsTutoring(){
+    public List<Post> SearchWhereInputIsTutoring() {
         List<Post> posts = postrepo.SearchWhereInputIsTutoring();
         return posts;
     }
 
-
-
-    public List<Post> SearchWhereInputIsDiscords(){
+    public List<Post> SearchWhereInputIsDiscords() {
         List<Post> posts = postrepo.SearchWhereInputIsDiscords();
         return posts;
     }
 
-    public void ChangePostTitle(Integer id, String NewTitile){
+    public void ChangePostTitle(Integer id, String NewTitile) {
         Post newTi = new Post();
         newTi = postrepo.findById(id).get();
         newTi.SetTitle(NewTitile);
         postrepo.save(newTi);
     }
 
-    public void ChangePostDesc(Integer id, String Newdisc){
+    public void ChangePostDesc(Integer id, String Newdisc) {
         Post newDEsc = new Post();
         newDEsc = postrepo.findById(id).get();
         newDEsc.setContent(Newdisc);
         postrepo.save(newDEsc);
     }
-
-
 
 }

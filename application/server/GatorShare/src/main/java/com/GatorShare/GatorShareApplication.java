@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import java.util.zip.DataFormatException;
 import java.util.zip.Inflater;
 
-
 import com.GatorShare.Dto.*;
 
 //import com.GatorShare.Repo.CommentRepo;
@@ -58,10 +57,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import javax.servlet.http.HttpServletRequest;
-
-
 
 @Slf4j
 
@@ -69,11 +65,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.GatorShare"})
+@ComponentScan(basePackages = { "com.GatorShare" })
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com", "http://gatorshare.com", "http://localhost:3000"})
-
+@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com",
+		"http://gatorshare.com", "http://localhost:3000" })
 
 public class GatorShareApplication {
 	@Autowired
@@ -81,18 +77,14 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
-//	@Autowired
-//	private commentService CommentService;
+	// @Autowired
+	// private commentService CommentService;
 
 	@Autowired
 	private postService PostService;
 
-
-
-
-//	@Autowired
-//	private ImageStorageService imageStorageService;
-
+	// @Autowired
+	// private ImageStorageService imageStorageService;
 
 	@Autowired
 	public HttpServletRequest request;
@@ -100,18 +92,12 @@ public class GatorShareApplication {
 	@Autowired
 	private PostRepo postRepo;
 
-//	@Autowired
-//	private CommentRepo commentRepo;
-
+	// @Autowired
+	// private CommentRepo commentRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
 	}
-
-
-
-
-
 
 	@GetMapping(value = "aboutus")
 	public ResponseEntity<List<AboutUsDto>> listAllUsers() {
@@ -119,9 +105,6 @@ public class GatorShareApplication {
 
 		return new ResponseEntity<List<AboutUsDto>>(Aboutusers, HttpStatus.OK);
 	}
-
-
-
 
 	@GetMapping("aboutus/id/{id}")
 	public ResponseEntity<AboutUsDto> getUserById(
@@ -158,101 +141,85 @@ public class GatorShareApplication {
 		return userService.login(logindto);
 	}
 
-
-
-
-
 	@GetMapping("login/id/{id}")
-	public ResponseEntity<User> getUserByID( @PathVariable(name = "id") final Long userId)
-	{
+	public ResponseEntity<User> getUserByID(@PathVariable(name = "id") final Long userId) {
 		String userNotFound = "{Wrong Entry: Try Some Thing Else}";
 		try {
-				final User user = this.userService.getUserByID(userId);
-				return new ResponseEntity<User>(user, HttpStatus.OK);
-		   } catch (NoSuchElementException e) {
-				return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+			final User user = this.userService.getUserByID(userId);
+			return new ResponseEntity<User>(user, HttpStatus.OK);
+		} catch (NoSuchElementException e) {
+			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-
-
 	@GetMapping(value = "search")
-	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query){
+	public ResponseEntity<List<Post>> searchPosts(@RequestParam("query") String query) {
 		return ResponseEntity.ok(PostService.searchPosts(query));
 	}
 
 	@GetMapping("search/{ArtAndFilm}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsArtAndFilm(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsArtAndFilm() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsArtAndFilm());
 	}
 
 	@GetMapping("search/{Article}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsArticle(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsArticle() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsArticle());
 	}
 
 	@GetMapping("search/{Discord}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsDiscords(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsDiscords() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsDiscords());
 	}
 
-
-
 	@GetMapping("search/{Tutoring}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsTutoring() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsTutoring());
 	}
 
 	@GetMapping("search/{Essay}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsAEssay() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsAEssa());
 	}
+
 	@GetMapping("search/{Clubs}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsClubs(){
+	public ResponseEntity<List<Post>> SearchWhereInputIsClubs() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsClub());
 	}
 
 	@GetMapping("search/{Others}")
-	public ResponseEntity<List<Post>> SearchWhereInputIsOthers()
-	{
+	public ResponseEntity<List<Post>> SearchWhereInputIsOthers() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsOthers());
 	}
 
-
 	@GetMapping("posts")
-	public Post getImage() throws IOException {
-		Optional<Post> retrievedposts = postRepo.getallposts();
-
-		Post post = new Post( retrievedposts.get().getId(),retrievedposts.get().getContent(), retrievedposts.get().getName(), retrievedposts.get().getDescription(), decompressBytes(retrievedposts.get().getPicByte()),retrievedposts.get().getLikes(), retrievedposts.get().getTag(), retrievedposts.get().getTitle(), retrievedposts.get().getCreatedDate());
-
-		return post;
-
+	public ResponseEntity<List<Post>> getAllPosts() {
+		return ResponseEntity.ok(PostService.getAllPosts());
 
 	}
 
-
-
-
 	@PostMapping("post")
 
-	public ResponseEntity<FileResponseMassage> UploadPost(@RequestPart("image") MultipartFile image, @RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc, @RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
+	public ResponseEntity<FileResponseMassage> UploadPost(
+			@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc,
+			@RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
-		try{
-			PostService.store(image, Titile, DEsc,tag, like);
+		try {
+			PostService.store(Titile, DEsc, tag, like);
 
-			message = "uploaded the post successfully: "+ Titile;
+			message = "uploaded the post successfully: " + Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
-		} catch (Exception e){
+		} catch (Exception e) {
 			message = "Post could not be uploaded " + Titile + ".";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
 
 		}
 	}
+
 	@GetMapping(value = "AllPosts/{id}")
-	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query){
+	public ResponseEntity<List<Post>> getPostByID(@RequestParam("query") Integer query) {
 		return ResponseEntity.ok(PostService.getallpostsbyid(query));
 	}
-
 
 	public static byte[] decompressBytes(byte[] data) {
 
@@ -273,106 +240,101 @@ public class GatorShareApplication {
 
 	}
 
-//	@PostMapping("post/{postID}/upload")
-//	public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image") MultipartFile file) {
-//		String message = "";
-//		try {
-//			imageStorageService.store(file);
-//
-//			message = "Uploaded the file successfully: " + file.getOriginalFilename();
-//			return ResponseEntity.status(HttpStatus.OK).body(new ResponesImageMessage(message));
-//		} catch (Exception e) {
-//			message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-//			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponesImageMessage(message));
-//		}
-//	}
+	// @PostMapping("post/{postID}/upload")
+	// public ResponseEntity<ResponesImageMessage> uploadFile(@RequestPart("Image")
+	// MultipartFile file) {
+	// String message = "";
+	// try {
+	// imageStorageService.store(file);
+	//
+	// message = "Uploaded the file successfully: " + file.getOriginalFilename();
+	// return ResponseEntity.status(HttpStatus.OK).body(new
+	// ResponesImageMessage(message));
+	// } catch (Exception e) {
+	// message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+	// return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new
+	// ResponesImageMessage(message));
+	// }
+	// }
 
-//	@GetMapping("postsImage")
-//	public ResponseEntity<List<ResponsePost>> getListFiles() {
-//		List<ResponsePost> files = postService.getListfiles().map(dbFile -> {
-//			String fileDownloadUri = ServletUriComponentsBuilder
-//					.fromCurrentContextPath()
-//					.path("/files/")
-//					.path(dbFile.getId())
-//					.toUriString();
-//
-//			return new ResponsePost(
-//					dbFile.getData(),
-//					dbFile.getName(),
-//					fileDownloadUri,
-//					dbFile.getType());
-//		}).collect(Collectors.toList());
-//
-//		return ResponseEntity.status(HttpStatus.OK).body(files);
-//	}
+	// @GetMapping("postsImage")
+	// public ResponseEntity<List<ResponsePost>> getListFiles() {
+	// List<ResponsePost> files = postService.getListfiles().map(dbFile -> {
+	// String fileDownloadUri = ServletUriComponentsBuilder
+	// .fromCurrentContextPath()
+	// .path("/files/")
+	// .path(dbFile.getId())
+	// .toUriString();
+	//
+	// return new ResponsePost(
+	// dbFile.getData(),
+	// dbFile.getName(),
+	// fileDownloadUri,
+	// dbFile.getType());
+	// }).collect(Collectors.toList());
+	//
+	// return ResponseEntity.status(HttpStatus.OK).body(files);
+	// }
 
-//	@GetMapping("/Images/{id}")
-//	public ResponseEntity<byte[]> getFile(@PathVariable int id) {
-//		Post post = postService.getfile(id);
-//
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + post.getName() + "\"")
-//				.body(post.getData());
-//	}
+	// @GetMapping("/Images/{id}")
+	// public ResponseEntity<byte[]> getFile(@PathVariable int id) {
+	// Post post = postService.getfile(id);
+	//
+	// return ResponseEntity.ok()
+	// .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+	// post.getName() + "\"")
+	// .body(post.getData());
+	// }
 
-
-
-
-
-//	@PostMapping("post/{postid}/comments")
-//	public  comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
-//		return postRepo.findById(postid).map(post -> {
-//			Comments.setPost(post);
-//			return commentRepo.save(Comments);
-//		}).orElseThrow();
-//	}
-//
-//	@GetMapping("comment/{post_id}/post_id")
-//	public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
-//		return ResponseEntity.ok(CommentService.getallpostsbyid(query));
-//	}
-
+	// @PostMapping("post/{postid}/comments")
+	// public comments createComment(@PathVariable (value = "postid") Integer
+	// postid, @RequestBody comments Comments){
+	// return postRepo.findById(postid).map(post -> {
+	// Comments.setPost(post);
+	// return commentRepo.save(Comments);
+	// }).orElseThrow();
+	// }
+	//
+	// @GetMapping("comment/{post_id}/post_id")
+	// public ResponseEntity<List<comments>>
+	// getCommentByPostID(@RequestParam("query") Integer query){
+	// return ResponseEntity.ok(CommentService.getallpostsbyid(query));
+	// }
 
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
-							  @RequestParam("newPostname") String name)
-	{
+			@RequestParam("newPostname") String name) {
 		String message = "";
-		try{
+		try {
 			PostService.ChangePostTitle(id, name);
 
 			message = "Post updated";
-		} catch (Exception e){
+		} catch (Exception e) {
 			message = "Post could not be uploaded " + ".";
 
 		}
 		return message;
 
-
-
 	}
+
 	@PostMapping("/changePostDescription")
-	public String changeDescription(@RequestParam("id") Integer id ,
-									@RequestParam("newDescription") String description)
+	public String changeDescription(@RequestParam("id") Integer id,
+			@RequestParam("newDescription") String description)
 
 	{
 		String message = "";
 		try {
 			PostService.ChangePostDesc(id, description);
 			message = "Post description updated";
-		} catch (Exception e){
+		} catch (Exception e) {
 			message = "Post could not be uploaded " + ".";
 		}
 		return message;
 	}
 
-
 	@PostMapping("/signup")
-	public singupResponse signup(@RequestBody signupDTO signupdto) throws CustomeException{
+	public singupResponse signup(@RequestBody signupDTO signupdto) throws CustomeException {
 		return userService.signUp(signupdto);
 	}
-
-
-
 
 }
