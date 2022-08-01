@@ -33,11 +33,15 @@ const Profile = () => {
 	const [editPost, setEditPost] = useState(false);
 
 	useEffect(() => {
-		http('login/id/' + userId).then((res) => {
-			setUserData(res.data);
+		http('login/id/' + userId)
+			.then((res) => {
+				setUserData(res.data);
 
-			setIsLoaded(true);
-		});
+				setIsLoaded(true);
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	}, []);
 
 	let title = 'fdfvdf';
@@ -150,17 +154,35 @@ const Profile = () => {
 		e.stopPropagation();
 		e.preventDefault();
 		console.log(e.target.value);
-		window.confirm('Do you really want to delete the post?');
-
-		alert('warning', 'POST HAS BEEN DELETED...');
+		if (window.confirm('Do you really want to delete the post?')) {
+			http.delete(`/post/delete/${e.target.value}`)
+				.then((res) => {
+					alert('warning', 'POST HAS BEEN DELETED...');
+					console.log(res);
+					return window.location.reload();
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		}
 	};
 
 	const confirmUserDeletion = (e) => {
 		e.stopPropagation();
 		e.preventDefault();
-		window.confirm('Do you really want to delete the post?');
 
-		alert('warning', 'USER HAS BEEN DELETED...');
+		if (window.confirm('Do you really want to delete the post?')) {
+			http.delete(`/User/delete/${e.target.value}`)
+				.then((res) => {
+					alert('warning', 'USER HAS BEEN DELETED...');
+					console.log(res);
+					localStorage.clear();
+					return (window.location = '/login');
+				})
+				.catch((e) => {
+					console.log(e);
+				});
+		}
 	};
 
 	const onChangePost = (e) => {

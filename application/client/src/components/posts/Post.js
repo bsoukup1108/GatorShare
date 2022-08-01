@@ -6,6 +6,7 @@ import { getToken } from '../../js/useToken';
 import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
+import { ReactSession } from 'react-client-session';
 
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -28,6 +29,7 @@ const Post = () => {
 
 	const { id } = useParams();
 	let postId = id || 1;
+	const userId_ttt = ReactSession.get('currentUserId');
 
 	const incLikes = () => {
 		setLikes(likes + 1);
@@ -65,6 +67,7 @@ const Post = () => {
 	const postComment = (e) => {
 		e.preventDefault();
 		http.post(`/comments`, {
+			userId: userId_ttt,
 			postid: postId,
 			text: comment.commentArea,
 		})
