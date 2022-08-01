@@ -1,5 +1,7 @@
 package com.GatorShare.Repo;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -46,7 +48,11 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
 
+    @Query("SELECT p FROM Post p order by p.photo_Like Desc")
+    List <Post> MostLikeImage();
 
+    @Query("SELECT p FROM Post p order by p.createdDate Desc")
+    List <Post> RecantDateFirst();
 
 }
 

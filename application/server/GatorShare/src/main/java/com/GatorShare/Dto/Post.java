@@ -1,7 +1,7 @@
 package com.GatorShare.Dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
@@ -19,10 +19,12 @@ public class Post {
 	private Integer id;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id",referencedColumnName = "id")
-	private User user;
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User users;
 
-	@Column(columnDefinition="TEXT")
+
+
+	@Column(columnDefinition = "TEXT")
 	private String Title;
 
 	@Column(columnDefinition = "TEXT")
@@ -32,33 +34,17 @@ public class Post {
 	private String Description;
 
 
-	public void setUserID(Long id){
-		this.user.setID(id);
-	}
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
 
-	private String name;
 
-	private String type;
 
-	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+
+	@Column(name = "createdDate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
 
-
-	@Lob
-	private byte[] data;
-
-	public Post() {
-	}
 
 	public Integer getId() {
 		return id;
@@ -68,36 +54,16 @@ public class Post {
 		this.id = id;
 	}
 
-	public void setTag(String tag){
+	public void setTag(String tag) {
 		this.Tag = tag;
 	}
 
-	public Long getUser_id(){
-		return user.getID();
-	}
 
 
 
-	public User getUser() {
-		return user;
-	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-
-
-	public String getTitle(){
+	public String getTitle() {
 		return Title;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
 	}
 
 	public String getContent() {
@@ -108,7 +74,7 @@ public class Post {
 		this.Description = Description;
 	}
 
-	public void SetTitle(String Title){
+	public void SetTitle(String Title) {
 		this.Title = Title;
 	}
 
@@ -124,11 +90,12 @@ public class Post {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	Date date = new Date();
+
+
+	public void setCreatedDate() {
+		this.createdDate = date;
 	}
-
-
 
 	public Integer getPhoto_Like() {
 		return photo_Like;
@@ -138,13 +105,8 @@ public class Post {
 		this.photo_Like = photo_Like;
 	}
 
-	public byte[] getData() {
-		return data;
-	}
+	public Post(){
 
-	public void setData(byte[] data) {
-		this.data = data;
 	}
-
 
 }
