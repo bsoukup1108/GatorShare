@@ -214,7 +214,7 @@ public class GatorShareApplication {
 
 	}
 
-	@PostMapping("{Userid}/GroupChat")
+	@PostMapping("GroupChat")
 	public ResponseEntity<FileResponseMassage> GroupChat(@RequestParam(name="User_id") int user_id, @RequestParam(name="username") String UserName, @RequestParam(name="Message") String Message) {
 		String message = "";
 		try {
