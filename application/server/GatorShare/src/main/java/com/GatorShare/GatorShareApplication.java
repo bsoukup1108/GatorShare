@@ -14,10 +14,7 @@ import com.GatorShare.Dto.*;
 import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
 //import com.GatorShare.Service.ImageStorageService;
-import com.GatorShare.Service.commentService;
-import com.GatorShare.Service.postService;
-import com.GatorShare.Service.UserService;
-import com.GatorShare.Service.AboutUsService;
+import com.GatorShare.Service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -94,6 +91,9 @@ public class GatorShareApplication {
 
 	 @Autowired
 	 private CommentRepo commentRepo;
+
+	 @Autowired
+	 private MessageService messageService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
@@ -208,8 +208,27 @@ public class GatorShareApplication {
 
 	}
 
-	@PostMapping("post")
+	@GetMapping("/GroupChat")
+	public ResponseEntity<List<Message>> getAllMessage() {
+		return ResponseEntity.ok(messageService.getAllMessages());
 
+	}
+
+	@PostMapping("{Userid}/GroupChat")
+	public ResponseEntity<FileResponseMassage> GroupChat(@RequestParam(name="User_id") int user_id, @RequestParam(name="username") String UserName, @RequestParam(name="Message") String Message) {
+		String message = "";
+		try {
+			messageService.StoreMessage(user_id, UserName, Message);
+
+			message = "Message Send successfully: ";
+			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
+		} catch (Exception e) {
+			message = "Message could not be sent.";
+			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new FileResponseMassage(message));
+
+		}
+	}
+	@PostMapping("post")
 	public ResponseEntity<FileResponseMassage> UploadPost(
 			@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc,
 			@RequestParam("likes") Integer like, @RequestParam("tag") String tag) {

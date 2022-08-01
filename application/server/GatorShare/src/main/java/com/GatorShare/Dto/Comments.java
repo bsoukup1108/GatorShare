@@ -21,10 +21,22 @@ public class Comments {
     private String text;
 
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        user.getID();
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postid")
+    @JoinColumn(name = "postid", referencedColumnName = "id")
     private Post post;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userid", referencedColumnName = "id")
+    private User user;
 
 
 
