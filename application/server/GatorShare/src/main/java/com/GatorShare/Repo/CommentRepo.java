@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface CommentRepo extends JpaRepository<Comments, Integer> {
 
-    @Query("SELECT c FROM Comments c WHERE c.id LIKE CONCAT('%',:query, '%')")
+    @Query("SELECT c FROM Comments c WHERE c.PostID LIKE CONCAT('%',:query, '%')")
     List<Comments> getAllCommentByPost_Id(int query);
 
 
