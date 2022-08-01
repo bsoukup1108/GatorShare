@@ -162,6 +162,16 @@ public class GatorShareApplication {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsArtAndFilm());
 	}
 
+	@GetMapping("search/{ASC}")
+	public ResponseEntity<List<Post>> GetByDate() {
+		return ResponseEntity.ok(PostService.getByDate());
+	}
+
+	@GetMapping("search/{Like}")
+	public ResponseEntity<List<Post>> GetByLike(){
+		return ResponseEntity.ok(PostService.getByLike());
+	}
+
 	@GetMapping("search/{Article}")
 	public ResponseEntity<List<Post>> SearchWhereInputIsArticle() {
 		return ResponseEntity.ok(PostService.SearchWhereInputIsArticle());
@@ -205,7 +215,7 @@ public class GatorShareApplication {
 			@RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
 		String message = "";
 		try {
-			PostService.store(Titile, DEsc, tag, like);
+			PostService.store(Titile,tag, DEsc,like);
 
 			message = "uploaded the post successfully: " + Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));

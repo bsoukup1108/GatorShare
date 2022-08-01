@@ -48,6 +48,12 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
 
+    @Query("SELECT p FROM Post p where p.Tag LIke '%Like%'")
+    List <Post> MostLikeImage();
+
+    @Query("SELECT p FROM Post p order by p.createdDate Desc")
+    List <Post> RecantDateFirst();
+
 }
 
 

@@ -37,11 +37,12 @@ public class postService {
     public void store(String Title, String tag, String description, Integer likes) throws IOException {
 
         Post newPost = new Post();
-        newPost.setCreatedDate();
+
         newPost.setDescription(description);
         newPost.setLikes(likes);
         newPost.setTag(tag);
         newPost.SetTitle(Title);
+        newPost.setCreatedDate();
         postrepo.save(newPost);
 
     }
@@ -88,6 +89,16 @@ public class postService {
 
     public List<Post> SearchWhereInputIsArticle() {
         List<Post> posts = postrepo.SearchWhereInputIsArticle();
+        return posts;
+    }
+
+    public List<Post> getByLike() {
+        List<Post> posts = postrepo.MostLikeImage();
+        return posts;
+    }
+
+    public List<Post> getByDate(){
+        List<Post> posts = postrepo.RecantDateFirst();
         return posts;
     }
 
