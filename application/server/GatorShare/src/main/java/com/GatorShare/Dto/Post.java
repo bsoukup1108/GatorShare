@@ -18,9 +18,6 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User users;
 
 
 
@@ -37,6 +34,17 @@ public class Post {
 
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
+
+	public Integer getUser_ID() {
+		return User_ID;
+	}
+
+	public void setUser_ID(Integer user_ID) {
+		User_ID = user_ID;
+	}
+
+	@Column(columnDefinition = "integer")
+	private Integer User_ID;
 
 
 

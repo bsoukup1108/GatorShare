@@ -254,10 +254,10 @@ public class GatorShareApplication {
 	@PostMapping("post")
 	public ResponseEntity<FileResponseMassage> UploadPost(
 			@RequestParam("postTitle") String Titile, @RequestParam("Descrption") String DEsc,
-			@RequestParam("likes") Integer like, @RequestParam("tag") String tag) {
+			@RequestParam("likes") Integer like, @RequestParam("tag") String tag, @RequestParam(name="user_ID") Integer userId) {
 		String message = "";
 		try {
-			PostService.store(Titile,tag, DEsc,like);
+			PostService.store(Titile,tag, DEsc,like, userId);
 
 			message = "uploaded the post successfully: " + Titile;
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));
@@ -348,10 +348,10 @@ public class GatorShareApplication {
 
 	@PostMapping("comments")
 	public ResponseEntity<FileResponseMassage> UploadPost(
-			@RequestParam("text") String text) {
+			@RequestParam("text") String text, @RequestParam("userId") Integer userId, @RequestParam("postId") Integer postId) {
 		String message = "";
 		try {
-			CommentService.storeComment(text);
+			CommentService.storeComment(text, userId, postId);
 
 			message = "Commented successfully ";
 			return ResponseEntity.status(HttpStatus.OK).body(new FileResponseMassage(message));

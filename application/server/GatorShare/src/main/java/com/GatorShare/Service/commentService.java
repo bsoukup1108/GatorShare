@@ -26,11 +26,13 @@ public class commentService {
 
     }
 
-    public void storeComment(String text) throws IOException {
+    public void storeComment(String text, Integer userId, Integer PostId) throws IOException {
 
         Comments comments = new Comments();
 
         comments.setText(text);
+        comments.setUserId(userId);
+        comments.setPostID(PostId);
 
         commentRepo.save(comments);
 

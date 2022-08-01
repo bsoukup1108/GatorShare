@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.GatorShare.Dto.AboutUsDto;
 
+import com.GatorShare.Dto.AuthenticationToken;
 import com.GatorShare.Dto.Post;
 import com.GatorShare.Dto.User;
 import com.GatorShare.Repo.UserRepository;
@@ -34,16 +35,19 @@ public class postService {
     @Autowired
     private UserRepository userRepository;
 
-    public void store(String Title, String tag, String description, Integer likes) throws IOException {
+    public void store(String Title, String tag, String description, Integer likes, Integer userId) throws IOException {
 
         Post newPost = new Post();
 
         newPost.setDescription(description);
         newPost.setLikes(likes);
         newPost.setTag(tag);
+        newPost.setUser_ID(userId);
         newPost.SetTitle(Title);
         newPost.setCreatedDate();
         postrepo.save(newPost);
+
+
 
     }
 

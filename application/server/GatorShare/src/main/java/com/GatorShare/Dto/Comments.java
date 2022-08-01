@@ -21,22 +21,29 @@ public class Comments {
     private String text;
 
 
-    public User getUser() {
-        return user;
+    @Column(columnDefinition = "Integer")
+    private Integer UserId;
+
+    @Column(columnDefinition = "Integer")
+    private Integer PostID;
+
+
+
+    public void setUserId(Integer userId) {
+        this.UserId = userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-        user.getID();
+    public Integer getPostID() {
+        return PostID;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "postid", referencedColumnName = "id")
-    private Post post;
+    public void setPostID(Integer postID) {
+        this.PostID = postID;
+    }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userid", referencedColumnName = "id")
-    private User user;
+
+
+
 
 
 
@@ -59,11 +66,4 @@ public class Comments {
         this.text = text;
     }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
 }
