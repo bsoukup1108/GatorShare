@@ -63,8 +63,8 @@ const User = () => {
 				let p = [];
 				if (res.data) {
 					res.data.map((post, i) => {
-						if (p.user) {
-							if (p.user.id === userId) {
+						if (post) {
+							if (post.user_ID === userId) {
 								p[p.length] = post;
 							}
 						}

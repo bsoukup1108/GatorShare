@@ -10,6 +10,7 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { alert } from '../../js/alert';
+import httpFormData from '../../http-form-data';
 
 import art from '../../img/art.jpeg';
 import articles from '../../img/articles.jpg';
@@ -44,24 +45,28 @@ const Profile = () => {
 			});
 	}, []);
 
-	let title = 'fdfvdf';
-	let descrption = 'dfdff';
+	let title = '';
+	let descrption = '';
 
 	useEffect(() => {
 		http('/posts')
 			.then((res) => {
 				setIsLoaded(false);
 
-				let p = null;
+				let p = [];
 				res.data.map((post, i) => {
-					if (post.user) {
-						if (post.user.id === userId) {
-							p[p.length] = res.data[i];
+					// if (post.id === 5) {
+					// 	p = post;
+					// }
+					if (post) {
+						if (post.user_ID === userId) {
+							console.log(post);
+							p[p.lengths] = res.data[i];
 						}
 					}
 					return p;
 				});
-				if (p !== null) {
+				if (p !== []) {
 					setPosts([p]);
 				}
 				setIsLoaded(true);
@@ -136,7 +141,6 @@ const Profile = () => {
 			document
 				.getElementById('profile-btn-2')
 				.classList.toggle('btn-warning');
-			onSubmitForm();
 		} else {
 			setEdit(true);
 			document
@@ -146,7 +150,7 @@ const Profile = () => {
 			document
 				.getElementById('profile-btn-2')
 				.classList.add('btn-success');
-			document.getElementById('profile-btn-2').innerHTML = 'Save Changes';
+			document.getElementById('profile-btn-2').innerHTML = 'Hide Edit';
 		}
 	};
 
@@ -204,37 +208,51 @@ const Profile = () => {
 		window.location.reload();
 	};
 
-	const onSavePost = (e) => {
+	const onSaveUser = (e) => {
+		const { emailForm, firstname, lastname } = formData;
+		alert('danger', 'cannot update profile...');
 		e.stopPropagation();
 		e.preventDefault();
+		return window.location.reload();
+	};
+
+	const onSavePost = (e) => {
+		e.preventDefault();
+		e.stopPropagation();
 
 		let postId = document.getElementById('edit-btn-5').value;
-		const { id, postTitle } = formDataPost;
+		const { id, postTitle, Descrption } = formDataPost;
 
 		let newPostname = postTitle;
+		let newDescription = Descrption;
 
-		setFormDataPost({ id: postId });
-		console.log(formDataPost);
 		document.getElementById('edit-post-form-1').hidden = true;
 
-		// http.post('/changePostTitle', { id, newPostname })
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 	})
-		// 	.catch((e) => {
-		// 		console.log(e);
-		// 	});
+		httpFormData
+			.post('/changePostTitle', { id: postId, newPostname: newPostname })
+			.then()
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 
-		// http.post('/changePostDescription', formDataPost)
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 	})
-		// 	.catch((e) => {
-		// 		console.log(e);
-		// 	});
+		httpFormData
+			.post('/changePostDescription', {
+				id: postId,
+				newDescription: newDescription,
+			})
+			.then((res) => {
+				console.log(res);
+			})
+			.catch((e) => {
+				console.log(e);
+			});
+
+		return window.location.reload();
 
 		alert('success', 'post changed');
-		console.log(formDataPost);
 	};
 
 	return (
@@ -260,6 +278,9 @@ const Profile = () => {
 									className='edit-btn'
 									value={edit}
 									onClick={(e) => confirmUserEdit(e)}
+									onSubmit={(e) => {
+										onSaveUser(e);
+									}}
 								>
 									Edit Profile
 								</button>
@@ -366,6 +387,29 @@ const Profile = () => {
 																		)
 																	}
 																/>
+																<button
+																	htmlFor='edit-user-form-1'
+																	id='profile-btn-2'
+																	type='submit'
+																	className='edit-btn'
+																	value={edit}
+																	onClick={(
+																		e
+																	) =>
+																		onSaveUser(
+																			e
+																		)
+																	}
+																	onSubmit={(
+																		e
+																	) => {
+																		onSaveUser(
+																			e
+																		);
+																	}}
+																>
+																	Save Profile
+																</button>
 															</div>
 														</form>
 													</div>

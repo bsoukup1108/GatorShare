@@ -7,7 +7,7 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { ReactSession } from 'react-client-session';
-
+import httpFormData from '../../http-form-data';
 const Post = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post, setPost] = useState([]);
@@ -66,11 +66,12 @@ const Post = () => {
 
 	const postComment = (e) => {
 		e.preventDefault();
-		http.post(`/comments`, {
-			userId: userId_ttt,
-			postid: postId,
-			text: comment.commentArea,
-		})
+		httpFormData
+			.post(`/comments`, {
+				userId: userId_ttt,
+				postId: postId,
+				text: comment.commentArea,
+			})
 			.then((res) => {
 				console.log(res);
 				if (res.status === 200) {
