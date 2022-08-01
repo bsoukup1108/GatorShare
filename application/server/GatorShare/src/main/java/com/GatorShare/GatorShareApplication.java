@@ -11,10 +11,10 @@ import java.util.zip.Inflater;
 
 import com.GatorShare.Dto.*;
 
-//import com.GatorShare.Repo.CommentRepo;
+import com.GatorShare.Repo.CommentRepo;
 import com.GatorShare.Repo.PostRepo;
 //import com.GatorShare.Service.ImageStorageService;
-//import com.GatorShare.Service.commentService;
+import com.GatorShare.Service.commentService;
 import com.GatorShare.Service.postService;
 import com.GatorShare.Service.UserService;
 import com.GatorShare.Service.AboutUsService;
@@ -77,8 +77,8 @@ public class GatorShareApplication {
 	@Autowired
 	private UserService userService;
 
-	// @Autowired
-	// private commentService CommentService;
+	 @Autowired
+	 private commentService CommentService;
 
 	@Autowired
 	private postService PostService;
@@ -92,8 +92,8 @@ public class GatorShareApplication {
 	@Autowired
 	private PostRepo postRepo;
 
-	// @Autowired
-	// private CommentRepo commentRepo;
+	 @Autowired
+	 private CommentRepo commentRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatorShareApplication.class, args);
@@ -296,20 +296,18 @@ public class GatorShareApplication {
 	// .body(post.getData());
 	// }
 
-	// @PostMapping("post/{postid}/comments")
-	// public comments createComment(@PathVariable (value = "postid") Integer
-	// postid, @RequestBody comments Comments){
-	// return postRepo.findById(postid).map(post -> {
-	// Comments.setPost(post);
-	// return commentRepo.save(Comments);
-	// }).orElseThrow();
-	// }
-	//
-	// @GetMapping("comment/{post_id}/post_id")
-	// public ResponseEntity<List<comments>>
-	// getCommentByPostID(@RequestParam("query") Integer query){
-	// return ResponseEntity.ok(CommentService.getallpostsbyid(query));
-	// }
+	 @PostMapping("post/{postid}/comments")
+	 public comments createComment(@PathVariable (value = "postid") Integer postid, @RequestBody comments Comments){
+	 return postRepo.findById(postid).map(post -> {
+	 Comments.setPost(post);
+	 return commentRepo.save(Comments);
+	 }).orElseThrow();
+	 }
+
+	 @GetMapping("comment/{post_id}/post_id")
+	 public ResponseEntity<List<comments>> getCommentByPostID(@RequestParam("query") Integer query){
+	 return ResponseEntity.ok(CommentService.getallpostsbyid(query));
+	 }
 
 	@PostMapping("/changePostTitle")
 	public String changePname(@RequestParam("id") Integer id,
