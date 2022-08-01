@@ -18,9 +18,11 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User users;
+//	@ManyToOne(fetch = FetchType.EAGER)
+//	@JoinColumn(name = "user_id", referencedColumnName = "id")
+//	private User users;
+
+
 
 	@Column(columnDefinition = "TEXT")
 	private String Title;
@@ -31,26 +33,18 @@ public class Post {
 
 	private String Description;
 
-	public String getType() {
-		return type;
-	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	@Column(columnDefinition = "integer")
 	private Integer photo_Like;
 
-	private String name;
 
-	private String type;
+
+
 
 	@Column(name = "createdDate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
 
-	public Post() {
-	}
 
 	public Integer getId() {
 		return id;
@@ -64,21 +58,9 @@ public class Post {
 		this.Tag = tag;
 	}
 
-	public Long getUser_id() {
-		return users.getID();
-	}
 
-	public User getUser() {
-		return users;
-	}
 
-	public String getName() {
-		return name;
-	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getTitle() {
 		return Title;
@@ -108,8 +90,11 @@ public class Post {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
-		this.createdDate = createdDate;
+	Date date = new Date();
+
+
+	public void setCreatedDate() {
+		this.createdDate = date;
 	}
 
 	public Integer getPhoto_Like() {
@@ -118,6 +103,10 @@ public class Post {
 
 	public void setPhoto_Like(Integer photo_Like) {
 		this.photo_Like = photo_Like;
+	}
+
+	public Post(){
+
 	}
 
 }

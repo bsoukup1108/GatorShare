@@ -37,8 +37,7 @@ public class postService {
     public void store(String Title, String tag, String description, Integer likes) throws IOException {
 
         Post newPost = new Post();
-        Date date = new Date();
-        newPost.setCreatedDate(date);
+        newPost.setCreatedDate();
         newPost.setDescription(description);
         newPost.setLikes(likes);
         newPost.setTag(tag);
@@ -47,14 +46,7 @@ public class postService {
 
     }
 
-    public static Post getfile(int id) {
-        return postrepo.findById(id).get();
-    }
 
-    public static Stream<Post> getAllfiles() {
-
-        return postrepo.findAll().stream();
-    }
 
     public static byte[] compressBytes(byte[] data) {
 
@@ -82,7 +74,7 @@ public class postService {
     }
 
     public List<Post> getAllPosts() {
-        List<Post> posts = postrepo.getallposts();
+        List<Post> posts = postrepo.findAll();
         return posts;
     }
 
@@ -92,9 +84,7 @@ public class postService {
 
     }
 
-    public static Stream<Post> getListfiles() {
-        return postrepo.findAll().stream();
-    }
+
 
     public List<Post> SearchWhereInputIsArticle() {
         List<Post> posts = postrepo.SearchWhereInputIsArticle();

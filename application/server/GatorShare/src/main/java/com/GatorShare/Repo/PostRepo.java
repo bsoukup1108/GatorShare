@@ -48,8 +48,6 @@ JpaRepository<Post, Integer>{
     @Query("SELECT p FROM Post p where p.Tag LIke '%others%'")
     List <Post> SearchWhereInputIsOthers();
 
-    @Query("SELECT p FROM Post p")
-    List<Post> getallposts();
 }
 
 
