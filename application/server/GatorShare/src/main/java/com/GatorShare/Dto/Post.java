@@ -1,9 +1,11 @@
 package com.GatorShare.Dto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -16,11 +18,11 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "user_id",referencedColumnName = "id")
-//	private User users;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User users;
 
-	@Column(columnDefinition="TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String Title;
 
 	@Column(columnDefinition = "TEXT")
@@ -28,13 +30,6 @@ public class Post {
 	@Column(columnDefinition = "TEXT")
 
 	private String Description;
-
-
-
-	@Column(name = "picByte")
-	private byte[] picByte;
-
-
 
 	public String getType() {
 		return type;
@@ -51,10 +46,8 @@ public class Post {
 
 	private String type;
 
-	@Column(name="createdDate", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name = "createdDate", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date createdDate;
-
-
 
 	public Post() {
 	}
@@ -67,19 +60,17 @@ public class Post {
 		this.id = id;
 	}
 
-	public void setTag(String tag){
+	public void setTag(String tag) {
 		this.Tag = tag;
 	}
 
-//	public Long getUser_id(){
-//		return users.getID();
-//	}
+	public Long getUser_id() {
+		return users.getID();
+	}
 
-
-
-//	public User getUser() {
-//		return users;
-//	}
+	public User getUser() {
+		return users;
+	}
 
 	public String getName() {
 		return name;
@@ -89,15 +80,9 @@ public class Post {
 		this.name = name;
 	}
 
-
-
-	public String getTitle(){
+	public String getTitle() {
 		return Title;
 	}
-
-//	public void setUser(User user) {
-//		this.users = user;
-//	}
 
 	public String getContent() {
 		return Description;
@@ -107,7 +92,7 @@ public class Post {
 		this.Description = Description;
 	}
 
-	public void SetTitle(String Title){
+	public void SetTitle(String Title) {
 		this.Title = Title;
 	}
 
@@ -127,25 +112,12 @@ public class Post {
 		this.createdDate = createdDate;
 	}
 
-
-
 	public Integer getPhoto_Like() {
 		return photo_Like;
 	}
 
 	public void setPhoto_Like(Integer photo_Like) {
 		this.photo_Like = photo_Like;
-	}
-
-
-
-
-	public byte[] getPicByte() {
-		return picByte;
-	}
-
-	public void setPicByte(byte[] picByte) {
-		this.picByte = picByte;
 	}
 
 }

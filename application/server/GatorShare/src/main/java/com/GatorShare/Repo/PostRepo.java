@@ -49,7 +49,7 @@ JpaRepository<Post, Integer>{
     List <Post> SearchWhereInputIsOthers();
 
     @Query("SELECT p FROM Post p")
-    Optional<Post> getallposts();
+    List<Post> getallposts();
 }
 
 
