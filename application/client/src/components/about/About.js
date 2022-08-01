@@ -38,6 +38,7 @@ const About = () => {
 				return aleksPic;
 
 			case 'Estefanos':
+			case 'Estefanos\t\t':
 				return Estefanos;
 
 			case 'Mohamed':
@@ -63,6 +64,7 @@ const About = () => {
 				return 'Frontend';
 
 			case 'Estefanos':
+			case 'Estefanos\t\t':
 				return 'Backend Lead';
 
 			case 'Mohamed':
