@@ -65,7 +65,7 @@ const Post = () => {
 	const postComment = (e) => {
 		e.preventDefault();
 		http.post(`/comments`, {
-			//postid: postId,
+			postid: postId,
 			text: comment.commentArea,
 		})
 			.then((res) => {
