@@ -18,9 +18,9 @@ public class Post {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "user_id", referencedColumnName = "id")
-//	private User users;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User users;
 
 
 
