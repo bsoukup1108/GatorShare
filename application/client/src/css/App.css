@@ -215,6 +215,10 @@ footer {
   box-shadow: 0px 0rem 0.625rem rgb(74, 33, 123);
 }
 
+.d-flex {
+  height: auto !important;
+}
+
 .form-overlay {
   position: absolute;
   top: 0;
@@ -905,7 +909,17 @@ label {
 #main-carroussel {
   margin: 1rem 0;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.car-img {
+  padding: 0 2rem 1rem;
+  margin-bottom: 7rem;
+}
+
+.carousel-caption {
+  text-align: center !important;
 }
 
 .carousel-item:hover {
@@ -920,7 +934,10 @@ label {
 .carroussel-caps {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+.carroussel-caps > * {
+  width: 100%;
 }
 
 li > p,
@@ -1405,9 +1422,6 @@ html {
   }
   .form-child > form > * > ul > li > button {
     margin-top: 3rem;
-  }
-  ::-webkit-scrollbar {
-    display: none;
   }
   #auth-hook {
     flex-direction: column;

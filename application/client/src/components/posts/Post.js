@@ -13,7 +13,7 @@ const Post = () => {
 	const [comments, setComments] = useState([]);
 	const isAuth = !!getToken();
 
-	const [bImage, setBImage] = useState(null);
+	//const [bImage, setBImage] = useState(null);
 
 	const [likes, setLikes] = useState(0);
 
@@ -36,20 +36,17 @@ const Post = () => {
 	useEffect(() => {
 		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
-				let b = res.data[0].data;
-				let src = 'data:image/png;base64,';
-				src += b;
+				// let b = res.data[0].data;
+				// let src = 'data:image/png;base64,';
+				// src += b;
 
-				if (src.length > 30 && res.data[0].name !== 'fake') {
-					setBImage(src);
-					setIsLoaded(true);
-				}
-
+				// if (src.length > 30 && res.data[0].name !== 'fake') {
+				// 	setBImage(src);
+				// 	setIsLoaded(true);
+				// }
 				setPost(res.data[0]);
 
-				if ((src.length < 30) | (res.data[0].name === 'fake')) {
-					setIsLoaded(true);
-				}
+				setIsLoaded(true);
 			})
 			.catch((e) => {
 				setIsLoaded(false);
@@ -67,19 +64,23 @@ const Post = () => {
 
 	const postComment = (e) => {
 		e.preventDefault();
-
-		http.post(`/comments/${postId}/comments`, {
+		http.post(`/comments`, {
+			//postid: postId,
 			text: comment.commentArea,
 		})
 			.then((res) => {
-				let commentDiv = document.getElementById('leaveComment');
-				commentDiv.innerHTML = '';
+				console.log(res);
+				if (res.status === 200) {
+					let commentDiv = document.getElementById('leaveComment');
+					commentDiv.value = '';
+					setComment('');
+					setIsLoaded(true);
+				}
 			})
 			.catch((e) => {
 				setIsLoaded(false);
 				console.log(e);
 			});
-		setComment('');
 	};
 	const { content, user, createdDate, title, tag, image } = post;
 	let fname;
@@ -88,14 +89,12 @@ const Post = () => {
 	let userId;
 	let contentDesc;
 	let Tag;
-
 	fname = post.user ? user.firstName : '_';
 	lname = post.user ? user.lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
 	userId = post.user ? (post.user.id ? post.user.id : null) : null;
-	Tag = content !== null ? content : 'No description';
+	Tag = tag !== null ? tag : 'No description';
 	contentDesc = tag !== null ? tag : 'No tag';
-	console.log(post);
 	useEffect(() => {
 		setLikes(phLikes);
 	}, [phLikes]);
@@ -132,7 +131,7 @@ const Post = () => {
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={bImage !== null ? bImage : noImage}
+										src={noImage}
 										className='img-fluid rounded-start post-image-individual-1'
 										alt='...'
 									/>
@@ -218,6 +217,7 @@ const Post = () => {
 											placeholder='Leave a comment'
 											name='commentArea'
 											maxLength='250'
+											required
 											onChange={(e) => {
 												onComment(e);
 											}}

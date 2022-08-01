@@ -34,7 +34,7 @@ const CreatePost = () => {
 		Descrption: '',
 		likes: 0,
 		tag: 'Other',
-		image: fakeFile,
+		//	image: fakeFile,
 	});
 
 	const { postTitle, Descrption } = formData;
@@ -46,14 +46,14 @@ const CreatePost = () => {
 		});
 	};
 
-	const onImageUpload = async (e) => {
-		let file = e.target.files[0];
-		console.log(file);
-		setFormData({
-			...formData,
-			image: file,
-		});
-	};
+	// const onImageUpload = async (e) => {
+	// 	let file = e.target.files[0];
+	// 	console.log(file);
+	// 	setFormData({
+	// 		...formData,
+	// 		image: file,
+	// 	});
+	// };
 
 	const onSubmit = async (e) => {
 		setIsLoaded(false);
@@ -141,7 +141,7 @@ const CreatePost = () => {
 							></textarea>
 						</div>
 
-						<div className='mb-3'>
+						{/* <div className='mb-3'>
 							<label className='form-label' htmlFor='image'>
 								Upload a photo
 							</label>
@@ -158,7 +158,7 @@ const CreatePost = () => {
 						</div>
 						<label className='form-label' htmlFor='image'>
 							Pick a Genre
-						</label>
+						</label> */}
 						<div id='checkboxCreate'>
 							<div className='form-check'>
 								<input

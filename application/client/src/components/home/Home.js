@@ -6,34 +6,39 @@ import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { ReactSession } from 'react-client-session';
 
+import art from '../../img/art.jpeg';
+import articles from '../../img/articles.jpg';
+import club from '../../img/club.jpg';
+import other from '../../img/other.png';
+import discord from '../../img/discord.png';
+import tutor from '../../img/tutor.jpg';
+
 const Home = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [post1, setPost1] = useState([]);
 	const [post2, setPost2] = useState([]);
 	const navigate = useNavigate();
 	useEffect(() => {
-		setPost1([]);
-		setPost2([]);
-		// http(`/search/{ASC}`)
-		// 	.then((res) => {
-		// 		setPost1(res.data);
-		// 		setIsLoaded(false);
-		// 	})
-		// 	.then(
-		// 		http(`/search/{Like}`)
-		// 			.then((res) => {
-		// 				setPost2(res.data);
-		// 				setIsLoaded(true);
-		// 			})
-		// 			.catch((e) => {
-		// 				setIsLoaded(false);
-		// 				console.log(e);
-		// 			})
-		// 	)
-		// 	.catch((e) => {
-		// 		setIsLoaded(false);
-		// 		console.log(e);
-		// 	});
+		http(`/search/{ASC}`)
+			.then((res) => {
+				setPost1(res.data);
+				setIsLoaded(false);
+			})
+			.then(
+				http(`/search/{Like}`)
+					.then((res) => {
+						setPost2(res.data);
+						setIsLoaded(true);
+					})
+					.catch((e) => {
+						setIsLoaded(false);
+						console.log(e);
+					})
+			)
+			.catch((e) => {
+				setIsLoaded(false);
+				console.log(e);
+			});
 	}, []);
 
 	const setCategory = (e) => {
@@ -184,17 +189,24 @@ const Home = () => {
 								>
 									<div className='carousel-inner'>
 										{post1.map((post, i) => {
-											let srcImg = noImage;
-											if (post.data) {
-												let src =
-													'data:image/png;base64,';
-												src += post.data;
-												if (
-													src.length > 30 &&
-													post.name !== 'fake'
-												) {
-													srcImg = src;
-												}
+											let img;
+
+											let tagg = post.tag
+												? post.tag
+												: 'Other';
+
+											if (tagg === 'Articles & Essays') {
+												img = articles;
+											} else if (tagg === 'Art & Film') {
+												img = art;
+											} else if (tagg === 'Clubs') {
+												img = club;
+											} else if (tagg === 'Discords') {
+												img = discord;
+											} else if (tagg === 'Tutoring') {
+												img = tutor;
+											} else {
+												img = other;
 											}
 											return (
 												<div
@@ -207,8 +219,8 @@ const Home = () => {
 													data-bs-interval='10000'
 												>
 													<img
-														src={srcImg}
-														className='d-block w-100'
+														src={img}
+														className='d-block w-100 car-img'
 														alt='...'
 													/>
 													<div className='carousel-caption d-none d-md-block'>
@@ -290,17 +302,32 @@ const Home = () => {
 									>
 										<div className='carousel-inner'>
 											{post2.map((post, i) => {
-												let srcImg = noImage;
-												if (post.data) {
-													let src =
-														'data:image/png;base64,';
-													src += post.data;
-													if (
-														src.length > 30 &&
-														post.name !== 'fake'
-													) {
-														srcImg = src;
-													}
+												let img;
+
+												let tagg = post.tag
+													? post.tag
+													: 'Other';
+
+												if (
+													tagg === 'Articles & Essays'
+												) {
+													img = articles;
+												} else if (
+													tagg === 'Art & Film'
+												) {
+													img = art;
+												} else if (tagg === 'Clubs') {
+													img = club;
+												} else if (
+													tagg === 'Discords'
+												) {
+													img = discord;
+												} else if (
+													tagg === 'Tutoring'
+												) {
+													img = tutor;
+												} else {
+													img = other;
 												}
 												return (
 													<div
@@ -313,8 +340,8 @@ const Home = () => {
 														data-bs-interval='10000'
 													>
 														<img
-															src={srcImg}
-															className='d-block w-100'
+															src={img}
+															className='d-block w-100 car-img'
 															alt='...'
 														/>
 														<div className='carousel-caption d-none d-md-block'>

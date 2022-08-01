@@ -13,12 +13,7 @@ const Messages = () => {
 	const currUser = ReactSession.get('currentUserId') || 0;
 	const username = ReactSession.get('username') || 'Anonimous';
 
-	const [messages, setMessages] = useState([
-		{
-			text: 'This is the very begginning of the conversation',
-			type: 'notification',
-		},
-	]);
+	const [messages, setMessages] = useState([]);
 
 	const handleOnSendMessage = (message) => {
 		// http.post('/message', { message: message, fromUserId: 3, toUserId: 3 })
@@ -49,8 +44,7 @@ const Messages = () => {
 			messages.concat({
 				author: {
 					username: username,
-					id: 3,
-					avatarUrl: '',
+					id: 1,
 				},
 				text: message,
 				timestamp: +new Date(),
@@ -65,7 +59,7 @@ const Messages = () => {
 			notif.setAttribute('class', 'dropdown me-1 notif-nav-2');
 		let notifBox = document.getElementById('notifications-1');
 
-		if (notifBox && window.location.pathname !== '/messages') {
+		if (notifBox) {
 			if (
 				notifBox.innerHTML ===
 				"<p>You don't have any notifications yet</p>"

@@ -15,6 +15,13 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 
+import art from '../../img/art.jpeg';
+import articles from '../../img/articles.jpg';
+import club from '../../img/club.jpg';
+import other from '../../img/other.png';
+import discord from '../../img/discord.png';
+import tutor from '../../img/tutor.jpg';
+
 // the main component that handles search results
 const SearchResults = () => {
 	// flag to indicate when results are fetched
@@ -239,6 +246,24 @@ const SearchResults = () => {
 							<div className='row row-cols-1 row-cols-md-3 g-4'>
 								{/* map through possts array and render each post */}
 								{posts.map((post, i) => {
+									let img;
+
+									let tagg = post.tag ? post.tag : 'Other';
+
+									if (tagg === 'Articles & Essays') {
+										img = articles;
+									} else if (tagg === 'Art & Film') {
+										img = art;
+									} else if (tagg === 'Clubs') {
+										img = club;
+									} else if (tagg === 'Discords') {
+										img = discord;
+									} else if (tagg === 'Tutoring') {
+										img = tutor;
+									} else {
+										img = other;
+									}
+
 									return posts.length === 0 ? (
 										<div>
 											<h1>WE DIDN'T FIND ANYTHING</h1>
@@ -258,11 +283,7 @@ const SearchResults = () => {
 												}}
 											>
 												<img
-													src={
-														post.image
-															? noImage
-															: noImage
-													}
+													src={img}
 													className='card-img-top'
 													alt='Error loading...'
 												/>

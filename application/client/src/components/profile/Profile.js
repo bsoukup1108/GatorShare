@@ -11,6 +11,13 @@ import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { alert } from '../../js/alert';
 
+import art from '../../img/art.jpeg';
+import articles from '../../img/articles.jpg';
+import club from '../../img/club.jpg';
+import other from '../../img/other.png';
+import discord from '../../img/discord.png';
+import tutor from '../../img/tutor.jpg';
+
 const Profile = () => {
 	// redirect if not logged in
 	if (!getToken()) {
@@ -33,22 +40,26 @@ const Profile = () => {
 		});
 	}, []);
 
+	let title = 'fdfvdf';
+	let descrption = 'dfdff';
+
 	useEffect(() => {
 		http('/posts')
 			.then((res) => {
 				setIsLoaded(false);
 
-				let p;
-				// res.data.map((post, i) => {
-				// 	if (post.user) {
-				// 		if (post.user.id === userId) {
-				// 			p[p.length] = res.data[i];
-				// 		}
-				// 	}
-				// 	return p;
-				// });
-				p = res.data;
-				setPosts([p]);
+				let p = null;
+				res.data.map((post, i) => {
+					if (post.user) {
+						if (post.user.id === userId) {
+							p[p.length] = res.data[i];
+						}
+					}
+					return p;
+				});
+				if (p !== null) {
+					setPosts([p]);
+				}
 				setIsLoaded(true);
 			})
 			.catch((e) => {
@@ -87,8 +98,6 @@ const Profile = () => {
 					: 'Guest';
 		}
 	}
-	let title = 'sdvfsfvs';
-	let descrption = 'sdvfsvesc';
 
 	const [formData, setFormData] = useState();
 	const [formDataPost, setFormDataPost] = useState({
@@ -184,6 +193,8 @@ const Profile = () => {
 
 		setFormDataPost({ id: postId });
 		console.log(formDataPost);
+		document.getElementById('edit-post-form-1').hidden = true;
+
 		// http.post('/changePostTitle', { id, newPostname })
 		// 	.then((res) => {
 		// 		console.log(res);
@@ -203,6 +214,7 @@ const Profile = () => {
 		alert('success', 'post changed');
 		console.log(formDataPost);
 	};
+
 	return (
 		<>
 			{!isLoaded && <Spinner />}
@@ -251,7 +263,9 @@ const Profile = () => {
 									{isLoaded && (
 										<div>
 											<div
-												style={{ marginBottom: '1rem' }}
+												style={{
+													marginBottom: '1rem',
+												}}
 											>
 												{edit && isLoaded && (
 													<div id='edit-user-form-1'>
@@ -410,20 +424,38 @@ const Profile = () => {
 												</h3>
 												<div className='row row-cols-1 row-cols-md-2 g-4'>
 													{posts.map((post, i) => {
-														let srcImg = noImage;
-														if (post.data) {
-															let src =
-																'data:image/png;base64,';
-															src += post.data;
-															if (
-																src.length >
-																	30 &&
-																post.name !==
-																	'fake'
-															) {
-																srcImg = src;
-															}
+														let img;
+
+														let tagg = post.tag
+															? post.tag
+															: 'Other';
+
+														if (
+															tagg ===
+															'Articles & Essays'
+														) {
+															img = articles;
+														} else if (
+															tagg ===
+															'Art & Film'
+														) {
+															img = art;
+														} else if (
+															tagg === 'Clubs'
+														) {
+															img = club;
+														} else if (
+															tagg === 'Discords'
+														) {
+															img = discord;
+														} else if (
+															tagg === 'Tutoring'
+														) {
+															img = tutor;
+														} else {
+															img = other;
 														}
+
 														return (
 															<div
 																key={`posts-post-${i}`}
@@ -440,7 +472,7 @@ const Profile = () => {
 																>
 																	<img
 																		src={
-																			srcImg
+																			img
 																		}
 																		className='card-img-top'
 																		alt='Error loading...'

@@ -7,9 +7,17 @@ import http from '../../http-common';
 import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 
+import art from '../../img/art.jpeg';
+import articles from '../../img/articles.jpg';
+import club from '../../img/club.jpg';
+import other from '../../img/other.png';
+import discord from '../../img/discord.png';
+import tutor from '../../img/tutor.jpg';
+
 const Posts = () => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [posts, setPosts] = useState([]);
+
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -18,10 +26,13 @@ const Posts = () => {
 				setPosts(res.data);
 				setIsLoaded(true);
 			})
+
 			.catch((e) => {
 				setIsLoaded(false);
 			});
 	}, []);
+
+	let img;
 
 	const filterByName = () => {
 		let datafil = posts;
@@ -83,167 +94,182 @@ const Posts = () => {
 		ReactSession.set('postId', postId);
 	};
 
-	return (
-		<>
-			<div>
-				<h1>All Posts</h1>
-				<div id='sort'>
-					<div className='dropdown'>
-						<button
-							className='btn btn-secondary dropdown-toggle sort-btn'
-							type='button'
-							id='dropdownMenuButton1'
-							data-bs-toggle='dropdown'
-							aria-expanded='false'
-						>
-							Sort by
-						</button>
-						<ul
-							className='dropdown-menu'
-							aria-labelledby='dropdownMenuButton1'
-						>
-							<li>
-								<a
-									className='dropdown-item'
-									href='#!'
-									onClick={() => setPosts(filterByName())}
-								>
-									Alphabetically
-								</a>
-							</li>
-							<li>
-								<a
-									className='dropdown-item'
-									href='#!'
-									onClick={() => setPosts(filterByDate())}
-								>
-									Most recent
-								</a>
-							</li>
-							<li>
-								<a
-									className='dropdown-item'
-									href='#!'
-									onClick={() => setPosts(filterByLike())}
-								>
-									Most popular
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-
-				{!isLoaded && <Spinner />}
-				{isLoaded && (
-					<div style={{ marginBottom: '1rem', marginTop: '1rem' }}>
-						<div
-							id='posts-render'
-							className='row row-cols-1 row-cols-md-3 g-4'
-						>
-							{posts.map((post, i) => {
-								let srcImg = noImage;
-								if (post.data) {
-									let src = 'data:image/png;base64,';
-									src += post.data;
-									if (
-										src.length > 30 &&
-										post.name !== 'fake'
-									) {
-										srcImg = src;
-									}
-								}
-
-								return (
-									<div
-										key={`posts-post-${i}`}
-										className='col'
-										onClick={saveIdToLoacalStorage(post.id)}
+	if (posts.length > 0) {
+		return (
+			<>
+				<div>
+					<h1>All Posts</h1>
+					<div id='sort'>
+						<div className='dropdown'>
+							<button
+								className='btn btn-secondary dropdown-toggle sort-btn'
+								type='button'
+								id='dropdownMenuButton1'
+								data-bs-toggle='dropdown'
+								aria-expanded='false'
+							>
+								Sort by
+							</button>
+							<ul
+								className='dropdown-menu'
+								aria-labelledby='dropdownMenuButton1'
+							>
+								<li>
+									<a
+										className='dropdown-item'
+										href='#!'
+										onClick={() => setPosts(filterByName())}
 									>
+										Alphabetically
+									</a>
+								</li>
+								<li>
+									<a
+										className='dropdown-item'
+										href='#!'
+										onClick={() => setPosts(filterByDate())}
+									>
+										Most recent
+									</a>
+								</li>
+								<li>
+									<a
+										className='dropdown-item'
+										href='#!'
+										onClick={() => setPosts(filterByLike())}
+									>
+										Most popular
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					{!isLoaded && <Spinner />}
+					{isLoaded && (
+						<div
+							style={{ marginBottom: '1rem', marginTop: '1rem' }}
+						>
+							<div
+								id='posts-render'
+								className='row row-cols-1 row-cols-md-3 g-4'
+							>
+								{posts.map((post, i) => {
+									let tagg = post.tag ? post.tag : 'Other';
+
+									if (tagg === 'Articles & Essays') {
+										img = articles;
+									} else if (tagg === 'Art & Film') {
+										img = art;
+									} else if (tagg === 'Clubs') {
+										img = club;
+									} else if (tagg === 'Discords') {
+										img = discord;
+									} else if (tagg === 'Tutoring') {
+										img = tutor;
+									} else {
+										img = other;
+									}
+
+									return (
 										<div
-											className='card posts'
-											onClick={() => {
-												navigate(`/posts/${post.id}`);
-												return false;
-											}}
+											key={`posts-post-${i}`}
+											className='col'
+											onClick={saveIdToLoacalStorage(
+												post.id
+											)}
 										>
-											{' '}
-											<div id='post-top-2'>
-												<div id='post-tag-2'>
-													<p>
-														<span className='badge badge-primary'>
-															{!!post.description
-																? post.description
-																: 'No tag'}
-														</span>
+											<div
+												className='card posts'
+												onClick={() => {
+													navigate(
+														`/posts/${post.id}`
+													);
+													return false;
+												}}
+											>
+												{' '}
+												<div id='post-top-2'>
+													<div id='post-tag-2'>
+														<p>
+															<span className='badge badge-primary'>
+																{!!post.tag
+																	? post.tag
+																	: 'No tag'}
+															</span>
+														</p>
+													</div>
+												</div>
+												<img
+													src={img}
+													className='card-img-top'
+													alt='Error loading...'
+												/>
+												<div className='card-body posts-body-1'>
+													<h5 className='card-title'>
+														<i>
+															{post.title
+																? post.title
+																: 'No title...'}
+														</i>
+													</h5>
+													<p
+														className='card-text'
+														style={{
+															whiteSpace:
+																'nowrap',
+															overflow: 'hidden',
+															textOverflow:
+																'ellipsis',
+															maxWidth: '500px',
+														}}
+													>
+														{post.content
+															? post.content
+															: 'No description...'}
+													</p>
+													<p className='card-text'>
+														<small className='text-muted'>
+															Created
+															<i>
+																{' '}
+																{post.createdDate
+																	? moment(
+																			post.createdDate
+																	  )
+																			.startOf(
+																				'day'
+																			)
+																			.fromNow()
+																	: ''}{' '}
+															</i>
+															by{' '}
+															<strong>
+																{!!post.user
+																	? post.user
+																			.firstName
+																	: 'Anonymous'}{' '}
+																{post.user
+																	? post.user
+																			.lastName
+																	: 'User'}
+															</strong>
+														</small>
 													</p>
 												</div>
 											</div>
-											<img
-												src={srcImg}
-												className='card-img-top'
-												alt='Error loading...'
-											/>
-											<div className='card-body posts-body-1'>
-												<h5 className='card-title'>
-													<i>
-														{post.title
-															? post.title
-															: 'No title...'}
-													</i>
-												</h5>
-												<p
-													className='card-text'
-													style={{
-														whiteSpace: 'nowrap',
-														overflow: 'hidden',
-														textOverflow:
-															'ellipsis',
-														maxWidth: '500px',
-													}}
-												>
-													{post.content
-														? post.content
-														: 'No description...'}
-												</p>
-												<p className='card-text'>
-													<small className='text-muted'>
-														Created
-														<i>
-															{' '}
-															{post.createdDate
-																? moment(
-																		post.createdDate
-																  )
-																		.startOf(
-																			'day'
-																		)
-																		.fromNow()
-																: ''}{' '}
-														</i>
-														by{' '}
-														<strong>
-															{!!post.user
-																? post.user
-																		.firstName
-																: 'Anonymous'}{' '}
-															{post.user
-																? post.user
-																		.lastName
-																: 'User'}
-														</strong>
-													</small>
-												</p>
-											</div>
 										</div>
-									</div>
-								);
-							})}
+									);
+								})}
+							</div>
 						</div>
-					</div>
-				)}
-			</div>
-		</>
-	);
+					)}
+				</div>
+			</>
+		);
+	} else {
+		return null;
+	}
 };
 
 export default Posts;
