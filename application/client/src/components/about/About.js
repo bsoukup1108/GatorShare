@@ -72,7 +72,7 @@ const About = () => {
 				return 'Database Master';
 
 			default:
-				return noImage;
+				return 'incognito';
 		}
 	};
 
@@ -93,6 +93,7 @@ const About = () => {
 
 					<div style={{ marginBottom: '1rem' }}>
 						{users.map((user, i) => {
+							console.log(user);
 							return (
 								<div key={`about-${i}`} className='card mb-3'>
 									<div className='row g-0'>
