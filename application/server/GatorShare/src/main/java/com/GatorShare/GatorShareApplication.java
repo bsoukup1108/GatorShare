@@ -65,8 +65,7 @@ import javax.servlet.http.HttpServletRequest;
 @ComponentScan(basePackages = { "com.GatorShare" })
 @RequestMapping("/api/")
 @EnableJpaRepositories
-@CrossOrigin(origins = { "https://gatorshare.com", "http://gatorshare1.s3-website-us-west-1.amazonaws.com",
-		"http://gatorshare.com", "http://localhost:3000" })
+@CrossOrigin(origins = { "https://gatorshare.com", "http://localhost:3000" })
 
 public class GatorShareApplication {
 	@Autowired
