@@ -146,4 +146,9 @@ public class postService {
         postrepo.save(newDEsc);
     }
 
+    public void delete(int id)
+    {
+
+        postrepo.deleteById(id);
+    }
 }

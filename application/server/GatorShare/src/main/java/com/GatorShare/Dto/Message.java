@@ -19,7 +19,7 @@ import java.util.Date;
 public class Message {
     @Id
     @GeneratedValue
-    Long id;
+    Integer id;
 
 
 

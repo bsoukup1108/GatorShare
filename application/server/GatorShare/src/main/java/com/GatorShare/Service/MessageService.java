@@ -33,4 +33,10 @@ public class MessageService {
         List<Message> message = messageRepo.findAll();
         return message;
     }
+
+
+    public void delete(Integer id)
+    {
+        messageRepo.deleteById(id);
+    }
 }

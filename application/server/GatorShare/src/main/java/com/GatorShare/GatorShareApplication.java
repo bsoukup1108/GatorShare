@@ -207,6 +207,30 @@ public class GatorShareApplication {
 
 	}
 
+	@DeleteMapping("post/delete/{id}")
+	public ResponseEntity<Post> deletePostById(@PathVariable(name = "id") final int PostId) {
+		this.PostService.delete(PostId);
+		return new ResponseEntity<Post>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("message/delete/{id}")
+	public ResponseEntity<Message> deleteMessageById(@PathVariable(name = "id") final int MessageId) {
+		this.messageService.delete(MessageId);
+		return new ResponseEntity<Message>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("User/delete/{id}")
+	public ResponseEntity<User> deleteUserById(@PathVariable(name = "id") final Long userId) {
+		this.userService.delete(userId);
+		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+	}
+
+	@DeleteMapping("comment/delete/{id}")
+	public ResponseEntity<Comments> deleteCommentById(@PathVariable(name = "id") final int commentId) {
+		this.CommentService.delete(commentId);
+		return new ResponseEntity<Comments>(HttpStatus.NO_CONTENT);
+	}
+
 	@GetMapping("/GroupChat")
 	public ResponseEntity<List<Message>> getAllMessage() {
 		return ResponseEntity.ok(messageService.getAllMessages());
