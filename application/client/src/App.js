@@ -38,7 +38,7 @@ const App = () => {
 		}
 	}, [token]);
 	return (
-		<BrowserRouter>
+		<BrowserRouter basename='/'>
 			<>
 				<div id='notifications'></div>
 				<div id='wrapper'>
