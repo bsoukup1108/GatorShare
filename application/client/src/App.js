@@ -71,7 +71,7 @@ const App = () => {
 							<Route path='/rules' element={<Agreement />} />
 							<Route path='/about' element={<Aboutus />} />
 
-							<Route exact path='/user/:id' element={<User />} />
+							<Route path='/user/:id' element={<User />} />
 
 							<Route
 								exact
@@ -84,20 +84,10 @@ const App = () => {
 								element={<Messages />}
 							/>
 							{isAuthenticated && (
-								<Route
-									exact
-									path='/post'
-									element={<CreatePost />}
-								/>
+								<Route path='/post' element={<CreatePost />} />
 							)}
-							{/* {isAuthenticated && (
-								<Route
-									exact
-									path='/messages'
-									element={<ChatRoom />}
-								/>
-							)} */}
-							<Route exact path='/posts' element={<Posts />} />
+
+							<Route path='/posts' element={<Posts />} />
 							{<Route path='/posts/:id' element={<Post />} />}
 						</Routes>
 					</div>
