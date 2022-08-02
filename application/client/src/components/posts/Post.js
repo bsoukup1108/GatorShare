@@ -248,6 +248,16 @@ const Post = () => {
 								<div id='postCommentList'>
 									{isLoadedC &&
 										comments.map((el, i) => {
+											let date = moment(
+												Date.now()
+											).calendar(null, {
+												sameDay: '[Today]',
+												nextDay: '[Tomorrow]',
+												nextWeek: 'dddd',
+												lastDay: '[Yesterday]',
+												lastWeek: '[Last] dddd',
+												sameElse: 'DD/MM/YYYY',
+											});
 											return (
 												<div
 													key={`1111111-${i}`}
@@ -262,6 +272,7 @@ const Post = () => {
 														</a>
 													</small>
 													<p>{el.text}</p>
+													<small>{date}</small>
 												</div>
 											);
 										})}
