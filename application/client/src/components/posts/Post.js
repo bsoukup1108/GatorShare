@@ -105,7 +105,6 @@ const Post = () => {
 					commentDiv.value = '';
 					setComment('');
 					setIsLoaded(true);
-					window.location.reload();
 				}
 			})
 			.catch((e) => {
