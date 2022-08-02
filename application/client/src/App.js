@@ -17,6 +17,7 @@ import Aboutus from './components/about/About';
 import Post from './components/posts/Post';
 import Profile from './components/profile/Profile';
 import User from './components/profile/User';
+import Tutor from './components/profile/Tutor';
 
 //import ChatRoom from './components/chatRoom/ChatRoom';
 
@@ -38,7 +39,7 @@ const App = () => {
 		}
 	}, [token]);
 	return (
-		<BrowserRouter basename='/'>
+		<BrowserRouter>
 			<>
 				<div id='notifications'></div>
 				<div id='wrapper'>
@@ -72,6 +73,7 @@ const App = () => {
 							<Route path='/about' element={<Aboutus />} />
 
 							<Route path='/user/:id' element={<User />} />
+							<Route path='/tutor' element={<Tutor />} />
 
 							<Route
 								exact

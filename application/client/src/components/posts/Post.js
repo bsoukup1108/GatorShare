@@ -204,7 +204,7 @@ const Post = () => {
 														</i>
 													) : (
 														<a
-															href={`/user/${userId}`}
+															href={`/Tutor`}
 															className='text-muted'
 															id='link-profile'
 														>
