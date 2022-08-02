@@ -22,9 +22,6 @@ const CreatePost = () => {
 	}
 
 	const [isLoaded, setIsLoaded] = useState(true);
-	const i = String(noImage.indexOf('base64,'));
-	const buffer = Buffer.from(noImage.slice(i + 7), 'base64');
-	let fakeFile = new File(buffer, 'fake');
 
 	const userId = ReactSession.get('currentUserId');
 
@@ -34,7 +31,6 @@ const CreatePost = () => {
 		Descrption: '',
 		likes: 0,
 		tag: 'Other',
-		//	image: fakeFile,
 	});
 
 	const { postTitle, Descrption } = formData;
@@ -46,24 +42,11 @@ const CreatePost = () => {
 		});
 	};
 
-	// const onImageUpload = async (e) => {
-	// 	let file = e.target.files[0];
-	// 	console.log(file);
-	// 	setFormData({
-	// 		...formData,
-	// 		image: file,
-	// 	});
-	// };
-
 	const onSubmit = async (e) => {
 		setIsLoaded(false);
 		e.preventDefault();
-		console.log(formData);
 		http.post('/post', formData)
 			.then((response) => {
-				console.log(formData);
-				console.log(response);
-
 				if (response.status === 200) {
 					alert('success', 'Post has been created');
 					window.location = '/posts';
@@ -79,26 +62,8 @@ const CreatePost = () => {
 				setIsLoaded(true);
 				console.log(err);
 
-				//return window.location.reload();
+				return window.location.reload();
 			});
-
-		// http.post('/post', formDataImg)
-		// 	.then((response) => {
-		// 		console.log(formDataImg);
-		// 		if (response.status === 200) {
-		// 			alert('success', 'Image has been uploaded');
-		// 			window.location = '/posts';
-		// 		} else {
-		// 			// TODO errors
-		// 			console.log('create post error');
-		// 			return null;
-		// 		}
-		// 	})
-		// 	.catch(function (err) {
-		// 		console.log(err);
-
-		// 		//return window.location.reload();
-		// 	});
 	};
 
 	return (
@@ -155,10 +120,10 @@ const CreatePost = () => {
 								//	value={image}
 								onInput={(e) => onImageUpload(e)}
 							/>
-						</div>
+						</div>*/}
 						<label className='form-label' htmlFor='image'>
 							Pick a Genre
-						</label> */}
+						</label>
 						<div id='checkboxCreate'>
 							<div className='form-check'>
 								<input

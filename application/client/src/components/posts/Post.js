@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { alert } from '../../js/alert';
 import { getToken } from '../../js/useToken';
 import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
+import SFSU1 from '../../img/sfsu.jpeg';
 import Spinner from '../misc/Spinner';
 import { ReactSession } from 'react-client-session';
 import httpFormData from '../../http-form-data';
@@ -17,9 +17,8 @@ const Post = () => {
 	const [comments, setComments] = useState([]);
 	const isAuth = !!getToken();
 
-	//const [bImage, setBImage] = useState(null);
-
 	const [likes, setLikes] = useState(0);
+	const [likeflag, setLikeflag] = useState(false);
 
 	const onLike = (e) => {
 		let icon = document.getElementById('like-icon');
@@ -38,9 +37,16 @@ const Post = () => {
 	const userId_ttt = ReactSession.get('currentUserId');
 
 	const incLikes = () => {
-		setLikes(likes + 1);
+		if (likeflag) {
+			setLikes(likes - 1);
+			setLikeflag(false);
+		} else {
+			setLikes(likes + 1);
+
+			setLikeflag(true);
+		}
 	};
-	let userId_post;
+
 	useEffect(() => {
 		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
@@ -66,10 +72,8 @@ const Post = () => {
 			.then((res) => {
 				if (res.data) {
 					res.data.map((el) => {
-						console.log(el);
 						setComments(res.data);
 					});
-					//			setIsLoadedC(true);
 				}
 			})
 			.catch((e) => {
@@ -109,7 +113,7 @@ const Post = () => {
 				console.log(e);
 			});
 	};
-	const { content, user, createdDate, title, tag, image } = post;
+	const { createdDate, title, tag } = post;
 	let fname;
 	let lname;
 	let phLikes;
@@ -171,7 +175,7 @@ const Post = () => {
 							<div className='row g-0'>
 								<div className='col-md-4'>
 									<img
-										src={noImage}
+										src={SFSU1}
 										className='img-fluid rounded-start post-image-individual-1'
 										alt='...'
 									/>

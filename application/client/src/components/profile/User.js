@@ -9,7 +9,6 @@ import { getToken } from '../../js/useToken';
 import noProfile from '../../img/noProfile.png';
 import Spinner from '../misc/Spinner';
 import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
 import { alert } from '../../js/alert';
 
 import art from '../../img/art.jpeg';

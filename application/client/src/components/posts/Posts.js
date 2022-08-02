@@ -4,7 +4,6 @@ import moment from 'moment';
 import { ReactSession } from 'react-client-session';
 import { useEffect } from 'react';
 import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 
 import art from '../../img/art.jpeg';

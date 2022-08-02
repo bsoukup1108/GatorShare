@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import ChatBox, { ChatFrame } from 'react-chat-plugin';
 import { getToken } from '../../js/useToken';
 import { useEffect } from 'react';
 import { ReactSession } from 'react-client-session';
-import http from '../../http-form-data';
-import noImage from '../../img/tutor.jpg';
 import moment from 'moment';
+import http from '../../http-form-data';
 let postIdArr = [];
 
 const Messages = () => {
@@ -56,7 +54,6 @@ const Messages = () => {
 
 	setInterval(function () {
 		retrieveMessages();
-		console.log('fire');
 	}, 5000);
 
 	const retrieveMessages = () => {
@@ -128,8 +125,6 @@ const Messages = () => {
 			.catch((e) => {
 				console.log(e);
 			});
-
-		console.log(inp.value);
 
 		inp.value = '';
 	};

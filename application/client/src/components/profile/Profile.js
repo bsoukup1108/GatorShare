@@ -7,7 +7,6 @@ import { ReactSession } from 'react-client-session';
 import { useEffect } from 'react';
 import noProfile from '../../img/noProfile.png';
 import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 import { alert } from '../../js/alert';
 import httpFormData from '../../http-form-data';
@@ -57,14 +56,12 @@ const Profile = () => {
 				res.data.map((post, i) => {
 					if (post) {
 						if (post.user_ID === userId) {
-							console.log(post);
 							p[p.length] = res.data[i];
 						}
 					}
 					return p;
 				});
 				if (p !== []) {
-					console.log(posts);
 					setPosts(p);
 				}
 				setIsLoaded(true);
@@ -158,12 +155,11 @@ const Profile = () => {
 	const confirmPostDeletion = (e) => {
 		e.stopPropagation();
 		e.preventDefault();
-		console.log(e.target.value);
+
 		if (window.confirm('Do you really want to delete the post?')) {
 			http.delete(`/post/delete/${e.target.value}`)
 				.then((res) => {
 					alert('warning', 'POST HAS BEEN DELETED...');
-					console.log(res);
 					return window.location.reload();
 				})
 				.catch((e) => {
@@ -180,7 +176,6 @@ const Profile = () => {
 			http.delete(`/User/delete/${e.target.value}`)
 				.then((res) => {
 					alert('warning', 'USER HAS BEEN DELETED...');
-					console.log(res);
 					localStorage.clear();
 					return (window.location = '/login');
 				})
@@ -204,13 +199,7 @@ const Profile = () => {
 		});
 	};
 
-	const onSubmitForm = () => {
-		alert('success', 'profile changed');
-		window.location.reload();
-	};
-
 	const onSaveUser = (e) => {
-		const { emailForm, firstname, lastname } = formData;
 		alert('danger', 'cannot update profile...');
 		e.stopPropagation();
 		e.preventDefault();
@@ -222,7 +211,7 @@ const Profile = () => {
 		e.stopPropagation();
 
 		let postId = document.getElementById('edit-btn-5').value;
-		const { id, postTitle, Descrption } = formDataPost;
+		const { postTitle, Descrption } = formDataPost;
 
 		let newPostname = postTitle;
 		let newDescription = Descrption;
@@ -232,9 +221,7 @@ const Profile = () => {
 		httpFormData
 			.post('/changePostTitle', { id: postId, newPostname: newPostname })
 			.then()
-			.then((res) => {
-				console.log(res);
-			})
+			.then((res) => {})
 			.catch((e) => {
 				console.log(e);
 			});
@@ -244,9 +231,7 @@ const Profile = () => {
 				id: postId,
 				newDescription: newDescription,
 			})
-			.then((res) => {
-				console.log(res);
-			})
+			.then((res) => {})
 			.catch((e) => {
 				console.log(e);
 			});
@@ -492,8 +477,6 @@ const Profile = () => {
 												<div className='row row-cols-1 row-cols-md-2 g-4'>
 													{posts.map((post, i) => {
 														let img;
-
-														console.log(post);
 
 														let tagg = post.tag
 															? post.tag

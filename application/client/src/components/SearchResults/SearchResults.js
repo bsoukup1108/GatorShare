@@ -12,7 +12,6 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { ReactSession } from 'react-client-session';
 import http from '../../http-common';
-import noImage from '../../img/noImage.jpeg';
 import Spinner from '../misc/Spinner';
 
 import art from '../../img/art.jpeg';
@@ -117,7 +116,6 @@ const SearchResults = () => {
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 
@@ -135,7 +133,6 @@ const SearchResults = () => {
 			}
 			return 0;
 		});
-		console.log(val);
 		return val;
 	};
 
