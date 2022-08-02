@@ -51,6 +51,7 @@ const Post = () => {
 		http.get(`/AllPosts/{id}?query=${postId}`)
 			.then((res) => {
 				setPost(res.data[0]);
+				console.log(res.data);
 
 				if (res.data[0].user_ID) {
 					let user = res.data[0].user_ID;
@@ -132,13 +133,14 @@ const Post = () => {
 				console.log(e);
 			});
 	};
-	const { createdDate, title, tag } = post;
+	const { createdDate, title, tag, description } = post;
 	let fname;
 	let lname;
 	let phLikes;
 	let userId;
 	let contentDesc;
 	let Tag;
+	let contentD;
 
 	const { firstName, lastName, id: userrrID } = userQ;
 
@@ -146,10 +148,11 @@ const Post = () => {
 	lname = lastName ? lastName : 'Anonymous';
 	phLikes = post.photo_Like ? post.photo_Like : 0;
 	userId = userrrID ? userrrID : null;
+	contentDesc = tag !== null ? tag : 'No tag';
 
 	Tag = tag !== null ? tag : 'No description';
 	contentDesc = tag !== null ? tag : 'No tag';
-
+	contentD = description !== null ? description : 'No description';
 	let commentss;
 
 	commentss = comments.length > 0 ? comments : null;
@@ -206,7 +209,7 @@ const Post = () => {
 												{title ? title : 'No title...'}
 											</h5>
 											<p className='card-text'>
-												{contentDesc}
+												{contentD}
 											</p>
 										</div>
 										<div>
