@@ -91,8 +91,29 @@ const Post = () => {
 		});
 	};
 
+	const appendComment = (text) => {
+		let el = document.getElementById('postCommentList');
+
+		let div = document.createElement('div');
+		div.setAttribute('class', 'comment alert alert-primary');
+		let date = 'Today';
+		// DON'T CHANGE CLASS TO CLASSNAME below !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		div.innerHTML = `<small><a href='/profile' class='badge badge-primary'> <small >go to user's profile</small></a>`;
+		div.innerHTML += `<p >${text}</p>`;
+		div.innerHTML += `<p class='commentDate'><small class='text-muted'><i>${date}</i></small></p>`;
+		// DON'T CHANGE CLASS TO CLASSNAME up !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		div.setAttribute('className', 'comment');
+		if (el) {
+			el.appendChild(div);
+		}
+	};
+
 	const postComment = (e) => {
 		e.preventDefault();
+
+		let el2 = document.getElementById('leaveComment').value;
+
+		appendComment(el2);
 		httpFormData
 			.post(`/comments`, {
 				userId: userId_ttt,
@@ -103,8 +124,7 @@ const Post = () => {
 				if (res.status === 200) {
 					let commentDiv = document.getElementById('leaveComment');
 					commentDiv.value = '';
-					setComment('');
-					setIsLoaded(true);
+					return setComment('');
 				}
 			})
 			.catch((e) => {
